@@ -1,0 +1,7 @@
+<h1>Menu</h1>
+<ul>
+  {{#each item in model}}
+    <li>{{item.menuId}} {{item.name}}</li>
+  {{/each}}
+</ul>
+{{outlet}}
