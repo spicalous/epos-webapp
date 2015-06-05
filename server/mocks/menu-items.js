@@ -153,39 +153,39 @@ module.exports = function(app) {
       categories:[
         {
           "id": 1,
-          "name": "SNACKS"
+          "name": "Snacks"
         },
         {
           "id": 2,
-          "name": "STARTER"
+          "name": "Starter"
         },
         {
           "id": 3,
-          "name": "CHICKEN"
+          "name": "Chicken"
         },
         {
           "id": 4,
-          "name": "PORK"
+          "name": "Pork"
         },
         {
           "id": 5,
-          "name": "PRAWNS"
+          "name": "Prawns"
         },
         {
           "id": 6,
-          "name": "BEEF"
+          "name": "Beef"
         },
         {
           "id": 7,
-          "name": "FISH"
+          "name": "Fish"
         },
         {
           "id": 8,
-          "name": "VEGETARIAN"
+          "name": "Vegetarian"
         },
         {
           "id": 9,
-          "name": "SEAFOOD"
+          "name": "Seafood"
         }
       ]
     });
