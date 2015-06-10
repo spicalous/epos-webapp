@@ -9,5 +9,10 @@ export default Ember.Route.extend({
       controller: this.controllerFor('menu'),
       model: this.store.findAll('menu-item')
     });
+  },
+  actions: {
+    menuItemClick: function(menuItem) {
+      console.log(menuItem.get('name'));
+    }
   }
 });
