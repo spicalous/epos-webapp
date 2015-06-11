@@ -1,4 +1,12 @@
-<div class="orderPadMenu">
+<div class="orderPad-categories">
+  {{#each model.categories}}
+    {{category-item category=this action="categoryItemClick"}}
+  {{/each}}
+</div>
+<div class="orderPad-menu">
   {{outlet "menu"}}
+</div>
+<div class="orderPad-order">
+
 </div>
 {{outlet}}

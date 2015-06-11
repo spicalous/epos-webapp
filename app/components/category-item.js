@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'li',
+  tagName: 'div',
   click: function() {
-    this.sendAction('action', this.get('menuItem'));
+    this.sendAction('action', this.get('category'));
   }
 });

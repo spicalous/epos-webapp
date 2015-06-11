@@ -1,7 +1,6 @@
-<h3>Menu</h3>
 <ul>
-{{#each model as |item|}}
-  {{menu-item menuItem=item action="menuItemClick" param=item}}
+{{#each model}}
+  {{menu-item menuItem=this action="menuItemClick"}}
 {{/each}}
 </ul>
 
