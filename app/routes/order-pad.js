@@ -13,12 +13,13 @@ export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
       menu: this.store.all('menu-item'),
-      categories: this.store.all('category')
+      categories: this.store.all('category'),
+      order: this.store.createRecord('order', {})
     });
   },
   actions: {
     menuItemClick: function(menuItem) {
-      console.log(menuItem.get('name'));
+      this.modelFor('orderPad').order.addItem(menuItem);
     },
     categoryItemClick: function(categoryItem) {
       console.log(categoryItem.get('name'));
