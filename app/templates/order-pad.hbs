@@ -1,16 +1,31 @@
-<div class="orderPad-categories">
-  {{#each model.categories}}
-    {{category-item category=this action="categoryItemClick"}}
-  {{/each}}
-</div>
-<div class="orderPad-menu">
-  {{outlet "menu"}}
-</div>
-<div class="orderPad-order">
-  {{#each model.order.orderItems}}
-    <div>
-      {{this.quantity}} x {{this.menuItem.name}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+
+    <div class="orderPad-categories">
+      <div class="row">
+      {{#each model.categories}}
+        {{category-item category=this action="categoryItemClick"}}
+      {{/each}}
+      </div>
     </div>
-  {{/each}}
+
+    <div class="orderPad-menu">
+      {{outlet "menu"}}
+    </div>
+
+    </div>
+    <div class="col-md-6">
+
+    <div class="orderPad-order">
+      {{#each model.order.orderItems}}
+        <div>
+          {{this.quantity}} x {{this.menuItem.name}}
+        </div>
+      {{/each}}
+    </div>
+
+    </div>
+  </div>
 </div>
 {{outlet}}
