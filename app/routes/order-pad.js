@@ -6,7 +6,7 @@ export default Ember.Route.extend({
     this.render('menu', {
       into: 'order-pad',
       outlet: 'menu',
-      controller: this.controllerFor('menu'),
+      controller: 'menu',
       model: this.store.findAll('menu-item')
     });
   },
