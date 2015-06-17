@@ -28,15 +28,19 @@ export default Ember.Route.extend({
       orderItem.incrementProperty('quantity');
     },
     submitOrder: function() {
-      var order = this.modelFor('orderPad').order;
-      order.set('date', Date.now());
+      var route = this;
 
-      order.save().then(function(post) {
-        console.log('onFail');
-      },
-      function(post) {
-        console.log('onSuccess');
-      });
+      this.modelFor('orderPad')
+        .order
+        .set('date', Date.now())
+        .save()
+        .then(function() {
+          console.log('onFail');
+        }, function() {
+          //TODO Find a way to refresh just model.order otherwise a REST call is made
+          //for a non-changing menu
+          route.refresh();
+        });
     }
   }
 });
