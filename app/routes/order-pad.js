@@ -18,11 +18,14 @@ export default Ember.Route.extend({
     });
   },
   actions: {
+    categoryItemClick: function(categoryItem) {
+      console.log(categoryItem.get('name'));
+    },
     menuItemClick: function(menuItem) {
       this.modelFor('orderPad').order.addItem(menuItem);
     },
-    categoryItemClick: function(categoryItem) {
-      console.log(categoryItem.get('name'));
+    orderItemClick: function(orderItem) {
+      orderItem.incrementProperty('quantity');
     }
   }
 });

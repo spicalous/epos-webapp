@@ -4,6 +4,6 @@ export default Ember.Component.extend({
   tagName: 'li',
   classNames: ['list-group-item'],
   click: function() {
-    this.sendAction('orderItem', this.get('orderItem'));
+    this.sendAction('action', this.get('orderItem'));
   }
 });
