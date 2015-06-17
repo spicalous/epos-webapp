@@ -4,7 +4,12 @@ export default DS.Model.extend({
   orderId: DS.attr('string'),
   date: DS.attr('string'),
   orderItems: DS.hasMany('order-item'),
-  total: DS.attr('number'),
+
+  total: function() {
+    return this.get('orderItems').reduce(function(prev, orderItem) {
+      return prev + orderItem.get('total');
+    }, 0);
+  }.property('orderItems.@each.quantity'),
 
   addItem: function(menuItem) {
     var orderItems = this.get('orderItems');

@@ -20,9 +20,13 @@
     <div class="orderPad-order">
       {{#each model.order.orderItems}}
         <div>
-          {{this.quantity}} x {{this.menuItem.name}}
+          {{this.quantity}} x {{this.menuItem.name}} {{this.total}}
         </div>
       {{/each}}
+
+      <div>
+        TOTAL: {{model.order.total}}
+      </div>
     </div>
 
     </div>
