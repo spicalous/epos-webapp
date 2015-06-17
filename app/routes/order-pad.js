@@ -26,6 +26,17 @@ export default Ember.Route.extend({
     },
     orderItemClick: function(orderItem) {
       orderItem.incrementProperty('quantity');
+    },
+    submitOrder: function() {
+      var order = this.modelFor('orderPad').order;
+      order.set('date', Date.now());
+
+      order.save().then(function(post) {
+        console.log('onFail');
+      },
+      function(post) {
+        console.log('onSuccess');
+      });
     }
   }
 });

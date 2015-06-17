@@ -5,5 +5,7 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   description: DS.attr('string'),
   price: DS.attr('number'),
-  categories: DS.hasMany('category')
+  categories: DS.hasMany('category'),
+
+  orderItem: DS.belongsTo('order-item')
 });
