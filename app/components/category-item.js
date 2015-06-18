@@ -1,8 +1,10 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
-  tagName: 'div',
-  classNames: ['col-xs-3', 'col-md-3'],
+  tagName: 'button',
+  attributeBindings: ['type'],
+  type: 'button',
+  classNames: ['col-xs-3', 'col-md-3', 'btn', 'btn-default', 'category-item-btn'],
   click: function() {
     this.sendAction('action', this.get('category'));
   }

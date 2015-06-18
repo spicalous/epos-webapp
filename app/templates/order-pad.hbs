@@ -21,6 +21,8 @@
         {{#each model.order.orderItems}}
           {{order-item orderItem=this action="orderItemClick"}}
         {{/each}}
+      </div>
+      <div class="orderPad-summary pull-right">
         TOTAL: {{model.order.total}}
         {{submit-btn action="submitOrder"}}
       </div>
