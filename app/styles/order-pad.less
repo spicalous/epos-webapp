@@ -4,16 +4,21 @@
 
 .orderPad-summary {
   margin-bottom: 15px;
+  margin-right: 60px;
+
+  button {
+    margin-left: 30px;
+  }
 }
 
-.orderPad-order {
-
-  @media (min-width: @screen-sm-min) {
-
+@media (min-width: @screen-sm-min) {
+  .toggle-menu {
+    visibility: hidden;
   }
+}
 
-  @media (max-width: (@screen-sm-min - 1)) {
-
+@media (max-width: (@screen-sm-min - 1)) {
+  .toggle-menu {
+    visibility: visible;
   }
-
 }
