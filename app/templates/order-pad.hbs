@@ -2,7 +2,7 @@
   <div class="row">
 
 
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <div class="orderPad-categories">
         <div class="row">
           {{#each model.categories}}
@@ -16,7 +16,7 @@
     </div>
 
 
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <div class="orderPad-order">
         {{#each model.order.orderItems}}
           {{order-item orderItem=this action="orderItemClick"}}
