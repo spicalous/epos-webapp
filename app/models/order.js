@@ -10,6 +10,10 @@ export default DS.Model.extend({
     }, 0);
   }.property('orderItems.@each.quantity'),
 
+  displayTotal: function() {
+    return (this.get('total') / 100).toFixed(2);
+  }.property('total'),
+
   addItem: function(menuItem) {
     var orderItems = this.get('orderItems');
 
