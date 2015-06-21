@@ -24,9 +24,6 @@ export default Ember.Route.extend({
     menuItemClick: function(menuItem) {
       this.modelFor('orderpad').order.addItem(menuItem);
     },
-    orderItemClick: function(orderItem) {
-      orderItem.incrementProperty('quantity');
-    },
     submitOrder: function() {
       var route = this;
 
