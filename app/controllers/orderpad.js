@@ -6,14 +6,16 @@ export default Ember.Controller.extend({
 
     },
     submitOrder: function() {
+      var _this = this;
+
       this.get('model').order
         .set('date', Date.now())
         .save()
         .then(function() {
-          //TODO Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
-          console.log('failed');
+          //TODO Handle fail scenarios
         }, function() {
-          console.log('success');
+          //TODO Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
+          _this.send('refresh');
         });
     }
   }

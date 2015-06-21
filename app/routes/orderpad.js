@@ -20,6 +20,9 @@ export default Ember.Route.extend({
   actions: {
     menuItemClick: function(menuItem) {
       this.modelFor('orderpad').order.addItem(menuItem);
+    },
+    refresh: function() {
+      this.refresh();
     }
   }
 });
