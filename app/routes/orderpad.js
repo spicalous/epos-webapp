@@ -2,9 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   renderTemplate: function() {
-    this.render('order-pad');
+    this.render('orderpad');
     this.render('menu', {
-      into: 'order-pad',
+      into: 'orderpad',
       outlet: 'menu',
       controller: 'menu',
       model: this.store.findAll('menu-item')
@@ -22,7 +22,7 @@ export default Ember.Route.extend({
       console.log(categoryItem.get('name'));
     },
     menuItemClick: function(menuItem) {
-      this.modelFor('orderPad').order.addItem(menuItem);
+      this.modelFor('orderpad').order.addItem(menuItem);
     },
     orderItemClick: function(orderItem) {
       orderItem.incrementProperty('quantity');
@@ -30,7 +30,7 @@ export default Ember.Route.extend({
     submitOrder: function() {
       var route = this;
 
-      this.modelFor('orderPad')
+      this.modelFor('orderpad')
         .order
         .set('date', Date.now())
         .save()
