@@ -1,5 +1,5 @@
-{{#each order.orderItems}}
-  {{order-item orderItem=this action="orderItemClick"}}
+{{#each orderItem in order.orderItems}}
+  {{order-item orderItem=orderItem action="orderItemClick"}}
 {{/each}}
 <div class="orderpad-summary pull-right">
   TOTAL: {{order.displayTotal}}
