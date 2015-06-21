@@ -16,7 +16,13 @@
     </div>
 
     <div class="col-sm-6">
-      {{orderpad-order order=model.order}}
+      {{#orderpad-order order=model.order}}
+        <div class="orderpad-summary pull-right">
+          TOTAL: {{model.order.displayTotal}}
+          {{submit-btn action="submitOrder"}}
+        </div>
+        {{toggle-menu}}
+      {{/orderpad-order}}
     </div>
 
 

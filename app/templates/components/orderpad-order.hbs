@@ -1,9 +1,5 @@
 {{#each orderItem in order.orderItems}}
   {{order-item orderItem=orderItem action="orderItemClick"}}
 {{/each}}
-<div class="orderpad-summary pull-right">
-  TOTAL: {{order.displayTotal}}
-  {{submit-btn action="submitOrder"}}
-</div>
 
-{{toggle-menu}}
+{{yield}}
