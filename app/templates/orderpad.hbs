@@ -24,12 +24,13 @@
           TOTAL: {{model.order.displayTotal}}
         </div>
         {{submit-btn action="submitOrder"}}
+        {{cancel-btn action="cancelOrder"}}
 
       {{/orderpad-order}}
     </div>
 
     {{toggle-menu   data-toggle="modal" data-target="#orderpad-modal"}}
-    
+
   </div>
 </div>
 
@@ -50,6 +51,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         {{submit-btn action="submitOrder"}}
+        {{cancel-btn action="cancelOrder"}}
       </div>
     </div>
   </div>
