@@ -1,6 +1,6 @@
 <ul class="list-group">
-{{#each model}}
-  {{menu-item menuItem=this action="menuItemClick"}}
+{{#each item in model}}
+  {{menu-item menuItem=item action="menuItemClick"}}
 {{/each}}
 </ul>
 

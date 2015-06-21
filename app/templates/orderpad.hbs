@@ -5,8 +5,8 @@
     <div class="col-sm-6">
       <div class="orderpad-categories">
         <div class="row">
-          {{#each category in model.categories}}
-            {{category-item category=category action="categoryItemClick"}}
+          {{#each item in model.categories}}
+            {{category-item category=item action="categoryItemClick"}}
           {{/each}}
         </div>
       </div>

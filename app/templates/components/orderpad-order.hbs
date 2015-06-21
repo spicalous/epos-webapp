@@ -1,5 +1,5 @@
-{{#each orderItem in order.orderItems}}
-  {{order-item orderItem=orderItem action="orderItemClick"}}
+{{#each item in order.orderItems}}
+  {{order-item orderItem=item action="orderItemClick"}}
 {{/each}}
 
 {{yield}}
