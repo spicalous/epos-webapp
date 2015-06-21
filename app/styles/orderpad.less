@@ -13,13 +13,13 @@
 }
 
 @media (min-width: @screen-sm-min) {
-  .toggle-menu {
-    visibility: hidden;
+  .toggle-menu, .orderpad-modal {
+    display: none;
   }
 }
 
 @media (max-width: (@screen-sm-min - 1)) {
-  .toggle-menu {
-    visibility: visible;
+  #orderpad-order {
+    display: none;
   }
 }

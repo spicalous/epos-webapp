@@ -10,22 +10,49 @@
           {{/each}}
         </div>
       </div>
+
       <div class="orderpad-menu">
         {{outlet "menu"}}
       </div>
     </div>
 
-    <div class="col-sm-6">
+    <div id="orderpad-order" class="col-sm-6">
+
       {{#orderpad-order order=model.order}}
-        <div class="orderpad-summary pull-right">
+
+        <div class="orderpad-summary">
           TOTAL: {{model.order.displayTotal}}
-          {{submit-btn action="submitOrder"}}
         </div>
-        {{toggle-menu}}
+        {{submit-btn action="submitOrder"}}
+
       {{/orderpad-order}}
     </div>
 
-
+    {{toggle-menu   data-toggle="modal" data-target="#orderpad-modal"}}
+    
   </div>
 </div>
+
+<div id="orderpad-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Order Items</h4>
+      </div>
+      <div class="modal-body">
+        {{#orderpad-order order=model.order}}
+          <div class="orderpad-summary">
+            TOTAL: {{model.order.displayTotal}}
+          </div>
+        {{/orderpad-order}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        {{submit-btn action="submitOrder"}}
+      </div>
+    </div>
+  </div>
+</div>
+
 {{outlet}}
