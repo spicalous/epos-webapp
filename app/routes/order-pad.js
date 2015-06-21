@@ -37,8 +37,7 @@ export default Ember.Route.extend({
         .then(function() {
           console.log('onFail');
         }, function() {
-          //TODO Find a way to refresh just model.order otherwise a REST call is made
-          //for a non-changing menu
+          //TODO Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
           route.refresh();
         });
     }
