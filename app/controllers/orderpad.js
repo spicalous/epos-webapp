@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions: {
     categoryItemClick: function(categoryItem) {
-      //TODO Filter menu model by selecting category
+      //TODO [VERY HIGH] Filter menu model by selecting category
     },
     submitOrder: function() {
       var _this = this;
@@ -12,11 +12,17 @@ export default Ember.Controller.extend({
           .set('date', Date.now())
           .save()
           .then(function() {
-            //TODO Handle fail scenarios
+            //TODO [MEDIUM] Handle fail scenarios
           }, function() {
-            //TODO Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
+            //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
+            //TODO [MEDIUM] Do not keep order and order items on client
             _this.send('refresh');
           });
+    },
+    cancelOrder: function() {
+      //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
+      //TODO [MEDIUM] Do not keep order and order items on client
+      this.send('refresh');
     }
   }
 });
