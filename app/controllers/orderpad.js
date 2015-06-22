@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions: {
     categoryItemClick: function(categoryItem) {
+      console.log(categoryItem.get('name'));
       //TODO [VERY HIGH] Filter menu model by selecting category
     },
     submitOrder: function() {
