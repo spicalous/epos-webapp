@@ -1,10 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  needs: 'menu',
+  menuController: Ember.computed.alias("controllers.menu"),
   actions: {
     categoryItemClick: function(categoryItem) {
-      console.log(categoryItem.get('name'));
-      //TODO [VERY HIGH] Filter menu model by selecting category
+      if (this.get('menuController').get('filter') === categoryItem) {
+        //Do nothing
+      } else {
+        this.get('menuController').set('filter', categoryItem);
+      }
     },
     submitOrder: function() {
       var _this = this;
