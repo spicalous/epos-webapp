@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   actions: {
     categoryItemClick: function(categoryItem) {
       if (this.get('menuController').get('filter') === categoryItem) {
-        //Do nothing
+        this.get('menuController').set('filter', ''); //Reset filter
       } else {
         this.get('menuController').set('filter', categoryItem);
       }
