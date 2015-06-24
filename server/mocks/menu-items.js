@@ -285,6 +285,230 @@ module.exports = function(app) {
           "description": "",
           "price": 895,
           "categories": ["4", "10", "11"]
+        },
+        {
+          "id": 36,
+          "menuId": "31",
+          "name": "Chicken Red Curry",
+          "description": "",
+          "price": 795,
+          "categories": ["4", "5"]
+        },
+        {
+          "id": 37,
+          "menuId": "31",
+          "name": "Pork Red Curry",
+          "description": "",
+          "price": 795,
+          "categories": ["4", "6"]
+        },
+        {
+          "id": 38,
+          "menuId": "31",
+          "name": "Beef Red Curry",
+          "description": "",
+          "price": 850,
+          "categories": ["4", "7"]
+        },
+        {
+          "id": 39,
+          "menuId": "31",
+          "name": "Prawns Red Curry",
+          "description": "",
+          "price": 895,
+          "categories": ["4", "10", "11"]
+        },
+        {
+          "id": 40,
+          "menuId": "32",
+          "name": "Chicken Panang Curry",
+          "description": "",
+          "price": 795,
+          "categories": ["4", "5"]
+        },
+        {
+          "id": 41,
+          "menuId": "32",
+          "name": "Pork Panang Curry",
+          "description": "",
+          "price": 795,
+          "categories": ["4", "6"]
+        },
+        {
+          "id": 42,
+          "menuId": "32",
+          "name": "Beef Panang Curry",
+          "description": "",
+          "price": 850,
+          "categories": ["4", "7"]
+        },
+        {
+          "id": 43,
+          "menuId": "32",
+          "name": "Prawns Panang Curry",
+          "description": "",
+          "price": 895,
+          "categories": ["4", "10", "11"]
+        },
+        {
+          "id": 44,
+          "menuId": "33",
+          "name": "Chicken Jungle Curry",
+          "description": "",
+          "price": 795,
+          "categories": ["4", "5"]
+        },
+        {
+          "id": 45,
+          "menuId": "33",
+          "name": "Pork Jungle Curry",
+          "description": "",
+          "price": 795,
+          "categories": ["4", "6"]
+        },
+        {
+          "id": 46,
+          "menuId": "33",
+          "name": "Beef Jungle Curry",
+          "description": "",
+          "price": 850,
+          "categories": ["4", "7"]
+        },
+        {
+          "id": 47,
+          "menuId": "33",
+          "name": "Prawns Jungle Curry",
+          "description": "",
+          "price": 895,
+          "categories": ["4", "10", "11"]
+        },
+        {
+          "id": 48,
+          "menuId": "34",
+          "name": "Beef Massaman",
+          "description": "",
+          "price": 850,
+          "categories": ["4", "7"]
+        },
+        {
+          "id": 49,
+          "menuId": "34",
+          "name": "Chicken Massaman",
+          "description": "",
+          "price": 850,
+          "categories": ["4", "5"]
+        },
+        {
+          "id": 50,
+          "menuId": "35",
+          "name": "Vegetable Green Curry",
+          "description": "",
+          "price": 695,
+          "categories": ["4", "13"]
+        },
+        {
+          "id": 51,
+          "menuId": "36",
+          "name": "Vegetable Red Curry",
+          "description": "",
+          "price": 695,
+          "categories": ["4", "13"]
+        },
+        {
+          "id": 52,
+          "menuId": "37",
+          "name": "Vegetable Jungle Curry",
+          "description": "",
+          "price": 695,
+          "categories": ["4", "13"]
+        },
+        {
+          "id": 53,
+          "menuId": "38",
+          "name": "Kai Pad Mamuang Himmaparn",
+          "description": "",
+          "price": 795,
+          "categories": ["5"]
+        },
+        {
+          "id": 54,
+          "menuId": "39",
+          "name": "Kai Pad Khing",
+          "description": "",
+          "price": 795,
+          "categories": ["5"]
+        },
+        {
+          "id": 55,
+          "menuId": "40",
+          "name": "Kai Ta Krai",
+          "description": "",
+          "price": 795,
+          "categories": ["5"]
+        },
+        {
+          "id": 56,
+          "menuId": "41",
+          "name": "Kai Pad Prik Khing",
+          "description": "",
+          "price": 795,
+          "categories": ["5"]
+        },
+        {
+          "id": 57,
+          "menuId": "42",
+          "name": "Kai Pad Priew Wan",
+          "description": "",
+          "price": 795,
+          "categories": ["5"]
+        },
+        {
+          "id": 58,
+          "menuId": "43",
+          "name": "Kai Pad Bai Kra Prao",
+          "description": "",
+          "price": 795,
+          "categories": ["5"]
+        },
+        {
+          "id": 59,
+          "menuId": "44",
+          "name": "Mu Tod Kra Tiem Prik Tai",
+          "description": "",
+          "price": 795,
+          "categories": ["6"]
+        },
+        {
+          "id": 60,
+          "menuId": "45",
+          "name": "Mu Pad Khing",
+          "description": "",
+          "price": 795,
+          "categories": ["6"]
+        },
+        {
+          "id": 61,
+          "menuId": "46",
+          "name": "Mu Priew Wan",
+          "description": "",
+          "price": 795,
+          "categories": ["6"]
+        },
+        {
+          "id": 62,
+          "menuId": "47",
+          "name": "Mu Pad Kra Prao",
+          "description": "",
+          "price": 795,
+          "categories": ["6"]
+        },
+        {
+          "id": 63,
+          "menuId": "48",
+          "name": "Mu Pad Prik Khing",
+          "description": "",
+          "price": 795,
+          "categories": ["6"]
         }
       ],
       categories:[
@@ -302,15 +526,15 @@ module.exports = function(app) {
         },
         {
           "id": 4,
-          "name": "Curries",
+          "name": "Curries 30-37",
         },
         {
           "id": 5,
-          "name": "Chicken",
+          "name": "Chicken 38-43",
         },
         {
           "id": 6,
-          "name": "Pork",
+          "name": "Pork 44-48",
         },
         {
           "id": 7,

@@ -18,7 +18,7 @@ test("Page contents", function(assert) {
 
   assert.expect(2);
   visit('/orderpad').then(function() {
-    assert.equal(find('.orderpad-menu .list-group-item').length, 35, "Correct number of menu items");
+    assert.equal(find('.orderpad-menu .list-group-item').length, 63, "Correct number of menu items");
     assert.equal(find('.orderpad-categories .row button').length, 18, "Correct number of category items");
   });
 
