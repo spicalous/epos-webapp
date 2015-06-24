@@ -2,7 +2,7 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
   tagName: 'li',
-  classNames: ['list-group-item'],
+  classNames: ['list-group-item', 'no-select'],
   click: function() {
     this.sendAction('action', this.get('orderItem'));
   },
