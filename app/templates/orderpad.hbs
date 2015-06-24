@@ -44,12 +44,14 @@
         <h4 class="modal-title">Order Items</h4>
       </div>
       <div class="modal-body">
-        {{#orderpad-order order=model.order}}
-          <div class="orderpad-summary">
-            ITEMS: {{model.order.size}} <br>
-            TOTAL: {{model.order.displayTotal}}
-          </div>
-        {{/orderpad-order}}
+        <small>
+          {{#orderpad-order order=model.order}}
+            <div class="orderpad-summary">
+              ITEMS: {{model.order.size}} <br>
+              TOTAL: {{model.order.displayTotal}}
+            </div>
+          {{/orderpad-order}}
+        </small>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
