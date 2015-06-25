@@ -132,7 +132,7 @@ module.exports = function(app) {
           "name": "Vegetable Tempura",
           "description": "Deep fried mixed vegetables in batter, served with sweet chilli sauce",
           "price": 450,
-          "categories": ["1", "13"]
+          "categories": ["1", "12"]
         },
         {
           "id": 17,
@@ -140,7 +140,7 @@ module.exports = function(app) {
           "name": "Gui Chai (Vegetable Pancake)",
           "description": "Deep fried Thai leek stuffing in pancakes served with a sweet soya sauce and sesame seeds",
           "price": 450,
-          "categories": ["1", "13"]
+          "categories": ["1", "12"]
         },
         {
           "id": 18,
@@ -180,7 +180,7 @@ module.exports = function(app) {
           "name": "Tom Yum Hed",
           "description": "The classic spicy lemongrass soup with mushrooms, tomatoes, fresh chilli and lime juice",
           "price": 495,
-          "categories": ["2", "13"]
+          "categories": ["2", "12"]
         },
         {
           "id": 23,
@@ -188,7 +188,7 @@ module.exports = function(app) {
           "name": "Tom Kha Hed Soup",
           "description": "Coconut soup with mushrooms and tomatoes spiced with galangal, lemongrass and lime leaves",
           "price": 495,
-          "categories": ["2", "13"]
+          "categories": ["2", "12"]
         },
         {
           "id": 24,
@@ -212,7 +212,7 @@ module.exports = function(app) {
           "name": "Yum Tao Hoo (Crispy Tofu Salad)",
           "description": "Delicious, vegan friendly and a healthy source of protein alternative to meat on a bed of fresh salad in a hot and spicy sauce, garnished with sesame seeds",
           "price": 695,
-          "categories": ["3", "13"]
+          "categories": ["3", "12"]
         },
         {
           "id": 27,
@@ -244,7 +244,7 @@ module.exports = function(app) {
           "name": "Som Tum (Papaya Salad)",
           "description": "Shredded papaya and carrots seasoned with ground peanuts, dry shrimp, lime juice, plum sugar, fish sauce and chilli",
           "price": 695,
-          "categories": ["3", "12"]
+          "categories": ["3"]
         },
         {
           "id": 31,
@@ -404,7 +404,7 @@ module.exports = function(app) {
           "name": "Vegetable Green Curry",
           "description": "",
           "price": 695,
-          "categories": ["4", "13"]
+          "categories": ["4", "12"]
         },
         {
           "id": 51,
@@ -412,7 +412,7 @@ module.exports = function(app) {
           "name": "Vegetable Red Curry",
           "description": "",
           "price": 695,
-          "categories": ["4", "13"]
+          "categories": ["4", "12"]
         },
         {
           "id": 52,
@@ -420,7 +420,7 @@ module.exports = function(app) {
           "name": "Vegetable Jungle Curry",
           "description": "",
           "price": 695,
-          "categories": ["4", "13"]
+          "categories": ["4", "12"]
         },
         {
           "id": 53,
@@ -509,6 +509,530 @@ module.exports = function(app) {
           "description": "",
           "price": 795,
           "categories": ["6"]
+        },
+        {
+          "id": 64,
+          "menuId": "49",
+          "name": "Nuea Pad Bai Kra Prao",
+          "description": "Stir fried beef with basil leaves, onions and fresh chillies",
+          "price": 850,
+          "categories": ["7"]
+        },
+        {
+          "id": 65,
+          "menuId": "50",
+          "name": "Nuea Pad Nam Mun Hoi",
+          "description": "Stir fried beef with oyster sauce, mushroom, peppers and spring onion",
+          "price": 850,
+          "categories": ["7"]
+        },
+        {
+          "id": 66,
+          "menuId": "51",
+          "name": "Nuea Ka Ta",
+          "description": "Stir fried marinated beef with pineapple, mushroom in XO sauce served on a hot sizzling plate",
+          "price": 895,
+          "categories": ["7"]
+        },
+        {
+          "id": 67,
+          "menuId": "52",
+          "name": "Ped Pad Kraprao",
+          "description": "Wok fried duck with added Thai basil and fresh chilli",
+          "price": 895,
+          "categories": ["8"]
+        },
+        {
+          "id": 68,
+          "menuId": "53",
+          "name": "Panang Ped",
+          "description": "Roast duck in rich red coconut curry and lime leaves",
+          "price": 950,
+          "categories": ["8"]
+        },
+        {
+          "id": 69,
+          "menuId": "54",
+          "name": "Ped Ka Ta",
+          "description": "Roasted duck with pineapple, mushroom and peppers in XO sauce served on a hot sizzling plate",
+          "price": 950,
+          "categories": ["8"]
+        },
+        {
+          "id": 70,
+          "menuId": "55",
+          "name": "Ped Ta Krai",
+          "description": "Succulent slices of duck quickly wok fried with lemongrass and chilli",
+          "price": 895,
+          "categories": ["8"]
+        },
+        {
+          "id": 71,
+          "menuId": "56 Cod",
+          "name": "Pla Chu Chee",
+          "description": "Deep fried topped with chu chee curry sauce, coconut milk and garnished with shredded lime leaves",
+          "price": 950,
+          "categories": ["9"]
+        },
+        {
+          "id": 72,
+          "menuId": "56 Trout",
+          "name": "Pla Chu Chee",
+          "description": "Deep fried topped with chu chee curry sauce, coconut milk and garnished with shredded lime leaves",
+          "price": 950,
+          "categories": ["9"]
+        },
+        {
+          "id": 73,
+          "menuId": "57 Cod",
+          "name": "Pla Rad Prik",
+          "description": "Deef fried and topped with chilli and garlic sauce",
+          "price": 950,
+          "categories": ["9"]
+        },
+        {
+          "id": 74,
+          "menuId": "57 Trout",
+          "name": "Pla Rad Prik",
+          "description": "Deef fried and topped with chilli and garlic sauce",
+          "price": 950,
+          "categories": ["9"]
+        },
+        {
+          "id": 75,
+          "menuId": "58 Cod",
+          "name": "Pla Priew Wan",
+          "description": "Deep fried and topped with vegetables in sweet and sour sauce",
+          "price": 950,
+          "categories": ["9"]
+        },
+        {
+          "id": 76,
+          "menuId": "58 Trout",
+          "name": "Pla Priew Wan",
+          "description": "Deep fried and topped with vegetables in sweet and sour sauce",
+          "price": 950,
+          "categories": ["9"]
+        },
+        {
+          "id": 77,
+          "menuId": "59",
+          "name": "Goong Kra Tiam",
+          "description": "King prawns sauteed with garlic and Thai pepper sauce",
+          "price": 895,
+          "categories": ["11"]
+        },
+        {
+          "id": 78,
+          "menuId": "60",
+          "name": "Goong Pad Kra Prao",
+          "description": "Stir fried king prawns with Thai basil and fresh chilli",
+          "price": 895,
+          "categories": ["11"]
+        },
+        {
+          "id": 79,
+          "menuId": "61",
+          "name": "Goong Pad Nam Prik Pao",
+          "description": "Prawns sauteed with a roasted chilli sauce",
+          "price": 895,
+          "categories": ["11"]
+        },
+        {
+          "id": 80,
+          "menuId": "62",
+          "name": "Chu Chee Goong",
+          "description": "Stir fried king prawn topped with chu chee curry sauce then garnished with shredded lime leaves",
+          "price": 895,
+          "categories": ["11"]
+        },
+        {
+          "id": 81,
+          "menuId": "63",
+          "name": "Pla Muek Pad Prik",
+          "description": "Tender squid stir fried with fresh chilli, garlic and onions",
+          "price": 850,
+          "categories": ["10"]
+        },
+        {
+          "id": 82,
+          "menuId": "64",
+          "name": "Priew Wan Goong",
+          "description": "Thai style sweet and sour king prawns",
+          "price": 895,
+          "categories": ["11"]
+        },
+        {
+          "id": 83,
+          "menuId": "65",
+          "name": "Goong Pad Khing",
+          "description": "King prawns stir fried with fresh ginger in yellow bean sauce",
+          "price": 895,
+          "categories": ["11"]
+        },
+        {
+          "id": 84,
+          "menuId": "66",
+          "name": "Pad Talay",
+          "description": "A medley of mixed seafood in spicy sauce with flavours of lemongrass, basil leaves and red pepper",
+          "price": 950,
+          "categories": ["10"]
+        },
+        {
+          "id": 85,
+          "menuId": "67",
+          "name": "Pad Khing Tao Hoo",
+          "description": "Fried beancurd with shredded ginger, mushrooms and spring onions, seasoned with yellow bean sauce",
+          "price": 695,
+          "categories": ["12"]
+        },
+        {
+          "id": 86,
+          "menuId": "68",
+          "name": "Pad Kra Prao Tao Hoo",
+          "description": "Fried beancurd with chilli, onions and fresh basil leaves",
+          "price": 695,
+          "categories": ["12"]
+        },
+        {
+          "id": 87,
+          "menuId": "69",
+          "name": "Pak Ob",
+          "description": "Steamed green vegetables topped with garlic and oyster sauce",
+          "price": 650,
+          "categories": ["12"]
+        },
+        {
+          "id": 88,
+          "menuId": "70",
+          "name": "Pad Pak Met Ma Muang",
+          "description": "Stir fried mixed vegetables with cashew nuts",
+          "price": 650,
+          "categories": ["12"]
+        },
+        {
+          "id": 89,
+          "menuId": "71",
+          "name": "Hed Kee Mao",
+          "description": "Mushrooms, fried with fresh chilli, garlic, basil leaves in XO sauce",
+          "price": 650,
+          "categories": ["12"]
+        },
+        {
+          "id": 90,
+          "menuId": "72",
+          "name": "Hed Wine Dang",
+          "description": "Mushrooms and French red wine cooked with sweet and sour sauce",
+          "price": 650,
+          "categories": ["12"]
+        },
+        {
+          "id": 91,
+          "menuId": "73",
+          "name": "Pad Pak",
+          "description": "Mixed vegetables with light soya sauce",
+          "price": 650,
+          "categories": ["12"]
+        },
+        {
+          "id": 92,
+          "menuId": "74",
+          "name": "Pad Pak Bung Fai Daeng",
+          "description": "Thai hawker stall favourite of stir fried morning glory with fresh chilli, garlic and oyster sauce",
+          "price": 675,
+          "categories": ["12"]
+        },
+        {
+          "id": 93,
+          "menuId": "75",
+          "name": "Pad Kwang Tung",
+          "description": "Stir fried choi sum cooked with fresh chilli, garlic and oyster sauce",
+          "price": 675,
+          "categories": ["12"]
+        },
+        {
+          "id": 94,
+          "menuId": "76",
+          "name": "Pad Thai",
+          "description": "Special Thai style noodles with chicken, prawns, beansprouts, spring onion and egg topped with ground peanuts",
+          "price": 795,
+          "categories": ["14"]
+        },
+        {
+          "id": 95,
+          "menuId": "77",
+          "name": "Singapore Noodles",
+          "description": "Vermicelli noodles stir fried with curry powder, egg, baby prawns, beansprouts and spring onion",
+          "price": 795,
+          "categories": ["14"]
+        },
+        {
+          "id": 96,
+          "menuId": "78",
+          "name": "Chicken Pad Si Ew",
+          "description": "Fried rice noodles with egg, vegetables and a choice of pork, chicken OR beef in a dark soya sauce",
+          "price": 795,
+          "categories": ["14"]
+        },
+        {
+          "id": 97,
+          "menuId": "78",
+          "name": "Pork Pad Si Ew",
+          "description": "Fried rice noodles with egg, vegetables and a choice of pork, chicken OR beef in a dark soya sauce",
+          "price": 795,
+          "categories": ["14"]
+        },
+        {
+          "id": 98,
+          "menuId": "78",
+          "name": "Beef Pad Si Ew",
+          "description": "Fried rice noodles with egg, vegetables and a choice of pork, chicken OR beef in a dark soya sauce",
+          "price": 795,
+          "categories": ["14"]
+        },
+        {
+          "id": 99,
+          "menuId": "79",
+          "name": "Pad Kee Mao",
+          "description": "Fried egg noodles with beef, green vegetables, fresh chilli, garlic and basil leaves",
+          "price": 795,
+          "categories": ["14"]
+        },
+        {
+          "id": 100,
+          "menuId": "80",
+          "name": "Pad Thai Jay",
+          "description": "Popular pad Thai noodles stir fried sweet radish, beansprouts, spring onions, egg and ground peanut",
+          "price": 725,
+          "categories": ["14", "12"]
+        },
+        {
+          "id": 101,
+          "menuId": "81",
+          "name": "Guay Teaw Jay",
+          "description": "Fried egg noodles with spring onions and beansprouts",
+          "price": 550,
+          "categories": ["14", "12"]
+        },
+        {
+          "id": 102,
+          "menuId": "82",
+          "name": "Steamed Jasmine Rice",
+          "price": 250,
+          "categories": ["13"]
+        },
+        {
+          "id": 103,
+          "menuId": "83",
+          "name": "Egg Fried Rice",
+          "price": 280,
+          "categories": ["13"]
+        },
+        {
+          "id": 104,
+          "menuId": "84",
+          "name": "Coconut Rice",
+          "price": 280,
+          "categories": ["13"]
+        },
+        {
+          "id": 105,
+          "menuId": "85",
+          "name": "Sticky Rice",
+          "price": 295,
+          "categories": ["13"]
+        },
+        {
+          "id": 106,
+          "menuId": "86",
+          "name": "House Special Fried Rice",
+          "description": "Stir fried rice with prawns and chicken",
+          "price": 795,
+          "categories": ["13", "5", "11"]
+        },
+        {
+          "id": 107,
+          "menuId": "87",
+          "name": "Prawn Fried Rice",
+          "description": "Fried rice with prawns, pineapple and cashew nuts",
+          "price": 795,
+          "categories": ["13", "11"]
+        },
+        {
+          "id": 108,
+          "menuId": "770",
+          "name": "Singapore Fried Rice",
+          "description": "Fried rice with curry powder, egg, baby prawns and spring onions",
+          "price": 795,
+          "categories": ["13"]
+        },
+        {
+          "id": 109,
+          "menuId": "771",
+          "name": "Tom Yum Fried Rice",
+          "description": "The most talked about fried rice, now comes to our menu. Absolute blast of hot and sour flavours, prawns and chicken fried rice with aroma of Thai herbs",
+          "price": 795,
+          "categories": ["13", "5", "11"]
+        },
+        {
+          "id": 110,
+          "menuId": "772",
+          "name": "Tom Yum Noodle Soup",
+          "description": "Thin rice vermicelli noodles with chicken and prawns, tomatoes, mushrooms, fresh chilli and lemongrass in Thai famous hot and sour tom yum soup",
+          "price": 895,
+          "categories": ["14", "5", "11"]
+        },
+        {
+          "id": 111,
+          "menuId": "773",
+          "name": "Tom Kha Noodle Soup",
+          "description": "Thick egg noodles with chicken, galangal, lemongrass, fresh chilli, lime juice in a creamy coconut based Thai classic tom kha soup topped with sesame oil",
+          "price": 895,
+          "categories": ["14", "5"]
+        },
+        {
+          "id": 112,
+          "menuId": "88",
+          "name": "Ped Makarm",
+          "description": "Crispy fried roasted duck topped with tamarind sauce",
+          "price": 950,
+          "categories": ["15", "8"]
+        },
+        {
+          "id": 113,
+          "menuId": "89",
+          "name": "Gang Phed Ped Yung",
+          "description": "Roasted duck cooked in red curry, coconut milk, pineapple and tomato",
+          "price": 895,
+          "categories": ["15", "8", "4"]
+        },
+        {
+          "id": 114,
+          "menuId": "90",
+          "name": "Ped Pad Khing",
+          "description": "Stir fried duck with fresh ginger, mushroom, yellow bean sauce and spring onion",
+          "price": 895,
+          "categories": ["15", "8"]
+        },
+        {
+          "id": 115,
+          "menuId": "91",
+          "name": "Pla Nueng",
+          "description": "Steamed whole seabass with ginger, spring onion and bean sauce",
+          "price": 1695,
+          "categories": ["15", "9"]
+        },
+        {
+          "id": 116,
+          "menuId": "92",
+          "name": "Pla Tod Rad Prik",
+          "description": "Deep fried whole seabass topped with chilli garlic sauce",
+          "price": 1695,
+          "categories": ["15", "9"]
+        },
+        {
+          "id": 117,
+          "menuId": "93",
+          "name": "Salmon Panang Curry",
+          "description": "Battered salmon fillet topped with panang curry sauce, lime leaves and basil",
+          "price": 1150,
+          "categories": ["15", "9", "4"]
+        },
+        {
+          "id": 118,
+          "menuId": "94",
+          "name": "Seabass Tamarind",
+          "description": "Deep fried whole seabass topped with tamarind sauce",
+          "price": 1695,
+          "categories": ["15", "9"]
+        },
+        {
+          "id": 119,
+          "menuId": "",
+          "name": "Coca-Cola",
+          "description": "",
+          "price": 080,
+          "categories": ["16"]
+        },
+        {
+          "id": 120,
+          "menuId": "",
+          "name": "Diet Coke",
+          "description": "",
+          "price": 080,
+          "categories": ["16"]
+        },
+        {
+          "id": 121,
+          "menuId": "",
+          "name": "7up",
+          "description": "",
+          "price": 080,
+          "categories": ["16"]
+        },
+        {
+          "id": 122,
+          "menuId": "",
+          "name": "Tango",
+          "description": "",
+          "price": 080,
+          "categories": ["16"]
+        },
+        {
+          "id": 123,
+          "menuId": "",
+          "name": "Coconut Juice",
+          "description": "",
+          "price": 125,
+          "categories": ["16"]
+        },
+        {
+          "id": 124,
+          "menuId": "",
+          "name": "Thai Iced Tea",
+          "description": "",
+          "price": 125,
+          "categories": ["16"]
+        },
+        {
+          "id": 125,
+          "menuId": "",
+          "name": "Lemon Iced Tea",
+          "description": "",
+          "price": 125,
+          "categories": ["16"]
+        },
+        {
+          "id": 126,
+          "menuId": "",
+          "name": "Small Still Water",
+          "description": "",
+          "price": 120,
+          "categories": ["16"]
+        },
+        {
+          "id": 127,
+          "menuId": "",
+          "name": "Large Still Water",
+          "description": "",
+          "price": 160,
+          "categories": ["16"]
+        },
+        {
+          "id": 128,
+          "menuId": "",
+          "name": "Small Sparkling Water",
+          "description": "",
+          "price": 120,
+          "categories": ["16"]
+        },
+        {
+          "id": 129,
+          "menuId": "",
+          "name": "Large Sparkling Water",
+          "description": "",
+          "price": 160,
+          "categories": ["16"]
         }
       ],
       categories:[
@@ -558,30 +1082,26 @@ module.exports = function(app) {
         },
         {
           "id": 12,
-          "name": "Shrimp",
-        },
-        {
-          "id": 13,
           "name": "Vegetarian",
         },
         {
-          "id": 14,
+          "id": 13,
           "name": "Rice",
         },
         {
-          "id": 15,
+          "id": 14,
           "name": "Noodles",
         },
         {
-          "id": 16,
+          "id": 15,
           "name": "Chef Specials",
         },
         {
-          "id": 17,
+          "id": 16,
           "name": "Drinks",
         },
         {
-          "id": 18,
+          "id": 17,
           "name": "Desserts",
         }
       ]
