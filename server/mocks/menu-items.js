@@ -951,7 +951,7 @@ module.exports = function(app) {
           "menuId": "",
           "name": "Coca-Cola",
           "description": "",
-          "price": 080,
+          "price": 80,
           "categories": ["16"]
         },
         {
@@ -959,7 +959,7 @@ module.exports = function(app) {
           "menuId": "",
           "name": "Diet Coke",
           "description": "",
-          "price": 080,
+          "price": 80,
           "categories": ["16"]
         },
         {
@@ -967,7 +967,7 @@ module.exports = function(app) {
           "menuId": "",
           "name": "7up",
           "description": "",
-          "price": 080,
+          "price": 80,
           "categories": ["16"]
         },
         {
@@ -975,7 +975,7 @@ module.exports = function(app) {
           "menuId": "",
           "name": "Tango",
           "description": "",
-          "price": 080,
+          "price": 80,
           "categories": ["16"]
         },
         {
