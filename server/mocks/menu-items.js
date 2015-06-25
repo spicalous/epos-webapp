@@ -258,7 +258,7 @@ module.exports = function(app) {
           "id": 32,
           "menuId": "30",
           "name": "Chicken Green Curry",
-          "description": "",
+          "description": "A traditional Thai green curry using fresh green chillies then cooked in coconut milk with aubergines, bell peppers, long beans, sweet basil leaves and bamboo shoots",
           "price": 795,
           "categories": ["4", "5"]
         },
@@ -266,7 +266,7 @@ module.exports = function(app) {
           "id": 33,
           "menuId": "30",
           "name": "Pork Green Curry",
-          "description": "",
+          "description": "A traditional Thai green curry using fresh green chillies then cooked in coconut milk with aubergines, bell peppers, long beans, sweet basil leaves and bamboo shoots",
           "price": 795,
           "categories": ["4", "6"]
         },
@@ -274,7 +274,7 @@ module.exports = function(app) {
           "id": 34,
           "menuId": "30",
           "name": "Beef Green Curry",
-          "description": "",
+          "description": "A traditional Thai green curry using fresh green chillies then cooked in coconut milk with aubergines, bell peppers, long beans, sweet basil leaves and bamboo shoots",
           "price": 850,
           "categories": ["4", "7"]
         },
@@ -282,7 +282,7 @@ module.exports = function(app) {
           "id": 35,
           "menuId": "30",
           "name": "Prawns Green Curry",
-          "description": "",
+          "description": "A traditional Thai green curry using fresh green chillies then cooked in coconut milk with aubergines, bell peppers, long beans, sweet basil leaves and bamboo shoots",
           "price": 895,
           "categories": ["4", "10", "11"]
         },
@@ -290,7 +290,7 @@ module.exports = function(app) {
           "id": 36,
           "menuId": "31",
           "name": "Chicken Red Curry",
-          "description": "",
+          "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 795,
           "categories": ["4", "5"]
         },
@@ -298,7 +298,7 @@ module.exports = function(app) {
           "id": 37,
           "menuId": "31",
           "name": "Pork Red Curry",
-          "description": "",
+          "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 795,
           "categories": ["4", "6"]
         },
@@ -306,7 +306,7 @@ module.exports = function(app) {
           "id": 38,
           "menuId": "31",
           "name": "Beef Red Curry",
-          "description": "",
+          "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 850,
           "categories": ["4", "7"]
         },
@@ -314,7 +314,7 @@ module.exports = function(app) {
           "id": 39,
           "menuId": "31",
           "name": "Prawns Red Curry",
-          "description": "",
+          "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 895,
           "categories": ["4", "10", "11"]
         },
@@ -322,7 +322,7 @@ module.exports = function(app) {
           "id": 40,
           "menuId": "32",
           "name": "Chicken Panang Curry",
-          "description": "",
+          "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 795,
           "categories": ["4", "5"]
         },
@@ -330,7 +330,7 @@ module.exports = function(app) {
           "id": 41,
           "menuId": "32",
           "name": "Pork Panang Curry",
-          "description": "",
+          "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 795,
           "categories": ["4", "6"]
         },
@@ -338,7 +338,7 @@ module.exports = function(app) {
           "id": 42,
           "menuId": "32",
           "name": "Beef Panang Curry",
-          "description": "",
+          "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 850,
           "categories": ["4", "7"]
         },
@@ -346,7 +346,7 @@ module.exports = function(app) {
           "id": 43,
           "menuId": "32",
           "name": "Prawns Panang Curry",
-          "description": "",
+          "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 895,
           "categories": ["4", "10", "11"]
         },
@@ -354,7 +354,7 @@ module.exports = function(app) {
           "id": 44,
           "menuId": "33",
           "name": "Chicken Jungle Curry",
-          "description": "",
+          "description": "Jungle curry is a clear but spicy red curry without coconut milk prepared with bamboo shoots, aubergine, basil leaves, long beans and mixed vegetables",
           "price": 795,
           "categories": ["4", "5"]
         },
@@ -362,7 +362,7 @@ module.exports = function(app) {
           "id": 45,
           "menuId": "33",
           "name": "Pork Jungle Curry",
-          "description": "",
+          "description": "Jungle curry is a clear but spicy red curry without coconut milk prepared with bamboo shoots, aubergine, basil leaves, long beans and mixed vegetables",
           "price": 795,
           "categories": ["4", "6"]
         },
@@ -370,7 +370,7 @@ module.exports = function(app) {
           "id": 46,
           "menuId": "33",
           "name": "Beef Jungle Curry",
-          "description": "",
+          "description": "Jungle curry is a clear but spicy red curry without coconut milk prepared with bamboo shoots, aubergine, basil leaves, long beans and mixed vegetables",
           "price": 850,
           "categories": ["4", "7"]
         },
@@ -378,7 +378,7 @@ module.exports = function(app) {
           "id": 47,
           "menuId": "33",
           "name": "Prawns Jungle Curry",
-          "description": "",
+          "description": "Jungle curry is a clear but spicy red curry without coconut milk prepared with bamboo shoots, aubergine, basil leaves, long beans and mixed vegetables",
           "price": 895,
           "categories": ["4", "10", "11"]
         },
@@ -386,7 +386,7 @@ module.exports = function(app) {
           "id": 48,
           "menuId": "34",
           "name": "Beef Massaman",
-          "description": "",
+          "description": "A mild beef coconut curry with potatoes, red and green bell peppers, onions, carrots and peanuts",
           "price": 850,
           "categories": ["4", "7"]
         },
@@ -394,7 +394,7 @@ module.exports = function(app) {
           "id": 49,
           "menuId": "34",
           "name": "Chicken Massaman",
-          "description": "",
+          "description": "A mild chicken coconut curry with potatoes, red and green bell peppers, onions, carrots and peanuts",
           "price": 850,
           "categories": ["4", "5"]
         },
@@ -402,7 +402,7 @@ module.exports = function(app) {
           "id": 50,
           "menuId": "35",
           "name": "Vegetable Green Curry",
-          "description": "",
+          "description": "Mixed fresh vegetables cooked in coconut milk with bamboo shoots, sweet basil leaves and green curry paste",
           "price": 695,
           "categories": ["4", "12"]
         },
@@ -410,7 +410,7 @@ module.exports = function(app) {
           "id": 51,
           "menuId": "36",
           "name": "Vegetable Red Curry",
-          "description": "",
+          "description": "Mixed fresh vegetables cooked in coconut milk with bamboo shoots, sweet basil leaves and red curry paste",
           "price": 695,
           "categories": ["4", "12"]
         },
@@ -418,7 +418,7 @@ module.exports = function(app) {
           "id": 52,
           "menuId": "37",
           "name": "Vegetable Jungle Curry",
-          "description": "",
+          "description": "Mixed vegetables in clear spicy red curry without coconut milk",
           "price": 695,
           "categories": ["4", "12"]
         },
@@ -426,7 +426,7 @@ module.exports = function(app) {
           "id": 53,
           "menuId": "38",
           "name": "Kai Pad Mamuang Himmaparn",
-          "description": "",
+          "description": "Chicken with cashew nuts, bell peppers, onions, mushrooms, pineapple and spring onions",
           "price": 795,
           "categories": ["5"]
         },
@@ -434,7 +434,7 @@ module.exports = function(app) {
           "id": 54,
           "menuId": "39",
           "name": "Kai Pad Khing",
-          "description": "",
+          "description": "Chicken with shredded ginger, mushrooms, carrots, onions in yellow bean sauce",
           "price": 795,
           "categories": ["5"]
         },
@@ -442,7 +442,7 @@ module.exports = function(app) {
           "id": 55,
           "menuId": "40",
           "name": "Kai Ta Krai",
-          "description": "",
+          "description": "Stir fried chicken with lemongrass and chilli",
           "price": 795,
           "categories": ["5"]
         },
@@ -450,7 +450,7 @@ module.exports = function(app) {
           "id": 56,
           "menuId": "41",
           "name": "Kai Pad Prik Khing",
-          "description": "",
+          "description": "Chicken stir fried with curry paste and green beans then garnished with finely shredded lime leaves",
           "price": 795,
           "categories": ["5"]
         },
@@ -458,7 +458,7 @@ module.exports = function(app) {
           "id": 57,
           "menuId": "42",
           "name": "Kai Pad Priew Wan",
-          "description": "",
+          "description": "Thai style sweet and sour chicken with tomatoes and pineapple",
           "price": 795,
           "categories": ["5"]
         },
@@ -466,7 +466,7 @@ module.exports = function(app) {
           "id": 58,
           "menuId": "43",
           "name": "Kai Pad Bai Kra Prao",
-          "description": "",
+          "description": "Sliced chicken stir fried with basil leaves, onion and chillies",
           "price": 795,
           "categories": ["5"]
         },
@@ -474,7 +474,7 @@ module.exports = function(app) {
           "id": 59,
           "menuId": "44",
           "name": "Mu Tod Kra Tiem Prik Tai",
-          "description": "",
+          "description": "Stir fried pork with garlic, pepper and coriander",
           "price": 795,
           "categories": ["6"]
         },
@@ -482,7 +482,7 @@ module.exports = function(app) {
           "id": 60,
           "menuId": "45",
           "name": "Mu Pad Khing",
-          "description": "",
+          "description": "Sliced pork stir fried with fresh ginger, onion, mushroom and spring onion",
           "price": 795,
           "categories": ["6"]
         },
@@ -490,7 +490,7 @@ module.exports = function(app) {
           "id": 61,
           "menuId": "46",
           "name": "Mu Priew Wan",
-          "description": "",
+          "description": "Thai style sweet and sour dish with pork",
           "price": 795,
           "categories": ["6"]
         },
@@ -498,7 +498,7 @@ module.exports = function(app) {
           "id": 62,
           "menuId": "47",
           "name": "Mu Pad Kra Prao",
-          "description": "",
+          "description": "Wok fried pork with added Thai basil and fresh chilli",
           "price": 795,
           "categories": ["6"]
         },
@@ -506,7 +506,7 @@ module.exports = function(app) {
           "id": 63,
           "menuId": "48",
           "name": "Mu Pad Prik Khing",
-          "description": "",
+          "description": "Green beans and red curry paste stir fried with pork",
           "price": 795,
           "categories": ["6"]
         },
