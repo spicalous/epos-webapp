@@ -32,5 +32,5 @@ module.exports = function(app) {
 //    res.status(204).end();
 //  });
 
-  app.use('/api/orders', ordersRouter);
+  app.use('/EPOSDataService-1.0-SNAPSHOT/api/orders', ordersRouter);
 };
