@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
       var _this = this;
 
       this.get('model').order
-          .set('date', Date.now())
+          .set('dateTime', new Date())
           .save()
           .then(function() {
             //TODO [MEDIUM] Handle fail scenarios

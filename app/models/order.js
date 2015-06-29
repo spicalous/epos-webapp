@@ -1,7 +1,7 @@
 import DS from "ember-data";
 
 export default DS.Model.extend({
-  date: DS.attr('string'),
+  dateTime: DS.attr('date'),
   orderItems: DS.hasMany('order-item'),
 
   total: function() {
