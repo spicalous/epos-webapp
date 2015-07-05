@@ -2,7 +2,7 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
   tagName: 'li',
-  classNames: ['list-group-item'],
+  classNames: ['list-group-item', 'clearfix'],
   click: function() {
     this.sendAction('action', this.get('orderItem'));
   },
@@ -16,6 +16,10 @@ export default Ember.Component.extend({
       } else {
          orderItem.set('quantity', --quantity);
       }
+    },
+    editItem: function() {
+      var orderItem = this.get('orderItem');
+      console.log(orderItem);
     }
   }
 });
