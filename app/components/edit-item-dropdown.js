@@ -2,5 +2,16 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
   tagName: 'ul',
-  classNames: ['dropdown-menu']
+  classNames: ['dropdown-menu'],
+  drinkOptions: Ember.A(['Edit Drink']),
+  foodOptions: Ember.A(['Add Food', 'Edit Food']),
+  desertOptions: Ember.A(['Add Desert', 'Edit Dessert']),
+  editItemOptions: function() {
+    var categories = this.get('itemCategories');
+
+    switch(categories.objectAt(0).get('id')) {
+      case "16": return this.get('drinkOptions');
+      default: return this.get('foodOptions');
+    }
+  }.property('categories')
 });
