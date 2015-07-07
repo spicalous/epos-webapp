@@ -2,6 +2,8 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
   tagName: 'a',
-  attributeBindings: ['data-toggle', 'aria-haspopup', 'aria-expanded'],
+  attributeBindings: ['dataToggle:data-toggle', 'ariaHaspopup:aria-haspopup'],
+  dataToggle: 'dropdown',
+  ariaHaspopup: true,
   classNames: ['edit-item-btn', 'dropdown-toggle']
 });
