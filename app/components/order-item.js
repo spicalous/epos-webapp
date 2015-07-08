@@ -16,10 +16,6 @@ export default Ember.Component.extend({
       } else {
          orderItem.set('quantity', --quantity);
       }
-    },
-    editItem: function() {
-      var orderItem = this.get('orderItem');
-      console.log(orderItem);
     }
   }
 });
