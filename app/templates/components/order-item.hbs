@@ -2,6 +2,5 @@
 {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
 <span class="pull-right">
   {{orderItem.displayTotal}}
-  {{edit/edit-btn}}
-  {{edit/edit-dropdown itemCategories=orderItem.menuItem.categories}}
+  {{edit/edit-btn orderItem=orderItem}}
 </span>
