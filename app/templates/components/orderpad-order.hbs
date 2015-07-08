@@ -1,5 +1,11 @@
+<h4 class="text-center">{{title}}</h4>
 {{#each item in order.orderItems}}
   {{order-item orderItem=item}}
 {{/each}}
+
+<div class="orderpad-summary">
+  ITEMS: {{order.size}} <br>
+  TOTAL: {{order.displayTotal}}
+</div>
 
 {{yield}}
