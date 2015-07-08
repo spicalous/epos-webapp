@@ -39,12 +39,7 @@
       </div>
       <div class="modal-body">
         <small>
-          {{#orderpad-order order=model.order}}
-            <div class="orderpad-summary">
-              ITEMS: {{model.order.size}} <br>
-              TOTAL: {{model.order.displayTotal}}
-            </div>
-          {{/orderpad-order}}
+          {{orderpad-order order=model.order}}
         </small>
       </div>
       <div class="modal-footer">
