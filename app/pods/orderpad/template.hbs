@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-sm-6">
+      <div class="orderpad-categories">
+        <div class="row">
+          {{#each item in model.categories}}
+            {{category-item category=item action="categoryItemClick"}}
+          {{/each}}
+        </div>
+      </div>
+      <div class="orderpad-menu">
+        {{outlet "menu"}}
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      {{outlet}}
+    </div>
+
+  </div>
+</div>
