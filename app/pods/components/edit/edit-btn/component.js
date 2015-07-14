@@ -14,5 +14,12 @@ export default Ember.Component.extend({
       case "16": return this.get('drinkOptions');
       default: return this.get('foodOptions');
     }
-  }.property('categories')
+  }.property('categories'),
+  actions: {
+    editItem: function(option) {
+      var orderItem = this.get('orderItem');
+
+      console.log(option + ' ' + orderItem);
+    }
+  }
 });
