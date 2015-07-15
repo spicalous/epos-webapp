@@ -15,7 +15,36 @@
     </div>
 
     <div class="col-sm-6">
-      {{outlet}}
+      <div id="orderpad-header">
+        {{outlet}}
+      </div>
+      <div id="orderpad-order">
+        {{#orderpad-order order=model.order title="Order Items"}}
+          {{submit-btn action="submitOrder"}}
+          {{cancel-btn action="cancelOrder"}}
+        {{/orderpad-order}}
+      </div>
+      <div id="orderpad-modal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Order Items</h4>
+            </div>
+            <div class="modal-body">
+              <small>
+                {{orderpad-order order=model.order}}
+              </small>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default close-btn" data-dismiss="modal">Close</button>
+              {{submit-btn action="submitOrder"}}
+              {{cancel-btn action="cancelOrder"}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{toggle-menu size=model.order.size}}
     </div>
 
   </div>

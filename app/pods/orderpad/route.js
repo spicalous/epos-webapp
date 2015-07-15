@@ -6,13 +6,11 @@ export default Ember.Route.extend({
     this.render('menu', {
       into: 'orderpad',
       outlet: 'menu',
-      controller: 'menu',
       model: this.store.findAll('menu-item')
     });
   },
   model: function() {
     return Ember.RSVP.hash({
-      menu: this.store.all('menu-item'),
       categories: this.store.all('category'),
       order: this.store.createRecord('order', {})
     });
