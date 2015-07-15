@@ -7,11 +7,13 @@ export default Ember.Controller.extend({
     var _this = this;
 
     if (filter === '') {
-      _this.set('model', this.store.all('menu-item'));
+       _this.set('model', this.store.all('menu-item'));
     } else {
-      this.store.filter('menu-item', function(menuItem) {
+      var filterPromise = this.store.filter('menu-item', function(menuItem) {
         return menuItem.get('categories').indexOf(filter) > -1;
-      }).then(function(filteredMenu) {
+      });
+
+      filterPromise.then(function(filteredMenu){
         _this.set('model', filteredMenu);
       });
     }
