@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Ember from 'ember';
 
 export default Ember.Controller.extend({
   filter: '',
@@ -9,11 +9,9 @@ export default Ember.Controller.extend({
     if (filter === '') {
       _this.set('model', this.store.all('menu-item'));
     } else {
-      var filterPromise = this.store.filter('menu-item', function(menuItem) {
+      this.store.filter('menu-item', function(menuItem) {
         return menuItem.get('categories').indexOf(filter) > -1;
-      });
-
-      filterPromise.then(function(filteredMenu){
+      }).then(function(filteredMenu) {
         _this.set('model', filteredMenu);
       });
     }
