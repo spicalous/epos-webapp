@@ -1,7 +1,7 @@
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:orderpad', {
-  needs: ['controller:menu']
+  needs: []
 });
 
 // Replace this with your real tests.

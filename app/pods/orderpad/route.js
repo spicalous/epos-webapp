@@ -3,22 +3,20 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   renderTemplate: function() {
     this.render('orderpad');
-    this.render('menu', {
+    this.render('menuItem', {
       into: 'orderpad',
       outlet: 'menu',
-      model: this.store.findAll('menu-item')
+      controller: 'orderpad'
     });
   },
   model: function() {
     return Ember.RSVP.hash({
+      menu: this.store.findAll('menu-item'),
       categories: this.store.all('category'),
       order: this.store.createRecord('order', {})
     });
   },
   actions: {
-    menuItemClick: function(menuItem) {
-      this.modelFor('orderpad').order.addItem(menuItem);
-    },
     refresh: function() {
       this.refresh();
     }

@@ -13,7 +13,7 @@ Router.map(function() {
     this.route('takeaway');
   });
 
-  this.resource('menu');
+  this.route('menuItem');
 
 });
 

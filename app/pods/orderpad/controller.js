@@ -1,15 +1,31 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: 'menu',
-  menuController: Ember.computed.alias("controllers.menu"),
+  filter: '',
+  filterMenu: function() {
+    var filter = this.get('filter');
+    var _this = this;
+
+    if (filter === '') {
+       _this.set('model.menu', this.store.all('menu-item'));
+    } else {
+      this.store.filter('menu-item', function(menuItem) {
+        return menuItem.get('categories').indexOf(filter) > -1;
+      }).then(function(filteredMenu){
+        _this.set('model.menu', filteredMenu);
+      });
+    }
+  }.observes('filter'),
   actions: {
     categoryItemClick: function(categoryItem) {
-      if (this.get('menuController').get('filter') === categoryItem) {
-        this.get('menuController').set('filter', ''); //Reset filter
+      if (this.get('filter') === categoryItem) {
+        this.set('filter', ''); //Reset filter
       } else {
-        this.get('menuController').set('filter', categoryItem);
+        this.set('filter', categoryItem);
       }
+    },
+    menuItemClick: function(menuItem) {
+      this.get('model').order.addItem(menuItem);
     },
     submitOrder: function() {
       var _this = this;
