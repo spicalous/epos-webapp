@@ -1,23 +1,21 @@
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid height">
+  <div class="row height">
 
-    <div class="col-sm-6">
-      <div class="orderpad-categories">
+    <div class="col-sm-6 height">
+      <div id="orderpad-categories">
         <div class="row">
           {{#each item in model.categories}}
             {{category-item category=item action="categoryItemClick"}}
           {{/each}}
         </div>
       </div>
-      <div class="orderpad-menu">
+      <div id="orderpad-menu">
         {{outlet "menu"}}
       </div>
     </div>
 
     <div class="col-sm-6">
-      <div id="orderpad-header">
-        {{outlet}}
-      </div>
+      {{outlet}}
       <div id="orderpad-order">
         {{#orderpad-order order=model.order title="Order Items"}}
           {{submit-btn action="submitOrder"}}

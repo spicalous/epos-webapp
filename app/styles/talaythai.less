@@ -5,6 +5,11 @@
 @color-primary-3: #590303;
 @color-primary-4: #340000;
 
+@grid-gutter-width:         22px;
+
+html, body, .ember-reset, .height {
+  height: 100%;
+}
 
 //Allows touch events to be fired on touch devices
 a, a:focus, a:hover, a:active, a:visited {
@@ -14,13 +19,18 @@ a, a:focus, a:hover, a:active, a:visited {
   cursor: pointer;
 }
 
+
 .btn-default:focus,
-.btn-danger:focus,
 .btn-default:active,
+.btn-danger:focus,
 .btn-danger:active,
 .btn-success:focus,
 .btn-success:active {
   outline: none !important;
+}
+
+.btn-default:focus {
+  background-color: #FFF;
 }
 
 .no-select {
