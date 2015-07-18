@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
     submitOrder: function() {
       var _this = this;
 
-      this.get('model').order
+      this.get('model.order')
           .set('dateTime', new Date())
           .save()
           .then(function() {
@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
           }, function() {
             //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
             //TODO [MEDIUM] Do not keep order and order items on client
-            _this.send('refresh');
+            _this.transitionTo('index');
           });
     },
     cancelOrder: function() {
