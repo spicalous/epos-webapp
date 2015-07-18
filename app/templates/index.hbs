@@ -1,11 +1,13 @@
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="home text-center">
-        {{#main-btn}}
-          {{#link-to 'orderpad.restaurant'}}RESTAURANT ORDER{{/link-to}}
-        {{/main-btn}}
-      </div>
-    </div>
+  <div class="row text-center">
+    {{#link-to 'orderpad.restaurant'}}
+      {{#main-btn}}RESTAURANT ORDER{{/main-btn}}
+    {{/link-to}}
+    {{#link-to 'orderpad.takeaway'}}
+      {{#main-btn}}TAKEAWAY ORDER{{/main-btn}}
+    {{/link-to}}
+    {{#link-to 'orderpad.delivery'}}
+      {{#main-btn}}DELIVERY ORDER{{/main-btn}}
+    {{/link-to}}
   </div>
 </div>
