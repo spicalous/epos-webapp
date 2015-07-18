@@ -115,3 +115,25 @@ test("Deleting an order item with quantity of 2 decrements to 1", function(asser
 
 });
 
+//test("Canceling an order hides the modal", function(assert) {
+
+//  assert.expect(3);
+//  visit('/orderpad/restaurant');
+
+//  andThen(function() {
+
+//  });
+
+//});
+
+//test("Submitting an order transitions to index", function(assert) {
+
+//  assert.expect(3);
+//  visit('/orderpad/restaurant');
+
+//  andThen(function() {
+
+//  });
+
+//});
+

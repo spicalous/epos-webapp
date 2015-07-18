@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
       }
     },
     menuItemClick: function(menuItem) {
-      this.get('model').order.addItem(menuItem);
+      this.get('model.order').addItem(menuItem);
     },
     submitOrder: function() {
       var _this = this;
@@ -45,6 +45,7 @@ export default Ember.Controller.extend({
       //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
       //TODO [MEDIUM] Do not keep order and order items on client
       this.send('refresh');
+        $('#orderpad-modal').modal('hide');
     }
   }
 });
