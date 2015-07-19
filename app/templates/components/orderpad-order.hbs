@@ -1,7 +1,14 @@
 <h4 class="text-center">{{title}}</h4>
 <div>
   {{#each item in order.orderItems}}
-    {{order-item orderItem=item}}
+    <li class="list-group-item clearfix">
+      {{decrement-btn action="decrementItem" orderItem=item}}
+      {{item.quantity}} x {{item.menuItem.menuId}} {{item.menuItem.name}}
+      <span class="pull-right">
+        {{item.displayTotal}}
+        {{edit/edit-btn orderItem=item}}
+      </span>
+    </li>
   {{/each}}
 </div>
 <div id="orderpad-summary">

@@ -4,6 +4,6 @@ export default Ember.Component.extend({
   tagName: 'a',
   classNames: ['btn-danger', 'decrement-btn'],
   click: function() {
-    this.sendAction('action');
+    this.sendAction('action', this.get('orderItem'));
   }
 });
