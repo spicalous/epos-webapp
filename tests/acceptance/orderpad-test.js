@@ -18,8 +18,8 @@ test("Page contents", function(assert) {
 
   assert.expect(2);
   visit('/orderpad/restaurant').then(function() {
-    assert.equal(find('#orderpad-menu .list-group-item').length, 129, "Correct number of menu items");
-    assert.equal(find('#orderpad-categories .row button').length, 17, "Correct number of category items");
+    assert.equal(find('#orderpad-menu .list-group-item').length, 129, "Wrong number of menu items");
+    assert.equal(find('#orderpad-categories .row button').length, 17, "Wrong number of category items");
   });
 
 });
@@ -115,6 +115,20 @@ test("Deleting an order item with quantity of 2 decrements to 1", function(asser
 
 });
 
+test("Submitting an order transitions to index", function(assert) {
+
+  assert.expect(1);
+  visit('/orderpad/restaurant');
+  click('.submit-btn');
+
+  andThen(function() {
+    var current = currentRouteName(),
+        expected = 'index';
+    assert.equal(current, 'index', 'Expected: ' + expected + ', got: ' + current);
+  });
+
+});
+
 //test("Canceling an order hides the modal", function(assert) {
 
 //  assert.expect(3);
@@ -125,15 +139,3 @@ test("Deleting an order item with quantity of 2 decrements to 1", function(asser
 //  });
 
 //});
-
-//test("Submitting an order transitions to index", function(assert) {
-
-//  assert.expect(3);
-//  visit('/orderpad/restaurant');
-
-//  andThen(function() {
-
-//  });
-
-//});
-
