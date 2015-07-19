@@ -5,12 +5,10 @@ export default Ember.Component.extend({
   classNames: ['orderpad-order', 'no-select'],
   actions: {
     decrementItem: function(orderItem) {
-      var quantity = orderItem.get('quantity');
-
-      if (quantity === 1) {
+      if (orderItem.get('quantity') === 1) {
          orderItem.destroyRecord();
       } else {
-         orderItem.set('quantity', --quantity);
+         orderItem.decrementProperty('quantity');
       }
     }
   }
