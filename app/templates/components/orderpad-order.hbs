@@ -6,7 +6,9 @@
       {{item.quantity}} x {{item.menuItem.menuId}} {{item.menuItem.name}}
       <span class="pull-right">
         {{item.displayTotal}}
-        {{edit/edit-btn orderItem=item}}
+        <a class="edit-item-btn" {{action "openModal" item}}>
+          <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+        </a>
       </span>
     </li>
   {{/each}}
