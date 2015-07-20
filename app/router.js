@@ -13,8 +13,6 @@ Router.map(function() {
     this.route('takeaway');
   });
 
-  this.route('menuItem');
-
 });
 
 export default Router;

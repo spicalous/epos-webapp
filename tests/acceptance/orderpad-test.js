@@ -119,7 +119,7 @@ test("Submitting an order transitions to index", function(assert) {
 
   assert.expect(1);
   visit('/orderpad/restaurant');
-  click('.submit-btn');
+  click('#orderpad-order .submit-btn');
 
   andThen(function() {
     var current = currentRouteName(),

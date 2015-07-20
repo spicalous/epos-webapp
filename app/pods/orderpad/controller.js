@@ -40,7 +40,7 @@ export default Ember.Controller.extend({
             //TODO [MEDIUM] Do not keep order and order items on client
             //TODO [MEDIUM] Accepted Feedback
             $('#orderpad-modal').modal('hide');
-            _this.transitionTo('index');
+            _this.transitionToRoute('index');
           });
     },
     cancelOrder: function() {

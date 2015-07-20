@@ -10,6 +10,9 @@ export default Ember.Component.extend({
       } else {
          orderItem.decrementProperty('quantity');
       }
+    },
+    editItem: function(orderItem, order) {
+      order.set('itemToEdit', orderItem);
     }
   }
 });
