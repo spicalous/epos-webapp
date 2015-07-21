@@ -17,10 +17,10 @@
     <div class="col-sm-6">
       <div id="orderpad-order">
         {{outlet}}
-        {{#orderpad-order order=model.order title="Order Items"}}
+        {{#order-list order=model.order title="Order Items"}}
           {{submit-btn action="submitOrder"}}
           {{cancel-btn action="cancelOrder"}}
-        {{/orderpad-order}}
+        {{/order-list}}
       </div>
 
       {{#orderpad-modal order=model.order title="Order Items"}}
@@ -29,7 +29,10 @@
       {{/orderpad-modal}}
 
       {{edit-item-modal order=model.order}}
-      {{toggle-menu size=model.order.size}}
+
+      {{#toggle-menu}}
+        {{model.order.size}}
+      {{/toggle-menu}}
     </div>
 
   </div>
