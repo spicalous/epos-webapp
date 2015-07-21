@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   filter: '',
-  filterMenu: function() {
+  filterObserver: function() {
     var filter = this.get('filter');
     var _this = this;
 
@@ -16,6 +16,7 @@ export default Ember.Controller.extend({
       });
     }
   }.observes('filter'),
+
   actions: {
     categoryItemClick: function(categoryItem) {
       if (this.get('filter') === categoryItem) {
