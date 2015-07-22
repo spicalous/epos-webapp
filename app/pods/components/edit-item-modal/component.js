@@ -29,13 +29,17 @@ export default Ember.Component.extend({
     var categories = this.get('order.itemToEdit.menuItem.categories');
 
     if (categories) {
-      switch(categories.objectAt(0).get('id')) {
+      this.set('mainCategory', categories.objectAt(0).get('id'));
+
+      switch(this.get('mainCategory')) {
         case "16":
           this.set('editItemTabs', this.get('drinkOptions'));
+          this.set('selected', this.get('drinkOptions').objectAt(0));
           this.set('editItemOptions', this.get('addDrinkOptions'));
           break;
         default:
           this.set('editItemTabs', this.get('foodOptions'));
+          this.set('selected', this.get('foodOptions').objectAt(0));
           this.set('editItemOptions', this.get('addFoodOptions'));
       }
     }
@@ -46,10 +50,18 @@ export default Ember.Component.extend({
       console.log('SUBMIT EDIT');
       $('#edit-item-modal').modal('hide');
     },
-    cancelEdit: function() {
-      console.log('CANCEL EDIT');
-      $('#edit-item-modal').modal('hide');
-    },
-  }
+    tabClick: function(text) {
+      this.set('selected', text);
 
+      switch(this.get('mainCategory')) {
+        case "16":
+          this.set('editItemOptions',
+            text === 'Add Drink' ? this.get('addDrinkOptions') : this.get('editDrinkOptions'));
+          break;
+        default:
+          this.set('editItemOptions',
+            text === 'Add Food' ? this.get('addFoodOptions') : this.get('editFoodOptions'));
+      }
+    }
+  }
 });
