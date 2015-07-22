@@ -5,7 +5,46 @@
 @color-primary-3: #590303;
 @color-primary-4: #340000;
 
+// ###################################
+// ### Bootstrap variable overides ###
+// ###################################
+
 @grid-gutter-width:         22px;
+
+// override navs-justified to not collapse for small sreens
+.nav-justified {
+
+  @media (min-width: (@screen-xs-min - 120)) {
+    > li {
+      display: table-cell;
+      width: 1%;
+      > a {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.nav-tabs-justified {
+
+  @media (min-width: (@screen-xs-min - 120)) {
+    > li > a {
+      border-bottom: 1px solid @nav-tabs-justified-link-border-color;
+      border-radius: @border-radius-base @border-radius-base 0 0;
+    }
+    > .active > a,
+    > .active > a:hover,
+    > .active > a:focus {
+      border-bottom-color: @nav-tabs-justified-active-link-border-color;
+    }
+  }
+}
+
+// ############## END ################
+// ###################################
+// ### Bootstrap variable overides ###
+// ###################################
+
 
 html, body, .ember-reset, .height {
   height: 100%;
@@ -18,7 +57,6 @@ a, a:focus, a:hover, a:active, a:visited {
   text-decoration: none;
   cursor: pointer;
 }
-
 
 .btn-default:focus,
 .btn-default:active,
