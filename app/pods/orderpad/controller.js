@@ -39,6 +39,7 @@ export default Ember.Controller.extend({
           }, function() {
             //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
             //TODO [MEDIUM] Do not keep order and order items on client
+            //TODO [MEDIUM] Confirm Submit
             //TODO [MEDIUM] Accepted Feedback
             $('#orderpad-modal').modal('hide');
             _this.transitionToRoute('index');
