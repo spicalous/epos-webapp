@@ -1,5 +1,7 @@
 /* jshint node: true */
 
+var package = require('../package.json');
+
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'talaythai-webapp',
@@ -15,6 +17,8 @@ module.exports = function(environment) {
     },
 
     APP: {
+      name: 'Talay Thai WebPOS',
+      version: package.version
       // Here you can pass flags/options to your application instance
       // when it is created
     }
