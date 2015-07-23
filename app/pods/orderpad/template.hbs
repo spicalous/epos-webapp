@@ -16,8 +16,10 @@
 
     <div class="col-sm-6">
       <div id="orderpad-order">
+
         {{outlet}}
-        {{#order-list order=model.order title="Order Items"}}
+
+        {{#order-list order=model.order}}
           {{submit-btn action="submitOrder"}}
           {{cancel-btn action="cancelOrder"}}
         {{/order-list}}
