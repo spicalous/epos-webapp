@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   quantity: DS.attr('number'),
-  menuItem: DS.belongsTo('menu-item'),
+  editOptions: DS.hasMany('edit-option'),
 
   total: function() {
     return this.get('quantity') * this.get('menuItem').get('price');

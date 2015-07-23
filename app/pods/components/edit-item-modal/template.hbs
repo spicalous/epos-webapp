@@ -12,9 +12,14 @@
       </ul>
     </div>
     <div class="modal-body">
-      <ul>
-        {{#each option in editItemOptions}}
-          <li><a>{{option}}</a></li>
+      <ul class="nav nav-stacked">
+        {{#each option in filteredEditOptions}}
+          <li>
+            <a class="edit-option" {{action "editOptionToggle" option}}>
+              {{input type="checkbox" name=option.name}}
+              <span>{{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}</span>
+            </a>
+          </li>
         {{/each}}
       </ul>
     </div>

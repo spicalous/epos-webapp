@@ -1442,6 +1442,98 @@ module.exports = function(app) {
           "id":17,
           "name":"Desserts"
         }
+      ],
+      "editOptions":[
+        {
+          "id":1,
+          "type":0,
+          "name":"mixer",
+          "price":50
+        },
+        {
+          "id":2,
+          "type":1,
+          "name":"more ice",
+          "price":0
+        },
+        {
+          "id":3,
+          "type":1,
+          "name":"less ice",
+          "price":0
+        },
+        {
+          "id":4,
+          "type":1,
+          "name":"no ice",
+          "price":0
+        },
+        {
+          "id":5,
+          "type":2,
+          "name":"add chicken",
+          "price":150
+        },
+        {
+          "id":6,
+          "type":2,
+          "name":"add pork",
+          "price":150
+        },
+        {
+          "id":7,
+          "type":2,
+          "name":"add beef",
+          "price":150
+        },
+        {
+          "id":8,
+          "type":2,
+          "name":"add prawns",
+          "price":150
+        },
+        {
+          "id":9,
+          "type":2,
+          "name":"vegetarian",
+          "price":0
+        },
+        {
+          "id":10,
+          "type":3,
+          "name":"mild",
+          "price":0
+        },
+        {
+          "id":11,
+          "type":3,
+          "name":"spicy",
+          "price":0
+        },
+        {
+          "id":12,
+          "type":3,
+          "name":"peppers",
+          "price":0
+        },
+        {
+          "id":13,
+          "type":3,
+          "name":"no peppers",
+          "price":0
+        },
+        {
+          "id":14,
+          "type":3,
+          "name":"mushrooms",
+          "price":0
+        },
+        {
+          "id":15,
+          "type":3,
+          "name":"no mushrooms",
+          "price":0
+        }
       ]
     });
   });

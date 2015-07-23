@@ -28,7 +28,7 @@
         {{cancel-btn action="cancelOrder"}}
       {{/orderpad-modal}}
 
-      {{edit-item-modal order=model.order}}
+      {{edit-item-modal order=model.order editOptions=model.editOptions}}
 
       {{#toggle-menu}}
         {{model.order.size}}
