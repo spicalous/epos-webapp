@@ -26,8 +26,7 @@ export default Ember.Component.extend({
     }
 
     var orderItemEditOptions = itemToEdit.get('editOptions'),
-        editOptions = this.get('editOptions'),
-        _this = this;
+        editOptions = this.get('editOptions');
 
     editOptions.forEach(function(option) {
       if (orderItemEditOptions.indexOf(option) > -1) {
@@ -37,16 +36,10 @@ export default Ember.Component.extend({
       }
     });
 
-    orderItemEditOptions.forEach(function(option) {
-      _this.set(option.get('name'), true);
-    });
-
     var categories = itemToEdit.get('menuItem.categories');
 
     if (categories) {
-      this.set('mainCategory', categories.objectAt(0).get('id'));
-
-      switch(this.get('mainCategory')) {
+      switch(categories.objectAt(0).get('id')) {
         case "16":
           this.set('editType', 0);
           break;
@@ -91,10 +84,10 @@ export default Ember.Component.extend({
     var type = '';
 
     switch(this.get('selected')) {
-      case 'Add Drink': type = 0;break;
-      case 'Edit Drink': type = 1;break;
-      case 'Add Food': type = 2;break;
-      case 'Edit Food': type = 3;break;
+      case 'Add Drink': type = 0; break;
+      case 'Edit Drink': type = 1; break;
+      case 'Add Food': type = 2; break;
+      case 'Edit Food': type = 3; break;
     }
 
     this.set('filteredEditOptions', this.get('editOptions').filterProperty('type', type));
