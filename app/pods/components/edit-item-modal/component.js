@@ -101,10 +101,6 @@ export default Ember.Component.extend({
   }.observes('selected'),
 
   actions: {
-    submitEdit: function() {
-      console.log('SUBMIT EDIT');
-      $('#edit-item-modal').modal('hide');
-    },
     tabClick: function(text) {
       this.set('selected', text);
     },
