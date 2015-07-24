@@ -5,8 +5,9 @@
       {{decrement-btn action="decrementItem" orderItem=item}}
       {{item.quantity}} x {{item.menuItem.menuId}} {{item.menuItem.name}}
       {{#each option in item.editOptions}}
-        <br>
-        {{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}
+        <div class="order-edit-option">
+          {{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}
+        </div>
       {{/each}}
       <span class="pull-right">
         {{item.displayTotal}}
