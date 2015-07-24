@@ -16,7 +16,7 @@
         {{#each option in filteredEditOptions}}
           <li>
             <a class="edit-option" {{action "editOptionToggle" option}}>
-              {{input type="checkbox" name=option.name}}
+              {{input type="checkbox" name=option.name checked=option.checked}}
               <span>{{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}</span>
             </a>
           </li>

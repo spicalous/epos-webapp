@@ -13,6 +13,11 @@ export default Ember.Component.extend({
     'Add Food', 'Edit Food'
   ]),
 
+  /**
+  *
+  * Fires when the user selects an item to edit (itemToEdit === orderItem)
+  * Sets the editType variable (tabs) based on the primary menu-item category
+  */
   editItemObserver: function() {
     var itemToEdit = this.get('order.itemToEdit');
 
@@ -20,8 +25,23 @@ export default Ember.Component.extend({
       return;
     }
 
-    var editOptionsFromItem = itemToEdit.get('editOptions'),
-        categories = itemToEdit.get('menuItem.categories');
+    var orderItemEditOptions = itemToEdit.get('editOptions'),
+        editOptions = this.get('editOptions'),
+        _this = this;
+
+    editOptions.forEach(function(option) {
+      if (orderItemEditOptions.indexOf(option) > -1) {
+        option.set('checked', true);
+      } else {
+        option.set('checked', false);
+      }
+    });
+
+    orderItemEditOptions.forEach(function(option) {
+      _this.set(option.get('name'), true);
+    });
+
+    var categories = itemToEdit.get('menuItem.categories');
 
     if (categories) {
       this.set('mainCategory', categories.objectAt(0).get('id'));
@@ -36,6 +56,12 @@ export default Ember.Component.extend({
     }
   }.observes('order.itemToEdit'),
 
+  /**
+  *
+  * Fired when an itemToEdit has changed
+  * Updates the tab options
+  * Updates the "selected" parameter used to set the "active" class on the selected tab
+  */
   editTypeObserver: function() {
     switch(this.get('editType')) {
       case 0:
@@ -57,6 +83,10 @@ export default Ember.Component.extend({
     }
   }.observes('editType'),
 
+  /**
+  *
+  * Sets the available edit options based on what tab (editType) was selected
+  */
   selectedTypeObserver: function() {
     var type = '';
 
@@ -67,9 +97,7 @@ export default Ember.Component.extend({
       case 'Edit Food': type = 3;break;
     }
 
-    var editOptions = this.get('editOptions');
-
-    this.set('filteredEditOptions', editOptions.filterProperty('type', type));
+    this.set('filteredEditOptions', this.get('editOptions').filterProperty('type', type));
   }.observes('selected'),
 
   actions: {
@@ -84,7 +112,7 @@ export default Ember.Component.extend({
       var itemToEdit = this.get('order.itemToEdit');
 
       itemToEdit.toggleOption(option);
-      console.log(option);
+      option.set('checked', !option.get('checked'));
     }
   }
 });
