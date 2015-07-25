@@ -5,7 +5,7 @@
       <h4 class="modal-title text-center">
         {{order.itemToEdit.menuItem.name}}
       </h4>
-      <ul class="nav nav-tabs nav-justified">
+      <ul class="nav nav-pills nav-justified">
         {{#each tab in editItemTabs}}
           {{tab-item text=tab current=selected action="tabClick"}}
         {{/each}}
@@ -16,7 +16,7 @@
         {{#each option in filteredEditOptions}}
           <li>
             <a class="edit-option" {{action "editOptionToggle" option}}>
-              {{input type="checkbox" name=option.name}}
+              {{input type="checkbox" name=option.name checked=option.checked}}
               <span>{{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}</span>
             </a>
           </li>
@@ -24,8 +24,7 @@
       </ul>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default close-btn" data-dismiss="modal">CANCEL</button>
-      {{submit-btn action="submitEdit"}}
+      <button type="button" class="btn btn-default close-btn" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>

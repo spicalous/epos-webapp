@@ -4,6 +4,11 @@
     <li class="list-group-item clearfix">
       {{decrement-btn action="decrementItem" orderItem=item}}
       {{item.quantity}} x {{item.menuItem.menuId}} {{item.menuItem.name}}
+      {{#each option in item.editOptions}}
+        <div class="order-edit-option">
+          {{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}
+        </div>
+      {{/each}}
       <span class="pull-right">
         {{item.displayTotal}}
         <a class="edit-item-btn" {{action "editItem" item order}} data-toggle="modal" data-target="#edit-item-modal">
