@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   /**
   *
   * Fires when the user selects an item to edit (itemToEdit === orderItem)
-  * Sets the editType variable (tabs) based on the primary menu-item category
+  * Sets the "selected" variable (tabs) based on the primary menu-item category
   */
   editItemObserver: function() {
     var itemToEdit = this.get('order.itemToEdit');
@@ -41,44 +41,19 @@ export default Ember.Component.extend({
     if (categories) {
       switch(categories.objectAt(0).get('id')) {
         case "16":
-          this.set('editType', 0);
+          this.set('editItemTabs', this.get('drinkOptions'));
+          this.set('selected', this.get('drinkOptions').objectAt(0));
           break;
         default:
-          this.set('editType', 2);
+          this.set('editItemTabs', this.get('foodOptions'));
+          this.set('selected', this.get('foodOptions').objectAt(0));
       }
     }
   }.observes('order.itemToEdit'),
 
   /**
   *
-  * Fired when an itemToEdit has changed
-  * Updates the tab options
-  * Updates the "selected" parameter used to set the "active" class on the selected tab
-  */
-  editTypeObserver: function() {
-    switch(this.get('editType')) {
-      case 0:
-        this.set('editItemTabs', this.get('drinkOptions'));
-        this.set('selected', this.get('drinkOptions').objectAt(0));
-        break;
-      case 1:
-        this.set('editItemTabs', this.get('drinkOptions'));
-        this.set('selected', this.get('drinkOptions').objectAt(1));
-        break;
-      case 2:
-        this.set('editItemTabs', this.get('foodOptions'));
-        this.set('selected', this.get('foodOptions').objectAt(0));
-        break;
-      case 3:
-        this.set('editItemTabs', this.get('foodOptions'));
-        this.set('selected', this.get('foodOptions').objectAt(1));
-        break;
-    }
-  }.observes('editType'),
-
-  /**
-  *
-  * Sets the available edit options based on what tab (editType) was selected
+  * Sets the available edit options based on what tab (selected) was selected
   */
   selectedTypeObserver: function() {
     var type = '';
@@ -98,9 +73,7 @@ export default Ember.Component.extend({
       this.set('selected', text);
     },
     editOptionToggle: function(option) {
-      var itemToEdit = this.get('order.itemToEdit');
-
-      itemToEdit.toggleOption(option);
+      this.get('order.itemToEdit').toggleOption(option);
       option.set('checked', !option.get('checked'));
     }
   }
