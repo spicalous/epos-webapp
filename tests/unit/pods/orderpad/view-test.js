@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('view:application', 'Unit | View | application');
+moduleFor('view:orderpad', 'Unit | View | orderpad');
 
 // Replace this with your real tests.
 test('it exists', function(assert) {
