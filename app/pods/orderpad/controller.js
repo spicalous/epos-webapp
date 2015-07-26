@@ -44,6 +44,7 @@ export default Ember.Controller.extend({
             //TODO [MEDIUM] Do not keep order and order items on client
             //TODO [MEDIUM] Confirm Submit
             //TODO [MEDIUM] Accepted Feedback
+            _this.set('filter', '');
             $('#orderpad-modal').modal('hide');
             _this.transitionToRoute('index');
           });
@@ -52,6 +53,7 @@ export default Ember.Controller.extend({
       //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
       //TODO [MEDIUM] Do not keep order and order items on client
       //TODO [MEDIUM] Confirm Cancel
+      this.set('filter', '');
       $('#orderpad-modal').modal('hide');
       this.send('refresh');
     }
