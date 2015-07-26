@@ -5,7 +5,7 @@
       <div id="orderpad-categories">
         <div class="row">
           {{#each item in model.categories}}
-            {{category-item category=item action="categoryItemClick"}}
+            {{category-item category=item action="categoryItemClick" selected=filter}}
           {{/each}}
         </div>
       </div>
