@@ -27,6 +27,9 @@ export default Ember.Controller.extend({
     },
     menuItemClick: function(menuItem) {
       this.get('model.order').addItem(menuItem);
+      setTimeout(function() {
+        $('#orderpad-order').scrollTop($('#orderpad-order').scrollTop() + 55);
+      }, 100);
     },
     submitOrder: function() {
       var _this = this;

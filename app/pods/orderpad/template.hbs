@@ -9,13 +9,13 @@
           {{/each}}
         </div>
       </div>
-      <div id="orderpad-menu">
+      <div id="orderpad-menu" class="scroll-y">
         {{outlet "menu"}}
       </div>
     </div>
 
     <div class="col-sm-6">
-      <div id="orderpad-order">
+      <div id="orderpad-order" class="scroll-y">
 
         {{outlet}}
 
@@ -24,18 +24,17 @@
           {{cancel-btn action="cancelOrder"}}
         {{/order-list}}
       </div>
-
-      {{#orderpad-modal order=model.order title="Order Items"}}
-        {{submit-btn action="submitOrder"}}
-        {{cancel-btn action="cancelOrder"}}
-      {{/orderpad-modal}}
-
-      {{edit-item-modal order=model.order editOptions=model.editOptions}}
-
-      {{#toggle-menu}}
-        {{model.order.size}}
-      {{/toggle-menu}}
     </div>
-
   </div>
 </div>
+
+{{#orderpad-modal order=model.order title="Order Items"}}
+  {{submit-btn action="submitOrder"}}
+  {{cancel-btn action="cancelOrder"}}
+{{/orderpad-modal}}
+
+{{edit-item-modal order=model.order editOptions=model.editOptions}}
+
+{{#toggle-menu}}
+  {{model.order.size}}
+{{/toggle-menu}}
