@@ -139,3 +139,5 @@ test("Submitting an order transitions to index", function(assert) {
 //  });
 
 //});
+
+//TODO edit item tests
