@@ -40,7 +40,7 @@ export default Ember.Component.extend({
 
     if (categories) {
       switch(categories.objectAt(0).get('id')) {
-        case "16":
+        case "15":
           this.set('editItemTabs', this.get('drinkOptions'));
           this.set('selected', this.get('drinkOptions').objectAt(0));
           break;
