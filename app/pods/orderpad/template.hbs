@@ -10,7 +10,11 @@
         </div>
       </div>
       <div id="orderpad-menu" class="scroll-y">
-        {{outlet "menu"}}
+        <ul class="list-group">
+          {{#each item in model.menu}}
+            {{menu-item-component menuItem=item action="menuItemClick"}}
+          {{/each}}
+        </ul>
       </div>
     </div>
 
