@@ -19,8 +19,8 @@
     </div>
 
     <div class="col-sm-6">
-      <h4 class="text-center">NEW ORDER</h4>
       <div id="orderpad-order" class="scroll-y">
+        <h4 class="text-center">NEW ORDER</h4>
         {{#order-list order=model.order}}
           {{submit-btn action="submitOrder"}}
           {{cancel-btn action="cancelOrder"}}
