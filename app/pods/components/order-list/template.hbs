@@ -3,7 +3,9 @@
   {{#each item in order.orderItems}}
     <li class="list-group-item clearfix">
       {{decrement-btn action="decrementItem" orderItem=item}}
-      {{item.quantity}} x {{item.menuItem.menuId}} {{item.menuItem.name}}
+      <span class="order-item-text" {{action "incrementItem" item}}>
+        {{item.quantity}} x {{item.menuItem.menuId}} {{item.menuItem.name}}
+      </span>
       {{#each option in item.editOptions}}
         <div class="order-edit-option">
           {{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}
