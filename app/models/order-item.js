@@ -2,6 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   quantity: DS.attr('number'),
+  menuItem: DS.belongsTo('menu-item'),
   editOptions: DS.hasMany('edit-option'),
 
   total: function() {
@@ -21,6 +22,10 @@ export default DS.Model.extend({
 
   isMenuItem: function(menuItem) {
     return this.get('menuItem').get('name') === menuItem.get('name');
+  },
+
+  hasNoEditOptions: function() {
+    return this.get('editOptions').length === 0;
   },
 
   toggleOption: function(option) {

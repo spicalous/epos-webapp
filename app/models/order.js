@@ -26,7 +26,7 @@ export default DS.Model.extend({
     var orderItems = this.get('orderItems');
 
     var orderItem = orderItems.any(function(orderItem) {
-      if (orderItem.isMenuItem(menuItem)) {
+      if (orderItem.isMenuItem(menuItem) && orderItem.hasNoEditOptions()) {
         return orderItem;
       }
     });
