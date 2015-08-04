@@ -7,11 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
 
-  this.resource('orderpad', function() {
-    this.route('restaurant');
-    this.route('delivery');
-    this.route('takeaway');
-  });
+  this.route('orderpad');
 
 });
 
