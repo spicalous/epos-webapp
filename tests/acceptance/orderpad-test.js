@@ -4,7 +4,7 @@ import startApp from 'talaythai-webapp/tests/helpers/start-app';
 
 var application;
 
-module('Acceptance | orderpad | restaurant', {
+module('Acceptance | orderpad', {
   beforeEach: function() {
     application = startApp();
   },
@@ -17,7 +17,7 @@ module('Acceptance | orderpad | restaurant', {
 test("Page contents", function(assert) {
 
   assert.expect(2);
-  visit('/orderpad/restaurant').then(function() {
+  visit('/orderpad').then(function() {
     assert.equal(find('#orderpad-menu .list-group-item').length, 129, "Wrong number of menu items");
     assert.equal(find('#orderpad-categories .row button').length, 17, "Wrong number of category items");
   });
@@ -27,7 +27,7 @@ test("Page contents", function(assert) {
 test("Adding an item in the main view", function(assert) {
 
   assert.expect(3);
-  visit('/orderpad/restaurant');
+  visit('/orderpad');
   click('#orderpad-menu .list-group-item:first-child');
 
   andThen(function() {
@@ -41,7 +41,7 @@ test("Adding an item in the main view", function(assert) {
 test("Adding an item in the modal", function(assert) {
 
   assert.expect(3);
-  visit('/orderpad/restaurant');
+  visit('/orderpad');
   click('#orderpad-menu .list-group-item:first-child');
 
   andThen(function() {
@@ -56,7 +56,7 @@ test("Adding an item in the modal", function(assert) {
 test("Selecting a category", function(assert) {
 
   assert.expect(1);
-  visit('/orderpad/restaurant');
+  visit('/orderpad');
   click('#orderpad-categories button:first-child');
 
   andThen(function() {
@@ -69,7 +69,7 @@ test("Selecting a category", function(assert) {
 test("Deleting an order item with quantity of 1 removes it", function(assert) {
 
   assert.expect(3);
-  visit('/orderpad/restaurant');
+  visit('/orderpad');
   click('#orderpad-menu .list-group-item:first-child');
   click('#orderpad-order .orderpad-order .decrement-btn');
 
@@ -85,7 +85,7 @@ test("Deleting an order item with quantity of 1 removes it", function(assert) {
 test("Deleting an order item with quantity of 1 removes it", function(assert) {
 
   assert.expect(3);
-  visit('/orderpad/restaurant');
+  visit('/orderpad');
   click('#orderpad-menu .list-group-item:first-child');
   click('#orderpad-modal .orderpad-order .decrement-btn');
 
@@ -101,7 +101,7 @@ test("Deleting an order item with quantity of 1 removes it", function(assert) {
 test("Deleting an order item with quantity of 2 decrements to 1", function(assert) {
 
   assert.expect(3);
-  visit('/orderpad/restaurant');
+  visit('/orderpad');
   click('#orderpad-menu .list-group-item:first-child');
   click('#orderpad-menu .list-group-item:first-child');
   click('#orderpad-order .orderpad-order .decrement-btn');
@@ -118,7 +118,7 @@ test("Deleting an order item with quantity of 2 decrements to 1", function(asser
 test("Submitting an order transitions to index", function(assert) {
 
   assert.expect(1);
-  visit('/orderpad/restaurant');
+  visit('/orderpad');
   click('#orderpad-order .submit-btn');
 
   andThen(function() {
@@ -132,7 +132,7 @@ test("Submitting an order transitions to index", function(assert) {
 //test("Canceling an order hides the modal", function(assert) {
 
 //  assert.expect(3);
-//  visit('/orderpad/restaurant');
+//  visit('/orderpad');
 
 //  andThen(function() {
 
