@@ -7,6 +7,6 @@ export default Ember.View.extend({
   },
   onResize: function() {
     $('#orderpad-menu').height($(window).height() - $('#orderpad-categories').outerHeight());
-    $('#orderpad-order').outerHeight($(window).height());
+    $('#orderpad-order').outerHeight($(window).height() - ($('#orderpad-customer').outerHeight() + $('#orderpad-header').outerHeight() + 20)); //20 for margin
   }
 });
