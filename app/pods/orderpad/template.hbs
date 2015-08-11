@@ -26,10 +26,9 @@
         {{customer-selector order=model.order}}
       </div>
       <div id="orderpad-order" class="scroll-y">
-        {{#order-list order=model.order}}
-          {{submit-btn action="submitOrder"}}
-          {{cancel-btn action="cancelOrder"}}
-        {{/order-list}}
+        {{order-list order=model.order}}
+        {{submit-btn action="submitOrder"}}
+        {{cancel-btn action="cancelOrder"}}
       </div>
     </div>
   </div>
