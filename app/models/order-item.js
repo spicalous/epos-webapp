@@ -6,7 +6,7 @@ export default DS.Model.extend({
   editOptions: DS.hasMany('edit-option'),
 
   total: function() {
-    return (this.get('quantity') * this.get('menuItem').get('price')) + this.get('editOptionTotal');
+    return this.get('quantity') * (this.get('menuItem.price') + this.get('editOptionTotal'));
   }.property('quantity', 'menuItem', 'editOptions.[]'),
 
   displayTotal: function() {
