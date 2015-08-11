@@ -42,17 +42,19 @@ export default Ember.Controller.extend({
             _this.send('showOverlay', 'overlay', { header: 'Failed', message: 'placeholder' });
           }, function() {
             _this.send('showOverlay', 'overlay', { header: 'Confirmed', message: 'Order submitted successfully' });
+            _this.send('reset');
             //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
             //TODO [MEDIUM] Do not keep order and order items on client
-            //TODO [MEDIUM] Confirm Submit
-            _this.set('filter', '');
-            $('#orderpad-modal').modal('hide');
+            //TODO [MEDIUM] Confirm before submit
           });
     },
     cancelOrder: function() {
       //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
       //TODO [MEDIUM] Do not keep order and order items on client
       //TODO [MEDIUM] Confirm Cancel
+      this.send('reset');
+    },
+    reset: function() {
       this.set('filter', '');
       $('#orderpad-modal').modal('hide');
       this.send('refresh');
