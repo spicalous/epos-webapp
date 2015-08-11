@@ -1037,6 +1037,30 @@ module.exports = function(app) {
           "description":"",
           "price":160,
           "categories":[15]
+        },
+        {
+          "id":200,
+          "menuId":"",
+          "name":"Chopsticks",
+          "description":"",
+          "price":0,
+          "categories":[17]
+        },
+        {
+          "id":201,
+          "menuId":"",
+          "name":"Chilli Oil",
+          "description":"",
+          "price":0,
+          "categories":[17]
+        },
+        {
+          "id":202,
+          "menuId":"",
+          "name":"Satay Sauce",
+          "description":"",
+          "price":0,
+          "categories":[17]
         }
       ],
       "categories":[
@@ -1113,91 +1137,79 @@ module.exports = function(app) {
         {
           "id":1,
           "type":0,
-          "name":"mixer",
+          "name":"ADD MIXER",
           "price":50
         },
         {
           "id":2,
           "type":1,
-          "name":"more ice",
+          "name":"ADD ICE",
           "price":0
         },
         {
           "id":3,
           "type":1,
-          "name":"less ice",
+          "name":"LESS ICE",
           "price":0
         },
         {
           "id":4,
           "type":1,
-          "name":"no ice",
+          "name":"NO ICE",
           "price":0
         },
         {
           "id":5,
           "type":2,
-          "name":"add chicken",
+          "name":"ADD CHICKEN",
           "price":150
         },
         {
           "id":6,
           "type":2,
-          "name":"add pork",
+          "name":"ADD PORK",
           "price":150
         },
         {
           "id":7,
           "type":2,
-          "name":"add beef",
+          "name":"ADD BEEF",
           "price":150
         },
         {
           "id":8,
           "type":2,
-          "name":"add prawns",
+          "name":"ADD PRAWNS",
           "price":150
         },
         {
           "id":9,
-          "type":2,
-          "name":"vegetarian",
+          "type":3,
+          "name":"MILD",
           "price":0
         },
         {
           "id":10,
           "type":3,
-          "name":"mild",
+          "name":"SPICY",
           "price":0
         },
         {
           "id":11,
           "type":3,
-          "name":"spicy",
+          "name":"NO PEANUTS",
           "price":0
         },
         {
           "id":12,
           "type":3,
-          "name":"peppers",
+          "name":"NO PEPPERS",
           "price":0
         },
         {
           "id":13,
           "type":3,
-          "name":"no peppers",
-          "price":0
-        },
-        {
-          "id":14,
-          "type":3,
-          "name":"mushrooms",
-          "price":0
-        },
-        {
-          "id":15,
-          "type":3,
-          "name":"no mushrooms",
+          "name":"NO MUSHROOMS",
           "price":0
         }
       ]
