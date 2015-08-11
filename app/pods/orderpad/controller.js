@@ -36,18 +36,20 @@ export default Ember.Controller.extend({
 
       this.get('model.order').set('dateTime', new Date()).save().then(function() {
         _this.send('showOverlay', 'overlay', { header: 'Confirmed', message: 'Order submitted successfully' });
+        _this.set('model.order', _this.store.createRecord('order', {}));
         _this.send('reset');
       }, function(response) {
         _this.send('showOverlay', 'overlay', { header: 'Failed', message: response.responseText });
       });
     },
     cancelOrder: function() {
+      this.get('model.order').destroyRecord();
+      this.set('model.order', this.store.createRecord('order', {}));
       this.send('reset');
     },
     reset: function() {
       this.set('filter', '');
       $('#orderpad-modal').modal('hide');
-      this.send('refresh');
     }
   }
 });

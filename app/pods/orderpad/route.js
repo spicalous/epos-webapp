@@ -8,10 +8,5 @@ export default Ember.Route.extend({
       editOptions: this.store.all('edit-option'),
       order: this.store.createRecord('order', {})
     });
-  },
-  actions: {
-    refresh: function() {
-      this.refresh();
-    }
   }
 });
