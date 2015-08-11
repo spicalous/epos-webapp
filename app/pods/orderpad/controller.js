@@ -38,15 +38,15 @@ export default Ember.Controller.extend({
           .set('dateTime', new Date())
           .save()
           .then(function() {
-            //TODO [MEDIUM] Handle fail scenarios
+            //TODO [MEDIUM] use error message from server
+            _this.send('showOverlay', 'overlay', { header: 'Failed', message: 'placeholder' });
           }, function() {
+            _this.send('showOverlay', 'overlay', { header: 'Confirmed', message: 'Order submitted successfully' });
             //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
             //TODO [MEDIUM] Do not keep order and order items on client
             //TODO [MEDIUM] Confirm Submit
-            //TODO [MEDIUM] Accepted Feedback
             _this.set('filter', '');
             $('#orderpad-modal').modal('hide');
-            _this.transitionToRoute('index');
           });
     },
     cancelOrder: function() {
