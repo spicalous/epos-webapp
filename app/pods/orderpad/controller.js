@@ -54,5 +54,7 @@ export default Ember.Controller.extend({
   }
 });
 
+//TODO [HIGH]   Client-side error checking
 //TODO [MEDIUM] Confirm before submit
 //TODO [MEDIUM] Confirm before cancel
+//TODO [LOW]    Acknowledge mobile order item add
