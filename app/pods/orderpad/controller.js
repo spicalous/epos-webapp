@@ -34,24 +34,14 @@ export default Ember.Controller.extend({
     submitOrder: function() {
       var _this = this;
 
-      this.get('model.order')
-          .set('dateTime', new Date())
-          .save()
-          .then(function() {
-            //TODO [MEDIUM] use error message from server
-            _this.send('showOverlay', 'overlay', { header: 'Failed', message: 'placeholder' });
-          }, function() {
-            _this.send('showOverlay', 'overlay', { header: 'Confirmed', message: 'Order submitted successfully' });
-            _this.send('reset');
-            //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
-            //TODO [MEDIUM] Do not keep order and order items on client
-            //TODO [MEDIUM] Confirm before submit
-          });
+      this.get('model.order').set('dateTime', new Date()).save().then(function() {
+        _this.send('showOverlay', 'overlay', { header: 'Confirmed', message: 'Order submitted successfully' });
+        _this.send('reset');
+      }, function(response) {
+        _this.send('showOverlay', 'overlay', { header: 'Failed', message: response.responseText });
+      });
     },
     cancelOrder: function() {
-      //TODO [MEDIUM] Find a way to refresh just model.order otherwise a REST call is made for a non-changing menu
-      //TODO [MEDIUM] Do not keep order and order items on client
-      //TODO [MEDIUM] Confirm Cancel
       this.send('reset');
     },
     reset: function() {
@@ -61,3 +51,6 @@ export default Ember.Controller.extend({
     }
   }
 });
+
+//TODO [MEDIUM] Confirm before submit
+//TODO [MEDIUM] Confirm before cancel

@@ -8,8 +8,13 @@ module.exports = function(app) {
 //    });
 //  });
 
+  var success = true;
+
   ordersRouter.post('/', function(req, res) {
-    res.status(201).end();
+    success ?
+      res.status(201).send({}) :
+      res.status(400).send("Reason for failure placeholder");
+
   });
 
 //  ordersRouter.get('/:id', function(req, res) {
