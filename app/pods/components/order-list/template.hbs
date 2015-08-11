@@ -3,20 +3,20 @@
   {{#each item in order.orderItems}}
     <li class="list-group-item clearfix">
       {{decrement-btn action="decrementItem" orderItem=item}}
-      <span class="order-item-text" {{action "incrementItem" item}}>
-        {{item.quantity}} x {{item.menuItem.menuId}} {{item.menuItem.name}}
-      </span>
+      <a {{action "incrementItem" item}}>
+        <b>{{item.quantity}} x {{item.menuItem.menuId}}</b> {{item.menuItem.name}}
+      </a>
       {{#each option in item.editOptions}}
         <div class="order-edit-option">
           {{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}
         </div>
       {{/each}}
-      <span class="pull-right">
+      <div class="pull-right">
         {{item.displayTotal}}
         <a class="edit-item-btn" {{action "editItem" item order}} data-toggle="modal" data-target="#edit-item-modal">
           <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
         </a>
-      </span>
+      </div>
     </li>
   {{/each}}
 </div>
