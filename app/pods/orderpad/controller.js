@@ -40,6 +40,9 @@ export default Ember.Controller.extend({
     },
     menuItemClick: function(menuItem) {
       this.get('model.order').addItem(menuItem);
+      this.send('showMessage', 'toast', {
+        message: 'Added ' + menuItem.get('name')
+      });
       setTimeout(function() {
         $('#orderpad-order').scrollTop($('#orderpad-order').scrollTop() + 55);
       }, 100);

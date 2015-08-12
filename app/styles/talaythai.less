@@ -92,6 +92,23 @@ a, a:focus, a:hover, a:active, a:visited {
   vertical-align: middle;
 }
 
+.toast {
+  width: 100%;
+  position: absolute;
+  bottom: 40px;
+  z-index: 101;
+  -webkit-animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.2s ease;
+}
+
+.toast-text {
+  display: inline-block;
+  color: #FFF;
+  background-color: #333;
+  padding: 1px 15px;
+  border-radius: 10px;
+}
+
 @-webkit-keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
