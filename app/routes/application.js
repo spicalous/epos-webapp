@@ -9,7 +9,7 @@ export default Ember.Route.extend({
         model: model
       });
     },
-    dismissOverlay: function(callback) {
+    dismissMessage: function(callback) {
       this.disconnectOutlet({
         outlet: 'message',
         parentView: 'application'
