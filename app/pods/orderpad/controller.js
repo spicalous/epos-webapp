@@ -48,6 +48,7 @@ export default Ember.Controller.extend({
       var _this = this;
 
       this.get('model.order').set('dateTime', new Date()).save().then(function() {
+        _this.send('reset');
         _this.send('showOverlay', 'overlay', {
           header: 'Confirmed',
           message: 'Order submitted successfully',
@@ -55,15 +56,14 @@ export default Ember.Controller.extend({
             _this.set('model.order', _this.store.createRecord('order', {}));
           }
         });
-        _this.send('reset');
       }, function(response) {
         _this.send('showOverlay', 'overlay', { header: 'Failed', message: response.responseText });
       });
     },
     cancelOrder: function() {
+      this.send('reset');
       this.get('model.order').destroyRecord();
       this.set('model.order', this.store.createRecord('order', {}));
-      this.send('reset');
     },
     reset: function() {
       this.set('filter', '');
