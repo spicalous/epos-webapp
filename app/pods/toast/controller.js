@@ -3,12 +3,9 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   messageObserver: function() {
-    var id = this.get('id'),
-        _this = this;
+    var _this = this;
 
-    if (id) {
-      clearTimeout(id);
-    }
+    clearTimeout(this.get('id'));
 
     this.set('id', setTimeout(function() {
       _this.send('dismissMessage');

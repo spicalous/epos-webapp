@@ -6,6 +6,7 @@ export default Ember.Route.extend({
       this.render(name, {
         into: 'application',
         outlet: 'message',
+        view: name,
         model: model
       });
     },
