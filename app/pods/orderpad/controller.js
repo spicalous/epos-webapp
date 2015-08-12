@@ -53,9 +53,9 @@ export default Ember.Controller.extend({
           message: 'Order submitted successfully',
           callback: function() {
             _this.set('model.order', _this.store.createRecord('order', {}));
-            _this.send('reset');
           }
         });
+        _this.send('reset');
       }, function(response) {
         _this.send('showOverlay', 'overlay', { header: 'Failed', message: response.responseText });
       });
