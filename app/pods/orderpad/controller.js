@@ -17,6 +17,19 @@ export default Ember.Controller.extend({
     }
   }.observes('filter'),
 
+  invalidOrder: true,
+
+  invalidOrderSetter: function() {
+    this.set('invalidOrder', this.get('emptyOrder'));
+  }.observes('emptyOrder'),
+  
+  emptyOrder: true,
+
+  orderSizeObserver: function() {
+    this.set('emptyOrder',
+      this.get('model.order.size') > 0 ? false : true);
+  }.observes('model.order.size'),
+
   actions: {
     categoryItemClick: function(categoryItem) {
       if (this.get('filter') === categoryItem) {

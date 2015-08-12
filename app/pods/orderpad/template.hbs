@@ -27,16 +27,16 @@
       </div>
       <div id="orderpad-order" class="scroll-y">
         {{order-list order=model.order}}
-        {{submit-btn action="submitOrder"}}
-        {{cancel-btn action="cancelOrder"}}
+        {{submit-btn action="submitOrder" disabled=invalidOrder}}
+        {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
       </div>
     </div>
   </div>
 </div>
 
 {{#orderpad-modal order=model.order title="Order Items"}}
-  {{submit-btn action="submitOrder"}}
-  {{cancel-btn action="cancelOrder"}}
+  {{submit-btn action="submitOrder" disabled=invalidOrder}}
+  {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
 {{/orderpad-modal}}
 
 {{edit-item-modal order=model.order editOptions=model.editOptions}}
