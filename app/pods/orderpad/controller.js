@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
   invalidOrderSetter: function() {
     this.set('invalidOrder', this.get('emptyOrder'));
   }.observes('emptyOrder'),
-  
+
   emptyOrder: true,
 
   orderSizeObserver: function() {
