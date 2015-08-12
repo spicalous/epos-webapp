@@ -9,11 +9,14 @@ export default Ember.Route.extend({
         model: model
       });
     },
-    dismissOverlay: function() {
+    dismissOverlay: function(callback) {
       this.disconnectOutlet({
         outlet: 'overlay',
         parentView: 'application'
       });
+      if (callback) {
+        callback();
+      }
     }
   }
 });

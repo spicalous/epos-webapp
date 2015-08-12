@@ -35,9 +35,14 @@ export default Ember.Controller.extend({
       var _this = this;
 
       this.get('model.order').set('dateTime', new Date()).save().then(function() {
-        _this.send('showOverlay', 'overlay', { header: 'Confirmed', message: 'Order submitted successfully' });
-        _this.set('model.order', _this.store.createRecord('order', {}));
-        _this.send('reset');
+        _this.send('showOverlay', 'overlay', {
+          header: 'Confirmed',
+          message: 'Order submitted successfully',
+          callback: function() {
+            _this.set('model.order', _this.store.createRecord('order', {}));
+            _this.send('reset');
+          }
+        });
       }, function(response) {
         _this.send('showOverlay', 'overlay', { header: 'Failed', message: response.responseText });
       });
