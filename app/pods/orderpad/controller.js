@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
 
       this.get('model.order').set('dateTime', new Date()).save().then(function() {
         _this.send('reset');
-        _this.send('showOverlay', 'overlay', {
+        _this.send('showMessage', 'overlay', {
           header: 'Confirmed',
           message: 'Order submitted successfully',
           callback: function() {
@@ -57,7 +57,17 @@ export default Ember.Controller.extend({
           }
         });
       }, function(response) {
-        _this.send('showOverlay', 'overlay', { header: 'Failed', message: response.responseText });
+        var modalWasOpen = $('#orderpad-modal').hasClass('in');
+        _this.send('reset');
+        _this.send('showMessage', 'overlay', {
+          header: 'Failed',
+          message: response.responseText,
+          callback: function() {
+            if (modalWasOpen) {
+              $('#orderpad-modal').modal('show');
+            }
+          }
+        });
       });
     },
     cancelOrder: function() {
@@ -72,7 +82,6 @@ export default Ember.Controller.extend({
   }
 });
 
-//TODO [HIGH]   Client-side error checking
 //TODO [MEDIUM] Confirm before submit
 //TODO [MEDIUM] Confirm before cancel
 //TODO [LOW]    Acknowledge mobile order item add

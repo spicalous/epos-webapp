@@ -2,16 +2,16 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   actions: {
-    showOverlay: function(name, model) {
+    showMessage: function(name, model) {
       this.render(name, {
         into: 'application',
-        outlet: 'overlay',
+        outlet: 'message',
         model: model
       });
     },
     dismissOverlay: function(callback) {
       this.disconnectOutlet({
-        outlet: 'overlay',
+        outlet: 'message',
         parentView: 'application'
       });
       if (callback) {
