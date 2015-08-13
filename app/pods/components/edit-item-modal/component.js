@@ -65,7 +65,7 @@ export default Ember.Component.extend({
       case 'Edit Food': type = 3; break;
     }
 
-    this.set('filteredEditOptions', this.get('editOptions').filterProperty('type', type));
+    this.set('filteredEditOptions', this.get('editOptions').filterBy('type', type));
   }.observes('selected'),
 
   actions: {

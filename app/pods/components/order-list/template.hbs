@@ -1,12 +1,12 @@
 <h4 class="text-center">{{title}}</h4>
 <div>
-  {{#each item in order.orderItems}}
+  {{#each order.orderItems as |item|}}
     <li class="list-group-item clearfix">
       {{decrement-btn action="decrementItem" orderItem=item}}
       <a {{action "incrementItem" item}}>
         <b>{{item.quantity}} x {{item.menuItem.menuId}}</b> {{item.menuItem.name}}
       </a>
-      {{#each option in item.editOptions}}
+      {{#each item.editOptions as |option|}}
         <div class="order-edit-option">
           {{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}
         </div>

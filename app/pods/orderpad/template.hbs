@@ -6,14 +6,14 @@
     <div class="col-sm-6">
       <div id="orderpad-categories">
         <div class="row">
-          {{#each item in model.categories}}
+          {{#each model.categories as |item|}}
             {{category-item category=item action="categoryItemClick" selected=filter}}
           {{/each}}
         </div>
       </div>
       <div id="orderpad-menu" class="scroll-y">
         <ul class="list-group">
-          {{#each item in model.menu}}
+          {{#each model.menu as |item|}}
             {{menu-item menuItem=item action="menuItemClick"}}
           {{/each}}
         </ul>

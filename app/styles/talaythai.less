@@ -4,6 +4,10 @@
 @color-primary-3: #590303;
 @color-primary-4: #340000;
 
+@customer-select-z-index: 1000;
+@toast-z-index: 1001;
+@overlay-z-index: 1002;
+
 //Allows touch events to be fired on touch devices
 a, a:focus, a:hover, a:active, a:visited {
   color: black;
@@ -46,7 +50,7 @@ a, a:focus, a:hover, a:active, a:visited {
   height: 100%;
   width: 100%;
   background: rgba(255, 255, 255, 0.9);
-  z-index: 100;
+  z-index: @overlay-z-index;
   -webkit-animation: fadeIn 0.2s ease;
   animation: fadeIn 0.2s ease;
 }
@@ -60,7 +64,7 @@ a, a:focus, a:hover, a:active, a:visited {
   width: 100%;
   position: absolute;
   bottom: 40px;
-  z-index: 101;
+  z-index: @toast-z-index;
   -webkit-animation: fadeIn 0.2s ease;
   animation: fadeIn 0.2s ease;
 }
