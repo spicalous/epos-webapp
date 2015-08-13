@@ -87,4 +87,3 @@ export default Ember.Controller.extend({
 
 //TODO [MEDIUM] Confirm before submit
 //TODO [MEDIUM] Confirm before cancel
-//TODO [LOW]    Acknowledge mobile order item add
