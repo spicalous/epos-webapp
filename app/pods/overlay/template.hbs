@@ -1,7 +1,12 @@
 <div class="overlay" {{action "dismissMessage" model.callback}}>
   <div class="overlay-inner">
     <div class="text-center">
-      <h2>{{model.header}}</h2>
+      <h2>
+        {{model.header}}
+        {{#if model.danger}}
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{/if}}
+      </h2>
       {{model.message}}
       <div class="text-muted">
         <small>Tap anywhere to dismiss</small>
