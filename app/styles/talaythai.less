@@ -1,44 +1,8 @@
-
 @color-primary-0: #811919;	/* Main Primary color */
 @color-primary-1: #D46E6E;
 @color-primary-2: #A93B3B;
 @color-primary-3: #590303;
 @color-primary-4: #340000;
-
-// ###################################
-// ### Bootstrap variable overides ###
-
-@grid-gutter-width:         10px;
-
-// ### override navs-justified to not collapse for small sreens
-.nav-justified {
-  @media (min-width: (@screen-xs-min - 120)) {
-    > li {
-      display: table-cell;
-      width: 1%;
-      > a {
-        margin-bottom: 0;
-      }
-    }
-  }
-}
-
-.nav-tabs-justified {
-  @media (min-width: (@screen-xs-min - 120)) {
-    > li > a {
-      border-bottom: 1px solid @nav-tabs-justified-link-border-color;
-      border-radius: @border-radius-base @border-radius-base 0 0;
-    }
-    > .active > a,
-    > .active > a:hover,
-    > .active > a:focus {
-      border-bottom-color: @nav-tabs-justified-active-link-border-color;
-    }
-  }
-}
-
-// ### Bootstrap variable overides ###
-// ###################################
 
 //Allows touch events to be fired on touch devices
 a, a:focus, a:hover, a:active, a:visited {
@@ -118,4 +82,3 @@ a, a:focus, a:hover, a:active, a:visited {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-
