@@ -8,5 +8,13 @@ export default Ember.Route.extend({
       editOptions: this.store.all('edit-option'),
       order: this.store.createRecord('order', {})
     });
+  },
+  actions: {
+    showCustomerSelect: function() {
+      this.render('customer-select', {
+        into: 'orderpad',
+        outlet: 'customer-select',
+      });
+    }
   }
 });
