@@ -9,6 +9,10 @@ export default Ember.Route.extend({
       order: this.store.createRecord('order', {})
     });
   },
+  setupController: function(controller, model) {
+    controller.set('model', model);
+    controller.set('menu', model.menu);
+  },
   actions: {
     showCustomerSelect: function() {
       this.render('customer-select', {

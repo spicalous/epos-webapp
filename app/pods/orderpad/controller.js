@@ -1,19 +1,21 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  filter: '',
+
   filterObserver: function() {
-    var filter = this.get('filter');
-    var _this = this;
+    var filter = this.get('filter'),
+        menu = this.get('model.menu'),
+        _this = this;
 
     if (filter === '') {
-       _this.set('model.menu', this.store.all('menu-item'));
+       _this.set('menu', menu);
     } else {
-      this.store.filter('menu-item', function(menuItem) {
-        return menuItem.get('categories').indexOf(filter) > -1;
-      }).then(function(filteredMenu){
-        _this.set('model.menu', filteredMenu);
-      });
+      _this.set('menu', menu.filter(function(item) {
+        var _filter = this;
+        return item.get('categories').any(function(category) {
+          return _filter === category;
+        });
+      }, filter));
     }
   }.observes('filter'),
 
