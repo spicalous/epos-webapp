@@ -3,13 +3,11 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   messageObserver: function() {
-    var _this = this;
+    Ember.run.debounce(this, 'dismissToast', 2000);
+  }.observes('model.body'),
 
-    clearTimeout(this.get('id'));
+  dismissToast() {
+    this.send('dismissMessage', 'toast');
+  }
 
-    this.set('id', setTimeout(function() {
-      _this.send('dismissMessage');
-    }, 2000));
-
-  }.observes('model.message')
 });

@@ -1,0 +1,7 @@
+<ul class="list-group">
+  {{#if hasBlock}}
+    {{#each menuItems as |menuItem|}}
+      {{yield menuItem}}
+    {{/each}}
+  {{/if}}
+</ul>

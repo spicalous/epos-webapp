@@ -2,17 +2,16 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   actions: {
-    showMessage: function(name, model) {
+    showMessage: function(name, message) {
       this.render(name, {
         into: 'application',
-        outlet: 'message',
-        view: name,
-        model: model
+        outlet: name,
+        model: message
       });
     },
-    dismissMessage: function(callback) {
+    dismissMessage: function(name, callback) {
       this.disconnectOutlet({
-        outlet: 'message',
+        outlet: name,
         parentView: 'application'
       });
       if (callback) {

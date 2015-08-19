@@ -43,7 +43,7 @@ export default Ember.Controller.extend({
     menuItemClick: function(menuItem) {
       this.get('model.order').addItem(menuItem);
       this.send('showMessage', 'toast', {
-        message: 'Added ' + menuItem.get('name')
+        body: 'Added ' + menuItem.get('name')
       });
       setTimeout(function() {
         $('#orderpad-order').scrollTop($('#orderpad-order').scrollTop() + 55);
@@ -56,7 +56,7 @@ export default Ember.Controller.extend({
         _this.send('reset');
         _this.send('showMessage', 'overlay', {
           header: 'Confirmed',
-          message: 'Order submitted successfully',
+          body: 'Order submitted successfully',
           callback: function() {
             _this.set('model.order', _this.store.createRecord('order', {}));
           }
@@ -66,7 +66,7 @@ export default Ember.Controller.extend({
         _this.send('reset');
         _this.send('showMessage', 'overlay', {
           header: 'Failed',
-          message: response.responseText,
+          body: response.responseText,
           danger: true,
           callback: function() {
             if (modalWasOpen) {

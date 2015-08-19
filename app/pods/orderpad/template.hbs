@@ -12,11 +12,9 @@
         </div>
       </div>
       <div id="orderpad-menu" class="scroll-y">
-        <ul class="list-group">
-          {{#each menu as |item|}}
-            {{menu-item menuItem=item action="menuItemClick"}}
-          {{/each}}
-        </ul>
+        {{#menu-list menuItems=menu as |menuItem|}}
+          {{menu-item menuItem=menuItem action="menuItemClick"}}
+        {{/menu-list}}
       </div>
     </div>
 
