@@ -33,14 +33,16 @@ export default Ember.Controller.extend({
   }.observes('model.order.size'),
 
   actions: {
-    categoryItemClick: function(categoryItem) {
+
+    categoryItemClick(categoryItem) {
       if (this.get('filter') === categoryItem) {
         this.set('filter', ''); //Reset filter
       } else {
         this.set('filter', categoryItem);
       }
     },
-    menuItemClick: function(menuItem) {
+
+    menuItemClick(menuItem) {
       this.get('model.order').addItem(menuItem);
       this.send('showMessage', 'toast', {
         body: 'Added ' + menuItem.get('name')
@@ -49,7 +51,8 @@ export default Ember.Controller.extend({
         $('#orderpad-order').scrollTop($('#orderpad-order').scrollTop() + 55);
       }, 100);
     },
-    submitOrder: function() {
+
+    submitOrder() {
       var _this = this;
 
       this.get('model.order').set('dateTime', new Date()).save().then(function() {
@@ -76,15 +79,18 @@ export default Ember.Controller.extend({
         });
       });
     },
-    cancelOrder: function() {
+
+    cancelOrder() {
       this.send('reset');
       this.get('model.order').destroyRecord();
       this.set('model.order', this.store.createRecord('order', {}));
     },
-    reset: function() {
+
+    reset() {
       this.set('filter', '');
       $('#orderpad-modal').modal('hide');
     }
+
   }
 });
 
