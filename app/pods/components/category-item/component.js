@@ -5,9 +5,9 @@ export default Ember.Component.extend({
   attributeBindings: ['type'],
   type: 'button',
   classNames: ['col-xs-3', 'btn', 'btn-default', 'category-item'],
-  classNameBindings: ['active'],
+  classNameBindings: ['is-selected'],
   selectedObserver: function() {
-    this.set('active', this.get('selected') === this.get('category'));
+    this.set('is-selected', this.get('selected') === this.get('category'));
   }.observes('selected'),
   click: function() {
     this.sendAction('action', this.get('category'));
