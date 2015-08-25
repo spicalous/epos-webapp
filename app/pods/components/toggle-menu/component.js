@@ -7,7 +7,9 @@ export default Ember.Component.extend({
   dataTarget: '#orderpad-modal',
   type: 'button',
   classNames: ['btn', 'btn-default', 'toggle-menu'],
-  click: function() {
+
+  click() {
     this.sendAction();
   }
+
 });

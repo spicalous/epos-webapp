@@ -3,19 +3,24 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'div',
   classNames: ['orderpad-order', 'no-select'],
+
   actions: {
-    incrementItem: function(orderItem) {
+
+    incrementItem(orderItem) {
       orderItem.incrementProperty('quantity');
     },
-    decrementItem: function(orderItem) {
+
+    decrementItem(orderItem) {
       if (orderItem.get('quantity') === 1) {
          orderItem.destroyRecord();
       } else {
          orderItem.decrementProperty('quantity');
       }
     },
-    editItem: function(orderItem, order) {
+
+    editItem(orderItem, order) {
       order.set('itemToEdit', orderItem);
     }
+
   }
 });

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function() {
+  model() {
     return Ember.RSVP.hash({
       menu: this.store.findAll('menu-item'),
       categories: this.store.peekAll('category'),
@@ -9,12 +9,12 @@ export default Ember.Route.extend({
       order: this.store.createRecord('order', {})
     });
   },
-  setupController: function(controller, model) {
+  setupController(controller, model) {
     controller.set('model', model);
     controller.set('menu', model.menu);
   },
   actions: {
-    showCustomerSelect: function() {
+    showCustomerSelect() {
       this.render('customer-select', {
         into: 'orderpad',
         outlet: 'customer-select',

@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   drinkOptions: Ember.A([
     'Add Drink', 'Edit Drink'
   ]),
+
   foodOptions: Ember.A([
     'Add Food', 'Edit Food'
   ]),
@@ -69,12 +70,15 @@ export default Ember.Component.extend({
   }.observes('selected'),
 
   actions: {
-    tabClick: function(text) {
+
+    tabClick(text) {
       this.set('selected', text);
     },
-    editOptionToggle: function(option) {
+
+    editOptionToggle(option) {
       this.get('order.itemToEdit').toggleOption(option);
       option.set('checked', !option.get('checked'));
     }
+
   }
 });

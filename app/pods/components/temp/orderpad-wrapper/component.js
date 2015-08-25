@@ -14,5 +14,6 @@ export default Ember.Component.extend({
   onResize() {
     $('#orderpad-menu').height($(window).height() - $('#orderpad-categories').outerHeight());
     $('#orderpad-order').outerHeight($(window).height() - ($('#orderpad-customer').outerHeight() + $('#orderpad-header').outerHeight() + 20)); //20 for margin
-  },
+  }
+
 });
