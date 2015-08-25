@@ -1136,79 +1136,79 @@ module.exports = function(app) {
       "editOptions":[
         {
           "id":1,
-          "type":0,
+          "editType":0,
           "name":"ADD MIXER",
           "price":50
         },
         {
           "id":2,
-          "type":1,
+          "editType":1,
           "name":"ADD ICE",
           "price":0
         },
         {
           "id":3,
-          "type":1,
+          "editType":1,
           "name":"LESS ICE",
           "price":0
         },
         {
           "id":4,
-          "type":1,
+          "editType":1,
           "name":"NO ICE",
           "price":0
         },
         {
           "id":5,
-          "type":2,
+          "editType":2,
           "name":"ADD CHICKEN",
           "price":150
         },
         {
           "id":6,
-          "type":2,
+          "editType":2,
           "name":"ADD PORK",
           "price":150
         },
         {
           "id":7,
-          "type":2,
+          "editType":2,
           "name":"ADD BEEF",
           "price":150
         },
         {
           "id":8,
-          "type":2,
+          "editType":2,
           "name":"ADD PRAWNS",
           "price":150
         },
         {
           "id":9,
-          "type":3,
+          "editType":3,
           "name":"MILD",
           "price":0
         },
         {
           "id":10,
-          "type":3,
+          "editType":3,
           "name":"SPICY",
           "price":0
         },
         {
           "id":11,
-          "type":3,
+          "editType":3,
           "name":"NO PEANUTS",
           "price":0
         },
         {
           "id":12,
-          "type":3,
+          "editType":3,
           "name":"NO PEPPERS",
           "price":0
         },
         {
           "id":13,
-          "type":3,
+          "editType":3,
           "name":"NO MUSHROOMS",
           "price":0
         }

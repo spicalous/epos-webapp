@@ -56,16 +56,16 @@ export default Ember.Component.extend({
   * Sets the available edit options based on what tab (selected) was selected
   */
   selectedTypeObserver: function() {
-    var type = '';
+    var editType = '';
 
     switch(this.get('selected')) {
-      case 'Add Drink': type = 0; break;
-      case 'Edit Drink': type = 1; break;
-      case 'Add Food': type = 2; break;
-      case 'Edit Food': type = 3; break;
+      case 'Add Drink': editType = 0; break;
+      case 'Edit Drink': editType = 1; break;
+      case 'Add Food': editType = 2; break;
+      case 'Edit Food': editType = 3; break;
     }
 
-    this.set('filteredEditOptions', this.get('editOptions').filterBy('type', type));
+    this.set('filteredEditOptions', this.get('editOptions').filterBy('editType', editType));
   }.observes('selected'),
 
   actions: {

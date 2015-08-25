@@ -53,9 +53,11 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      var _this = this;
+      var _this = this,
+          order = this.get('model.order');
 
-      this.get('model.order').set('dateTime', new Date()).save().then(function() {
+      order.set('dateTime', new Date());
+      order.save().then(function() {
         _this.send('reset');
         _this.send('showMessage', 'overlay', {
           header: 'Confirmed',
