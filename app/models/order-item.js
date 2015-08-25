@@ -25,7 +25,7 @@ export default DS.Model.extend({
   },
 
   hasNoEditOptions: function() {
-    return this.get('editOptions').length === 0;
+    return this.get('editOptions').get('length') === 0;
   },
 
   toggleOption: function(option) {
