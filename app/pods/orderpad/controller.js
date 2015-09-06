@@ -57,8 +57,11 @@ export default Ember.Controller.extend({
           order = this.get('model.order');
 
       order.set('dateTime', new Date());
+
       order.save().then(function() {
+
         _this.send('reset');
+
         _this.send('showMessage', 'overlay', {
           header: 'Confirmed',
           body: 'Order submitted successfully',
@@ -66,9 +69,12 @@ export default Ember.Controller.extend({
             _this.set('model.order', _this.store.createRecord('order', {}));
           }
         });
+
       }, function(response) {
         var modalWasOpen = $('#orderpad-modal').hasClass('in');
+
         _this.send('reset');
+
         _this.send('showMessage', 'overlay', {
           header: 'Failed',
           body: response.responseText,
