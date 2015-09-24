@@ -13,9 +13,11 @@
       {{/each}}
       <div class="pull-right">
         {{item.displayTotal}}
-        <a class="edit-item-btn" {{action "editItem" item order}} data-toggle="modal" data-target="#edit-item-modal">
-          <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
-        </a>
+        {{#if item.menuItem.editCategories}}
+          <a class="edit-item-btn" {{action "editItem" item order}} data-toggle="modal" data-target="#edit-item-modal">
+            <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+          </a>
+        {{/if}}
       </div>
     </li>
   {{/each}}
