@@ -19,24 +19,20 @@ export default Ember.Controller.extend({
     }
   }.observes('filter'),
 
-  invalidOrder: true,
+  invalidOrder: Ember.computed('emptyOrder', function() {
+    return this.get('emptyOrder');
+  }),
 
-  invalidOrderSetter: function() {
-    this.set('invalidOrder', this.get('emptyOrder'));
-  }.observes('emptyOrder'),
-
-  emptyOrder: true,
-
-  orderSizeObserver: function() {
-    this.set('emptyOrder',
-      this.get('model.order.size') > 0 ? false : true);
-  }.observes('model.order.size'),
+  emptyOrder: Ember.computed('model.order.size', function() {
+    return this.get('model.order.size') > 0 ? false : true;
+  }),
 
   actions: {
 
     categoryItemClick(categoryItem) {
       if (this.get('filter') === categoryItem) {
-        this.set('filter', ''); //Reset filter
+        //Reset filter
+        this.set('filter', '');
       } else {
         this.set('filter', categoryItem);
       }
@@ -47,9 +43,12 @@ export default Ember.Controller.extend({
       this.send('showMessage', 'toast', {
         body: 'Added ' + menuItem.get('name')
       });
+
+      //TODO: scroll to item added instead of scrolling down
       setTimeout(function() {
         $('#orderpad-order').scrollTop($('#orderpad-order').scrollTop() + 55);
       }, 100);
+
     },
 
     submitOrder() {
@@ -61,7 +60,6 @@ export default Ember.Controller.extend({
       order.save().then(function() {
 
         _this.send('reset');
-
         _this.send('showMessage', 'overlay', {
           header: 'Confirmed',
           body: 'Order submitted successfully',
@@ -74,7 +72,6 @@ export default Ember.Controller.extend({
         var modalWasOpen = $('#orderpad-modal').hasClass('in');
 
         _this.send('reset');
-
         _this.send('showMessage', 'overlay', {
           header: 'Failed',
           body: response.responseText,
