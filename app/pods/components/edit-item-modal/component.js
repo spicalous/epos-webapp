@@ -9,7 +9,6 @@ export default Ember.Component.extend({
   /**
   *
   * Fires when the user selects an item to edit (itemToEdit === orderItem)
-  * Sets the "selected" variable (tabs) based on the primary menu-item category
   */
   editItemObserver: function() {
     var itemToEdit = this.get('order.itemToEdit');
