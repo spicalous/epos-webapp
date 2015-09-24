@@ -51,7 +51,7 @@
     {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
   {{/orderpad-modal}}
 
-  {{edit-item-modal order=model.order editOptions=model.editOptions}}
+  {{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}
 
   {{#toggle-menu}}
     {{model.order.size}}

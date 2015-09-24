@@ -18,8 +18,8 @@ test("Page contents", function(assert) {
 
   assert.expect(2);
   visit('/orderpad').then(function() {
-    assert.equal(find('#orderpad-menu .list-group-item').length, 132, "Wrong number of menu items");
-    assert.equal(find('#orderpad-categories .row button').length, 17, "Wrong number of category items");
+    assert.equal(find('#orderpad-menu .list-group-item').length, 162, "Wrong number of menu items");
+    assert.equal(find('#orderpad-categories .row button').length, 18, "Wrong number of category items");
   });
 
 });

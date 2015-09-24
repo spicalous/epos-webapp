@@ -6,14 +6,6 @@ export default Ember.Component.extend({
   id: 'edit-item-modal',
   classNames: ['modal', 'fade'],
 
-  drinkOptions: Ember.A([
-    'Add Drink', 'Edit Drink'
-  ]),
-
-  foodOptions: Ember.A([
-    'Add Food', 'Edit Food'
-  ]),
-
   /**
   *
   * Fires when the user selects an item to edit (itemToEdit === orderItem)
@@ -37,42 +29,25 @@ export default Ember.Component.extend({
       }
     });
 
-    var categories = itemToEdit.get('menuItem.categories');
+    var editCategories = itemToEdit.get('menuItem.editCategories');
 
-    if (categories) {
-      switch(categories.objectAt(0).get('id')) {
-        case "15":
-          this.set('editItemTabs', this.get('drinkOptions'));
-          this.set('selected', this.get('drinkOptions').objectAt(0));
-          break;
-        default:
-          this.set('editItemTabs', this.get('foodOptions'));
-          this.set('selected', this.get('foodOptions').objectAt(0));
-      }
-    }
+    this.set('editItemTabs', editCategories);
+    this.set('selected', editCategories.get('firstObject'));
+
   }.observes('order.itemToEdit'),
 
-  /**
-  *
-  * Sets the available edit options based on what tab (selected) was selected
-  */
-  selectedTypeObserver: function() {
-    var editType = '';
-
-    switch(this.get('selected')) {
-      case 'Add Drink': editType = 0; break;
-      case 'Edit Drink': editType = 1; break;
-      case 'Add Food': editType = 2; break;
-      case 'Edit Food': editType = 3; break;
+  filteredEditOptions: Ember.computed('selected', function() {
+    if (!this.get('selected')) {
+      return;
     }
-
-    this.set('filteredEditOptions', this.get('editOptions').filterBy('editType', editType));
-  }.observes('selected'),
+    var selectedEditCategoryId = this.get('selected').get('id');
+    return this.get('editOptions').filterBy('editCategory', parseInt(selectedEditCategoryId));
+  }),
 
   actions: {
 
-    tabClick(text) {
-      this.set('selected', text);
+    tabClick(editCategory) {
+      this.set('selected', editCategory);
     },
 
     editOptionToggle(option) {

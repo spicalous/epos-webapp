@@ -5,6 +5,7 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       menu: this.store.findAll('menu-item'),
       categories: this.store.peekAll('category'),
+      editCategories: this.store.peekAll('edit-category'),
       editOptions: this.store.peekAll('edit-option'),
       order: this.store.createRecord('order', {})
     });

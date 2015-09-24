@@ -5,11 +5,11 @@ export default Ember.Component.extend({
   classNameBindings: ['isActive:active'],
 
   isActive: function() {
-    return this.get('current') === this.get('text');
-  }.property('current', 'text'),
+    return this.get('current') === this.get('item');
+  }.property('current', 'item'),
 
   click() {
-    this.sendAction('action', this.get('text'));
+    this.sendAction('action', this.get('item'));
   }
 
 });

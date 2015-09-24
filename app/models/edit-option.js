@@ -1,15 +1,15 @@
 import DS from "ember-data";
+import Ember from 'ember';
 
 export default DS.Model.extend({
-  editType: DS.attr('number'),
+  editCategory: DS.attr('number'),
   name: DS.attr('string'),
   price: DS.attr('number'),
 
   selected: DS.attr('boolean'),
 
-  displayPrice: function() {
-    return this.get('price') === 0 ?
-      '' :
-      (this.get('price') / 100).toFixed(2);
-  }.property('price'),
+  displayPrice: Ember.computed('price', function() {
+    return this.get('price') === 0 ? '' : (this.get('price') / 100).toFixed(2);
+  })
+
 });
