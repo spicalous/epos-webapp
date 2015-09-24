@@ -21,7 +21,7 @@ export default DS.Model.extend({
   }.property('editOptions.[]'),
 
   isMenuItem: function(menuItem) {
-    return this.get('menuItem').get('name') === menuItem.get('name');
+    return this.get('menuItem').get('id') === menuItem.get('id');
   },
 
   hasNoEditOptions: function() {
