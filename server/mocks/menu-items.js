@@ -2601,5 +2601,5 @@ module.exports = function(app) {
     });
   });
 
-  app.use('/EPOSDataService-1.0-SNAPSHOT/api/menuItems', menuItemsRouter);
+  app.use('/EPOSDataService/api/menuItems', menuItemsRouter);
 };
