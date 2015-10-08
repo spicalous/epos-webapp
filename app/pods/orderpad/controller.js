@@ -61,7 +61,7 @@ export default Ember.Controller.extend({
 
         _this.send('reset');
         _this.send('showMessage', 'overlay', {
-          header: 'Confirmed',
+          header: 'Confirmed ^.^',
           body: 'Order submitted successfully',
           callback: function() {
             _this.set('model.order', _this.store.createRecord('order', {}));
@@ -73,7 +73,7 @@ export default Ember.Controller.extend({
 
         _this.send('reset');
         _this.send('showMessage', 'overlay', {
-          header: 'Failed',
+          header: 'Failed :(',
           body: response.responseText,
           danger: true,
           callback: function() {
@@ -89,6 +89,9 @@ export default Ember.Controller.extend({
       this.send('reset');
       this.get('model.order').destroyRecord();
       this.set('model.order', this.store.createRecord('order', {}));
+      this.send('showMessage', 'overlay', {
+        header: 'Order Cancelled'
+      });
     },
 
     reset() {
