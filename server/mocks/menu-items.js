@@ -2438,7 +2438,7 @@ module.exports = function(app) {
         {
           "id": 154,
           "menuId": "",
-          "name": "Coke",
+          "name": "DELIVERY Coke",
           "description": "",
           "price": 85,
           "categories": [
@@ -2449,7 +2449,7 @@ module.exports = function(app) {
         {
           "id": 155,
           "menuId": "",
-          "name": "Diet Coke",
+          "name": "DELIVERY Diet Coke",
           "description": "",
           "price": 85,
           "categories": [
@@ -2460,7 +2460,7 @@ module.exports = function(app) {
         {
           "id": 156,
           "menuId": "",
-          "name": "7up",
+          "name": "DELIVERY 7up",
           "description": "",
           "price": 85,
           "categories": [
@@ -2471,7 +2471,7 @@ module.exports = function(app) {
         {
           "id": 157,
           "menuId": "",
-          "name": "Tango",
+          "name": "DELIVERY Tango",
           "description": "",
           "price": 85,
           "categories": [
@@ -2482,7 +2482,7 @@ module.exports = function(app) {
         {
           "id": 158,
           "menuId": "",
-          "name": "Small Still Water",
+          "name": "DELIVERY Small Still",
           "description": "",
           "price": 120,
           "categories": [
@@ -2493,7 +2493,7 @@ module.exports = function(app) {
         {
           "id": 159,
           "menuId": "",
-          "name": "Large Still Water",
+          "name": "DELIVERY Large Still",
           "description": "",
           "price": 160,
           "categories": [
@@ -2504,7 +2504,7 @@ module.exports = function(app) {
         {
           "id": 160,
           "menuId": "",
-          "name": "Small Sparkling Water",
+          "name": "DELIVERY Small Sparkling",
           "description": "",
           "price": 120,
           "categories": [
@@ -2515,7 +2515,7 @@ module.exports = function(app) {
         {
           "id": 161,
           "menuId": "",
-          "name": "Large Sparkling Water",
+          "name": "DELIVERY Large Sparkling",
           "description": "",
           "price": 160,
           "categories": [
