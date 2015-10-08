@@ -53,8 +53,9 @@
 
   {{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}
 
-  {{#toggle-menu}}
+  {{#toggle-btn class="toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
     {{model.order.size}}
-  {{/toggle-menu}}
+    <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+  {{/toggle-btn}}
 
 {{/temp/orderpad-wrapper}}
