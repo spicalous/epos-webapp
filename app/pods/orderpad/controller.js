@@ -31,8 +31,7 @@ export default Ember.Controller.extend({
 
     categoryItemClick(categoryItem) {
       if (this.get('filter') === categoryItem) {
-        //Reset filter
-        this.set('filter', '');
+        this.set('filter', ''); //Reset filter
       } else {
         this.set('filter', categoryItem);
       }
@@ -40,6 +39,7 @@ export default Ember.Controller.extend({
 
     menuItemClick(menuItem) {
       this.get('model.order').addItem(menuItem);
+
       this.send('showMessage', 'toast', {
         body: 'Added ' + menuItem.get('name')
       });
