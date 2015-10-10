@@ -9,12 +9,18 @@
 
 // ### Bootstrap overrides
 
-@grid-gutter-width:         10px;
+@grid-gutter-width:         8px;
 
-// override navs-justified to not collapse for small screens
+.list-group {
+  margin-bottom: @grid-gutter-width;
+}
+
+.list-group-item {
+  padding: 9px 8px;
+}
 
 .nav-justified {
-  @media (min-width: (@screen-xs-min - 120)) {
+  @media (min-width: (@screen-xs-min - 120)) { // dont collapse for small screens
     > li {
       display: table-cell;
       width: 1%;
@@ -26,7 +32,7 @@
 }
 
 .nav-tabs-justified {
-  @media (min-width: (@screen-xs-min - 120)) {
+  @media (min-width: (@screen-xs-min - 120)) { // dont collapse for small screens
     > li > a {
       border-bottom: 1px solid @nav-tabs-justified-link-border-color;
       border-radius: @border-radius-base @border-radius-base 0 0;

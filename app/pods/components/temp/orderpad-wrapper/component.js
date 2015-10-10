@@ -12,8 +12,12 @@ export default Ember.Component.extend({
   },
 
   onResize() {
-    $('#orderpad-menu').height($(window).height() - $('#orderpad-categories').outerHeight());
-    $('#orderpad-order').outerHeight($(window).height() - ($('#orderpad-customer').outerHeight() + $('#orderpad-header').outerHeight() + 20)); //20 for margin
+    $('#orderpad-menu').height($(window).height() -
+        $('#orderpad-categories').outerHeight());
+    $('#orderpad-orderlist').outerHeight($(window).height() - (
+        $('#orderpad-header').outerHeight() +
+        $('#orderpad-customer').outerHeight() +
+        $('#orderpad-summary').outerHeight()));
   }
 
 });

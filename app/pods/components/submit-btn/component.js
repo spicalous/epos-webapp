@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   attributeBindings: ['type'],
   type: 'button',
   classNameBindings: ['disabled'],
-  classNames: ['btn', 'btn-success', 'pull-right', 'submit-btn'],
+  classNames: ['btn', 'btn-success', 'submit-btn'],
 
   click() {
     this.sendAction();

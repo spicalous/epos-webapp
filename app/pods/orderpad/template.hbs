@@ -6,27 +6,33 @@
     <div class="row">
 
       <div class="col-sm-6">
-        <div id="orderpad-categories">
-          <div class="row">
+        <div class="row" id="orderpad-categories">
+          <div class="col-sm-12 top-bottom-gutter">
             {{#each model.categories as |item|}}
               {{category-item category=item action="categoryItemClick" selected=filter}}
             {{/each}}
           </div>
         </div>
-        <div id="orderpad-menu" class="scroll-y">
-          {{#menu-list menuItems=menu as |menuItem|}}
-            {{menu-item menuItem=menuItem action="menuItemClick"}}
-          {{/menu-list}}
+        <div class="row scroll-y" id="orderpad-menu">
+          <div class="col-sm-12 top-bottom-gutter">
+            {{#menu-list menuItems=menu as |menuItem|}}
+              {{menu-item menuItem=menuItem action="menuItemClick"}}
+            {{/menu-list}}
+          </div>
         </div>
       </div>
 
       <div class="hidden-xs">
         <div class="col-sm-6">
-          <div id="orderpad-header">
-            <h4 class="text-center">NEW ORDER</h4>
+
+          <div class="row" id="orderpad-header">
+            <div class="col-sm-12 top-bottom-gutter">
+              <h4 class="text-center">NEW ORDER</h4>
+            </div>
           </div>
-          <div id="orderpad-customer">
-            <div class="row">
+
+          <div class="row" id="orderpad-customer">
+            <div class="col-sm-12 top-bottom-gutter">
               {{#if order.customer}}
                 <h4>Customer Present</h4>
               {{else}}
@@ -34,20 +40,49 @@
               {{/if}}
             </div>
           </div>
-          <div id="orderpad-order" class="scroll-y">
-            {{order-list order=model.order}}
-            {{submit-btn action="submitOrder" disabled=invalidOrder}}
-            {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
+
+          <div class="row scroll-y" id="orderpad-orderlist">
+            <div class="col-sm-12 top-bottom-gutter">
+              {{order-list order=model.order}}
+            </div>
+          </div>
+
+          <div class="row" id="orderpad-summary">
+            <div class="col-sm-6 top-bottom-gutter">
+              ITEMS: {{model.order.size}}
+              TOTAL: {{model.order.displayTotal}}
+            </div>
+            <div class="col-sm-3 top-bottom-gutter">
+              {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
+            </div>
+            <div class="col-sm-3 top-bottom-gutter">
+              {{submit-btn action="submitOrder" disabled=invalidOrder}}
+            </div>
           </div>
 
         </div>
       </div>
+
     </div>
   </div>
 
   {{#orderpad-modal order=model.order title="Order Items"}}
-    {{submit-btn action="submitOrder" disabled=invalidOrder}}
-    {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
+    <div class="modal-body">
+      <small>
+        {{order-list order=model.order}}
+      </small>
+    </div>
+    <div class="modal-footer">
+      <div class="row">
+        ITEMS: {{model.order.size}}
+        TOTAL: {{model.order.displayTotal}}
+      </div>
+      <div class="row">
+        {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
+        {{submit-btn action="submitOrder" disabled=invalidOrder}}
+        <button type="button" class="btn btn-default close-btn" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   {{/orderpad-modal}}
 
   {{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}

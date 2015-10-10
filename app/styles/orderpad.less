@@ -1,24 +1,13 @@
 @media (min-width: @screen-sm-min) {
 
-  .cancel-btn {
-    margin-bottom: 40px;
-  }
-
   .toggle-menu, #orderpad-modal {
     display: none;
   }
-
 }
 
-#orderpad-categories,
-#orderpad-menu,
-#orderpad-order {
-  padding-left:5px;
-  padding-right:5px;
-}
-
-#orderpad-categories, #orderpad-customer {
-  padding: @grid-gutter-width;
+.top-bottom-gutter {
+  padding-top: floor((@grid-gutter-width / 2));
+  padding-bottom: floor((@grid-gutter-width / 2));
 }
 
 .scroll-y {
@@ -26,23 +15,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
-#orderpad-order, #orderpad-modal {
-
-  .list-group-item {
-    padding-left: 8px;
-    padding-right: 0px; //compensate for .edit-btn margin-right
-  }
-}
-
-#orderpad-order {
-
-  .cancel-btn {
-    margin-right: @grid-gutter-width;
-  }
-}
-
 #orderpad-summary {
-  margin-top: @grid-gutter-width;
+
+  .cancel-btn, .submit-btn {
+    width: 100%;
+  }
 }
 
 .order-edit-option {
