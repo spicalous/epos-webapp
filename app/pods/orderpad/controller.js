@@ -43,12 +43,6 @@ export default Ember.Controller.extend({
       this.send('showMessage', 'toast', {
         body: 'Added ' + menuItem.get('name')
       });
-
-      //TODO: scroll to item added instead of scrolling down
-      setTimeout(function() {
-        $('#orderpad-order').scrollTop($('#orderpad-order').scrollTop() + 55);
-      }, 100);
-
     },
 
     submitOrder() {
