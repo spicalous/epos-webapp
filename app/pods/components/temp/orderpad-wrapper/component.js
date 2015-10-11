@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     $('#orderpad-orderlist').outerHeight($(window).height() - (
         $('#orderpad-header').outerHeight() +
         $('#orderpad-customer').outerHeight() +
-        $('#orderpad-summary').outerHeight()));
+        $('#orderpad-bottom').outerHeight()));
   }
 
 });

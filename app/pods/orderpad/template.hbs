@@ -47,22 +47,35 @@
             </div>
           </div>
 
-          <div class="row" id="orderpad-summary">
-            <div class="col-sm-6 top-bottom-gutter">
-              ITEMS: {{model.order.size}}
-              TOTAL: {{model.order.displayTotal}}
+          <div id="orderpad-bottom">
+            <!--<div class="row">-->
+              <!--<div class="col-sm-12 text-center top-bottom-gutter">-->
+                {{!number-pad}}
+              <!--</div>-->
+            <!--</div>-->
+
+            <div class="row">
+              <div class="col-sm-6 text-center top-bottom-gutter">
+                ITEMS: {{model.order.size}}
+              </div>
+              <div class="col-sm-6 text-center top-bottom-gutter">
+                TOTAL: {{model.order.displayTotal}}
+              </div>
             </div>
-            <div class="col-sm-3 top-bottom-gutter">
-              {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
+
+            <div class="row">
+              <div class="col-sm-6 top-bottom-gutter">
+                {{cancel-btn action="cancelOrder" disabled=emptyOrder}}
+              </div>
+              <div class="col-sm-6 top-bottom-gutter">
+                {{submit-btn action="submitOrder" disabled=invalidOrder}}
+              </div>
             </div>
-            <div class="col-sm-3 top-bottom-gutter">
-              {{submit-btn action="submitOrder" disabled=invalidOrder}}
-            </div>
+
           </div>
-
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 
