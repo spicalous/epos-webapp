@@ -48,11 +48,14 @@
           </div>
 
           <div id="orderpad-bottom">
-            <!--<div class="row">-->
-              <!--<div class="col-sm-12 text-center top-bottom-gutter">-->
-                {{!number-pad}}
-              <!--</div>-->
-            <!--</div>-->
+            <div class="row">
+              <div class="col-sm-6 text-center top-bottom-gutter">
+                <span style="font-size: 80px">{{numpadValue}}</span>
+              </div>
+              <div class="col-sm-6 text-center top-bottom-gutter">
+                {{number-pad value=numpadValue maxLength=4}}
+              </div>
+            </div>
 
             <div class="row">
               <div class="col-sm-6 text-center top-bottom-gutter">

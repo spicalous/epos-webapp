@@ -2,22 +2,33 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  filterObserver: function() {
-    var filter = this.get('filter'),
-        menu = this.get('model.menu'),
-        _this = this;
+  numpadValue: '',
 
-    if (filter === '') {
-       _this.set('menu', menu);
-    } else {
-      _this.set('menu', menu.filter(function(item) {
-        var _filter = this;
-        return item.get('categories').any(function(category) {
-          return _filter === category;
+  filterMenu: function() {
+    var menu = this.get('model.menu'),
+        categoryFilter = this.get('filter'),
+        menuIdFilter = this.get('numpadValue'),
+        filteredMenu;
+
+    if (categoryFilter) {
+      filteredMenu = menu.filter(function(item) {
+        var _filterRenamePlease = this;
+        return item.get('categories').any(function(categoryRenamePlease) {
+          return _filterRenamePlease === categoryRenamePlease;
         });
-      }, filter));
+      }, categoryFilter);
+    } else {
+      filteredMenu = menu;
     }
-  }.observes('filter'),
+
+    if (menuIdFilter) {
+      filteredMenu = filteredMenu.filter(function(item) {
+        return item.get('menuId').startsWith(menuIdFilter);
+      });
+    }
+
+    this.set('menu', filteredMenu);
+  }.observes('filter', 'numpadValue'),
 
   invalidOrder: Ember.computed('emptyOrder', function() {
     return this.get('emptyOrder');
@@ -39,6 +50,7 @@ export default Ember.Controller.extend({
 
     menuItemClick(menuItem) {
       this.get('model.order').addItem(menuItem);
+      this.set('numpadValue', '');
 
       this.send('showMessage', 'toast', {
         body: 'Added ' + menuItem.get('name')
@@ -90,6 +102,7 @@ export default Ember.Controller.extend({
 
     reset() {
       this.set('filter', '');
+      this.set('numpadValue', '');
       $('#orderpad-modal').modal('hide');
     }
 
