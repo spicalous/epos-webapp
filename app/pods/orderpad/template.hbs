@@ -9,7 +9,7 @@
         <div class="row" id="orderpad-categories">
           <div class="col-sm-12 top-bottom-gutter">
             {{#each model.categories as |item|}}
-              {{category-item category=item action="categoryItemClick" selected=filter}}
+              {{category-item category=item action="categoryItemClick" selected=categoryFilter}}
             {{/each}}
           </div>
         </div>

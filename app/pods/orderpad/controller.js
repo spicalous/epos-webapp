@@ -2,20 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  filter: '',
+  categoryFilter: '',
   numpadValue: '',
 
   filterMenu: function() {
     var menu = this.get('model.menu'),
-        categoryFilter = this.get('filter'),
+        categoryFilter = this.get('categoryFilter'),
         menuIdFilter = this.get('numpadValue'),
         filteredMenu;
 
     if (categoryFilter) {
       filteredMenu = menu.filter(function(item) {
-        var _filterRenamePlease = this;
-        return item.get('categories').any(function(categoryRenamePlease) {
-          return _filterRenamePlease === categoryRenamePlease;
+        var _categoryFilter = this;
+        return item.get('categories').any(function(category) {
+          return _categoryFilter === category;
         });
       }, categoryFilter);
     } else {
@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
     }
 
     this.set('menu', filteredMenu);
-  }.observes('filter', 'numpadValue'),
+  }.observes('categoryFilter', 'numpadValue'),
 
   invalidOrder: Ember.computed('emptyOrder', function() {
     return this.get('emptyOrder');
@@ -42,10 +42,10 @@ export default Ember.Controller.extend({
   actions: {
 
     categoryItemClick(categoryItem) {
-      if (this.get('filter') === categoryItem) {
-        this.set('filter', ''); //Reset filter
+      if (this.get('categoryFilter') === categoryItem) {
+        this.set('categoryFilter', ''); //Reset filter
       } else {
-        this.set('filter', categoryItem);
+        this.set('categoryFilter', categoryItem);
       }
     },
 
@@ -101,7 +101,7 @@ export default Ember.Controller.extend({
     },
 
     reset() {
-      this.set('filter', '');
+      this.set('categoryFilter', '');
       this.set('numpadValue', '');
       $('#orderpad-modal').modal('hide');
     }
