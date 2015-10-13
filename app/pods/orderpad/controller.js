@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+  filter: '',
   numpadValue: '',
 
   filterMenu: function() {
@@ -81,7 +82,6 @@ export default Ember.Controller.extend({
         _this.send('showMessage', 'overlay', {
           header: 'Failed :(',
           body: response.responseText,
-          danger: true,
           callback: function() {
             if (modalWasOpen) {
               $('#orderpad-modal').modal('show');
