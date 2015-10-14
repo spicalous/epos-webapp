@@ -13,7 +13,7 @@ module.exports = function(app) {
   ordersRouter.post('/', function(req, res) {
     success ?
       res.status(201).send({}) :
-      res.status(400).send("Reason for failure placeholder");
+      res.status(400).send('Reason for failure placeholder');
 
   });
 
