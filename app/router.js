@@ -9,6 +9,7 @@ Router.map(function() {
 
   this.route('orderpad');
 
+  this.route('orders');
 });
 
 export default Router;

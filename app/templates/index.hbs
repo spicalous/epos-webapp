@@ -1,10 +1,17 @@
 <div class="container">
+  <div class="row text-center">
+    <div class="col-sm-4 col-xs-12">
+      {{#link-to 'orderpad'}}
+        {{#btn-generic class="btn-main btn-home"}}NEW ORDER{{/btn-generic}}
+      {{/link-to}}
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      {{#link-to 'orders'}}
+        {{#btn-generic class="btn-main btn-home"}}ORDERS{{/btn-generic}}
+      {{/link-to}}
+    </div>
+  </div>
   <div class="text-muted" style="position:absolute;bottom:0;left:0;padding-left:10px;padding-bottom:5px;">
     {{name}} - {{version}}
-  </div>
-  <div class="row text-center">
-    {{#link-to 'orderpad'}}
-      {{#btn-home}}NEW ORDER{{/btn-home}}
-    {{/link-to}}
   </div>
 </div>

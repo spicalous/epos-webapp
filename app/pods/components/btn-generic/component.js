@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   attributeBindings: ['type'],
   type: 'button',
   classNameBindings: ['disabled'],
-  classNames: ['btn', 'btn-danger', 'cancel-btn'],
+  classNames: ['btn'],
 
   click() {
     this.sendAction();
