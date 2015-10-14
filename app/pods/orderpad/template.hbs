@@ -36,7 +36,7 @@
               {{#if order.customer}}
                 <h4>Customer Present</h4>
               {{else}}
-                {{#btn-generic class="col-xs-10 col-xs-offset-1 btn-main" action="showCustomerSelect"}}Select Customer{{/btn-generic}}
+                {{#btn-button class="col-xs-10 col-xs-offset-1 btn-main" action="showCustomerSelect"}}Select Customer{{/btn-button}}
               {{/if}}
             </div>
           </div>
@@ -68,10 +68,10 @@
 
             <div class="row">
               <div class="col-sm-6 top-bottom-gutter">
-                {{#btn-generic class='btn-danger btn-cancel' action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-generic}}
+                {{#btn-button class='btn-danger btn-cancel' action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-button}}
               </div>
               <div class="col-sm-6 top-bottom-gutter">
-                {{#btn-generic class='btn-success btn-submit' action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-generic}}
+                {{#btn-button class='btn-success btn-submit' action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-button}}
               </div>
             </div>
 
@@ -94,18 +94,18 @@
         TOTAL: {{model.order.displayTotal}}
       </div>
       <div class="row">
-        {{#btn-generic class='btn-danger btn-cancel' action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-generic}}
-        {{#btn-generic class='btn-success btn-submit' action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-generic}}
-        <button type="button" class="btn btn-default close-btn" data-dismiss="modal">Close</button>
+        {{#btn-button class='btn-danger btn-cancel' action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-button}}
+        {{#btn-button class='btn-success btn-submit' action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-button}}
+        {{#btn-button class='btn-default btn-close' data-dismiss="modal"}}CLOSE{{/btn-button}}
       </div>
     </div>
   {{/orderpad-modal}}
 
   {{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}
 
-  {{#toggle-btn class="toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
+  {{#btn-button class="btn-default toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
     {{model.order.size}}
     <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
-  {{/toggle-btn}}
+  {{/btn-button}}
 
 {{/temp/orderpad-wrapper}}
