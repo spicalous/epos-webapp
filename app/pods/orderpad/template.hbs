@@ -43,7 +43,9 @@
 
           <div class="row scroll-y" id="orderpad-orderlist">
             <div class="col-sm-12 top-bottom-gutter">
+              <div class="lead">
               {{order-list order=model.order}}
+              </div>
             </div>
           </div>
 
@@ -59,10 +61,10 @@
 
             <div class="row">
               <div class="col-sm-6 text-center top-bottom-gutter">
-                ITEMS: {{model.order.size}}
+                <span class="lead">ITEMS: {{model.order.size}}</span>
               </div>
               <div class="col-sm-6 text-center top-bottom-gutter">
-                TOTAL: {{model.order.displayTotal}}
+                <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
               </div>
             </div>
 

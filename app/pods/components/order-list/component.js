@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'div',
-  classNames: ['orderpad-order', 'no-select'],
+  classNames: ['no-select'],
 
   actions: {
 
