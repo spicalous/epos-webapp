@@ -3,8 +3,7 @@ module.exports = function(app) {
   var menuItemsRouter = express.Router();
 
   menuItemsRouter.get('/', function(req, res) {
-    res.send(
-    {
+    res.send({
       "editCategories": [
         {
           "id": 0,

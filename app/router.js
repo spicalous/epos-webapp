@@ -6,10 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   this.route('orderpad');
-
   this.route('orders');
+  this.route('restaurant');
 });
 
 export default Router;
