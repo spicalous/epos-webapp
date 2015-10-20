@@ -22,65 +22,61 @@
         </div>
       </div>
 
-      <div class="hidden-xs">
-        <div class="col-sm-6">
-
-          <div class="row" id="orderpad-header">
-            <div class="col-sm-12 top-bottom-gutter">
-              <h4 class="text-center">NEW ORDER</h4>
-            </div>
-          </div>
-
-          <div class="row" id="orderpad-customer">
-            <div class="col-sm-12 top-bottom-gutter">
-              {{#if order.customer}}
-                <h4>Customer Present</h4>
-              {{else}}
-                {{#btn-button class="col-xs-10 col-xs-offset-1 btn-main" action="showCustomerSelect"}}Select Customer{{/btn-button}}
-              {{/if}}
-            </div>
-          </div>
-
-          <div class="row scroll-y" id="orderpad-orderlist">
-            <div class="col-sm-12 top-bottom-gutter">
-              <div class="lead">
-              {{order-list order=model.order}}
-              </div>
-            </div>
-          </div>
-
-          <div id="orderpad-bottom">
-            <div class="row">
-              <div class="col-sm-6 text-center top-bottom-gutter">
-                <span style="font-size: 80px">{{numpadValue}}</span>
-              </div>
-              <div class="col-sm-6 text-center top-bottom-gutter">
-                {{number-pad value=numpadValue maxLength=4}}
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6 text-center top-bottom-gutter">
-                <span class="lead">ITEMS: {{model.order.size}}</span>
-              </div>
-              <div class="col-sm-6 text-center top-bottom-gutter">
-                <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6 top-bottom-gutter">
-                {{#btn-button class="btn-danger btn-cancel" action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-button}}
-              </div>
-              <div class="col-sm-6 top-bottom-gutter">
-                {{#btn-button class="btn-success btn-submit" action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-button}}
-              </div>
-            </div>
-
+      <div class="col-sm-6 hidden-xs">
+        <div class="row" id="orderpad-header">
+          <div class="col-sm-12 top-bottom-gutter">
+            <h4 class="text-center">NEW ORDER</h4>
           </div>
         </div>
 
+        <div class="row" id="orderpad-customer">
+          <div class="col-sm-12 top-bottom-gutter">
+            {{#if order.customer}}
+              <h4>Customer Present</h4>
+            {{else}}
+              {{#btn-button class="col-xs-10 col-xs-offset-1 btn-main" action="showCustomerSelect"}}Select Customer{{/btn-button}}
+            {{/if}}
+          </div>
+        </div>
+
+        <div class="row scroll-y" id="orderpad-orderlist">
+          <div class="col-sm-12 top-bottom-gutter">
+            <div class="lead">
+              {{order-list order=model.order}}
+            </div>
+          </div>
+        </div>
+
+        <div id="orderpad-bottom">
+          <div class="row">
+            <div class="col-sm-6 text-center top-bottom-gutter">
+              <span style="font-size: 80px">{{numpadValue}}</span>
+            </div>
+            <div class="col-sm-6 text-center top-bottom-gutter">
+              {{number-pad value=numpadValue maxLength=4}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 text-center top-bottom-gutter">
+              <span class="lead">ITEMS: {{model.order.size}}</span>
+            </div>
+            <div class="col-sm-6 text-center top-bottom-gutter">
+              <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 top-bottom-gutter">
+              {{#btn-button class="btn-danger btn-cancel" action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-button}}
+            </div>
+            <div class="col-sm-6 top-bottom-gutter">
+              {{#btn-button class="btn-success btn-submit" action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-button}}
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 
