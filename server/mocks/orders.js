@@ -18,8 +18,17 @@ module.exports = function(app) {
   ordersRouter.post('/', function(req, res) {
     success ?
       res.status(201).send({id:addOrder(req.body)}) :
-      res.status(400).send('Reason for failure placeholder');
-
+      res.status(400).send({
+        errors: [
+          {
+            error: "Bad Gateway",
+            exception: "com.lovetalaythai.eposdataservice.printer.USBPrinter",
+            message: "Printer was not found. Please check that the printer is connected and switched on",
+            httpStatus: 502,
+            timestamp: 1445811517596
+          }
+        ]
+      });
   });
 
   function addOrder(order) {

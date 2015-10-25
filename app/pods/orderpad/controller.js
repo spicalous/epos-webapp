@@ -81,7 +81,7 @@ export default Ember.Controller.extend({
         _this.send('reset');
         _this.send('showMessage', 'overlay', {
           header: 'Failed :(',
-          body: response.responseText,
+          body: response.errors[0].message,
           callback: function() {
             if (modalWasOpen) {
               $('#orderpad-modal').modal('show');
