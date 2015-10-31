@@ -1,6 +1,6 @@
 {{#temp/orderpad-wrapper}}
 
-  {{outlet "customer-select"}}
+  {{outlet "customer-browser"}}
 
   <div class="container-fluid">
     <div class="row">
@@ -34,7 +34,18 @@
             {{#if order.customer}}
               <h4>Customer Present</h4>
             {{else}}
-              {{#btn-button class="col-xs-10 col-xs-offset-1 btn-main" action="showCustomerSelect"}}Select Customer{{/btn-button}}
+
+              <div class="text-center">
+                {{#btn-button class="col-xs-10 col-xs-offset-1 btn-main" data-toggle="dropdown"}}Select Customer{{/btn-button}}
+                <ul class="dropdown-menu" style="width: 100%;">
+                  <li><a href="#">Eat in</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Take away</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a {{action "showCustomerBrowser"}}>Delivery</a></li>
+                </ul>
+              </div>
+
             {{/if}}
           </div>
         </div>

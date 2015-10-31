@@ -19,16 +19,16 @@ export default Ember.Route.extend({
 
   actions: {
 
-    showCustomerSelect() {
-      this.render('customer-select', {
+    showCustomerBrowser() {
+      this.render('customer-browser', {
         into: 'orderpad',
-        outlet: 'customer-select',
+        outlet: 'customer-browser',
       });
     },
 
     hideCustomerSelect() {
       this.disconnectOutlet({
-        outlet: 'customer-select',
+        outlet: 'customer-browser',
         parentView: 'orderpad'
       });
     }
