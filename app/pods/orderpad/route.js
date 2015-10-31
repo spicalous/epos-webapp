@@ -26,7 +26,7 @@ export default Ember.Route.extend({
       });
     },
 
-    hideCustomerSelect() {
+    hideCustomerBrowser() {
       this.disconnectOutlet({
         outlet: 'customer-browser',
         parentView: 'orderpad'
