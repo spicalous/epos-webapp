@@ -2,12 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  orderType: '',
-
   actions: {
 
-    setOrderType(orderType) {
-      this.set('orderType', orderType);
+    setCustomer(customerType) {
+      this.sendAction('setCustomer', customerType);
+    },
+
+    removeCustomer() {
+      this.sendAction('removeCustomer');
     },
 
     showCustomerBrowser() {

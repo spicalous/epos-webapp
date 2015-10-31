@@ -58,6 +58,26 @@ export default Ember.Controller.extend({
       });
     },
 
+    setCustomer(customerType) {
+      let customer = this.get('model.order.customer');
+
+      if (!customer) {
+        customer = this.store.createRecord('customer', {});
+      }
+      customer.set('customerType', customerType);
+
+      this.set('model.order.customer', customer);
+    },
+
+    removeCustomer() {
+      let customer = this.get('model.order.customer');
+
+      if (customer) {
+        customer.destroyRecord();
+        this.set('model.order.customer', null);
+      }
+    },
+
     submitOrder() {
       var _this = this,
           order = this.get('model.order');

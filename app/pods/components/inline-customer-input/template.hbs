@@ -1,15 +1,23 @@
-{{#if orderType}}
-  <button {{action "setOrderType" ""}} type="button" class="close"
-                                       aria-label="Close"><span
-      aria-hidden="true">&times;</span></button>
-  <h4>{{orderType}}</h4>
+{{#if customer}}
+
+  <button {{action "removeCustomer"}}
+      type="button"
+      class="close"
+      aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{component customer.customerType customer=customer}}
+
 {{else}}
 
-    {{#btn-button class="col-xs-10 col-xs-offset-1 btn-main" data-toggle="dropdown"}}Select Customer{{/btn-button}}
+    {{#btn-button class="col-xs-10 col-xs-offset-1 btn-main" data-toggle="dropdown"}}
+      Select Customer
+    {{/btn-button}}
+
     <ul class="dropdown-menu" style="width: 100%;">
-      <!--<li><a {{action "setOrderType" "EAT IN"}}>Eat in</a></li>-->
+      <!--<li><a {{action "setCustomer" "restaurant-customer"}}>Eat in</a></li>-->
       <!--<li role="separator" class="divider"></li>-->
-      <li><a {{action "setOrderType" "TAKE AWAY"}}>Take away</a></li>
+      <li><a {{action "setCustomer" "takeaway-customer"}}>Take away</a></li>
       <li role="separator" class="divider"></li>
       <li><a {{action "showCustomerBrowser"}}>Delivery</a></li>
     </ul>
