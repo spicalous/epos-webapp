@@ -5,6 +5,9 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     orderItems: {
       serialize: 'records',
       deserialize: 'ids'
+    },
+    customer: {
+      serialize: 'records'
     }
   }
 });
