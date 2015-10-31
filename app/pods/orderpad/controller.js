@@ -68,6 +68,11 @@ export default Ember.Controller.extend({
 
       customer.destroyRecord();
       this.set('model.customer', this.store.createRecord('customer', {}));
+
+      //fire window.resize() to recalculate height of orderlist. See component/temp/orderpad-wrapper
+      Ember.run.next(this, function() {
+        $(window).resize();
+      });
     },
 
     submitOrder() {
