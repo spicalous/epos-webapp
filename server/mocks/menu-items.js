@@ -1228,8 +1228,8 @@ module.exports = function(app) {
         },
         {
           "id": 70,
-          "menuId": "56 Cod",
-          "name": "Pla Chu Chee",
+          "menuId": "56",
+          "name": "Cod Pla Chu Chee",
           "description": "Deep fried topped with chu chee curry sauce, coconut milk and garnished with shredded lime leaves",
           "price": 950,
           "categories": [
@@ -1243,8 +1243,8 @@ module.exports = function(app) {
         },
         {
           "id": 71,
-          "menuId": "56 Trout",
-          "name": "Pla Chu Chee",
+          "menuId": "56",
+          "name": "Trout Pla Chu Chee",
           "description": "Deep fried topped with chu chee curry sauce, coconut milk and garnished with shredded lime leaves",
           "price": 950,
           "categories": [
@@ -1258,8 +1258,8 @@ module.exports = function(app) {
         },
         {
           "id": 72,
-          "menuId": "57 Cod",
-          "name": "Pla Rad Prik",
+          "menuId": "57",
+          "name": "Cod Pla Rad Prik",
           "description": "Deef fried and topped with chilli and garlic sauce",
           "price": 950,
           "categories": [
@@ -1272,8 +1272,8 @@ module.exports = function(app) {
         },
         {
           "id": 73,
-          "menuId": "57 Trout",
-          "name": "Pla Rad Prik",
+          "menuId": "57",
+          "name": "Trout Pla Rad Prik",
           "description": "Deef fried and topped with chilli and garlic sauce",
           "price": 950,
           "categories": [
@@ -1286,8 +1286,8 @@ module.exports = function(app) {
         },
         {
           "id": 74,
-          "menuId": "58 Cod",
-          "name": "Pla Priew Wan",
+          "menuId": "58",
+          "name": "Cod Pla Priew Wan",
           "description": "Deep fried and topped with vegetables in sweet and sour sauce",
           "price": 950,
           "categories": [
@@ -1300,8 +1300,8 @@ module.exports = function(app) {
         },
         {
           "id": 75,
-          "menuId": "58 Trout",
-          "name": "Pla Priew Wan",
+          "menuId": "58",
+          "name": "Trout Pla Priew Wan",
           "description": "Deep fried and topped with vegetables in sweet and sour sauce",
           "price": 950,
           "categories": [
