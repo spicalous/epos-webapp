@@ -4,8 +4,11 @@ export default Ember.Controller.extend({
 
   categoryFilter: '',
   numpadValue: '',
+  mainAddress: '',
+  postcode: '',
+  contactNumber: '',
 
-  filterMenu: function() {
+  filterMenu: Ember.observer('categoryFilter', 'numpadValue', function() {
     var menu = this.get('model.menu'),
         categoryFilter = this.get('categoryFilter'),
         menuIdFilter = this.get('numpadValue'),
@@ -29,7 +32,21 @@ export default Ember.Controller.extend({
     }
 
     this.set('menu', filteredMenu);
-  }.observes('categoryFilter', 'numpadValue'),
+  }),
+
+  customerBrowserSearch: Ember.observer('mainAddress', 'postcode', 'contactNumber', function() {
+    Ember.run.once(this, 'searchDeliveryCustomer');
+  }),
+
+  searchDeliveryCustomer() {
+    let mainAddress = this.get('mainAddress').trim();
+    let postcode = this.get('postcode').trim();
+    let contactNumber = this.get('contactNumber').trim();
+
+    if (mainAddress || postcode || contactNumber) {
+      //TODO Throttle and search customer
+    }
+  },
 
   invalidOrder: Ember.computed('emptyOrder', function() {
     return this.get('emptyOrder');
@@ -73,6 +90,15 @@ export default Ember.Controller.extend({
       Ember.run.next(this, function() {
         $(window).resize();
       });
+    },
+
+    hideCustomerBrowser() {
+      this.set('mainAddress', '');
+      this.set('postcode', '');
+      this.set('contactNumber', '');
+
+      //bubble to the route to remove the outlet
+      return true;
     },
 
     submitOrder() {

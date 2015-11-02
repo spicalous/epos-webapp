@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   *
   * Fires when the user selects an item to edit (itemToEdit === orderItem)
   */
-  editItemObserver: function() {
+  editItemObserver: Ember.observer('order.itemToEdit', function() {
     var itemToEdit = this.get('order.itemToEdit');
 
     if (!itemToEdit) {
@@ -32,8 +32,7 @@ export default Ember.Component.extend({
 
     this.set('editItemTabs', editCategories);
     this.set('selected', editCategories.get('firstObject'));
-
-  }.observes('order.itemToEdit'),
+  }),
 
   filteredEditOptions: Ember.computed('selected', function() {
     if (!this.get('selected')) {
