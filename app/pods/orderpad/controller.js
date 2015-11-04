@@ -35,7 +35,16 @@ export default Ember.Controller.extend({
   }),
 
   customerBrowserSearch: Ember.observer('mainAddress', 'postcode', 'contactNumber', function() {
-    Ember.run.once(this, 'searchDeliveryCustomer');
+    let mainAddress = this.get('mainAddress').trim();
+    let postcode = this.get('postcode').trim();
+    let contactNumber = this.get('contactNumber').trim();
+    let debounce = this.get('searchDebounce');
+
+    if (mainAddress || postcode || contactNumber) {
+      this.set('searchDebounce', Ember.run.debounce(this, 'searchDeliveryCustomer', 1000));
+    } else {
+      Ember.run.cancel(debounce);
+    }
   }),
 
   searchDeliveryCustomer() {
@@ -43,9 +52,11 @@ export default Ember.Controller.extend({
     let postcode = this.get('postcode').trim();
     let contactNumber = this.get('contactNumber').trim();
 
-    if (mainAddress || postcode || contactNumber) {
-      //TODO Throttle and search customer
-    }
+    console.log('');
+    console.log('Updated: ');
+    console.log(mainAddress);
+    console.log(postcode);
+    console.log(contactNumber);
   },
 
   invalidOrder: Ember.computed('emptyOrder', function() {
