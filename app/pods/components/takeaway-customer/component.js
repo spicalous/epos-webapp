@@ -9,6 +9,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     //fire window.resize() to recalculate height of orderlist. See component/temp/orderpad-wrapper
+    this.$('#takeaway-customerName').focus();
     $(window).resize();
   }
 });
