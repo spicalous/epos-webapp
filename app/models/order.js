@@ -3,7 +3,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   dateTime: DS.attr('date'),
   orderItems: DS.hasMany('order-item'),
-  customer: DS.belongsTo('customer'),
+  customer: DS.belongsTo('customer', { polymorphic: true }),
 
   total: function() {
     return this.get('orderItems').reduce(

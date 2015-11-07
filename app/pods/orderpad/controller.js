@@ -41,22 +41,14 @@ export default Ember.Controller.extend({
     let debounce = this.get('searchDebounce');
 
     if (mainAddress || postcode || contactNumber) {
-      this.set('searchDebounce', Ember.run.debounce(this, 'searchDeliveryCustomer', 1000));
+      this.set('searchDebounce', Ember.run.debounce(this, 'searchDeliveryCustomer', mainAddress, postcode, contactNumber, 1000));
     } else {
       Ember.run.cancel(debounce);
     }
   }),
 
-  searchDeliveryCustomer() {
-    let mainAddress = this.get('mainAddress').trim();
-    let postcode = this.get('postcode').trim();
-    let contactNumber = this.get('contactNumber').trim();
-
-    console.log('');
-    console.log('Updated: ');
-    console.log(mainAddress);
-    console.log(postcode);
-    console.log(contactNumber);
+  searchDeliveryCustomer(mainAddress, postcode, contactNumber) {
+    console.log('Searching: mainAddress=' + mainAddress + ' postcode=' + postcode + ' contactNumber=' + contactNumber);
   },
 
   invalidOrder: Ember.computed('emptyOrder', function() {
@@ -87,8 +79,16 @@ export default Ember.Controller.extend({
     },
 
     setCustomer(customerType) {
-      let customer = this.get('model.customer');
-      customer.set('customerType', customerType);
+      var customer;
+
+      if (customerType === 'takeaway-customer') {
+          customer = this.store.createRecord('takeaway-customer');
+          customer.set('customerType', customerType);
+          this.set('model.customer', customer);
+      }
+      if (customerType === 'delivery-customer') {
+          this.send('showCustomerBrowser');
+      }
     },
 
     removeCustomer() {
@@ -96,11 +96,7 @@ export default Ember.Controller.extend({
 
       customer.destroyRecord();
       this.set('model.customer', this.store.createRecord('customer', {}));
-
-      //fire window.resize() to recalculate height of orderlist. See component/temp/orderpad-wrapper
-      Ember.run.next(this, function() {
-        $(window).resize();
-      });
+      this.send('resize');
     },
 
     hideCustomerBrowser() {
@@ -127,6 +123,8 @@ export default Ember.Controller.extend({
           body: 'Order submitted successfully',
           callback: function() {
             _this.set('model.order', _this.store.createRecord('order', {}));
+            _this.set('model.customer', _this.store.createRecord('customer', {}));
+            _this.send('resize');
           }
         });
 
@@ -159,6 +157,13 @@ export default Ember.Controller.extend({
       this.set('categoryFilter', '');
       this.set('numpadValue', '');
       $('#orderpad-modal').modal('hide');
+    },
+
+    resize() {
+      //fire window.resize() to recalculate height of orderlist. See component/temp/orderpad-wrapper
+      Ember.run.next(this, function() {
+        $(window).resize();
+      });
     }
 
   }

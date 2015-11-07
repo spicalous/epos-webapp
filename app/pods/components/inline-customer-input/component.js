@@ -10,14 +10,7 @@ export default Ember.Component.extend({
 
     removeCustomer() {
       this.sendAction('removeCustomer');
-    },
-
-    showCustomerBrowser() {
-      this.sendAction('showCustomerBrowser');
-    },
-
-    hideCustomerBrowser() {
-      this.sendAction('hideCustomerBrowser');
     }
+
   }
 });
