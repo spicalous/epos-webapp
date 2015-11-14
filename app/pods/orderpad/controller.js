@@ -49,6 +49,14 @@ export default Ember.Controller.extend({
 
   searchDeliveryCustomer(mainAddress, postcode, contactNumber) {
     console.log('Searching: mainAddress=' + mainAddress + ' postcode=' + postcode + ' contactNumber=' + contactNumber);
+    var _this = this;
+    this.store.query('delivery-customer', {
+      mainAddress: mainAddress,
+      postcode: postcode,
+      contactNumber: contactNumber
+    }).then(function(customers) {
+      _this.set('searchResults', customers);
+    });
   },
 
   invalidOrder: Ember.computed('emptyOrder', function() {
@@ -79,12 +87,9 @@ export default Ember.Controller.extend({
     },
 
     setCustomer(customerType) {
-      var customer;
-
       if (customerType === 'takeaway-customer') {
-          customer = this.store.createRecord('takeaway-customer');
-          customer.set('customerType', customerType);
-          this.set('model.customer', customer);
+        let customer = this.store.createRecord(customerType, {customerType: customerType});
+        this.set('model.customer', customer);
       }
       if (customerType === 'delivery-customer') {
           this.send('showCustomerBrowser');
@@ -92,9 +97,7 @@ export default Ember.Controller.extend({
     },
 
     removeCustomer() {
-      let customer = this.get('model.customer');
-
-      customer.destroyRecord();
+      this.get('model.customer').destroyRecord();
       this.set('model.customer', this.store.createRecord('customer', {}));
       this.send('resize');
     },
