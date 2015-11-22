@@ -10,10 +10,16 @@ module.exports = function(app) {
       contactNumber: "02086960854"
     },
     {
-      id: 0,
+      id: 1,
       mainAddress: "50 Bond Road",
       postcode: "CR4 3HE",
       contactNumber: "02087654321"
+    },
+    {
+      id: 2,
+      mainAddress: "50 ABC Road",
+      postcode: "CR4 2HE",
+      contactNumber: "02081111110"
     }
   ];
 
@@ -29,9 +35,28 @@ module.exports = function(app) {
 
     if (req.query.mainAddress || req.query.postcode || req.query.contactNumber) {
       body = DELIVERY_CUSTOMERS.filter(function(customer) {
-        return (req.query.mainAddress ? customer.mainAddress.startsWith(req.query.mainAddress) : false)
-          || (req.query.postcode ? customer.postcode.startsWith(req.query.postcode) : false)
-          || (req.query.contactNumber ? customer.contactNumber.startsWith(req.query.contactNumber) : false)
+        var result = false,
+            failed = false,
+            prev = false;
+
+        if (req.query.mainAddress) {
+          result = customer.mainAddress.startsWith(req.query.mainAddress);
+          failed = !result
+        }
+        if (!failed && req.query.postcode) {
+          result = result ?
+              result && customer.postcode.startsWith(req.query.postcode)
+              : result = customer.postcode.startsWith(req.query.postcode);
+          failed = !result;
+        }
+        if (!failed && req.query.contactNumber) {
+          result = result ?
+              result = result && customer.contactNumber.startsWith(req.query.contactNumber)
+              : result = customer.contactNumber.startsWith(req.query.contactNumber);
+          failed = !result;
+        }
+
+        return !failed && result;
       });
     } else {
       body = [];
