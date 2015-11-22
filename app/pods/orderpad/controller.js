@@ -55,7 +55,7 @@ export default Ember.Controller.extend({
       postcode: postcode,
       contactNumber: contactNumber
     }).then(function(customers) {
-      _this.set('searchResults', customers);
+      _this.set('deliveryCustomerResults', customers);
     });
   },
 

@@ -34,15 +34,7 @@
         </div>
       </form>
 
-      <div>
-        <ul class="list-group">
-          {{#each searchResults as |test|}}
-            {{test.mainAddress}}
-            {{test.postcode}}
-            {{test.contactNumber}}
-          {{/each}}
-        </ul>
-      </div>
+      {{delivery-customer-search-results deliveryCustomers=deliveryCustomerResults}}
     </div>
   </div>
 </div>
