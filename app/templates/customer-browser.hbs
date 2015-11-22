@@ -13,9 +13,9 @@
 
       <form class="form-horizontal">
         <div class="form-group">
-          <label class="col-xs-2 control-label" for="mainAddress">Main address</label>
+          <label class="col-xs-2 control-label" for="address">Address</label>
           <div class="col-xs-10">
-            {{input class="form-control" type="text" id="mainAddress" placeholder="House number and road name" value=mainAddress}}
+            {{input class="form-control" type="text" id="address" placeholder="House number and road name" value=address}}
           </div>
         </div>
 
@@ -34,7 +34,7 @@
         </div>
       </form>
 
-      {{delivery-customer-search-results deliveryCustomers=deliveryCustomerResults}}
+      {{delivery-customer-list deliveryCustomers=deliveryCustomerResults}}
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
 
   categoryFilter: '',
   numpadValue: '',
-  mainAddress: '',
+  address: '',
   postcode: '',
   contactNumber: '',
 
@@ -34,24 +34,24 @@ export default Ember.Controller.extend({
     this.set('menu', filteredMenu);
   }),
 
-  customerBrowserSearch: Ember.observer('mainAddress', 'postcode', 'contactNumber', function() {
-    let mainAddress = this.get('mainAddress').trim();
+  customerBrowserSearch: Ember.observer('address', 'postcode', 'contactNumber', function() {
+    let address = this.get('address').trim();
     let postcode = this.get('postcode').trim();
     let contactNumber = this.get('contactNumber').trim();
     let debounce = this.get('searchDebounce');
 
-    if (mainAddress || postcode || contactNumber) {
-      this.set('searchDebounce', Ember.run.debounce(this, 'searchDeliveryCustomer', mainAddress, postcode, contactNumber, 1000));
+    if (address || postcode || contactNumber) {
+      this.set('searchDebounce', Ember.run.debounce(this, 'searchDeliveryCustomer', address, postcode, contactNumber, 1000));
     } else {
       Ember.run.cancel(debounce);
     }
   }),
 
-  searchDeliveryCustomer(mainAddress, postcode, contactNumber) {
-    console.log('Searching: mainAddress=' + mainAddress + ' postcode=' + postcode + ' contactNumber=' + contactNumber);
+  searchDeliveryCustomer(address, postcode, contactNumber) {
+    console.log('Searching: address=' + address + ' postcode=' + postcode + ' contactNumber=' + contactNumber);
     var _this = this;
     this.store.query('delivery-customer', {
-      mainAddress: mainAddress,
+      address: address,
       postcode: postcode,
       contactNumber: contactNumber
     }).then(function(customers) {
@@ -103,7 +103,7 @@ export default Ember.Controller.extend({
     },
 
     hideCustomerBrowser() {
-      this.set('mainAddress', '');
+      this.set('address', '');
       this.set('postcode', '');
       this.set('contactNumber', '');
 

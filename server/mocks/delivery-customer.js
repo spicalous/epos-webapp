@@ -5,19 +5,19 @@ module.exports = function(app) {
   var DELIVERY_CUSTOMERS = [
     {
       id: 0,
-      mainAddress: '64 Streatham High Road',
+      address: '64 Streatham High Road',
       postcode: "SW16 1DA",
       contactNumber: "02086960854"
     },
     {
       id: 1,
-      mainAddress: "50 Bond Road",
+      address: "50 Bond Road",
       postcode: "CR4 3HE",
       contactNumber: "02087654321"
     },
     {
       id: 2,
-      mainAddress: "50 ABC Road",
+      address: "50 ABC Road",
       postcode: "CR4 2HE",
       contactNumber: "02081111110"
     }
@@ -33,14 +33,14 @@ module.exports = function(app) {
   deliveryCustomerRouter.get('/', function(req, res) {
     var body;
 
-    if (req.query.mainAddress || req.query.postcode || req.query.contactNumber) {
+    if (req.query.address || req.query.postcode || req.query.contactNumber) {
       body = DELIVERY_CUSTOMERS.filter(function(customer) {
         var result = false,
             failed = false,
             prev = false;
 
-        if (req.query.mainAddress) {
-          result = customer.mainAddress.startsWith(req.query.mainAddress);
+        if (req.query.address) {
+          result = customer.address.startsWith(req.query.address);
           failed = !result
         }
         if (!failed && req.query.postcode) {
