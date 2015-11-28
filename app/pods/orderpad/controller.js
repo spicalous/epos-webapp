@@ -4,9 +4,9 @@ export default Ember.Controller.extend({
 
   selectedCategory: '',
   numpadValue: '',
-  address: '',
-  postcode: '',
-  contactNumber: '',
+  searchAddress: '',
+  searchPostcode: '',
+  searchContactNumber: '',
 
   filterMenu: Ember.observer('selectedCategory', 'numpadValue', function() {
     var menu = this.get('model.menu'),
@@ -34,26 +34,26 @@ export default Ember.Controller.extend({
     this.set('menu', filteredMenu);
   }),
 
-  customerBrowserSearch: Ember.observer('address', 'postcode', 'contactNumber', function() {
-    let address = this.get('address').trim();
-    let postcode = this.get('postcode').trim();
-    let contactNumber = this.get('contactNumber').trim();
+  customerBrowserSearch: Ember.observer('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
+    let searchAddress = this.get('searchAddress').trim();
+    let searchPostcode = this.get('searchPostcode').trim();
+    let searchContactNumber = this.get('searchContactNumber').trim();
     let debounce = this.get('searchDebounce');
 
-    if (address || postcode || contactNumber) {
-      this.set('searchDebounce', Ember.run.debounce(this, 'searchDeliveryCustomer', address, postcode, contactNumber, 1000));
+    if (searchAddress || searchPostcode || searchContactNumber) {
+      this.set('searchDebounce', Ember.run.debounce(this, 'searchDeliveryCustomer', searchAddress, searchPostcode, searchContactNumber, 1000));
     } else {
       Ember.run.cancel(debounce);
     }
   }),
 
-  searchDeliveryCustomer(address, postcode, contactNumber) {
-    console.log('Searching: address=' + address + ' postcode=' + postcode + ' contactNumber=' + contactNumber);
+  searchDeliveryCustomer(searchAddress, searchPostcode, searchContactNumber) {
+    console.log('Searching: address=' + searchAddress + ' postcode=' + searchPostcode + ' contactNumber=' + searchContactNumber);
     var _this = this;
     this.store.query('delivery-customer', {
-      address: address,
-      postcode: postcode,
-      contactNumber: contactNumber
+      searchAddress: searchAddress,
+      searchPostcode: searchPostcode,
+      searchContactNumber: searchContactNumber
     }).then(function(customers) {
       _this.set('deliveryCustomerResults', customers);
     });
@@ -103,9 +103,9 @@ export default Ember.Controller.extend({
     },
 
     hideCustomerBrowser() {
-      this.set('address', '');
-      this.set('postcode', '');
-      this.set('contactNumber', '');
+      this.set('searchAddress', '');
+      this.set('searchPostcode', '');
+      this.set('searchContactNumber', '');
 
       return true; //bubble to the route
     },
