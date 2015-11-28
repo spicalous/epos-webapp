@@ -38,12 +38,12 @@ export default Ember.Controller.extend({
     let searchAddress = this.get('searchAddress').trim();
     let searchPostcode = this.get('searchPostcode').trim();
     let searchContactNumber = this.get('searchContactNumber').trim();
-    let debounce = this.get('searchDebounce');
+    let debouncedSearch = this.get('debouncedSearch');
 
     if (searchAddress || searchPostcode || searchContactNumber) {
-      this.set('searchDebounce', Ember.run.debounce(this, 'searchDeliveryCustomer', searchAddress, searchPostcode, searchContactNumber, 1000));
+      this.set('debouncedSearch', Ember.run.debounce(this, 'searchDeliveryCustomer', searchAddress, searchPostcode, searchContactNumber, 1000));
     } else {
-      Ember.run.cancel(debounce);
+      Ember.run.cancel(debouncedSearch);
     }
   }),
 
