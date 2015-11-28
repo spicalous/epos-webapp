@@ -92,9 +92,15 @@
         TOTAL: {{model.order.displayTotal}}
       </div>
       <div class="row">
-        {{#btn-button class="btn-danger btn-cancel" action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-button}}
-        {{#btn-button class="btn-success btn-submit" action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-button}}
-        {{#btn-button class="btn-default btn-close" data-dismiss="modal"}}CLOSE{{/btn-button}}
+        <div class="col-xs-offset-3 col-xs-3">
+          {{#btn-button class="btn-danger btn-cancel" action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-button}}
+        </div>
+        <div class="col-xs-3">
+          {{#btn-button class="btn-success btn-submit" action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-button}}
+        </div>
+        <div class="col-xs-3">
+          {{#btn-button class="btn-default btn-close" data-dismiss="modal"}}CLOSE{{/btn-button}}
+        </div>
       </div>
     </div>
   {{/orderpad-modal}}
