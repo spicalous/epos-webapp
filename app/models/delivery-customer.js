@@ -3,6 +3,5 @@ import Customer from './customer';
 
 export default Customer.extend({
   address: DS.attr('string'),
-  postcode: DS.attr('string'),
-  contactNumber: DS.attr('string')
+  postcode: DS.attr('string')
 });

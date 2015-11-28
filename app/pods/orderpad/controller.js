@@ -34,30 +34,40 @@ export default Ember.Controller.extend({
     this.set('menu', filteredMenu);
   }),
 
-  customerBrowserSearch: Ember.observer('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
-    let searchAddress = this.get('searchAddress').trim();
-    let searchPostcode = this.get('searchPostcode').trim();
-    let searchContactNumber = this.get('searchContactNumber').trim();
+  customerSearch: Ember.observer('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
     let debouncedSearch = this.get('debouncedSearch');
+    let address = this.get('searchAddress');
+    let postcode = this.get('searchPostcode');
+    let contactNumber = this.get('searchContactNumber');
 
-    if (searchAddress || searchPostcode || searchContactNumber) {
-      this.set('debouncedSearch', Ember.run.debounce(this, 'searchDeliveryCustomer', searchAddress, searchPostcode, searchContactNumber, 1000));
+    if (address || postcode || contactNumber) {
+      this.set('debouncedSearch', Ember.run.debounce(this, function() {
+        let address = this.get('searchAddress').trim();
+        let postcode = this.get('searchPostcode').trim();
+        let contactNumber = this.get('searchContactNumber').trim();
+        let _this = this;
+
+        console.log('Searching: address=' + address + ' postcode=' + postcode + ' contactNumber=' + contactNumber);
+
+        this.store.query('delivery-customer', {
+          address: address,
+          postcode: postcode,
+          contactNumber: contactNumber
+        }).then(function(customers) {
+          _this.set('deliveryCustomerResults', customers);
+        });
+
+      }, 1000));
+
     } else {
       Ember.run.cancel(debouncedSearch);
+      this.set('deliveryCustomerResults', undefined);
     }
   }),
 
-  searchDeliveryCustomer(searchAddress, searchPostcode, searchContactNumber) {
-    console.log('Searching: address=' + searchAddress + ' postcode=' + searchPostcode + ' contactNumber=' + searchContactNumber);
-    var _this = this;
-    this.store.query('delivery-customer', {
-      searchAddress: searchAddress,
-      searchPostcode: searchPostcode,
-      searchContactNumber: searchContactNumber
-    }).then(function(customers) {
-      _this.set('deliveryCustomerResults', customers);
-    });
-  },
+  customerFieldsNonEmpty: Ember.computed('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
+    return this.get('searchAddress') && this.get('searchPostcode') && this.get('searchContactNumber');
+  }),
 
   invalidOrder: Ember.computed('emptyOrder', function() {
     return this.get('emptyOrder');
@@ -94,6 +104,18 @@ export default Ember.Controller.extend({
       if (customerType === 'delivery-customer') {
           this.send('showCustomerBrowser');
       }
+    },
+
+    saveCustomer() {
+
+    },
+
+    selectCustomer() {
+
+    },
+
+    saveAndSelectCustomer() {
+
     },
 
     removeCustomer() {
