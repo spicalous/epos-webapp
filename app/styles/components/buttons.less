@@ -1,17 +1,49 @@
-.btn-main {
+.btn-main:focus,
+.btn-main:active,
+.btn-default:focus,
+.btn-default:active,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-success:focus,
+.btn-success:active {
+  outline: none !important;
+}
+
+.btn-default:focus,
+.btn-default:active,
+.btn-default:hover {
+  background-color: #FFF;
+}
+
+.btn-default,
+.btn-success,
+.btn-danger {
+  width: 100%;
+}
+
+.btn-main,
+.btn-main:focus {
   background-color: #FFF;
   color: @color-primary-0;
   border-color: @color-primary-0;
-  border-width: 2px;
+  border-width: 1px;
 }
 
 .btn-main:hover,
-.btn-main:active {
+.btn-main:active,
+.btn-default.is-selected,
+.btn-default.is-selected:focus {
   background-color: @color-primary-0;
   color: #FFF;
 }
 
-.decrement-btn, .btn-submit, .btn-cancel, .btn-close {
+.btn-default,
+.btn-success,
+.btn-danger,
+.decrement-btn,
+.btn-close {
   -webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
   -moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
@@ -32,5 +64,3 @@
   height: 40px;
   border-radius: 50%
 }
-
-
