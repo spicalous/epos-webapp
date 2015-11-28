@@ -2,25 +2,25 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  categoryFilter: '',
+  selectedCategory: '',
   numpadValue: '',
   address: '',
   postcode: '',
   contactNumber: '',
 
-  filterMenu: Ember.observer('categoryFilter', 'numpadValue', function() {
+  filterMenu: Ember.observer('selectedCategory', 'numpadValue', function() {
     var menu = this.get('model.menu'),
-        categoryFilter = this.get('categoryFilter'),
+        selectedCategory = this.get('selectedCategory'),
         menuIdFilter = this.get('numpadValue'),
         filteredMenu;
 
-    if (categoryFilter) {
+    if (selectedCategory) {
       filteredMenu = menu.filter(function(item) {
-        var _categoryFilter = this;
+        var _selectedCategory = this;
         return item.get('categories').any(function(category) {
-          return _categoryFilter === category;
+          return _selectedCategory === category;
         });
-      }, categoryFilter);
+      }, selectedCategory);
     } else {
       filteredMenu = menu;
     }
@@ -70,10 +70,10 @@ export default Ember.Controller.extend({
   actions: {
 
     categoryItemClick(categoryItem) {
-      if (this.get('categoryFilter') === categoryItem) {
-        this.set('categoryFilter', ''); //Reset filter
+      if (this.get('selectedCategory') === categoryItem) {
+        this.set('selectedCategory', '');
       } else {
-        this.set('categoryFilter', categoryItem);
+        this.set('selectedCategory', categoryItem);
       }
     },
 
@@ -107,8 +107,7 @@ export default Ember.Controller.extend({
       this.set('postcode', '');
       this.set('contactNumber', '');
 
-      //bubble to the route to remove the outlet
-      return true;
+      return true; //bubble to the route
     },
 
     submitOrder() {
@@ -157,7 +156,7 @@ export default Ember.Controller.extend({
     },
 
     reset() {
-      this.set('categoryFilter', '');
+      this.set('selectedCategory', '');
       this.set('numpadValue', '');
       $('#orderpad-modal').modal('hide');
     },

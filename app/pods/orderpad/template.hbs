@@ -10,7 +10,7 @@
           <div class="col-sm-12 top-bottom-gutter">
             {{#each model.categories as |item|}}
               <div class="col-xs-3">
-                {{category-item category=item action="categoryItemClick" selected=categoryFilter}}
+                {{category-item category=item action="categoryItemClick" selected=selectedCategory}}
               </div>
             {{/each}}
           </div>
