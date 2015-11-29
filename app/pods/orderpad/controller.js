@@ -21,9 +21,7 @@ export default Ember.Controller.extend({
     return this.get('validSearchDeliveryCustomer') && this.get('emptySearchResults');
   }),
 
-  emptySearchResults: Ember.computed('deliveryCustomerResults', function() {
-    return this.get('deliveryCustomerResults') === undefined;
-  }),
+  emptySearchResults: Ember.computed.empty('deliveryCustomerResults'),
 
   validSearchDeliveryCustomer: Ember.computed('customerFieldsNonEmpty', 'searchContactNumber', function() {
     return this.get('customerFieldsNonEmpty') && this.get('searchContactNumber').length === 11;
@@ -92,14 +90,14 @@ export default Ember.Controller.extend({
           postcode: postcode,
           contactNumber: contactNumber
         }).then(function(customers) {
-          _this.set('deliveryCustomerResults', customers.get('content').length === 0 ? undefined : customers);
+          _this.set('deliveryCustomerResults', customers);
         });
 
       }, 1000));
 
     } else {
       Ember.run.cancel(debouncedSearch);
-      this.set('deliveryCustomerResults', undefined);
+      this.set('deliveryCustomerResults', []);
     }
   }),
 
