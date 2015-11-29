@@ -10,7 +10,7 @@ export default DS.Model.extend({
       function(prev, orderItem) {
         return prev + orderItem.get('total');
       }, 0);
-  }.property('orderItems.@each.quantity'),
+  }.property('orderItems.@each.quantity'),  //TODO: BUG WITH EMBER 2.2.0
 
   displayTotal: function() {
     return (this.get('total') / 100).toFixed(2);
@@ -21,7 +21,7 @@ export default DS.Model.extend({
       function(prev, orderItem) {
         return prev + orderItem.get('quantity');
       }, 0);
-  }.property('orderItems.@each.quantity'),
+  }.property('orderItems.@each.quantity'), //TODO: BUG WITH EMBER 2.2.0
 
   addItem: function(menuItem) {
     var orderItems = this.get('orderItems');
