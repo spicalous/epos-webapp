@@ -132,13 +132,11 @@ export default Ember.Controller.extend({
       }
     },
 
-    saveCustomer() {
-
-    },
-
-    selectCustomer() {
-
-    },
+  selectCustomer(deliveryCustomer) {
+    deliveryCustomer.set('customerType', 'delivery-customer');
+    this.set('model.customer', deliveryCustomer);
+    this.send('hideCustomerBrowser');
+  },
 
     saveAndSelectCustomer() {
 
@@ -151,9 +149,9 @@ export default Ember.Controller.extend({
     },
 
     hideCustomerBrowser() {
-      this.set('searchAddress', '');
-      this.set('searchPostcode', '');
-      this.set('searchContactNumber', '');
+      this.set('searchAddressRaw', '');
+      this.set('searchPostcodeRaw', '');
+      this.set('searchContactNumberRaw', '');
 
       return true; //bubble to the route
     },

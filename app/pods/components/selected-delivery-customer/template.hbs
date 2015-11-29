@@ -1,8 +1,20 @@
 <form class="form-horizontal">
-  <div class="form-group">
-    <label class="col-xs-3 control-label" for="takeaway-customerName">DELIVERY</label>
+  <div class="form-group" style="margin-bottom: 5px">
+    <label class="col-xs-3 control-label" for="delivery-customerAddress">ADDRESS</label>
     <div class="col-xs-8">
-      BLAH
+      <span class="form-control">{{customer.address}}</span>
+    </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 5px">
+    <label class="col-xs-3 control-label" for="delivery-customerPostcode">POSTCODE</label>
+    <div class="col-xs-8">
+      <span class="form-control">{{customer.postcode}}</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="delivery-customerContactNumber">TEL</label>
+    <div class="col-xs-8">
+      <span class="form-control">{{customer.contactNumber}}</span>
     </div>
   </div>
 </form>
