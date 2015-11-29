@@ -212,5 +212,7 @@ export default Ember.Controller.extend({
   }
 });
 
-//TODO [MEDIUM] Confirm before submit
-//TODO [MEDIUM] Confirm before cancel
+//TODO [MEDIUM] Confirms before submit order
+//TODO                   before cancel order
+//TODO                   before selecting delivery customer
+//TODO                   before saving and selecting delivery customer
