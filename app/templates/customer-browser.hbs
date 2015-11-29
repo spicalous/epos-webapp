@@ -33,7 +33,7 @@
       </div>
 
       <div class="row" style="margin-bottom: 10px;">
-        {{#if customerFieldsNonEmpty}}
+        {{#if validSearchDeliveryCustomer}}
           <div class="col-xs-offset-8 col-xs-2">
             {{#btn-button class="btn-default btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
@@ -43,7 +43,7 @@
           </div>
         {{/if}}
 
-        {{#if customerFieldsNonEmpty}}
+        {{#if validSearchDeliveryCustomer}}
           <div class="col-xs-2">
             {{#btn-button class="btn-success btn-submit" action="saveAndSelectCustomer"}}Save and select{{/btn-button}}
           </div>

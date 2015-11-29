@@ -65,6 +65,10 @@ export default Ember.Controller.extend({
     }
   }),
 
+  validSearchDeliveryCustomer: Ember.computed('customerFieldsNonEmpty', 'searchContactNumber', function() {
+    return this.get('customerFieldsNonEmpty') && this.get('searchContactNumber').trim().length === 11;
+  }),
+
   customerFieldsNonEmpty: Ember.computed('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
     return this.get('searchAddress') && this.get('searchPostcode') && this.get('searchContactNumber');
   }),
