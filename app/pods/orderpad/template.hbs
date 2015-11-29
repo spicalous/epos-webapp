@@ -7,7 +7,7 @@
 
       <div class="col-sm-6">
         <div class="row" id="orderpad-categories">
-          <div class="col-sm-12 top-bottom-gutter">
+          <div class="col-xs-12 top-bottom-gutter">
             {{#each model.categories as |item|}}
               <div class="col-xs-3">
                 {{category-item category=item action="categoryItemClick" selected=selectedCategory}}
@@ -49,28 +49,28 @@
 
         <div id="orderpad-bottom">
           <div class="row">
-            <div class="col-sm-6 text-center top-bottom-gutter">
+            <div class="col-xs-6 text-center top-bottom-gutter">
               <span style="font-size: 80px">{{numpadValue}}</span>
             </div>
-            <div class="col-sm-6 text-center top-bottom-gutter">
+            <div class="col-xs-6 text-center top-bottom-gutter">
               {{number-pad value=numpadValue maxLength=4}}
             </div>
           </div>
 
           <div class="row">
-            <div class="col-sm-6 text-center top-bottom-gutter">
+            <div class="col-xs-6 text-center top-bottom-gutter">
               <span class="lead">ITEMS: {{model.order.size}}</span>
             </div>
-            <div class="col-sm-6 text-center top-bottom-gutter">
+            <div class="col-xs-6 text-center top-bottom-gutter">
               <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-sm-6 top-bottom-gutter">
+            <div class="col-xs-6 top-bottom-gutter">
               {{#btn-button class="btn-danger btn-cancel" action="cancelOrder" disabled=emptyOrder}}CANCEL{{/btn-button}}
             </div>
-            <div class="col-sm-6 top-bottom-gutter">
+            <div class="col-xs-6 top-bottom-gutter">
               {{#btn-button class="btn-success btn-submit" action="submitOrder" disabled=invalidOrder}}SUBMIT{{/btn-button}}
             </div>
           </div>

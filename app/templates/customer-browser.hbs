@@ -31,8 +31,8 @@
           </div>
         </form>
       </div>
-      <div class="row" style="margin-bottom: 10px;">
 
+      <div class="row" style="margin-bottom: 10px;">
         {{#if customerFieldsNonEmpty}}
           <div class="col-xs-offset-8 col-xs-2">
             {{#btn-button class="btn-default btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
@@ -48,8 +48,8 @@
             {{#btn-button class="btn-success btn-submit" action="saveAndSelectCustomer"}}Save and select{{/btn-button}}
           </div>
         {{/if}}
-
       </div>
+
       <div class="row">
         <div class="col-xs-12 top-bottom-gutter">
           {{delivery-customer-list deliveryCustomers=deliveryCustomerResults}}
