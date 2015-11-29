@@ -139,7 +139,6 @@ export default Ember.Controller.extend({
     },
 
     removeCustomer() {
-      this.get('model.customer').destroyRecord();
       this.set('model.customer', this.store.createRecord('customer', {}));
       this.send('resize');
     },
