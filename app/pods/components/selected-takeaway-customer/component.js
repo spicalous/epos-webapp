@@ -2,12 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  observeAndUpdate: Ember.observer('name', 'contactNumber', function() {
-    let name = this.get('name').trim();
-    let contactNumber = this.get('contactNumber').trim();
+  name: Ember.computed('nameRaw', function() {
+    return this.get('nameRaw') ? this.get('nameRaw').trim() : '';
+  }),
 
-    this.set('customer.name', name);
-    this.set('customer.contactNumber', contactNumber);
+  contactNumber: Ember.computed('contactNumberRaw', function() {
+    return this.get('contactNumberRaw') ? this.get('contactNumberRaw').trim() : '';
+  }),
+
+  observeAndUpdate: Ember.observer('nameRaw', 'contactNumberRaw', function() {
+    this.set('customer.name', this.get('name'));
+    this.set('customer.contactNumber', this.get('contactNumber'));
   }),
 
   didInsertElement() {

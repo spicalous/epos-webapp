@@ -4,9 +4,18 @@ export default Ember.Controller.extend({
 
   selectedCategory: '',
   numpadValue: '',
-  searchAddress: '',
-  searchPostcode: '',
-  searchContactNumber: '',
+
+  searchAddress: Ember.computed('searchAddressRaw', function() {
+    return this.get('searchAddressRaw') ? this.get('searchAddressRaw').trim() : '';
+  }),
+
+  searchPostcode: Ember.computed('searchPostcodeRaw', function() {
+    return this.get('searchPostcodeRaw') ? this.get('searchPostcodeRaw').trim() : '';
+  }),
+
+  searchContactNumber: Ember.computed('searchContactNumberRaw', function() {
+    return this.get('searchContactNumberRaw') ? this.get('searchContactNumberRaw').trim() : '';
+  }),
 
   canSaveCustomer: Ember.computed('validSearchDeliveryCustomer', 'emptySearchResults', function() {
     return this.get('validSearchDeliveryCustomer') && this.get('emptySearchResults');
@@ -17,7 +26,7 @@ export default Ember.Controller.extend({
   }),
 
   validSearchDeliveryCustomer: Ember.computed('customerFieldsNonEmpty', 'searchContactNumber', function() {
-    return this.get('customerFieldsNonEmpty') && this.get('searchContactNumber').trim().length === 11;
+    return this.get('customerFieldsNonEmpty') && this.get('searchContactNumber').length === 11;
   }),
 
   customerFieldsNonEmpty: Ember.computed('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
@@ -58,7 +67,7 @@ export default Ember.Controller.extend({
     this.set('menu', filteredMenu);
   }),
 
-  customerSearch: Ember.observer('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
+  customerSearch: Ember.observer('searchAddressRaw', 'searchPostcodeRaw', 'searchContactNumberRaw', function() {
     let debouncedSearch = this.get('debouncedSearch');
     let address = this.get('searchAddress');
     let postcode = this.get('searchPostcode');
@@ -71,9 +80,9 @@ export default Ember.Controller.extend({
       }
 
       this.set('debouncedSearch', Ember.run.debounce(this, function() {
-        let address = this.get('searchAddress').trim();
-        let postcode = this.get('searchPostcode').trim();
-        let contactNumber = this.get('searchContactNumber').trim();
+        let address = this.get('searchAddress');
+        let postcode = this.get('searchPostcode');
+        let contactNumber = this.get('searchContactNumber');
         let _this = this;
 
         console.log('Searching: address=' + address + ' postcode=' + postcode + ' contactNumber=' + contactNumber);
@@ -119,7 +128,7 @@ export default Ember.Controller.extend({
         this.set('model.customer', customer);
       }
       if (customerType === 'delivery-customer') {
-          this.send('showCustomerBrowser');
+        this.send('showCustomerBrowser');
       }
     },
 
