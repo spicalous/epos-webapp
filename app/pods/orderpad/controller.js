@@ -8,6 +8,30 @@ export default Ember.Controller.extend({
   searchPostcode: '',
   searchContactNumber: '',
 
+  canSaveCustomer: Ember.computed('validSearchDeliveryCustomer', 'emptySearchResults', function() {
+    return this.get('validSearchDeliveryCustomer') && this.get('emptySearchResults');
+  }),
+
+  emptySearchResults: Ember.computed('deliveryCustomerResults', function() {
+    return this.get('deliveryCustomerResults') === undefined;
+  }),
+
+  validSearchDeliveryCustomer: Ember.computed('customerFieldsNonEmpty', 'searchContactNumber', function() {
+    return this.get('customerFieldsNonEmpty') && this.get('searchContactNumber').trim().length === 11;
+  }),
+
+  customerFieldsNonEmpty: Ember.computed('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
+    return this.get('searchAddress') && this.get('searchPostcode') && this.get('searchContactNumber');
+  }),
+
+  invalidOrder: Ember.computed('emptyOrder', function() {
+    return this.get('emptyOrder');
+  }),
+
+  emptyOrder: Ember.computed('model.order.size', function() {
+    return this.get('model.order.size') > 0 ? false : true;
+  }),
+
   filterMenu: Ember.observer('selectedCategory', 'numpadValue', function() {
     var menu = this.get('model.menu'),
         selectedCategory = this.get('selectedCategory'),
@@ -41,6 +65,11 @@ export default Ember.Controller.extend({
     let contactNumber = this.get('searchContactNumber');
 
     if (address || postcode || contactNumber) {
+
+      if (debouncedSearch) {
+        Ember.run.cancel(debouncedSearch);
+      }
+
       this.set('debouncedSearch', Ember.run.debounce(this, function() {
         let address = this.get('searchAddress').trim();
         let postcode = this.get('searchPostcode').trim();
@@ -54,7 +83,7 @@ export default Ember.Controller.extend({
           postcode: postcode,
           contactNumber: contactNumber
         }).then(function(customers) {
-          _this.set('deliveryCustomerResults', customers);
+          _this.set('deliveryCustomerResults', customers.get('content').length === 0 ? undefined : customers);
         });
 
       }, 1000));
@@ -63,22 +92,6 @@ export default Ember.Controller.extend({
       Ember.run.cancel(debouncedSearch);
       this.set('deliveryCustomerResults', undefined);
     }
-  }),
-
-  validSearchDeliveryCustomer: Ember.computed('customerFieldsNonEmpty', 'searchContactNumber', function() {
-    return this.get('customerFieldsNonEmpty') && this.get('searchContactNumber').trim().length === 11;
-  }),
-
-  customerFieldsNonEmpty: Ember.computed('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
-    return this.get('searchAddress') && this.get('searchPostcode') && this.get('searchContactNumber');
-  }),
-
-  invalidOrder: Ember.computed('emptyOrder', function() {
-    return this.get('emptyOrder');
-  }),
-
-  emptyOrder: Ember.computed('model.order.size', function() {
-    return this.get('model.order.size') > 0 ? false : true;
   }),
 
   actions: {
@@ -102,7 +115,7 @@ export default Ember.Controller.extend({
 
     setCustomer(customerType) {
       if (customerType === 'takeaway-customer') {
-        let customer = this.store.createRecord(customerType, {customerType: customerType});
+        let customer = this.store.createRecord(customerType, { customerType: customerType });
         this.set('model.customer', customer);
       }
       if (customerType === 'delivery-customer') {
