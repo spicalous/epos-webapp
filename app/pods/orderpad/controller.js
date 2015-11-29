@@ -128,11 +128,11 @@ export default Ember.Controller.extend({
       }
     },
 
-  selectCustomer(deliveryCustomer) {
-    deliveryCustomer.set('customerType', 'delivery-customer');
-    this.set('model.customer', deliveryCustomer);
-    this.send('hideCustomerBrowser');
-  },
+    selectCustomer(deliveryCustomer) {
+      deliveryCustomer.set('customerType', 'delivery-customer');
+      this.set('model.customer', deliveryCustomer);
+      this.send('hideCustomerBrowser');
+    },
 
     saveAndSelectCustomer() {
 
