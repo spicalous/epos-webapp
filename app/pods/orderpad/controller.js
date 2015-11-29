@@ -83,8 +83,6 @@ export default Ember.Controller.extend({
         let contactNumber = this.get('searchContactNumber');
         let _this = this;
 
-        console.log('Searching: address=' + address + ' postcode=' + postcode + ' contactNumber=' + contactNumber);
-
         this.store.query('delivery-customer', {
           address: address,
           postcode: postcode,
