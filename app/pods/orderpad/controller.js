@@ -35,8 +35,21 @@ export default Ember.Controller.extend({
     return this.get('searchAddress') || this.get('searchPostcode') || this.get('searchContactNumber');
   }),
 
-  invalidOrder: Ember.computed('emptyOrder', function() {
-    return this.get('emptyOrder');
+  invalidOrder: Ember.computed('emptyOrder', 'validCustomer', function() {
+    return this.get('emptyOrder') || !this.get('validCustomer');
+  }),
+
+  validCustomer: Ember.computed('model.customer', 'model.customer.name', 'model.customer.contactNumber', function() {
+    let customer = this.get('model.customer');
+    if (!customer) {
+      return false;
+    }
+    return !!customer.get('contactNumber') && customer.get('contactNumber').length === 11 &&
+        ((customer.get('customerType') === 'takeaway-customer') ?
+            !!customer.get('name') :
+            (customer.get('customerType') === 'delivery-customer') ?
+              (!!customer.get('address') && !!customer.get('postcode')) :
+              false);
   }),
 
   emptyOrder: Ember.computed('model.order.size', function() {
@@ -160,7 +173,7 @@ export default Ember.Controller.extend({
     },
 
     removeCustomer() {
-      this.set('model.customer', this.store.createRecord('customer', {}));
+      this.set('model.customer', null);
       this.send('resize');
     },
 
@@ -173,6 +186,10 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
+      if (this.get('invalidOrder')) {
+        return;
+      }
+
       var _this = this,
           order = this.get('model.order');
 
@@ -209,6 +226,9 @@ export default Ember.Controller.extend({
     },
 
     cancelOrder() {
+      if (this.get('emptyOrder')) {
+        return;
+      }
       this.send('reset');
       this.get('model.order').destroyRecord();
       this.set('model.order', this.store.createRecord('order', {}));
@@ -234,6 +254,8 @@ export default Ember.Controller.extend({
 });
 
 //TODO [HIGH]            unhappy path for saving customer
+//TODO [MEDIUM] Feedback 'warning' for customer browser input (to save new customer - number length !== 11)
+//TODO [MEDIUM] Feedback 'error' for take away customer input (number length !== 11)
 //TODO [MEDIUM] Confirms before submit order
 //TODO                   before cancel order
 //TODO                   before selecting delivery customer
