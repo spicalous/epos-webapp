@@ -52,7 +52,22 @@
 
       <div class="row">
         <div class="col-xs-12 top-bottom-gutter">
-          {{delivery-customer-list deliveryCustomers=deliveryCustomerResults selectDeliveryCustomer=(action "selectCustomer")}}
+          {{#if debouncedSearch}}
+            <div class="text-center">
+              <img src="assets/ripple.svg">
+              <div class="text-muted">Loading...</div>
+            </div>
+          {{else}}
+            {{#if deliveryCustomerResults}}
+              {{delivery-customer-list deliveryCustomers=deliveryCustomerResults selectDeliveryCustomer=(action "selectCustomer")}}
+            {{else}}
+              {{#if hasCustomerQuery}}
+                <div class="text-center">
+                  <div class="text-muted">No customers were found</div>
+                </div>
+              {{/if}}
+            {{/if}}
+          {{/if}}
         </div>
       </div>
     </div>

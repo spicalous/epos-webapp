@@ -31,6 +31,10 @@ export default Ember.Controller.extend({
     return this.get('searchAddress') && this.get('searchPostcode') && this.get('searchContactNumber');
   }),
 
+  hasCustomerQuery: Ember.computed('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
+    return this.get('searchAddress') || this.get('searchPostcode') || this.get('searchContactNumber');
+  }),
+
   invalidOrder: Ember.computed('emptyOrder', function() {
     return this.get('emptyOrder');
   }),
@@ -89,6 +93,7 @@ export default Ember.Controller.extend({
           contactNumber: contactNumber
         }).then(function(customers) {
           _this.set('deliveryCustomerResults', customers);
+          _this.set('debouncedSearch', '');
         });
 
       }, 1000));
@@ -96,6 +101,7 @@ export default Ember.Controller.extend({
     } else {
       Ember.run.cancel(debouncedSearch);
       this.set('deliveryCustomerResults', []);
+      this.set('debouncedSearch', '');
     }
   }),
 
