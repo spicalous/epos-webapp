@@ -141,6 +141,21 @@ export default Ember.Controller.extend({
     },
 
     saveAndSelectCustomer() {
+      let customer = this.store.createRecord('delivery-customer', {
+        customerType: 'deliveryCustomer',
+        address: this.get('searchAddress'),
+        postcode: this.get('searchPostcode'),
+        contactNumber: this.get('searchContactNumber')
+      });
+
+      let _this = this;
+      let _customer = customer;
+
+      customer.save().then(function() {
+        _this.send('selectCustomer', _customer);
+      }).catch(function() {
+        console.log('FAILED TO SELECT CUSTOMER! WHAT DO I DO!?');
+      });
 
     },
 

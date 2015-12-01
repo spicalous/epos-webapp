@@ -1,8 +1,11 @@
 module.exports = function(app) {
   var express = require('express');
+  var bodyParser = require('body-parser');
   var deliveryCustomerRouter = express.Router();
 
-  var DELIVERY_CUSTOMERS = [
+  deliveryCustomerRouter.use(bodyParser.json());
+
+  var customers = [
     {
       id: 0,
       address: '64 Streatham High Road',
@@ -23,6 +26,13 @@ module.exports = function(app) {
     }
   ];
 
+  function addCustomer(customer) {
+    var id = customers.length;
+    customer.id = id;
+    customers.push(customer);
+    return id;
+  }
+
   if (!String.prototype.startsWith) {
     String.prototype.startsWith = function(searchString, position) {
       position = position || 0;
@@ -34,7 +44,7 @@ module.exports = function(app) {
     var body;
 
     if (req.query.address || req.query.postcode || req.query.contactNumber) {
-      body = DELIVERY_CUSTOMERS.filter(function(customer) {
+      body = customers.filter(function(customer) {
         var result = false,
             failed = false,
             prev = false;
@@ -68,7 +78,10 @@ module.exports = function(app) {
   });
 
   deliveryCustomerRouter.post('/', function(req, res) {
-    res.status(201).end();
+    console.log(req.body);
+    res.status(201).send({'delivery-customer': {
+      id: addCustomer(req.body.deliveryCustomer)
+    }});
   });
 
   deliveryCustomerRouter.get('/:id', function(req, res) {
