@@ -234,6 +234,7 @@ export default Ember.Controller.extend({
     },
 
     reset() {
+      this.send('removeCustomer');
       this.set('selectedCategory', '');
       this.set('numpadValue', '');
       $('#orderpad-modal').modal('hide');
