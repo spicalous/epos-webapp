@@ -15,9 +15,13 @@ export default Ember.Component.extend({
     this.set('customer.contactNumber', this.get('contactNumber'));
   }),
 
+  willDestroy() {
+    $(window).resize();
+  },
+
   didInsertElement() {
-    //fire window.resize() to recalculate height of orderlist. See component/temp/orderpad-wrapper
     $(window).resize();
     this.$('#takeaway-customerName').focus();
   }
+
 });

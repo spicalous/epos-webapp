@@ -41,9 +41,7 @@ export default Ember.Controller.extend({
 
   validCustomer: Ember.computed('model.customer', 'model.customer.name', 'model.customer.contactNumber', function() {
     let customer = this.get('model.customer');
-    if (!customer) {
-      return false;
-    }
+
     return !!customer.get('contactNumber') && customer.get('contactNumber').length === 11 &&
         ((customer.get('customerType') === 'takeaway-customer') ?
             !!customer.get('name') :
@@ -173,8 +171,7 @@ export default Ember.Controller.extend({
     },
 
     removeCustomer() {
-      this.set('model.customer', null);
-      this.send('resize');
+      this.set('model.customer', this.store.createRecord('customer', {}));
     },
 
     hideCustomerBrowser() {
@@ -205,7 +202,6 @@ export default Ember.Controller.extend({
           callback: function() {
             _this.set('model.order', _this.store.createRecord('order', {}));
             _this.set('model.customer', _this.store.createRecord('customer', {}));
-            _this.send('resize');
           }
         });
 
@@ -241,20 +237,12 @@ export default Ember.Controller.extend({
       this.set('selectedCategory', '');
       this.set('numpadValue', '');
       $('#orderpad-modal').modal('hide');
-    },
-
-    resize() {
-      //fire window.resize() to recalculate height of orderlist. See component/temp/orderpad-wrapper
-      Ember.run.next(this, function() {
-        $(window).resize();
-      });
     }
 
   }
 });
 
 //TODO [HIGH]            unhappy path for saving customer
-//TODO [MEDIUM] Feedback 'warning' for customer browser input (to save new customer - number length !== 11)
 //TODO [MEDIUM] Feedback 'error' for take away customer input (number length !== 11)
 //TODO [MEDIUM] Confirms before submit order
 //TODO                   before cancel order
