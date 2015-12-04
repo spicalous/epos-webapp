@@ -164,10 +164,12 @@ export default Ember.Controller.extend({
 
       customer.save().then(function() {
         _this.send('selectCustomer', _customer);
-      }).catch(function() {
-        console.log('FAILED TO SELECT CUSTOMER! WHAT DO I DO!?');
+      }).catch(function(response) {
+        _this.send('showMessage', 'overlay', {
+          header: 'Failed to save :(',
+          body: response.errors[0].message
+        });
       });
-
     },
 
     removeCustomer() {

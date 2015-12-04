@@ -77,11 +77,20 @@ module.exports = function(app) {
     });
   });
 
+  var success = true;
+
   deliveryCustomerRouter.post('/', function(req, res) {
-    console.log(req.body);
-    res.status(201).send({'delivery-customer': {
-      id: addCustomer(req.body.deliveryCustomer)
-    }});
+    success ?
+      res.status(201).send({'delivery-customer': { id: addCustomer(req.body.deliveryCustomer) }}) :
+      res.status(400).send({
+        errors: [{
+          error: "Bad Gateway",
+          exception: "com.lovetalaythai.eposdataservice.customer.exception",
+          message: "There was a problem saving the customer to the database",
+          httpStatus: 400,
+          timestamp: 1445811517596
+        }]
+      });
   });
 
   deliveryCustomerRouter.get('/:id', function(req, res) {
