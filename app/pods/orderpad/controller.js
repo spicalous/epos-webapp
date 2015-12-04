@@ -245,7 +245,6 @@ export default Ember.Controller.extend({
   }
 });
 
-//TODO [HIGH]            unhappy path for saving customer
 //TODO [MEDIUM] Confirms before submit order
 //TODO                   before cancel order
 //TODO                   before selecting delivery customer
