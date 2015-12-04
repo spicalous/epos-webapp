@@ -17,8 +17,8 @@ export default Ember.Controller.extend({
     return this.get('searchContactNumberRaw') ? this.get('searchContactNumberRaw').trim() : '';
   }),
 
-  canSaveCustomer: Ember.computed('validSearchDeliveryCustomer', 'emptySearchResults', function() {
-    return this.get('validSearchDeliveryCustomer') && this.get('emptySearchResults');
+  canSaveCustomer: Ember.computed('validSearchDeliveryCustomer', 'emptySearchResults', 'debouncedSearch', function() {
+    return this.get('validSearchDeliveryCustomer') && this.get('emptySearchResults') && !this.get('debouncedSearch');
   }),
 
   emptySearchResults: Ember.computed.empty('deliveryCustomerResults'),
@@ -244,7 +244,6 @@ export default Ember.Controller.extend({
 });
 
 //TODO [HIGH]            unhappy path for saving customer
-//TODO [MEDIUM] Feedback 'error' for take away customer input (number length !== 11)
 //TODO [MEDIUM] Confirms before submit order
 //TODO                   before cancel order
 //TODO                   before selecting delivery customer
