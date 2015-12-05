@@ -14,3 +14,11 @@
   height: 98%;
   z-index: @customer-select-z-index;
 }
+
+.confirm-dialog {
+  z-index: @customer-select-z-index + 2;
+}
+
+.confirm-backdrop:extend(.modal-backdrop) {
+  z-index: @customer-select-z-index + 1;
+}
