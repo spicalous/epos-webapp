@@ -162,12 +162,16 @@ export default Ember.Controller.extend({
       let _this = this;
       let _customer = customer;
 
+      this.send('showMessage', 'loader', { message: 'Saving customer..' });
+
       customer.save().then(function() {
+        _this.send('dismissMessage', 'loader');
         _this.send('selectCustomer', _customer);
         _this.send('showMessage', 'toast', {
           body: 'Customer saved successfully'
         });
       }).catch(function(response) {
+        _this.send('dismissMessage', 'loader');
         _this.send('showMessage', 'overlay', {
           header: 'Failed to save :(',
           body: response.errors[0].message
@@ -195,10 +199,14 @@ export default Ember.Controller.extend({
       var _this = this,
           order = this.get('model.order');
 
+      this.send('showMessage', 'loader', { message: 'Sending order..' });
+
       order.set('dateTime', new Date());
       order.set('customer', this.get('model.customer'));
 
       order.save().then(function() {
+
+        _this.send('dismissMessage', 'loader');
 
         _this.send('reset');
         _this.send('showMessage', 'overlay', {
@@ -212,6 +220,7 @@ export default Ember.Controller.extend({
 
       }, function(response) {
         var modalWasOpen = $('#orderpad-modal').hasClass('in');
+        _this.send('dismissMessage', 'loader');
 
         _this.send('reset');
         _this.send('showMessage', 'overlay', {

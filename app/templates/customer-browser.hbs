@@ -57,10 +57,7 @@
       <div class="row">
         <div class="col-xs-12 top-bottom-gutter">
           {{#if debouncedSearch}}
-            <div class="text-center">
-              <img src="assets/ripple.svg">
-              <div class="text-muted">Loading...</div>
-            </div>
+            {{loading-spinner text="Searching customers..."}}
           {{else}}
             {{#if deliveryCustomerResults}}
               {{delivery-customer-list deliveryCustomers=deliveryCustomerResults selectDeliveryCustomer=(action "selectCustomer")}}
