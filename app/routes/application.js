@@ -2,11 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   actions: {
-    showMessage(name, message) {
+    showMessage(name, model) {
       this.render(name, {
         into: 'application',
         outlet: name,
-        model: message
+        model: model
       });
     },
     dismissMessage(name, callback) {
