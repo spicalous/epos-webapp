@@ -1,13 +1,11 @@
 <div class="customer-browser">
-  <div class="container-fluid">
-
-    <div class="row modal-header">
+  <div class="modal-content" style="height:100%">
+    <div class="modal-header">
       <button {{action "hideCustomerBrowser"}} type="button" class="close" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
       <h4 class="modal-title text-center">Customer Search</h4>
     </div>
-
     <div class="modal-body">
       <div class="row">
         <form class="form-horizontal">
@@ -31,7 +29,6 @@
           </div>
         </form>
       </div>
-
       <div class="row" style="margin-bottom: 10px;">
 
         {{#unless canSaveCustomer}}
@@ -57,7 +54,6 @@
         {{/if}}
       </div>
 
-
       <div class="row">
         <div class="col-xs-12 top-bottom-gutter">
           {{#if debouncedSearch}}
@@ -81,4 +77,4 @@
     </div>
   </div>
 </div>
-<div class="customer-browser-backdrop"></div>
+<div class="modal-backdrop"></div>
