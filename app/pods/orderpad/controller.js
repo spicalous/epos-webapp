@@ -164,6 +164,9 @@ export default Ember.Controller.extend({
 
       customer.save().then(function() {
         _this.send('selectCustomer', _customer);
+        _this.send('showMessage', 'toast', {
+          body: 'Customer saved successfully'
+        });
       }).catch(function(response) {
         _this.send('showMessage', 'overlay', {
           header: 'Failed to save :(',
