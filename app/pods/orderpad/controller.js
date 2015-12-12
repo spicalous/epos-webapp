@@ -192,11 +192,7 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      if (this.get('invalidOrder')) {
-        return;
-      }
-
-      var _this = this,
+      let _this = this,
           order = this.get('model.order');
 
       this.send('showMessage', 'loader', { message: 'Sending order..' });
@@ -236,9 +232,6 @@ export default Ember.Controller.extend({
     },
 
     cancelOrder() {
-      if (this.get('emptyOrder')) {
-        return;
-      }
       this.send('reset');
       this.get('model.order').destroyRecord();
       this.set('model.order', this.store.createRecord('order', {}));

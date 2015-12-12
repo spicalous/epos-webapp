@@ -20,10 +20,12 @@ export default Ember.Component.extend({
   confirmMessage: '',
 
   click() {
-    if (this.get('displayConfirm')) {
-      this.send("showConfirm", this.get('confirmMessage'), this.get('action'));
-    } else {
-      this.sendAction();
+    if (!this.get('disabled')) {
+      if (this.get('displayConfirm')) {
+        this.send("showConfirm", this.get('confirmMessage'), this.get('action'));
+      } else {
+        this.sendAction();
+      }
     }
   }
 
