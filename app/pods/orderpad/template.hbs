@@ -37,7 +37,7 @@
             setCustomer="setCustomer"
             removeCustomer="removeCustomer"}}
           </div>
-          {{#if model.customer.customerType}}
+          {{#if model.customer.type}}
             {{#unless validCustomer}}
               {{#alert-box classNames="col-xs-offset-1 col-sm-10 top-bottom-gutter" alertType="info"}}
                 Please enter a name and an 11 digit contact number

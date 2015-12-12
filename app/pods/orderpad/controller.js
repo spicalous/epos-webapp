@@ -41,11 +41,13 @@ export default Ember.Controller.extend({
 
   validCustomer: Ember.computed('model.customer', 'model.customer.name', 'model.customer.contactNumber', function() {
     let customer = this.get('model.customer');
-
+    if (!customer) {
+      return false;
+    }
     return !!customer.get('contactNumber') && customer.get('contactNumber').length === 11 &&
-        ((customer.get('customerType') === 'takeaway-customer') ?
+        ((customer.get('type') === 'takeaway-customer') ?
             !!customer.get('name') :
-            (customer.get('customerType') === 'delivery-customer') ?
+            (customer.get('type') === 'delivery-customer') ?
               (!!customer.get('address') && !!customer.get('postcode')) :
               false);
   }),
@@ -135,25 +137,23 @@ export default Ember.Controller.extend({
       });
     },
 
-    setCustomer(customerType) {
-      if (customerType === 'takeaway-customer') {
-        let customer = this.store.createRecord(customerType, { customerType: customerType });
+    setCustomer(type) {
+      if (type === 'takeaway-customer') {
+        let customer = this.store.createRecord(type);
         this.set('model.customer', customer);
       }
-      if (customerType === 'delivery-customer') {
+      if (type === 'delivery-customer') {
         this.send('showCustomerBrowser');
       }
     },
 
     selectCustomer(deliveryCustomer) {
-      deliveryCustomer.set('customerType', 'delivery-customer');
       this.set('model.customer', deliveryCustomer);
       this.send('hideCustomerBrowser');
     },
 
     saveAndSelectCustomer() {
       let customer = this.store.createRecord('delivery-customer', {
-        customerType: 'deliveryCustomer',
         address: this.get('searchAddress'),
         postcode: this.get('searchPostcode'),
         contactNumber: this.get('searchContactNumber')
@@ -180,7 +180,7 @@ export default Ember.Controller.extend({
     },
 
     removeCustomer() {
-      this.set('model.customer', this.store.createRecord('customer', {}));
+      this.set('model.customer', null);
     },
 
     hideCustomerBrowser() {
@@ -210,7 +210,7 @@ export default Ember.Controller.extend({
           body: 'Order submitted successfully',
           callback: function() {
             _this.set('model.order', _this.store.createRecord('order', {}));
-            _this.set('model.customer', _this.store.createRecord('customer', {}));
+            _this.set('model.customer', null);
           }
         });
 

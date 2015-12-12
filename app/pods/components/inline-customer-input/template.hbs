@@ -1,4 +1,4 @@
-{{#if customer.customerType}}
+{{#if customer.type}}
 
   <button {{action "removeCustomer"}}
       type="button"
@@ -7,7 +7,7 @@
       style="padding:6px;">
     <span aria-hidden="true">&times;</span>
   </button>
-  {{component (concat 'selected-' customer.customerType) customer=customer}}
+  {{component (concat 'selected-' customer.type) customer=customer}}
 
 {{else}}
 
