@@ -9,14 +9,5 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     customer: {
       serialize: 'records'
     }
-  },
-  serialize(record) {
-    var json = this._super(...arguments);
-
-    json.customer.type = json.customerType;
-
-    delete json.customerType;
-
-    return json;
   }
 });
