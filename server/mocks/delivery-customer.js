@@ -5,26 +5,23 @@ module.exports = function(app) {
 
   deliveryCustomerRouter.use(bodyParser.json());
 
-  var customers = [
-    {
-      id: 0,
-      address: '64 Streatham High Road',
-      postcode: "SW16 1DA",
-      contactNumber: "02086960854"
-    },
-    {
-      id: 1,
-      address: "50 Bond Road",
-      postcode: "CR4 3HE",
-      contactNumber: "02087654321"
-    },
-    {
-      id: 2,
-      address: "50 ABC Road",
-      postcode: "CR4 2HE",
-      contactNumber: "02081111110"
+  var customers = generateCustomers(100);
+
+  function generateCustomers(numberOfCustomers) {
+    var result = [];
+
+    for (var i = 0; i < numberOfCustomers; i++) {
+      var customer = {
+        id: i,
+        address: i + " road name road",
+        postcode: "AB" + i + " 1CD",
+        contactNumber: (02090000000 - i) + ""
+      }
+      result.push(customer);
     }
-  ];
+
+    return result;
+  }
 
   function addCustomer(customer) {
     var id = customers.length;

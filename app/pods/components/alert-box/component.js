@@ -8,7 +8,6 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     $(window).resize();
-    this.$('#takeaway-customerName').focus();
   }
 
 });
