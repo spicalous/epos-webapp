@@ -15,7 +15,7 @@ module.exports = function(app) {
         id: i,
         address: i + " road name road",
         postcode: "AB" + i + " 1CD",
-        contactNumber: (02090000000 - i) + ""
+        contactNumber: "0" + (2090000000 - i)
       }
       result.push(customer);
     }
