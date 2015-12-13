@@ -7,73 +7,76 @@
       <h4 class="modal-title text-center">Customer Search</h4>
     </div>
     <div class="modal-body">
-      <div class="row">
-        <form class="form-horizontal">
-          <div class="form-group">
-            <label class="col-xs-2 control-label" for="searchAddressRaw">Address</label>
-            <div class="col-xs-10">
-              {{input class="form-control" type="text" id="searchAddressRaw" placeholder="House number and road name" value=searchAddressRaw}}
+      <div id="customer-browser-top">
+        <div class="row">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-xs-2 control-label" for="searchAddressRaw">Address</label>
+              <div class="col-xs-10">
+                {{input class="form-control" type="text" id="searchAddressRaw" placeholder="House number and road name" value=searchAddressRaw}}
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="col-xs-2 control-label" for="searchPostcodeRaw">Postcode</label>
-            <div class="col-xs-10">
-              {{input class="form-control" type="text" id="searchPostcodeRaw" placeholder="Postcode" value=searchPostcodeRaw}}
+            <div class="form-group">
+              <label class="col-xs-2 control-label" for="searchPostcodeRaw">Postcode</label>
+              <div class="col-xs-10">
+                {{input class="form-control" type="text" id="searchPostcodeRaw" placeholder="Postcode" value=searchPostcodeRaw}}
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="col-xs-2 control-label" for="searchContactNumberRaw">Contact number</label>
-            <div class="col-xs-10">
-              {{input class="form-control" type="number" id="searchContactNumberRaw" placeholder="Contact number" value=searchContactNumberRaw}}
+            <div class="form-group">
+              <label class="col-xs-2 control-label" for="searchContactNumberRaw">Contact number</label>
+              <div class="col-xs-10">
+                {{input class="form-control" type="number" id="searchContactNumberRaw" placeholder="Contact number" value=searchContactNumberRaw}}
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
-
-      {{#unless canSaveCustomer}}
-        <div class="row top-bottom-gutter">
-          <div class="col-xs-offset-2 col-sm-10">
-            {{#alert-box alertType="info"}}
-              Please enter a unique address, postcode and an 11 digit contact number to save the customer
-            {{/alert-box}}
-          </div>
+          </form>
         </div>
-      {{/unless}}
 
-      <div class="row top-bottom-gutter">
-        {{#if canSaveCustomer}}
-          <div class="col-xs-offset-8 col-xs-2">
-            {{#btn-button class="btn-default btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
+        {{#unless canSaveCustomer}}
+          <div class="row top-bottom-gutter">
+            <div class="col-xs-offset-2 col-sm-10">
+              {{#alert-box alertType="info"}}
+                Please enter a unique address, postcode and an 11 digit contact number to save the customer
+              {{/alert-box}}
+            </div>
           </div>
-        {{else}}
-          <div class="col-xs-offset-10 col-xs-2">
-            {{#btn-button class="btn-default btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
-          </div>
-        {{/if}}
+        {{/unless}}
 
-        {{#if canSaveCustomer}}
-          <div class="col-xs-2">
-            {{#btn-button class="btn-success btn-submit" action="saveAndSelectCustomer"
-            target=this displayConfirm=true confirmMessage=(concat "Confirm saving customer: " searchAddress " " searchPostcode ", " searchContactNumber)}}Save{{/btn-button}}
-          </div>
-        {{/if}}
-      </div>
-
-      <div class="row top-bottom-gutter">
-        <div class="col-xs-12">
-          {{#if debouncedSearch}}
-            {{loading-spinner text="Searching customers..."}}
+        <div class="row top-bottom-gutter">
+          {{#if canSaveCustomer}}
+            <div class="col-xs-offset-8 col-xs-2">
+              {{#btn-button class="btn-default btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
+            </div>
           {{else}}
-            {{#if deliveryCustomerResults}}
-              {{delivery-customer-list deliveryCustomers=deliveryCustomerResults selectDeliveryCustomer=(action "selectCustomer")}}
+            <div class="col-xs-offset-10 col-xs-2">
+              {{#btn-button class="btn-default btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
+            </div>
+          {{/if}}
+
+          {{#if canSaveCustomer}}
+            <div class="col-xs-2">
+              {{#btn-button class="btn-success btn-submit" action="saveAndSelectCustomer"
+              target=this displayConfirm=true confirmMessage=(concat "Confirm saving customer: " searchAddress " " searchPostcode ", " searchContactNumber)}}Save{{/btn-button}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
+      <div id="customer-browser-bottom" class="scroll-y">
+        <div class="row top-bottom-gutter">
+          <div class="col-xs-12">
+            {{#if debouncedSearch}}
+              {{loading-spinner text="Searching customers..."}}
             {{else}}
-              {{#if hasCustomerQuery}}
-                <div class="text-center">
-                  <div class="text-muted">No customers were found</div>
-                </div>
+              {{#if deliveryCustomerResults}}
+                {{delivery-customer-list deliveryCustomers=deliveryCustomerResults selectDeliveryCustomer=(action "selectCustomer")}}
+              {{else}}
+                {{#if hasCustomerQuery}}
+                  <div class="text-center">
+                    <div class="text-muted">No customers were found</div>
+                  </div>
+                {{/if}}
               {{/if}}
             {{/if}}
-          {{/if}}
+          </div>
         </div>
       </div>
     </div>

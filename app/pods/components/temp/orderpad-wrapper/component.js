@@ -18,6 +18,10 @@ export default Ember.Component.extend({
         $('#orderpad-header').outerHeight() +
         $('#orderpad-customer').outerHeight() +
         $('#orderpad-bottom').outerHeight()));
+    $('#customer-browser-bottom').outerHeight($('.customer-browser').height() - (
+        30 +
+        $('.customer-browser .modal-header').outerHeight() +
+        $('#customer-browser-top').outerHeight()));
   }
 
 });
