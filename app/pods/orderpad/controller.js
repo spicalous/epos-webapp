@@ -45,9 +45,9 @@ export default Ember.Controller.extend({
       return false;
     }
     return !!customer.get('contactNumber') && customer.get('contactNumber').length === 11 &&
-        ((customer.get('type') === 'takeaway-customer') ?
+        ((customer.get('customerType') === 'takeaway-customer') ?
             !!customer.get('name') :
-            (customer.get('type') === 'delivery-customer') ?
+            (customer.get('customerType') === 'delivery-customer') ?
               (!!customer.get('address') && !!customer.get('postcode')) :
               false);
   }),
