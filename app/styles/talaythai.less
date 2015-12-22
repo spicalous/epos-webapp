@@ -5,9 +5,9 @@
 @color-primary-4: #340000;
 
 @zindex-customer-browser: @zindex-navbar-fixed + 1;
-@zindex-confirm: @zindex-navbar-fixed + 2;
-@zindex-toast: @zindex-navbar-fixed + 3;
-@zindex-overlay: @zindex-navbar-fixed + 4;
+@zindex-confirm: @zindex-customer-browser + 3;
+@zindex-toast: @zindex-confirm + 1;
+@zindex-overlay: @zindex-toast + 1;
 
 //Allows touch events to be fired on touch devices
 a, a:focus, a:hover, a:active, a:visited {
@@ -24,6 +24,19 @@ html {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.confirm-dialog {
+  z-index: @zindex-confirm;
+}
+
+.confirm-backdrop {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: @zindex-confirm - 1;
 }
 
 .overlay {
