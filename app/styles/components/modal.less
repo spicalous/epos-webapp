@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  z-index: @customer-select-z-index - 1;
+  z-index: @zindex-customer-browser - 1;
 }
 
 .customer-browser {
@@ -12,13 +12,13 @@
   top: 1%;
   width: 98%;
   height: 98%;
-  z-index: @customer-select-z-index;
+  z-index: @zindex-customer-browser;
 }
 
 .confirm-dialog {
-  z-index: @customer-select-z-index + 2;
+  z-index: @zindex-confirm;
 }
 
 .confirm-backdrop:extend(.modal-backdrop) {
-  z-index: @customer-select-z-index + 1;
+  z-index: @zindex-confirm - 1;
 }

@@ -4,9 +4,10 @@
 @color-primary-3: #590303;
 @color-primary-4: #340000;
 
-@customer-select-z-index: 1000;
-@toast-z-index: 1001;
-@overlay-z-index: 1002;
+@zindex-customer-browser: @zindex-navbar-fixed + 1;
+@zindex-confirm: @zindex-navbar-fixed + 2;
+@zindex-toast: @zindex-navbar-fixed + 3;
+@zindex-overlay: @zindex-navbar-fixed + 4;
 
 //Allows touch events to be fired on touch devices
 a, a:focus, a:hover, a:active, a:visited {
@@ -31,7 +32,7 @@ html {
   height: 100%;
   width: 100%;
   background: rgba(255, 255, 255, 0.9);
-  z-index: @overlay-z-index;
+  z-index: @zindex-overlay;
   -webkit-animation: fadeIn 0.2s ease;
   animation: fadeIn 0.2s ease;
 }
@@ -46,7 +47,7 @@ html {
   width: 100%;
   position: absolute;
   bottom: 40px;
-  z-index: @toast-z-index;
+  z-index: @zindex-toast;
   -webkit-animation: fadeIn 0.2s ease;
   animation: fadeIn 0.2s ease;
 }

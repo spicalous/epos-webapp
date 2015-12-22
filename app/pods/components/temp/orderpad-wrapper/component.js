@@ -6,15 +6,17 @@ import Ember from 'ember';
 */
 export default Ember.Component.extend({
 
-  didInsertElement() {
-    $(window).resize(this.get('onResize'));
-    this.get('onResize')();
-  },
+  NAV_HEIGHT: 50,
+
+  visibleWindowHeight: Ember.computed('NAV_HEIGHT', function() {
+    return $(window).height() - this.get('NAV_HEIGHT');
+  }),
 
   onResize() {
-    $('#orderpad-menu').height($(window).height() -
+    this.notifyPropertyChange('NAV_HEIGHT'); //recalculate window.height
+    $('#orderpad-menu').height(this.get('visibleWindowHeight') -
         $('#orderpad-categories').outerHeight());
-    $('#orderpad-orderlist').outerHeight($(window).height() - (
+    $('#orderpad-orderlist').outerHeight(this.get('visibleWindowHeight') - (
         $('#orderpad-header').outerHeight() +
         $('#orderpad-customer').outerHeight() +
         $('#orderpad-bottom').outerHeight()));
@@ -22,6 +24,14 @@ export default Ember.Component.extend({
         30 +
         $('.customer-browser .modal-header').outerHeight() +
         $('#customer-browser-top').outerHeight()));
+  },
+
+  didInsertElement() {
+    let _this = this;
+    $(window).resize(function() {
+      _this.get('onResize').call(_this);
+    });
+    this.get('onResize').call(this);
   }
 
 });
