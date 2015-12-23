@@ -206,8 +206,7 @@ module.exports = function(app) {
           "description": "Lightly salted green soybeans in pod",
           "price": 295,
           "categories": [
-            0,
-            11
+            0
           ],
           "editCategories": [
             0,
@@ -235,8 +234,7 @@ module.exports = function(app) {
           "description": "Marinated chicken skewered on bamboo, served with peanut sauce",
           "price": 525,
           "categories": [
-            0,
-            4
+            0
           ],
           "editCategories": [
             0,
@@ -250,8 +248,7 @@ module.exports = function(app) {
           "description": "Deep fried prawns and minced chicken wrapped in a pancake, served with plum sauce",
           "price": 575,
           "categories": [
-            0,
-            10
+            0
           ],
           "editCategories": [
             0,
@@ -279,8 +276,7 @@ module.exports = function(app) {
           "description": "Glass vermicelli, shredded cabbage and carrots rolled in rice paper and deep fried until crisp, served with sweet chilli sauce",
           "price": 475,
           "categories": [
-            0,
-            11
+            0
           ],
           "editCategories": [
             0,
@@ -304,12 +300,11 @@ module.exports = function(app) {
         {
           "id": 7,
           "menuId": "6",
-          "name": "Tod Man Kow Pod (Corn Cakes)",
+          "name": "Corn Cakes",
           "description": "Corn spiced with curry paste mixed with chopped lime leaves, served with a sweet chilli sauce",
           "price": 475,
           "categories": [
-            0,
-            11
+            0
           ],
           "editCategories": [
             0,
@@ -319,12 +314,11 @@ module.exports = function(app) {
         {
           "id": 8,
           "menuId": "7",
-          "name": "Kanom Pang Na Goong (Prawn on Toast)",
+          "name": "Prawns on Toast",
           "description": "Minced prawns mixed with garlic, pepper and coriander roots spread on bread triangles and deep fried, served with sweet chilli sauce",
           "price": 475,
           "categories": [
-            0,
-            10
+            0
           ],
           "editCategories": [
             0,
@@ -334,12 +328,11 @@ module.exports = function(app) {
         {
           "id": 9,
           "menuId": "8",
-          "name": "Cee Krong Moo (Deep Fried Spare Ribs)",
+          "name": "Deep Fried Spare Ribs",
           "description": "Deep fried spare ribs marinated in our chefs special sauce",
           "price": 475,
           "categories": [
-            0,
-            5
+            0
           ],
           "editCategories": [
             0,
@@ -350,11 +343,10 @@ module.exports = function(app) {
           "id": 10,
           "menuId": "9",
           "name": "Pla Muek Tord",
-          "description": "Tender squids dipped in batter and fried, served with a sweet chilli sauce",
+          "description": "Tender squid dipped in batter and fried, served with a sweet chilli sauce",
           "price": 475,
           "categories": [
-            0,
-            9
+            0
           ],
           "editCategories": [
             0,
@@ -364,12 +356,11 @@ module.exports = function(app) {
         {
           "id": 11,
           "menuId": "10",
-          "name": "Peek Kai Yai Sai (Stuffed Chicken Wings)",
+          "name": "Stuffed Chicken Wings",
           "description": "Boneless chicken wings stuffed with minced chicken and herb, served with chilli sauce",
           "price": 475,
           "categories": [
-            0,
-            4
+            0
           ],
           "editCategories": [
             0,
@@ -379,12 +370,11 @@ module.exports = function(app) {
         {
           "id": 12,
           "menuId": "11",
-          "name": "Tao Hoo Tod (Crispy Beancurd)",
+          "name": "Crispy Beancurd",
           "description": "Deep fried beancurd, served with sweet chilli sauce",
           "price": 450,
           "categories": [
-            0,
-            11
+            0
           ],
           "editCategories": [
             0,
@@ -412,8 +402,7 @@ module.exports = function(app) {
           "description": "Grilled king prawns, served with Thai spicy sauce",
           "price": 575,
           "categories": [
-            0,
-            10
+            0
           ],
           "editCategories": [
             0,
@@ -427,8 +416,7 @@ module.exports = function(app) {
           "description": "Deep fried mixed vegetables in batter, served with sweet chilli sauce",
           "price": 450,
           "categories": [
-            0,
-            11
+            0
           ],
           "editCategories": [
             0,
@@ -438,12 +426,11 @@ module.exports = function(app) {
         {
           "id": 16,
           "menuId": "16",
-          "name": "Gui Chai (Vegetable Pancake)",
+          "name": "Vegetable Pancake",
           "description": "Deep fried Thai leek stuffing in pancakes served with a sweet soya sauce and sesame seeds",
           "price": 450,
           "categories": [
-            0,
-            11
+            0
           ],
           "editCategories": [
             0,
@@ -471,8 +458,7 @@ module.exports = function(app) {
           "description": "Popular Thai classic spicy lemongrass soup with prawns, mushrooms, fresh chilli, tomatoes and lime juice",
           "price": 575,
           "categories": [
-            1,
-            10
+            1
           ],
           "editCategories": [
             0,
@@ -486,8 +472,7 @@ module.exports = function(app) {
           "description": "Prawns, mushrooms and tomatoes in coconut milk soup flavoured with lemongrass, lime leaves, galangal, chilli and lime juice",
           "price": 575,
           "categories": [
-            1,
-            10
+            1
           ],
           "editCategories": [
             0,
@@ -501,8 +486,7 @@ module.exports = function(app) {
           "description": "Spicy soup with mixed seafood, shallots, lemongrass, lime leaves, basil leaves and fresh chilli in traditional Thai pot",
           "price": 1350,
           "categories": [
-            1,
-            9
+            1
           ],
           "editCategories": [
             0,
@@ -516,8 +500,7 @@ module.exports = function(app) {
           "description": "The classic spicy lemongrass soup with mushrooms, tomatoes, fresh chilli and lime juice",
           "price": 495,
           "categories": [
-            1,
-            11
+            1
           ],
           "editCategories": [
             0,
@@ -531,8 +514,7 @@ module.exports = function(app) {
           "description": "Coconut soup with mushrooms and tomatoes spiced with galangal, lemongrass and lime leaves",
           "price": 495,
           "categories": [
-            1,
-            11
+            1
           ],
           "editCategories": [
             0,
@@ -546,8 +528,7 @@ module.exports = function(app) {
           "description": "Thinly sliced char-grilled beef served on top of a fresh salad with Thai herbs and a spicy dressing",
           "price": 850,
           "categories": [
-            2,
-            6
+            2
           ],
           "editCategories": [
             0,
@@ -557,7 +538,7 @@ module.exports = function(app) {
         {
           "id": 24,
           "menuId": "24",
-          "name": "Yum Woon Sean (Vermicelli Salad)",
+          "name": "Vermicelli Salad",
           "description": "Clear glass vermicelli noodles with prawns, minced chicken, onion and coriander, served with a chilli and lemon dressing",
           "price": 850,
           "categories": [
@@ -571,12 +552,11 @@ module.exports = function(app) {
         {
           "id": 25,
           "menuId": "25",
-          "name": "Yum Tao Hoo (Crispy Tofu Salad)",
+          "name": "Crispy Tofu Salad",
           "description": "Delicious, vegan friendly and a healthy source of protein alternative to meat on a bed of fresh salad in a hot and spicy sauce, garnished with sesame seeds",
           "price": 695,
           "categories": [
-            2,
-            11
+            2
           ],
           "editCategories": [
             0,
@@ -590,8 +570,7 @@ module.exports = function(app) {
           "description": "King prawns cooked with lemongrass, shallots and lime leaves, mixed with hot and sour dressing, served on a bed of salad",
           "price": 895,
           "categories": [
-            2,
-            10
+            2
           ],
           "editCategories": [
             0,
@@ -605,8 +584,7 @@ module.exports = function(app) {
           "description": "The freshly minced chicken cooked with Thai herbs, ground rice, chilli powder, fish sauce and lime juice",
           "price": 750,
           "categories": [
-            2,
-            4
+            2
           ],
           "editCategories": [
             0,
@@ -620,8 +598,7 @@ module.exports = function(app) {
           "description": "Mixed seafood with Thai style herbs and lemon dressing",
           "price": 895,
           "categories": [
-            2,
-            9
+            2
           ],
           "editCategories": [
             0,
@@ -631,12 +608,11 @@ module.exports = function(app) {
         {
           "id": 29,
           "menuId": "29",
-          "name": "Som Tum (Papaya Salad)",
+          "name": "Som Tum Papaya Salad",
           "description": "Shredded papaya and carrots seasoned with ground peanuts, dry shrimp, lime juice, plum sugar, fish sauce and chilli",
           "price": 695,
           "categories": [
-            2,
-            11
+            2
           ],
           "editCategories": [
             0,
@@ -650,8 +626,7 @@ module.exports = function(app) {
           "description": "Shredded aromatic crispy duck with tomatoes, spring onions, cucumber, garlic, chilli and Hoi Sin dressing on a mixed salad",
           "price": 895,
           "categories": [
-            2,
-            7
+            2
           ],
           "editCategories": [
             0,
@@ -665,8 +640,7 @@ module.exports = function(app) {
           "description": "A traditional Thai green curry using fresh green chillies then cooked in coconut milk with aubergines, bell peppers, long beans, sweet basil leaves and bamboo shoots",
           "price": 795,
           "categories": [
-            3,
-            5
+            3
           ],
           "editCategories": [
             0,
@@ -680,8 +654,7 @@ module.exports = function(app) {
           "description": "A traditional Thai green curry using fresh green chillies then cooked in coconut milk with aubergines, bell peppers, long beans, sweet basil leaves and bamboo shoots",
           "price": 795,
           "categories": [
-            3,
-            5
+            3
           ],
           "editCategories": [
             0,
@@ -695,8 +668,7 @@ module.exports = function(app) {
           "description": "A traditional Thai green curry using fresh green chillies then cooked in coconut milk with aubergines, bell peppers, long beans, sweet basil leaves and bamboo shoots",
           "price": 850,
           "categories": [
-            3,
-            6
+            3
           ],
           "editCategories": [
             0,
@@ -710,8 +682,7 @@ module.exports = function(app) {
           "description": "A traditional Thai green curry using fresh green chillies then cooked in coconut milk with aubergines, bell peppers, long beans, sweet basil leaves and bamboo shoots",
           "price": 895,
           "categories": [
-            3,
-            10
+            3
           ],
           "editCategories": [
             0,
@@ -725,8 +696,7 @@ module.exports = function(app) {
           "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 795,
           "categories": [
-            3,
-            4
+            3
           ],
           "editCategories": [
             0,
@@ -740,8 +710,7 @@ module.exports = function(app) {
           "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 795,
           "categories": [
-            3,
-            5
+            3
           ],
           "editCategories": [
             0,
@@ -755,8 +724,7 @@ module.exports = function(app) {
           "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 850,
           "categories": [
-            3,
-            6
+            3
           ],
           "editCategories": [
             0,
@@ -770,8 +738,7 @@ module.exports = function(app) {
           "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 895,
           "categories": [
-            3,
-            10
+            3
           ],
           "editCategories": [
             0,
@@ -785,8 +752,7 @@ module.exports = function(app) {
           "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 795,
           "categories": [
-            3,
-            4
+            3
           ],
           "editCategories": [
             0,
@@ -800,8 +766,7 @@ module.exports = function(app) {
           "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 795,
           "categories": [
-            3,
-            5
+            3
           ],
           "editCategories": [
             0,
@@ -815,8 +780,7 @@ module.exports = function(app) {
           "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 850,
           "categories": [
-            3,
-            6
+            3
           ],
           "editCategories": [
             0,
@@ -830,8 +794,7 @@ module.exports = function(app) {
           "description": "Red coconut curry with bell peppers, long beans, basil leaves, bamboo shoots, aubergines and chilli",
           "price": 895,
           "categories": [
-            3,
-            10
+            3
           ],
           "editCategories": [
             0,
@@ -845,8 +808,7 @@ module.exports = function(app) {
           "description": "Jungle curry is a clear but spicy red curry without coconut milk prepared with bamboo shoots, aubergine, basil leaves, long beans and mixed vegetables",
           "price": 795,
           "categories": [
-            3,
-            4
+            3
           ],
           "editCategories": [
             0,
@@ -860,8 +822,7 @@ module.exports = function(app) {
           "description": "Jungle curry is a clear but spicy red curry without coconut milk prepared with bamboo shoots, aubergine, basil leaves, long beans and mixed vegetables",
           "price": 795,
           "categories": [
-            3,
-            5
+            3
           ],
           "editCategories": [
             0,
@@ -875,8 +836,7 @@ module.exports = function(app) {
           "description": "Jungle curry is a clear but spicy red curry without coconut milk prepared with bamboo shoots, aubergine, basil leaves, long beans and mixed vegetables",
           "price": 850,
           "categories": [
-            3,
-            6
+            3
           ],
           "editCategories": [
             0,
@@ -890,8 +850,7 @@ module.exports = function(app) {
           "description": "Jungle curry is a clear but spicy red curry without coconut milk prepared with bamboo shoots, aubergine, basil leaves, long beans and mixed vegetables",
           "price": 895,
           "categories": [
-            3,
-            10
+            3
           ],
           "editCategories": [
             0,
@@ -905,8 +864,7 @@ module.exports = function(app) {
           "description": "A mild beef coconut curry with potatoes, red and green bell peppers, onions, carrots and peanuts",
           "price": 850,
           "categories": [
-            3,
-            6
+            3
           ],
           "editCategories": [
             0,
@@ -920,8 +878,7 @@ module.exports = function(app) {
           "description": "A mild chicken coconut curry with potatoes, red and green bell peppers, onions, carrots and peanuts",
           "price": 850,
           "categories": [
-            3,
-            4
+            3
           ],
           "editCategories": [
             0,
@@ -935,8 +892,7 @@ module.exports = function(app) {
           "description": "Mixed fresh vegetables cooked in coconut milk with bamboo shoots, sweet basil leaves and green curry paste",
           "price": 695,
           "categories": [
-            3,
-            11
+            3
           ],
           "editCategories": [
             0,
@@ -950,8 +906,7 @@ module.exports = function(app) {
           "description": "Mixed fresh vegetables cooked in coconut milk with bamboo shoots, sweet basil leaves and red curry paste",
           "price": 695,
           "categories": [
-            3,
-            11
+            3
           ],
           "editCategories": [
             0,
@@ -965,8 +920,7 @@ module.exports = function(app) {
           "description": "Mixed vegetables in clear spicy red curry without coconut milk",
           "price": 695,
           "categories": [
-            3,
-            11
+            3
           ],
           "editCategories": [
             0,
@@ -976,7 +930,7 @@ module.exports = function(app) {
         {
           "id": 52,
           "menuId": "38",
-          "name": "Kai Pad Mamuang Himmaparn",
+          "name": "Chicken and Cashew Nuts",
           "description": "Chicken with cashew nuts, bell peppers, onions, mushrooms, pineapple and spring onions",
           "price": 795,
           "categories": [
@@ -1319,8 +1273,7 @@ module.exports = function(app) {
           "description": "King prawns sauteed with garlic and Thai pepper sauce",
           "price": 895,
           "categories": [
-            9,
-            10
+            9
           ],
           "editCategories": [
             0,
@@ -1334,8 +1287,7 @@ module.exports = function(app) {
           "description": "Stir fried king prawns with Thai basil and fresh chilli",
           "price": 895,
           "categories": [
-            9,
-            10
+            9
           ],
           "editCategories": [
             0,
@@ -1349,8 +1301,7 @@ module.exports = function(app) {
           "description": "Prawns sauteed with a roasted chilli sauce",
           "price": 895,
           "categories": [
-            9,
-            10
+            9
           ],
           "editCategories": [
             0,
@@ -1365,7 +1316,6 @@ module.exports = function(app) {
           "price": 895,
           "categories": [
             9,
-            10,
             3
           ],
           "editCategories": [
@@ -1394,8 +1344,7 @@ module.exports = function(app) {
           "description": "Thai style sweet and sour king prawns",
           "price": 895,
           "categories": [
-            9,
-            10
+            9
           ],
           "editCategories": [
             0,
@@ -1409,8 +1358,7 @@ module.exports = function(app) {
           "description": "King prawns stir fried with fresh ginger in yellow bean sauce",
           "price": 895,
           "categories": [
-            9,
-            10
+            9
           ],
           "editCategories": [
             0,
@@ -1438,7 +1386,7 @@ module.exports = function(app) {
           "description": "Fried beancurd with shredded ginger, mushrooms and spring onions, seasoned with yellow bean sauce",
           "price": 695,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1452,7 +1400,7 @@ module.exports = function(app) {
           "description": "Fried beancurd with chilli, onions and fresh basil leaves",
           "price": 695,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1466,7 +1414,7 @@ module.exports = function(app) {
           "description": "Steamed green vegetables topped with garlic and oyster sauce",
           "price": 650,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1480,7 +1428,7 @@ module.exports = function(app) {
           "description": "Stir fried mixed vegetables with cashew nuts",
           "price": 650,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1494,7 +1442,7 @@ module.exports = function(app) {
           "description": "Mushrooms, fried with fresh chilli, garlic, basil leaves in XO sauce",
           "price": 650,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1508,7 +1456,7 @@ module.exports = function(app) {
           "description": "Mushrooms and French red wine cooked with sweet and sour sauce",
           "price": 650,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1522,7 +1470,7 @@ module.exports = function(app) {
           "description": "Mixed vegetables with light soya sauce",
           "price": 650,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1536,7 +1484,7 @@ module.exports = function(app) {
           "description": "Thai hawker stall favourite of stir fried morning glory with fresh chilli, garlic and oyster sauce",
           "price": 675,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1550,7 +1498,7 @@ module.exports = function(app) {
           "description": "Stir fried choi sum cooked with fresh chilli, garlic and oyster sauce",
           "price": 675,
           "categories": [
-            11
+            10
           ],
           "editCategories": [
             0,
@@ -1564,7 +1512,7 @@ module.exports = function(app) {
           "description": "Special Thai style noodles with chicken, prawns, beansprouts, spring onion and egg topped with ground peanuts",
           "price": 795,
           "categories": [
-            13
+            11
           ],
           "editCategories": [
             0,
@@ -1578,7 +1526,7 @@ module.exports = function(app) {
           "description": "Vermicelli noodles stir fried with curry powder, egg, baby prawns, beansprouts and spring onion",
           "price": 795,
           "categories": [
-            13
+            11
           ],
           "editCategories": [
             0,
@@ -1592,8 +1540,7 @@ module.exports = function(app) {
           "description": "Fried rice noodles with egg, vegetables and a choice of pork, chicken OR beef in a dark soya sauce",
           "price": 795,
           "categories": [
-            13,
-            4
+            11
           ],
           "editCategories": [
             0,
@@ -1607,8 +1554,7 @@ module.exports = function(app) {
           "description": "Fried rice noodles with egg, vegetables and a choice of pork, chicken OR beef in a dark soya sauce",
           "price": 795,
           "categories": [
-            13,
-            5
+            11
           ],
           "editCategories": [
             0,
@@ -1622,8 +1568,7 @@ module.exports = function(app) {
           "description": "Fried rice noodles with egg, vegetables and a choice of pork, chicken OR beef in a dark soya sauce",
           "price": 795,
           "categories": [
-            13,
-            6
+            11
           ],
           "editCategories": [
             0,
@@ -1637,8 +1582,7 @@ module.exports = function(app) {
           "description": "Fried egg noodles with beef, green vegetables, fresh chilli, garlic and basil leaves",
           "price": 795,
           "categories": [
-            13,
-            6
+            11
           ],
           "editCategories": [
             0,
@@ -1652,8 +1596,8 @@ module.exports = function(app) {
           "description": "Popular pad Thai noodles stir fried sweet radish, beansprouts, spring onions, egg and ground peanut",
           "price": 725,
           "categories": [
-            13,
-            11
+            11,
+            10
           ],
           "editCategories": [
             0,
@@ -1667,8 +1611,8 @@ module.exports = function(app) {
           "description": "Fried egg noodles with spring onions and beansprouts",
           "price": 550,
           "categories": [
-            13,
-            11
+            11,
+            10
           ],
           "editCategories": [
             0,
@@ -1738,9 +1682,7 @@ module.exports = function(app) {
           "description": "Stir fried rice with prawns and chicken",
           "price": 795,
           "categories": [
-            12,
-            4,
-            10
+            12
           ],
           "editCategories": [
             0,
@@ -1754,8 +1696,7 @@ module.exports = function(app) {
           "description": "Fried rice with prawns, pineapple and cashew nuts",
           "price": 795,
           "categories": [
-            14,
-            10
+            12
           ],
           "editCategories": [
             0,
@@ -1783,9 +1724,7 @@ module.exports = function(app) {
           "description": "The most talked about fried rice, now comes to our menu. Absolute blast of hot and sour flavours, prawns and chicken fried rice with aroma of Thai herbs",
           "price": 795,
           "categories": [
-            12,
-            4,
-            10
+            12
           ],
           "editCategories": [
             0,
@@ -1799,9 +1738,7 @@ module.exports = function(app) {
           "description": "Thin rice vermicelli noodles with chicken and prawns, tomatoes, mushrooms, fresh chilli and lemongrass in Thai famous hot and sour tom yum soup",
           "price": 895,
           "categories": [
-            13,
-            4,
-            10
+            11
           ],
           "editCategories": [
             0,
@@ -1815,8 +1752,7 @@ module.exports = function(app) {
           "description": "Thick egg noodles with chicken, galangal, lemongrass, fresh chilli, lime juice in a creamy coconut based Thai classic tom kha soup topped with sesame oil",
           "price": 895,
           "categories": [
-            13,
-            4
+            11
           ],
           "editCategories": [
             0,
@@ -1830,7 +1766,7 @@ module.exports = function(app) {
           "description": "Crispy fried roasted duck topped with tamarind sauce",
           "price": 950,
           "categories": [
-            14,
+            13,
             7
           ],
           "editCategories": [
@@ -1845,7 +1781,7 @@ module.exports = function(app) {
           "description": "Roasted duck cooked in red curry, coconut milk, pineapple and tomato",
           "price": 895,
           "categories": [
-            14,
+            13,
             7,
             3
           ],
@@ -1861,7 +1797,7 @@ module.exports = function(app) {
           "description": "Stir fried duck with fresh ginger, mushroom, yellow bean sauce and spring onion",
           "price": 895,
           "categories": [
-            14,
+            13,
             7
           ],
           "editCategories": [
@@ -1876,7 +1812,7 @@ module.exports = function(app) {
           "description": "Steamed whole seabass with ginger, spring onion and bean sauce",
           "price": 1695,
           "categories": [
-            14,
+            13,
             8
           ],
           "editCategories": [
@@ -1891,7 +1827,7 @@ module.exports = function(app) {
           "description": "Deep fried whole seabass topped with chilli garlic sauce",
           "price": 1695,
           "categories": [
-            14,
+            13,
             8
           ],
           "editCategories": [
@@ -1906,7 +1842,7 @@ module.exports = function(app) {
           "description": "Battered salmon fillet topped with panang curry sauce, lime leaves and basil",
           "price": 1150,
           "categories": [
-            14,
+            13,
             8,
             3
           ],
@@ -1922,7 +1858,7 @@ module.exports = function(app) {
           "description": "Deep fried whole seabass topped with tamarind sauce",
           "price": 1695,
           "categories": [
-            14,
+            13,
             8
           ],
           "editCategories": [
@@ -2441,7 +2377,7 @@ module.exports = function(app) {
           "description": "",
           "price": 85,
           "categories": [
-            17
+            16
           ],
           "editCategories": []
         },
@@ -2452,7 +2388,7 @@ module.exports = function(app) {
           "description": "",
           "price": 85,
           "categories": [
-            17
+            16
           ],
           "editCategories": []
         },
@@ -2463,7 +2399,7 @@ module.exports = function(app) {
           "description": "",
           "price": 85,
           "categories": [
-            17
+            16
           ],
           "editCategories": []
         },
@@ -2474,7 +2410,7 @@ module.exports = function(app) {
           "description": "",
           "price": 85,
           "categories": [
-            17
+            16
           ],
           "editCategories": []
         },
@@ -2485,7 +2421,7 @@ module.exports = function(app) {
           "description": "",
           "price": 120,
           "categories": [
-            17
+            16
           ],
           "editCategories": []
         },
@@ -2496,7 +2432,7 @@ module.exports = function(app) {
           "description": "",
           "price": 160,
           "categories": [
-            17
+            16
           ],
           "editCategories": []
         },
@@ -2507,7 +2443,7 @@ module.exports = function(app) {
           "description": "",
           "price": 120,
           "categories": [
-            17
+            16
           ],
           "editCategories": []
         },
@@ -2518,7 +2454,7 @@ module.exports = function(app) {
           "description": "",
           "price": 160,
           "categories": [
-            17
+            16
           ],
           "editCategories": []
         }
@@ -2566,11 +2502,11 @@ module.exports = function(app) {
         },
         {
           "id": 10,
-          "name": "Prawns"
+          "name": "Vegetarian"
         },
         {
           "id": 11,
-          "name": "Vegetarian"
+          "name": "Noodles"
         },
         {
           "id": 12,
@@ -2578,11 +2514,11 @@ module.exports = function(app) {
         },
         {
           "id": 13,
-          "name": "Noodles"
+          "name": "Chef specials"
         },
         {
           "id": 14,
-          "name": "Chef specials"
+          "name": "Desserts"
         },
         {
           "id": 15,
@@ -2590,10 +2526,6 @@ module.exports = function(app) {
         },
         {
           "id": 16,
-          "name": "Desserts"
-        },
-        {
-          "id": 17,
           "name": "Del Drinks"
         }
       ]
