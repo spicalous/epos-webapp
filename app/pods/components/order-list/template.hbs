@@ -3,7 +3,8 @@
     <li class="list-group-item clearfix">
       {{decrement-btn action="decrementItem" orderItem=item}}
       <a {{action "incrementItem" item}}>
-        <b>{{item.quantity}} x {{item.menuItem.menuId}}</b> {{item.menuItem.name}}
+        <b>{{item.quantity}} x {{item.menuItem.menuId}}</b>
+        <br><span style="padding-left:40px;">{{item.menuItem.name}}</span>
       </a>
       {{#each item.editOptions as |option|}}
         <div class="order-edit-option">
