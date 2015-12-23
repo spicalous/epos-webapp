@@ -1,19 +1,12 @@
-// ### glyphicon-none
-
-.glyphicon-none:before {
-    content: "\2122";
-    color: transparent !important;
-}
-
-// ### END glyphicon-none
-
-// ### Bootstrap overrides
+// ###############################
+// ####  Bootstrap overrides  ####
+// ###############################
 
 @grid-gutter-width:         0px;
 @btn-border-radius-base:    0px;
 @btn-border-radius-large:   0px;
 @btn-border-radius-small:   0px;
-@list-group-border-radius:   0px;
+@list-group-border-radius:  0px;
 
 .alert {
   padding: 7px;
@@ -60,6 +53,14 @@
 
 .modal {
   overflow-y: auto;   //fix scrolling with multiple modals
+}
+
+.modal-footer {
+  padding: 0px;
+
+  button {
+    border: 0px;
+  }
 }
 
 .lead {
