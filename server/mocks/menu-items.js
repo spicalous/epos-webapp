@@ -1071,7 +1071,7 @@ module.exports = function(app) {
           "id": 62,
           "menuId": "48",
           "name": "Mu Pad Prik Khing",
-          "description": "",
+          "description": "Green beans and red curry paste stir fried with pork",
           "price": 795,
           "categories": [
             5
