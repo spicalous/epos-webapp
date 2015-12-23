@@ -2,27 +2,33 @@
   {{#each order.orderItems as |item|}}
     <li class="list-group-item clearfix">
       {{decrement-btn action="decrementItem" orderItem=item}}
-      <a {{action "incrementItem" item}}>
-        <b>{{item.quantity}} x {{item.menuItem.menuId}}</b>
-        <br><span style="padding-left:40px;">{{item.menuItem.name}}</span>
-      </a>
+      <a><span {{action "incrementItem" item}}>{{item.menuItem.name}}</span></a>
+      <div>
+        <span style="padding-left:40px;">
+          <b>{{item.quantity}} x {{item.menuItem.menuId}}</b>
+        </span>
+        <div class="pull-right">
+          {{item.displayTotal}}
+          {{#if item.menuItem.editCategories}}
+            <a class="edit-item-btn" data-toggle="modal"
+               data-target="#edit-item-modal" {{action "editItem" item order}}>
+                <span class="glyphicon glyphicon-option-horizontal"
+                      aria-hidden="true"></span>
+            </a>
+          {{else}}
+            <a class="edit-item-btn">
+              <span class="glyphicon glyphicon-none"></span>
+            </a>
+          {{/if}}
+        </div>
+      </div>
+
+
       {{#each item.editOptions as |option|}}
         <div class="order-edit-option">
           {{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}
         </div>
       {{/each}}
-      <div class="pull-right">
-        {{item.displayTotal}}
-        {{#if item.menuItem.editCategories}}
-          <a class="edit-item-btn" data-toggle="modal" data-target="#edit-item-modal" {{action "editItem" item order}}>
-            <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
-          </a>
-        {{else}}
-          <a class="edit-item-btn">
-            <span class="glyphicon glyphicon-none"></span>
-          </a>
-        {{/if}}
-      </div>
     </li>
   {{/each}}
 </ul>

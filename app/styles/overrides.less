@@ -13,8 +13,17 @@
   margin-bottom: 5px;
 }
 
+.btn {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .form-group {
   margin-bottom: 3px;
+}
+
+.lead {
+  margin-bottom: 0px;
 }
 
 .list-group {
@@ -23,6 +32,18 @@
 
 .list-group-item {
   padding: 9px 0px 9px 9px; //no right padding
+}
+
+.modal {
+  overflow-y: auto;   //fix scrolling with multiple modals
+}
+
+.modal-footer {
+  padding: 0px;
+
+  button {
+    border: 0px;
+  }
 }
 
 .nav-justified {
@@ -49,22 +70,6 @@
       border-bottom-color: @nav-tabs-justified-active-link-border-color;
     }
   }
-}
-
-.modal {
-  overflow-y: auto;   //fix scrolling with multiple modals
-}
-
-.modal-footer {
-  padding: 0px;
-
-  button {
-    border: 0px;
-  }
-}
-
-.lead {
-  margin-bottom: 0px;
 }
 
 // ### END overrides
