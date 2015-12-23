@@ -11,7 +11,7 @@
         <div class="row" id="orderpad-categories">
           <div class="col-xs-12 top-bottom-gutter">
             {{#each model.categories as |item|}}
-              <div class="col-xs-3">
+              <div class="col-xs-4 col-sm-3 col-md-2">
                 {{category-item category=item action="categoryItemClick" selected=selectedCategory}}
               </div>
             {{/each}}
