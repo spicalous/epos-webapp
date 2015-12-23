@@ -9,7 +9,7 @@
 
       <div class="col-sm-7 col-md-8">
         <div class="row" id="orderpad-categories">
-          <div class="col-xs-12 top-bottom-gutter">
+          <div class="col-xs-12 bottom-gutter">
             {{#each model.categories as |item|}}
               <div class="col-xs-4 col-sm-3 col-md-2">
                 {{category-item category=item action="categoryItemClick" selected=selectedCategory}}
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="row scroll-y" id="orderpad-menu">
-          <div class="col-sm-12 top-bottom-gutter">
+          <div class="col-sm-12">
             {{#menu-list menuItems=menu as |menuItem|}}
               {{menu-item menuItem=menuItem action="menuItemClick"}}
             {{/menu-list}}

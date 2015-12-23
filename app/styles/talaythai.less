@@ -9,6 +9,8 @@
 @zindex-toast: @zindex-confirm + 1;
 @zindex-overlay: @zindex-toast + 1;
 
+@talaythai-gutter: 4px;
+
 //Allows touch events to be fired on touch devices
 a, a:focus, a:hover, a:active, a:visited {
   color: black;
@@ -26,9 +28,18 @@ html {
   user-select: none;
 }
 
+.bottom-gutter {
+  padding-bottom: @talaythai-gutter;
+}
+
 .top-bottom-gutter {
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: @talaythai-gutter;
+  padding-bottom: @talaythai-gutter;
+}
+
+.left-right-gutter {
+  padding-left: @talaythai-gutter;
+  padding-right: @talaythai-gutter;
 }
 
 .confirm-dialog {
