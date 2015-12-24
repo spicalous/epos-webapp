@@ -27,14 +27,8 @@
       </div>
 
       <div class="hidden-xs col-sm-5 col-md-4">
-        <div class="row" id="orderpad-header">
-          <div class="col-sm-12 top-bottom-gutter">
-            <h4 class="text-center">NEW ORDER</h4>
-          </div>
-        </div>
-
         <div class="row" id="orderpad-customer">
-          <div class="col-sm-12 top-bottom-gutter">
+          <div class="col-sm-12">
             {{inline-customer-input customer=model.customer
             setCustomer="setCustomer"
             removeCustomer="removeCustomer"}}
@@ -49,7 +43,7 @@
         </div>
 
         <div class="row scroll-y" id="orderpad-orderlist">
-          <div class="col-sm-12 top-bottom-gutter">
+          <div class="col-sm-12">
             <div class="lead">
               {{order-list order=model.order}}
             </div>
@@ -57,11 +51,11 @@
         </div>
 
         <div id="orderpad-bottom">
-          <div class="row">
-            <div class="col-xs-6 text-center top-bottom-gutter">
+          <div class="row top-bottom-gutter">
+            <div class="col-xs-6 text-center ">
               <span class="lead">ITEMS: {{model.order.size}}</span>
             </div>
-            <div class="col-xs-6 text-center top-bottom-gutter">
+            <div class="col-xs-6 text-center">
               <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
             </div>
           </div>

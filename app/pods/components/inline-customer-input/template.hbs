@@ -7,12 +7,14 @@
       style="padding:6px;">
     <span aria-hidden="true">&times;</span>
   </button>
-  {{component (concat 'selected-' customer.customerType) customer=customer}}
+  <div class="top-bottom-gutter">
+    {{component (concat 'selected-' customer.customerType) customer=customer}}
+  </div>
 
 {{else}}
 
-  <div class="col-xs-10 col-xs-offset-1">
-    {{#btn-button class="col-xs-12 btn-main" data-toggle="dropdown"}}
+  <div class="col-xs-12">
+    {{#btn-button class="col-xs-12 btn-danger" data-toggle="dropdown"}}
       Select Customer
     {{/btn-button}}
 

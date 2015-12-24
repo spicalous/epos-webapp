@@ -37,7 +37,7 @@ module.exports = function(app) {
     };
   }
 
-  var success = false;
+  var success = true;
 
   deliveryCustomerRouter.get('/', function(req, res) {
     var body;
