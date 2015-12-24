@@ -37,44 +37,56 @@ module.exports = function(app) {
     };
   }
 
+  var success = false;
+
   deliveryCustomerRouter.get('/', function(req, res) {
     var body;
 
-    if (req.query.address || req.query.postcode || req.query.contactNumber) {
-      body = customers.filter(function(customer) {
-        var result = false,
-            failed = false,
-            prev = false;
+    if (success) {
+      if (req.query.address || req.query.postcode || req.query.contactNumber) {
+        body = customers.filter(function(customer) {
+          var result = false,
+              failed = false,
+              prev = false;
 
-        if (req.query.address) {
-          result = customer.address.startsWith(req.query.address);
-          failed = !result
-        }
-        if (!failed && req.query.postcode) {
-          result = result ?
-              result && customer.postcode.startsWith(req.query.postcode)
-              : result = customer.postcode.startsWith(req.query.postcode);
-          failed = !result;
-        }
-        if (!failed && req.query.contactNumber) {
-          result = result ?
-              result = result && customer.contactNumber.startsWith(req.query.contactNumber)
-              : result = customer.contactNumber.startsWith(req.query.contactNumber);
-          failed = !result;
-        }
+          if (req.query.address) {
+            result = customer.address.startsWith(req.query.address);
+            failed = !result
+          }
+          if (!failed && req.query.postcode) {
+            result = result ?
+                result && customer.postcode.startsWith(req.query.postcode)
+                : result = customer.postcode.startsWith(req.query.postcode);
+            failed = !result;
+          }
+          if (!failed && req.query.contactNumber) {
+            result = result ?
+                result = result && customer.contactNumber.startsWith(req.query.contactNumber)
+                : result = customer.contactNumber.startsWith(req.query.contactNumber);
+            failed = !result;
+          }
 
-        return !failed && result;
+          return !failed && result;
+        });
+      } else {
+        body = [];
+      }
+      res.send({
+        'deliveryCustomers': body
       });
     } else {
-      body = [];
+      res.status(400).send({
+        errors: [{
+          error: "Bad Gateway",
+          exception: "com.lovetalaythai.eposdataservice.customer.exception",
+          message: "There was a problem saving the customer to the database",
+          status: 400,
+          timestamp: 1445811517596
+        }]
+      });
     }
 
-    res.send({
-      'deliveryCustomers': body
-    });
   });
-
-  var success = true;
 
   deliveryCustomerRouter.post('/', function(req, res) {
     success ?
@@ -84,7 +96,7 @@ module.exports = function(app) {
           error: "Bad Gateway",
           exception: "com.lovetalaythai.eposdataservice.customer.exception",
           message: "There was a problem saving the customer to the database",
-          httpStatus: 400,
+          status: 400,
           timestamp: 1445811517596
         }]
       });
