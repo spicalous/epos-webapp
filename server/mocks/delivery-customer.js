@@ -79,7 +79,7 @@ module.exports = function(app) {
         errors: [{
           error: "Bad Gateway",
           exception: "com.lovetalaythai.eposdataservice.customer.exception",
-          message: "There was a problem saving the customer to the database",
+          message: "There was an error searching for the customer",
           status: 400,
           timestamp: 1445811517596
         }]

@@ -107,6 +107,12 @@ export default Ember.Controller.extend({
         }).then(function(customers) {
           _this.set('deliveryCustomerResults', customers);
           _this.set('debouncedSearch', '');
+        }).catch(function(response) {
+          _this.set('debouncedSearch', '');
+          _this.send('showMessage', 'overlay', {
+            header: 'Failed to save :(',
+            body: response.errors[0].message
+          });
         });
 
       }, 1000));
@@ -193,17 +199,17 @@ export default Ember.Controller.extend({
 
     submitOrder() {
       let _this = this,
-          order = this.get('model.order');
+          order = this.get('model.order'),
+          modalWasOpen = $('#orderpad-modal').hasClass('in');
 
+      $('#orderpad-modal').modal('hide');
       this.send('showMessage', 'loader', { message: 'Sending order..' });
 
       order.set('dateTime', new Date());
       order.set('customer', this.get('model.customer'));
-
       order.save().then(function() {
 
         _this.send('dismissMessage', 'loader');
-
         _this.send('reset');
         _this.send('showMessage', 'overlay', {
           header: 'Confirmed ^.^',
@@ -215,10 +221,8 @@ export default Ember.Controller.extend({
         });
 
       }, function(response) {
-        var modalWasOpen = $('#orderpad-modal').hasClass('in');
-        _this.send('dismissMessage', 'loader');
 
-        _this.send('reset');
+        _this.send('dismissMessage', 'loader');
         _this.send('showMessage', 'overlay', {
           header: 'Failed :(',
           body: response.errors[0].message,
@@ -228,6 +232,7 @@ export default Ember.Controller.extend({
             }
           }
         });
+
       });
     },
 
@@ -266,4 +271,5 @@ export default Ember.Controller.extend({
     }
 
   }
+
 });
