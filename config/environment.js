@@ -21,8 +21,6 @@ module.exports = function(environment) {
       version: package.version,
 
       NAV_BAR_ENABLED: false,
-      // Here you can pass flags/options to your application instance
-      // when it is created
     }
   };
 
