@@ -10,15 +10,13 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div class="col-sm-7 col-md-8">
-        <div class="row" id="orderpad-categories">
-          <div class="col-xs-12 bottom-gutter">
-            {{#each model.categories as |item|}}
-              <div class="col-xs-4 col-sm-3 col-md-2">
-                {{category-item category=item action="categoryItemClick" selected=selectedCategory}}
-              </div>
-            {{/each}}
-          </div>
+      <div class="col-xs-12 col-sm-7 col-md-8">
+        <div class="row bottom-gutter" id="orderpad-categories">
+          {{#each model.categories as |item|}}
+            <div class="col-xs-4 col-sm-3 col-md-2">
+              {{category-item category=item action="categoryItemClick" selected=selectedCategory}}
+            </div>
+          {{/each}}
         </div>
         <div class="row">
           <div class="col-sm-7 scroll-y" id="orderpad-menu">
