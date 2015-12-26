@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../../../../config/environment';
 
 /**
 *
@@ -6,20 +7,26 @@ import Ember from 'ember';
 */
 export default Ember.Component.extend({
 
+  featureFlags: {
+    NAV_BAR_ENABLED: config.APP.NAV_BAR_ENABLED
+  },
+
   NAV_HEIGHT: 50,
 
-  visibleWindowHeight: Ember.computed('NAV_HEIGHT', function() {
-    return $(window).height() - this.get('NAV_HEIGHT');
-  }),
-
   onResize() {
-    this.notifyPropertyChange('NAV_HEIGHT'); //recalculate window.height
-    $('#orderpad-menu').height(this.get('visibleWindowHeight') -
+    let windowHeight = $(window).height();
+
+    if (this.get('featureFlags.NAV_BAR_ENABLED')) {
+      this.notifyPropertyChange('NAV_HEIGHT'); //recalculate window.height
+      windowHeight = windowHeight - this.get('NAV_HEIGHT');
+    }
+
+    $('#orderpad-menu').height(windowHeight -
         $('#orderpad-categories').outerHeight());
-    $('#orderpad-orderlist').outerHeight(this.get('visibleWindowHeight') - (
+    $('#orderpad-orderlist').outerHeight(windowHeight - (
         $('#orderpad-customer').outerHeight() +
         $('#orderpad-bottom').outerHeight()));
-    $('#customer-browser-bottom').outerHeight(this.get('visibleWindowHeight') -
+    $('#customer-browser-bottom').outerHeight(windowHeight -
         $('#customer-browser-top').outerHeight());
   },
 

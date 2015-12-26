@@ -18,7 +18,9 @@ module.exports = function(environment) {
 
     APP: {
       name: 'Talay Thai WebPOS',
-      version: package.version
+      version: package.version,
+
+      NAV_BAR_ENABLED: false,
       // Here you can pass flags/options to your application instance
       // when it is created
     }

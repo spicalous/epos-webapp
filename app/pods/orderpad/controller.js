@@ -1,6 +1,11 @@
 import Ember from 'ember';
+import config from '../../config/environment';
 
 export default Ember.Controller.extend({
+
+  featureFlags: {
+    NAV_BAR_ENABLED: config.APP.NAV_BAR_ENABLED
+  },
 
   selectedCategory: '',
   numpadValue: '',
