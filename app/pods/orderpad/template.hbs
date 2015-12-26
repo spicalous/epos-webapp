@@ -20,11 +20,17 @@
             {{/each}}
           </div>
         </div>
-        <div class="row scroll-y" id="orderpad-menu">
-          <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-7 scroll-y" id="orderpad-menu">
             {{#menu-list menuItems=menu as |menuItem|}}
               {{menu-item menuItem=menuItem action="menuItemClick"}}
             {{/menu-list}}
+          </div>
+          <div class="col-sm-5 text-center" id="orderpad-numpad">
+            <div class="col-sm-12" style="position:absolute; width=100%; bottom:0;">
+              <span style="font-size: 80px">{{numpadValue}}</span>
+              {{number-pad value=numpadValue maxLength=4}}
+            </div>
           </div>
         </div>
       </div>
@@ -66,19 +72,19 @@
           <div class="row">
             <div class="col-xs-6">
               {{#btn-button class="btn-lg btn-danger btn-cancel" action="cancelOrder"
-                  target=this
-                  displayConfirm=true
-                  confirmMessage="Are you sure you want to cancel?"
-                  disabled=emptyOrder}}
+              target=this
+              displayConfirm=true
+              confirmMessage="Are you sure you want to cancel?"
+              disabled=emptyOrder}}
                 CANCEL ORDER
               {{/btn-button}}
             </div>
             <div class="col-xs-6">
               {{#btn-button class="btn-lg btn-success btn-submit" action="submitOrder"
-                  target=this
-                  displayConfirm=true
-                  confirmMessage="Please confirm the order"
-                  disabled=invalidOrder}}
+              target=this
+              displayConfirm=true
+              confirmMessage="Please confirm the order"
+              disabled=invalidOrder}}
                 SUBMIT ORDER
               {{/btn-button}}
             </div>
