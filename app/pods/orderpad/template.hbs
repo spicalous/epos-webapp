@@ -19,13 +19,13 @@
           {{/each}}
         </div>
         <div class="row">
-          <div class="col-sm-7 scroll-y" id="orderpad-menu">
+          <div class="col-xs-12 col-sm-7 col-md-8 scroll-y" id="orderpad-menu">
             {{#menu-list menuItems=menu as |menuItem|}}
               {{menu-item menuItem=menuItem action="menuItemClick"}}
             {{/menu-list}}
           </div>
-          <div class="col-sm-5 text-center" id="orderpad-numpad">
-            <div class="col-sm-12" style="position:absolute; width=100%; bottom:0;">
+          <div class="hidden-xs col-sm-5 col-md-4 text-center" id="orderpad-numpad">
+            <div class="col-xs-12" style="position:absolute; width=100%; bottom:0;">
               <span style="font-size: 80px">{{numpadValue}}</span>
               {{number-pad value=numpadValue maxLength=4}}
             </div>
@@ -126,7 +126,7 @@
 
   {{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}
 
-  {{#btn-button class="btn-default toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
+  {{#btn-button class="btn-default btn-lg toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
     {{model.order.size}}
     <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
   {{/btn-button}}

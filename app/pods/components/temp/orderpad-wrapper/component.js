@@ -15,16 +15,22 @@ export default Ember.Component.extend({
 
   onResize() {
     let windowHeight = $(window).height();
+    let windowWidth = $(window).width();
 
     if (this.get('featureFlags.NAV_BAR_ENABLED')) {
       this.notifyPropertyChange('NAV_HEIGHT'); //recalculate window.height
       windowHeight = windowHeight - this.get('NAV_HEIGHT');
     }
+    if (windowWidth < 769) {
+      $('#orderpad-menu').height(windowHeight -
+        $('#orderpad-categories').outerHeight());
+    } else {
+      $('#orderpad-menu').height(windowHeight -
+          $('#orderpad-categories').outerHeight());
+      $('#orderpad-numpad').height(windowHeight -
+          $('#orderpad-categories').outerHeight());
+    }
 
-    $('#orderpad-menu').height(windowHeight -
-        $('#orderpad-categories').outerHeight());
-    $('#orderpad-numpad').height(windowHeight -
-        $('#orderpad-categories').outerHeight());
     $('#orderpad-orderlist').outerHeight(windowHeight - (
         $('#orderpad-customer').outerHeight() +
         $('#orderpad-bottom').outerHeight()));
