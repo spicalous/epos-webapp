@@ -22,8 +22,9 @@ export default Ember.Component.extend({
       windowHeight = windowHeight - this.get('NAV_HEIGHT');
     }
     if (windowWidth < 769) {
-      $('#orderpad-menu').height(windowHeight -
-        $('#orderpad-categories').outerHeight());
+      $('#orderpad-menu').height(windowHeight - (
+        $('#orderpad-customer-small').outerHeight() +
+        $('#orderpad-categories').outerHeight()));
     } else {
       $('#orderpad-menu').height(windowHeight -
           $('#orderpad-categories').outerHeight());
