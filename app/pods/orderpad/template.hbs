@@ -100,7 +100,7 @@
   </div>
 
   {{#orderpad-modal order=model.order title="Order Items"}}
-    <div class="modal-body">
+    <div class="modal-body" style="padding: 0px;">
       <small>
         {{order-list order=model.order}}
       </small>
@@ -109,10 +109,10 @@
 
       <div class="row">
         <div class="col-xs-6 text-center top-bottom-gutter">
-          ITEMS: {{model.order.size}}
+          <span class="lead">ITEMS: {{model.order.size}}</span>
         </div>
         <div class="col-xs-6 text-center top-bottom-gutter">
-          TOTAL: {{model.order.displayTotal}}
+          <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
         </div>
       </div>
 
