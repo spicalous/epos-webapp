@@ -7,8 +7,13 @@
       style="padding:6px;">
     <span aria-hidden="true">&times;</span>
   </button>
-  <div class="top-bottom-gutter">
+  <div class="top-bottom-gutter bottom-divider">
     {{component (concat 'selected-' customer.customerType) customer=customer}}
+    {{#unless validCustomer}}
+      {{#alert-box classNames="col-xs-offset-1 col-xs-10" alertType="info"}}
+        Please enter a name and an 11 digit contact number
+      {{/alert-box}}
+    {{/unless}}
   </div>
 
 {{else}}

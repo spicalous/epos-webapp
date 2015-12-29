@@ -1,20 +1,6 @@
-<form class="form-horizontal">
-  <div class="form-group">
-    <label class="col-xs-3 control-label">ADDRESS</label>
-    <div class="col-xs-8">
-      <span class="form-control" style="overflow:scroll">{{customer.address}}</span>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-xs-3 control-label">POSTCODE</label>
-    <div class="col-xs-8">
-      <span class="form-control">{{customer.postcode}}</span>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-xs-3 control-label">TEL</label>
-    <div class="col-xs-8">
-      <span class="form-control">{{customer.contactNumber}}</span>
-    </div>
-  </div>
-</form>
+<div class="text-center">
+  {{customer.address}}
+</div>
+<div class="text-center">
+  {{customer.postcode}}, {{customer.contactNumber}}
+</div>
