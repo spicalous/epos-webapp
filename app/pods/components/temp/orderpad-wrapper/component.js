@@ -23,12 +23,12 @@ export default Ember.Component.extend({
     }
     if (windowWidth < 769) {
       $('#orderpad-menu').height(windowHeight - (
-          30 + //menu inline padding in orderpad template
+          16 + //menu inline padding in orderpad template
           $('#orderpad-customer-small').outerHeight() +
           $('#orderpad-categories').outerHeight()));
     } else {
       $('#orderpad-menu').height(windowHeight - (
-          30 + //menu inline padding in orderpad template
+          16 + //menu inline padding in orderpad template
           $('#orderpad-categories').outerHeight()));
       $('#orderpad-numpad').height(windowHeight -
           $('#orderpad-categories').outerHeight());
