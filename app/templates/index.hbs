@@ -1,26 +1,19 @@
 <div class="container">
   <div class="row text-center">
-    <!--<div class="col-sm-4 col-xs-12">-->
-      {{!--
-      {{#link-to "restaurant"}}
-        {{#btn-button class="btn-main btn-home"}}CURRENT ORDERS{{/btn-button}}
-      {{/link-to}}
-      --}}
-    <!--</div>-->
     <div class="col-sm-4 col-xs-12">
       {{#link-to "orderpad"}}
         {{#btn-button class="btn-main btn-home"}}NEW ORDER{{/btn-button}}
       {{/link-to}}
     </div>
-    <!--<div class="col-sm-4 col-xs-12">-->
-      {{!--
-      {{#link-to "orders"}}
-        {{#btn-button class="btn-main btn-home"}}ORDERS{{/btn-button}}
+  </div>
+  <div class="row text-center">
+    <div class="col-sm-4 col-xs-12">
+      {{#link-to "customers"}}
+        {{#btn-button class="btn-main btn-home"}}CUSTOMER MANAGEMENT{{/btn-button}}
       {{/link-to}}
-      --}}
-    <!--</div>-->
+    </div>
   </div>
-  <div class="text-muted" style="position:absolute;bottom:5px;left:10px;">
-    {{name}} - {{version}}
-  </div>
+</div>
+<div class="text-muted" style="position:absolute;bottom:5px;left:10px;">
+  {{name}} - {{version}}
 </div>

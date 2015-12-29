@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('orderpad');
   this.route('orders');
   this.route('restaurant');
+  this.route('customers');
 });
 
 export default Router;
