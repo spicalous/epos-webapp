@@ -2,9 +2,9 @@
   {{#each order.orderItems as |item|}}
     <li class="list-group-item clearfix">
       {{decrement-btn action="decrementItem" orderItem=item}}
-      <a><span {{action "incrementItem" item}}>{{item.menuItem.name}}</span></a>
+      <a><span style="padding-left:7px;" {{action "incrementItem" item}}>{{item.menuItem.name}}</span></a>
       <div>
-        <span style="padding-left:40px;">
+        <span style="padding-left:45px;">
           <b>{{item.quantity}} x {{item.menuItem.menuId}}</b>
         </span>
         <div class="pull-right">
