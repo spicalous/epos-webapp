@@ -23,5 +23,5 @@ test('it renders', function(assert) {
     {{/temp/orderpad-wrapper}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), '');
 });

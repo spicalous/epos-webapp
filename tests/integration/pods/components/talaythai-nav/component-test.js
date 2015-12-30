@@ -21,5 +21,5 @@ test('it renders', function(assert) {
     {{/talaythai-nav}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), '');
 });

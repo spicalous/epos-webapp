@@ -20,7 +20,7 @@ var VISIBLE_MENU_LIST = '#orderpad-menu .list-group-item',
     VISIBLE_CATEGORY_BUTTONS = '#orderpad-categories button',
     VISIBLE_ORDER_LIST = '#orderpad-orderlist .list-group-item';
 
-test('Page contents', function(assert) {
+test('Displays correct number of categories and menu items', function(assert) {
 
   assert.expect(2);
   visit('/orderpad').then(function() {

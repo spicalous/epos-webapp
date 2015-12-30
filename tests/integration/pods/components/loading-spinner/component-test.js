@@ -6,7 +6,7 @@ moduleForComponent('loading-spinner', 'Integration | Component | loading spinner
 });
 
 test('it renders', function(assert) {
-  
+
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
@@ -21,5 +21,5 @@ test('it renders', function(assert) {
     {{/loading-spinner}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), '');
 });

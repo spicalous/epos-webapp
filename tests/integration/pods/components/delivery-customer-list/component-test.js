@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('alert-box', 'Integration | Component | alert box', {
+moduleForComponent('/delivery-customer-list', 'Integration | Component | delivery customer list', {
   integration: true
 });
 
@@ -10,16 +10,16 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
-  this.render(hbs`{{alert-box}}`);
+  this.render(hbs`{{delivery-customer-list}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:" + EOL +
   this.render(hbs`
-    {{#alert-box}}
+    {{#delivery-customer-list}}
       template block text
-    {{/alert-box}}
+    {{/delivery-customer-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), '');
 });
