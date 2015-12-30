@@ -25,7 +25,7 @@ test('Page contents', function(assert) {
   assert.expect(2);
   visit('/orderpad').then(function() {
     assert.equal(find(VISIBLE_MENU_LIST).length, 162, 'Wrong number of menu items');
-    assert.equal(find(VISIBLE_CATEGORY_BUTTONS).length, 18, 'Wrong number of category items');
+    assert.equal(find(VISIBLE_CATEGORY_BUTTONS).length, 17, 'Wrong number of category items');
   });
 
 });
@@ -34,7 +34,7 @@ test('Selecting a category', function(assert) {
 
   assert.expect(1);
   visit('/orderpad');
-  click('#orderpad-categories button:first-child');
+  click('#orderpad-categories button:first');
   andThen(function() {
     assert.equal(find(VISIBLE_MENU_LIST).length, 18, 'Correct number of menu items after filtering');
   });
@@ -85,8 +85,8 @@ test('Removing an item [Modal] ', function(assert) {
 
   assert.expect(3);
   visit('/orderpad');
-  click('#orderpad-menu .list-group-item:first-child');
-  click('#orderpad-modal .orderpad-order .decrement-btn');
+  click('#orderpad-menu .list-group-item:first');
+  click('#orderpad-modal .decrement-btn:first');
   andThen(function() {
     assert.equal(find(VISIBLE_ORDER_LIST).length, 0, 'Correctly removes menu item from modal order item list');
     assert.ok(find('#orderpad-modal .modal-footer').text().includes('ITEMS: 0'), 'Correctly updates the item count text');
@@ -129,11 +129,11 @@ test('Numpad filtering', function(assert) {
   assert.expect(2);
 
   visit('/orderpad');
-  click('#orderpad-bottom .keypad-container > div:nth-child(1) > button:nth-child(1)');
-  click('#orderpad-bottom .keypad-container > div:nth-child(1) > button:nth-child(2)');
+  click('#orderpad-numpad .keypad-container .row:nth-child(1) div:nth-child(1) button');
+  click('#orderpad-numpad .keypad-container .row:nth-child(1) div:nth-child(2) button');
   andThen(function() {
     assert.equal(find(VISIBLE_MENU_LIST).length, 1, 'Wrong number of filtered menu items');
-    assert.ok(find('#orderpad-bottom').text().includes('12'), 'Incorrect numberpad value displayed');
+    assert.ok(find('#orderpad-numpad').text().trim().startsWith('12'), 'Incorrect numberpad value displayed');
   });
 
 });
