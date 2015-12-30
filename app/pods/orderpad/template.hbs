@@ -69,7 +69,7 @@
 
           <div class="row">
             <div class="col-xs-6">
-              {{#btn-button class="btn-lg btn-danger btn-cancel" action="cancelOrder"
+              {{#btn-button class="btn-lg btn-danger" action="cancelOrder"
               target=this
               displayConfirm=true
               confirmMessage="Cancel the order?"
@@ -78,7 +78,7 @@
               {{/btn-button}}
             </div>
             <div class="col-xs-6">
-              {{#btn-button class="btn-lg btn-success btn-submit" action="submitOrder"
+              {{#btn-button class="btn-lg btn-success" action="submitOrder"
               target=this
               displayConfirm=true
               confirmMessage="Submit the order?"
@@ -112,10 +112,10 @@
 
       <div class="row">
         <div class="col-xs-6">
-          {{#btn-button class="btn-danger btn-cancel btn-lg" action="cancelOrder" disabled=emptyOrder}}CANCEL ORDER{{/btn-button}}
+          {{#btn-button class="btn-danger btn-lg" action="cancelOrder" disabled=emptyOrder}}CANCEL ORDER{{/btn-button}}
         </div>
         <div class="col-xs-6">
-          {{#btn-button class="btn-success btn-submit btn-lg" action="submitOrder" disabled=invalidOrder}}SUBMIT ORDER{{/btn-button}}
+          {{#btn-button class="btn-success btn-lg" action="submitOrder" disabled=invalidOrder}}SUBMIT ORDER{{/btn-button}}
         </div>
         <div class="col-xs-12">
           {{#btn-button class="btn-default btn-close btn-lg" data-dismiss="modal"}}CLOSE{{/btn-button}}
