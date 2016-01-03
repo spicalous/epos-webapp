@@ -88,23 +88,16 @@ export default Ember.Controller.extend({
   }),
 
   customerSearch: Ember.observer('searchAddressRaw', 'searchPostcodeRaw', 'searchContactNumberRaw', function() {
-    let debouncedSearch = this.get('debouncedSearch');
     let address = this.get('searchAddress');
     let postcode = this.get('searchPostcode');
     let contactNumber = this.get('searchContactNumber');
+    let _this = this;
+
+    Ember.run.cancel(this.get('debouncedSearch'));
 
     if (address || postcode || contactNumber) {
 
-      if (debouncedSearch) {
-        Ember.run.cancel(debouncedSearch);
-      }
-
       this.set('debouncedSearch', Ember.run.debounce(this, function() {
-        let address = this.get('searchAddress');
-        let postcode = this.get('searchPostcode');
-        let contactNumber = this.get('searchContactNumber');
-        let _this = this;
-
         this.store.query('delivery-customer', {
           address: address,
           postcode: postcode,
@@ -123,7 +116,6 @@ export default Ember.Controller.extend({
       }, 1000));
 
     } else {
-      Ember.run.cancel(debouncedSearch);
       this.set('deliveryCustomerResults', []);
       this.set('debouncedSearch', '');
     }
