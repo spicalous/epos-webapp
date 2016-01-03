@@ -14,12 +14,17 @@ export default Ember.Controller.extend({
     return this.get('searchContactNumberRaw') ? this.get('searchContactNumberRaw').trim() : '';
   }),
 
+  emptySearch: Ember.computed('searchAddressRaw', 'searchPostcodeRaw', 'searchContactNumberRaw', function() {
+    return !(this.get('searchAddressRaw') || this.get('searchPostcodeRaw') || this.get('searchContactNumberRaw'));
+  }),
+
   actions: {
 
     searchCustomer() {
       let address = this.get('searchAddress');
       let postcode = this.get('searchPostcode');
       let contactNumber = this.get('searchContactNumber');
+      let _this = this;
 
       this.store.query('delivery-customer', {
         address: address,
