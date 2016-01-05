@@ -21,7 +21,7 @@ export default Ember.Component.extend({
       this.notifyPropertyChange('NAV_HEIGHT'); //recalculate window.height
       windowHeight = windowHeight - this.get('NAV_HEIGHT');
     }
-    if (windowWidth < 769) {
+    if (windowWidth < 768) {
       $('#orderpad-menu').height(windowHeight - (
           16 + //menu inline padding in orderpad template
           $('#orderpad-customer-small').outerHeight() +
