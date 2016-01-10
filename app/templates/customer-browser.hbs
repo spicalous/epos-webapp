@@ -24,8 +24,11 @@
 
         {{#if canSaveCustomer}}
           <div class="col-xs-2 col-md-2">
-            {{#btn-button class="btn-primary" action="saveAndSelectCustomer"
-            target=this displayConfirm=true confirmMessage=(concat "Confirm saving customer: " searchAddress " " searchPostcode ", " searchContactNumber)}}Save{{/btn-button}}
+            {{#btn-button class="btn-primary" action=(action "saveAndSelectCustomer")
+            showMessage="showMessage"
+            confirmMessage=(concat "Confirm saving customer: " searchAddress " " searchPostcode ", " searchContactNumber)}}
+              Save
+            {{/btn-button}}
           </div>
         {{/if}}
 

@@ -242,24 +242,6 @@ export default Ember.Controller.extend({
       });
     },
 
-    showConfirm(message, confirmAction, cancelAction) {
-      let _this = this;
-
-      this.send('showMessage', 'confirm', {
-        message: message,
-        confirm: function() {
-          if (confirmAction) {
-            _this.send(confirmAction);
-          }
-        },
-        cancel: function() {
-          if (cancelAction) {
-            _this.send(cancelAction);
-          }
-        }
-      });
-    },
-
     reset() {
       this.send('removeCustomer');
       this.set('selectedCategory', '');

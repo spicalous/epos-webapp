@@ -39,5 +39,3 @@ export default Ember.Controller.extend({
   }
 
 });
-
-  //TODO Disable search button on empty input
