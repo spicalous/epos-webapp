@@ -10,7 +10,7 @@ Router.map(function() {
   this.route('orders');
   this.route('restaurant');
   this.resource('customers');
-  this.resource('delivery-customer', { path: '/delivery-customer/:customer_id' }, function() {
+  this.resource('deliveryCustomer', { path: '/deliveryCustomer/:customer_id' }, function() {
     this.route('edit');
   });
 });

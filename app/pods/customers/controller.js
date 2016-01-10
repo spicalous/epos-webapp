@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
       let contactNumber = this.get('searchContactNumber');
       let _this = this;
 
-      this.send('showMessage', 'loader', { message: 'Saving customer..' });
+      this.send('showMessage', 'loader', { message: 'Searching customer..' });
       this.store.query('delivery-customer', {
         address: address,
         postcode: postcode,
@@ -45,7 +45,7 @@ export default Ember.Controller.extend({
     },
 
     transitionToCustomer(customer) {
-      this.transitionToRoute('delivery-customer', customer);
+      this.transitionToRoute('deliveryCustomer', customer);
     }
   }
 
