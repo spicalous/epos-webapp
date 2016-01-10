@@ -104,9 +104,7 @@ module.exports = function(app) {
 
   deliveryCustomerRouter.get('/:id', function(req, res) {
     res.send({
-      'delivery-customer': {
-        id: req.params.id
-      }
+      'delivery-customer': customers[req.params.id]
     });
   });
 
