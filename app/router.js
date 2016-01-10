@@ -9,7 +9,10 @@ Router.map(function() {
   this.route('orderpad');
   this.route('orders');
   this.route('restaurant');
-  this.route('customers');
+  this.resource('customers');
+  this.resource('delivery-customer', { path: '/delivery-customer/:customer_id' }, function() {
+    this.route('edit');
+  });
 });
 
 export default Router;

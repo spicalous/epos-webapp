@@ -42,6 +42,10 @@ export default Ember.Controller.extend({
           body: response.errors[0].message
         });
       });
+    },
+
+    transitionToCustomer(customer) {
+      this.transitionToRoute('delivery-customer', customer);
     }
   }
 

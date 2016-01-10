@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import Customer from './customer';
+import Customer from 'talaythai-webapp/models/customer';
 
 export default Customer.extend({
   address: DS.attr('string'),
