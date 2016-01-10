@@ -7,16 +7,6 @@ export default Ember.Component.extend({
   classNameBindings: ['disabled'],
   classNames: ['btn'],
 
-  /**
-   *  This flag is used to display a confirmation in the application
-   *  Using this flag assumes that the current controller has a "showConfirm" action
-   *  that sends an action to the application route to show the confirm
-   *  the consumer must also set the target of the button to the controller to ensure
-   *  that sending the action is handled by the controller
-   */
-  displayConfirm: false,
-
-  /** Message to display on the confirm */
   confirmMessage: '',
 
   click() {
