@@ -70,7 +70,7 @@
 
           <div class="row">
             <div class="col-xs-6">
-              {{#btn-button class="btn-lg btn-danger" action=(action "cancelOrder")
+              {{#btn-button class="btn-lg btn-danger" confirmAction=(action "cancelOrder")
               disabled=emptyOrder
               showMessage="showMessage"
               confirmMessage="Cancel the order?"}}
@@ -78,7 +78,7 @@
               {{/btn-button}}
             </div>
             <div class="col-xs-6">
-              {{#btn-button class="btn-lg btn-success" action="submitOrder"
+              {{#btn-button class="btn-lg btn-success" confirmAction="submitOrder"
               disabled=invalidOrder
               showMessage="showMessage"
               confirmMessage="Submit the order?"}}

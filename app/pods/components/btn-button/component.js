@@ -25,7 +25,7 @@ export default Ember.Component.extend({
         let _this = this;
         this.sendAction('showMessage', 'confirm', {
           message: this.get('confirmMessage'),
-          confirm: _this.get('action'),
+          confirm: _this.get('confirmAction'),
           cancel: function() {
           }
         });
