@@ -8,7 +8,7 @@ module.exports = function(environment) {
     podModulePrefix: 'talaythai-webapp/pods',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
