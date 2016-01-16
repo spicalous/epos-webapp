@@ -49,13 +49,32 @@ export default Ember.Controller.extend({
         }).catch(function(response) {
           _this.send('dismissMessage', 'loader');
           _this.send('showMessage', 'overlay', {
-            header: 'Error updating customer :(',
+            header: 'Failed to  update the customer :(',
             body: response.errors[0].message
           });
         });
       } else {
         this.send('disableEdit');
       }
+    },
+
+    deleteCustomer() {
+      let _this = this;
+
+      this.send('showMessage', 'loader', { message: 'Deleting customer..' });
+      this.get('model').destroyRecord().then(function() {
+        _this.send('dismissMessage', 'loader');
+        _this.send('showMessage', 'overlay', {
+          header: 'Customer Deleted ^^',
+          body: 'Customer deleted successfully'
+        });
+      }).catch(function(response) {
+        _this.send('dismissMessage', 'loader');
+        _this.send('showMessage', 'overlay', {
+          header: 'Failed to delete the customer :(',
+          body: response.errors[0].message
+        });
+      });
     }
   }
 

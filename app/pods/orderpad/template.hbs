@@ -78,7 +78,7 @@
               {{/btn-button}}
             </div>
             <div class="col-xs-6">
-              {{#btn-button class="btn-lg btn-success" confirmAction="submitOrder"
+              {{#btn-button class="btn-lg btn-success" confirmAction=(action "submitOrder")
               disabled=invalidOrder
               showMessage="showMessage"
               confirmMessage="Submit the order?"}}
