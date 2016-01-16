@@ -1,6 +1,6 @@
-<form class="form-horizontal top-bottom-gutter">
-  {{form-group label="ID" type="text" value=customer.id}}
-  {{form-group label="Telephone" type="number" value=customer.contactNumber}}
-  {{form-group label="Address" type="text" value=customer.address}}
-  {{form-group label="Postcode" type="text" value=customer.postcode}}
+<form class="form-horizontal">
+  {{form-group label="ID" type="text" value=customer.id readonly=true}}
+  {{form-group label="Telephone" type="number" value=customer.contactNumber disabled=disabled}}
+  {{form-group label="Address" type="text" value=customer.address disabled=disabled}}
+  {{form-group label="Postcode" type="text" value=customer.postcode disabled=disabled}}
 </form>
