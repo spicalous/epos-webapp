@@ -27,13 +27,28 @@ export default Ember.Controller.extend({
     },
 
     saveEdit() {
-      let _this = this;
+      let changedAttributes = this.get('model').changedAttributes();
+      let hasChangedAfterTrimming = false;
 
-      this.get('model').save().then(function() {
-        _this.set('editable', false);
-      }).catch(function() {
+      for (var attributes in changedAttributes) {
+        let oldVal = changedAttributes[attributes][0];
+        let newVal = changedAttributes[attributes][1];
+        if (oldVal !== newVal.trim()) {
+          hasChangedAfterTrimming = true;
+        }
+      }
 
-      });
+      if (hasChangedAfterTrimming) {
+        let _this = this;
+
+        this.get('model').save().then(function() {
+          _this.set('editable', false);
+        }).catch(function() {
+
+        });
+      } else {
+        this.send('disableEdit');
+      }
     }
   }
 
