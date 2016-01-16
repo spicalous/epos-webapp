@@ -28,9 +28,9 @@ export default Ember.Controller.extend({
     },
 
     saveEdit() {
+      //trailing whitespace is not disregarded so we check that here
       let changedAttributes = this.get('model').changedAttributes();
       let hasChangedAfterTrimming = false;
-
       for (var attributes in changedAttributes) {
         let oldVal = changedAttributes[attributes][0];
         let newVal = changedAttributes[attributes][1];
