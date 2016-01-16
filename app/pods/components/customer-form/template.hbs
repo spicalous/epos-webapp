@@ -1,20 +1,5 @@
 <form class="form-horizontal">
-  <div class="form-group">
-    <label class="col-xs-3 col-sm-2 left-right-gutter control-label" for="searchAddressRaw">Address</label>
-    <div class="col-xs-9 col-sm-10">
-      {{input class="form-control" type="text" id="searchAddressRaw" placeholder="House number and road name" value=searchAddressRaw}}
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-xs-3 col-sm-2 left-right-gutter control-label" for="searchPostcodeRaw">Postcode</label>
-    <div class="col-xs-9 col-sm-10">
-      {{input class="form-control" type="text" id="searchPostcodeRaw" placeholder="Postcode" value=searchPostcodeRaw}}
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-xs-3 col-sm-2 left-right-gutter control-label" for="searchContactNumberRaw">Contact no.</label>
-    <div class="col-xs-9 col-sm-10">
-      {{input class="form-control" type="number" id="searchContactNumberRaw" placeholder="Contact number" value=searchContactNumberRaw}}
-    </div>
-  </div>
+  {{form-group label="Address" type="text" placeholder="House number and road name" value=searchAddressRaw}}
+  {{form-group label="Postcode" type="text" placeholder="Postcode" value=searchPostcodeRaw}}
+  {{form-group label="Telephone" type="number" placeholder="Contact number" value=searchContactNumberRaw}}
 </form>
