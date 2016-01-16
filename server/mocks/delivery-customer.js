@@ -23,13 +23,6 @@ module.exports = function(app) {
     return result;
   }
 
-  function addCustomer(customer) {
-    var id = customers.length;
-    customer.id = id;
-    customers.push(customer);
-    return id;
-  }
-
   if (!String.prototype.startsWith) {
     String.prototype.startsWith = function(searchString, position) {
       position = position || 0;
@@ -90,7 +83,7 @@ module.exports = function(app) {
 
   deliveryCustomerRouter.post('/', function(req, res) {
     success ?
-      res.status(201).send({'delivery-customer': { id: addCustomer(req.body.deliveryCustomer) }}) :
+      res.status(201).send({'delivery-customer': { id: req .params.id } }) :
       res.status(400).send({
         errors: [{
           error: "Bad Gateway",
