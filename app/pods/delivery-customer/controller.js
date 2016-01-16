@@ -6,11 +6,15 @@ export default Ember.Controller.extend({
 
   saveDisabled: Ember.computed.not('canSave'),
 
-  canSave: Ember.computed.and('model.hasDirtyAttributes', 'hasNonEmptyFields'),
+  canSave: Ember.computed.and('model.hasDirtyAttributes', 'hasNonEmptyFields', 'validTelephone'),
 
   hasNonEmptyFields: Ember.computed('model.contactNumber', 'model.address', 'model.postcode', function() {
     let model = this.get('model');
-    return !!model.get('contactNumber') && !!model.get('address') && !!model.get('postcode');
+    return !!model.get('address').trim() && !!model.get('postcode').trim();
+  }),
+
+  validTelephone: Ember.computed('model.contactNumber', function() {
+    return this.get('model.contactNumber').length === 11;
   }),
 
   editable: false,
