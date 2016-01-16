@@ -41,10 +41,16 @@ export default Ember.Controller.extend({
       if (hasChangedAfterTrimming) {
         let _this = this;
 
+        this.send('showMessage', 'loader', { message: 'Updating customer..' });
         this.get('model').save().then(function() {
+          _this.send('dismissMessage', 'loader');
           _this.set('editable', false);
-        }).catch(function() {
-
+        }).catch(function(response) {
+          _this.send('dismissMessage', 'loader');
+          _this.send('showMessage', 'overlay', {
+            header: 'Error updating customer :(',
+            body: response.errors[0].message
+          });
         });
       } else {
         this.send('disableEdit');

@@ -109,11 +109,17 @@ module.exports = function(app) {
   });
 
   deliveryCustomerRouter.put('/:id', function(req, res) {
-    res.send({
-      'delivery-customer': {
-        id: req.params.id
-      }
-    });
+    success ?
+      res.send({ 'delivery-customer': { id: req .params.id } }) :
+      res.status(400).send({
+        errors: [{
+          error: "Bad Gateway",
+          exception: "com.lovetalaythai.eposdataservice.customer.exception",
+          message: "There was a problem updating the customer",
+          status: 400,
+          timestamp: 1445811517596
+        }]
+      });
   });
 
   deliveryCustomerRouter.delete('/:id', function(req, res) {
