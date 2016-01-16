@@ -2,22 +2,19 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+  validTelephone: Ember.computed.not('model.invalidTelephone'),
+
+  validAddress: Ember.computed.not('model.invalidAddress'),
+
+  validPostcode: Ember.computed.not('model.invalidPostcode'),
+
+  editable: false,
+
   editDisabled: Ember.computed.not('editable'),
 
   saveDisabled: Ember.computed.not('canSave'),
 
-  canSave: Ember.computed.and('model.hasDirtyAttributes', 'hasNonEmptyFields', 'validTelephone'),
-
-  hasNonEmptyFields: Ember.computed('model.contactNumber', 'model.address', 'model.postcode', function() {
-    let model = this.get('model');
-    return !!model.get('address').trim() && !!model.get('postcode').trim();
-  }),
-
-  validTelephone: Ember.computed('model.contactNumber', function() {
-    return this.get('model.contactNumber').length === 11;
-  }),
-
-  editable: false,
+  canSave: Ember.computed.and('model.hasDirtyAttributes', 'validTelephone', 'validAddress', 'validPostcode'),
 
   actions: {
 

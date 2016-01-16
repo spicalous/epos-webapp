@@ -1,7 +1,12 @@
 <form class="form-horizontal">
   {{form-group label="ID" type="text" value=customer.id readonly=true}}
-  {{form-group label="Telephone" type="number" value=customer.contactNumber
-      hasError=invalidTelephone disabled=disabled helpText="Please enter 11 digits."}}
-  {{form-group label="Address" type="text" value=customer.address disabled=disabled}}
-  {{form-group label="Postcode" type="text" value=customer.postcode disabled=disabled}}
+
+  {{form-group label="Telephone" type="number" value=customer.contactNumber disabled=disabled
+      hasError=customer.invalidTelephone helpText=customer.invalidTelephoneReason}}
+
+  {{form-group label="Address" type="text" value=customer.address disabled=disabled
+      hasError=customer.invalidAddress helpText=customer.invalidAddressReason}}
+
+  {{form-group label="Postcode" type="text" value=customer.postcode disabled=disabled
+      hasError=customer.invalidPostcode helpText=customer.invalidPostcodeReason}}
 </form>
