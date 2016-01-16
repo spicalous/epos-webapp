@@ -13,22 +13,19 @@
       <div class="row top-bottom-gutter">
 
         {{#if canSaveCustomer}}
-          <div class="col-xs-offset-8 col-xs-2 col-md-offset-7 col-md-2 left-right-gutter">
-            {{#btn-button class="btn-default btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
+          <div class="col-xs-6 col-sm-offset-2 col-sm-5 left-right-gutter">
+            {{#btn-button class="btn-default btn-lg btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
-        {{else}}
-          <div class="col-xs-offset-10 col-xs-2 col-md-offset-9 col-md-2">
-            {{#btn-button class="btn-default btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
-          </div>
-        {{/if}}
-
-        {{#if canSaveCustomer}}
-          <div class="col-xs-2 col-md-2">
-            {{#btn-button class="btn-primary" confirmAction=(action "saveAndSelectCustomer")
+          <div class="col-xs-6 col-sm-5">
+            {{#btn-button class="btn-primary btn-lg" confirmAction=(action "saveAndSelectCustomer")
             showMessage="showMessage"
             confirmMessage=(concat "Confirm saving customer: " searchAddress " " searchPostcode ", " searchContactNumber)}}
               Save
             {{/btn-button}}
+          </div>
+        {{else}}
+          <div class="col-xs-offset-6 col-xs-6 col-sm-offset-7 col-sm-5">
+            {{#btn-button class="btn-default btn-lg btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
         {{/if}}
 
