@@ -2,8 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  searchAddress: Ember.computed('searchAddressRaw', function() {
-    return this.get('searchAddressRaw') ? this.get('searchAddressRaw').trim() : '';
+  searchAddressOne: Ember.computed('searchAddressOneRaw', function() {
+    return this.get('searchAddressOneRaw') ? this.get('searchAddressOneRaw').trim() : '';
+  }),
+
+  searchAddressTwo: Ember.computed('searchAddressTwoRaw', function() {
+    return this.get('searchAddressTwoRaw') ? this.get('searchAddressTwoRaw').trim() : '';
   }),
 
   searchPostcode: Ember.computed('searchPostcodeRaw', function() {
@@ -14,21 +18,23 @@ export default Ember.Controller.extend({
     return this.get('searchContactNumberRaw') ? this.get('searchContactNumberRaw').trim() : '';
   }),
 
-  emptySearch: Ember.computed('searchAddressRaw', 'searchPostcodeRaw', 'searchContactNumberRaw', function() {
-    return !(this.get('searchAddressRaw') || this.get('searchPostcodeRaw') || this.get('searchContactNumberRaw'));
+  emptySearch: Ember.computed('searchAddressOneRaw', 'searchAddressTwoRaw', 'searchPostcodeRaw', 'searchContactNumberRaw', function() {
+    return !(this.get('searchAddressOneRaw') || this.get('searchAddressTwoRaw') || this.get('searchPostcodeRaw') || this.get('searchContactNumberRaw'));
   }),
 
   actions: {
 
     searchCustomer() {
-      let address = this.get('searchAddress');
+      let addressOne = this.get('searchAddressOne');
+      let addressTwo = this.get('searchAddressTwo');
       let postcode = this.get('searchPostcode');
       let contactNumber = this.get('searchContactNumber');
       let _this = this;
 
       this.send('showMessage', 'loader', { message: 'Searching customer..' });
       this.store.query('delivery-customer', {
-        address: address,
+        addressOne: addressOne,
+        addressTwo: addressTwo,
         postcode: postcode,
         contactNumber: contactNumber
       }).then(function(customers) {

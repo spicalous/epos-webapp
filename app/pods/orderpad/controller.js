@@ -10,8 +10,12 @@ export default Ember.Controller.extend({
   selectedCategory: '',
   numpadValue: '',
 
-  searchAddress: Ember.computed('searchAddressRaw', function() {
-    return this.get('searchAddressRaw') ? this.get('searchAddressRaw').trim() : '';
+  searchAddressOne: Ember.computed('searchAddressOneRaw', function() {
+    return this.get('searchAddressOneRaw') ? this.get('searchAddressOneRaw').trim() : '';
+  }),
+
+  searchAddressTwo: Ember.computed('searchAddressTwoRaw', function() {
+    return this.get('searchAddressTwoRaw') ? this.get('searchAddressTwoRaw').trim() : '';
   }),
 
   searchPostcode: Ember.computed('searchPostcodeRaw', function() {
@@ -32,12 +36,12 @@ export default Ember.Controller.extend({
     return this.get('customerFieldsNonEmpty') && this.get('searchContactNumber').length === 11;
   }),
 
-  customerFieldsNonEmpty: Ember.computed('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
-    return this.get('searchAddress') && this.get('searchPostcode') && this.get('searchContactNumber');
+  customerFieldsNonEmpty: Ember.computed('searchAddressOne', 'searchAddressTwo', 'searchPostcode', 'searchContactNumber', function() {
+    return (this.get('searchAddressOne') || this.get('searchAddressTwo')) && this.get('searchPostcode') && this.get('searchContactNumber');
   }),
 
-  hasCustomerQuery: Ember.computed('searchAddress', 'searchPostcode', 'searchContactNumber', function() {
-    return this.get('searchAddress') || this.get('searchPostcode') || this.get('searchContactNumber');
+  hasCustomerQuery: Ember.computed('searchAddressOne', 'searchAddressTwo', 'searchPostcode', 'searchContactNumber', function() {
+    return this.get('searchAddressOne') || this.get('searchAddressTwo') || this.get('searchPostcode') || this.get('searchContactNumber');
   }),
 
   invalidOrder: Ember.computed('emptyOrder', 'validCustomer', function() {
@@ -87,19 +91,21 @@ export default Ember.Controller.extend({
     this.set('menu', filteredMenu);
   }),
 
-  customerSearch: Ember.observer('searchAddressRaw', 'searchPostcodeRaw', 'searchContactNumberRaw', function() {
-    let address = this.get('searchAddress');
+  customerSearch: Ember.observer('searchAddressOneRaw', 'searchAddressTwoRaw', 'searchPostcodeRaw', 'searchContactNumberRaw', function() {
+    let addressOne = this.get('searchAddressOne');
+    let addressTwo = this.get('searchAddressTwo');
     let postcode = this.get('searchPostcode');
     let contactNumber = this.get('searchContactNumber');
     let _this = this;
 
     Ember.run.cancel(this.get('debouncedSearch'));
 
-    if (address || postcode || contactNumber) {
+    if (addressOne || addressTwo || postcode || contactNumber) {
 
       this.set('debouncedSearch', Ember.run.debounce(this, function() {
         this.store.query('delivery-customer', {
-          address: address,
+          addressOne: addressOne,
+          addressTwo: addressTwo,
           postcode: postcode,
           contactNumber: contactNumber
         }).then(function(customers) {
@@ -108,7 +114,7 @@ export default Ember.Controller.extend({
         }).catch(function(response) {
           _this.set('debouncedSearch', '');
           _this.send('showMessage', 'overlay', {
-            header: 'Failed to save :(',
+            header: 'Error searching for customers :(',
             body: response.errors[0].message
           });
         });
@@ -157,7 +163,8 @@ export default Ember.Controller.extend({
 
     saveAndSelectCustomer() {
       let customer = this.store.createRecord('delivery-customer', {
-        address: this.get('searchAddress'),
+        addressOne: this.get('searchAddressOne'),
+        addressTwo: this.get('searchAddressTwo'),
         postcode: this.get('searchPostcode'),
         contactNumber: this.get('searchContactNumber')
       });
@@ -187,7 +194,8 @@ export default Ember.Controller.extend({
     },
 
     hideCustomerBrowser() {
-      this.set('searchAddressRaw', '');
+      this.set('searchAddressOneRaw', '');
+      this.set('searchAddressTwoRaw', '');
       this.set('searchPostcodeRaw', '');
       this.set('searchContactNumberRaw', '');
 

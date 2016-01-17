@@ -4,7 +4,10 @@
   {{form-group label="Telephone" type="number" value=customer.contactNumber disabled=disabled
       hasError=customer.invalidTelephone helpText=customer.invalidTelephoneReason}}
 
-  {{form-group label="Address" type="text" value=customer.address disabled=disabled
+  {{form-group label="Flat/House number" type="text" value=customer.addressOne disabled=disabled
+      hasError=customer.invalidAddress}}
+
+  {{form-group label="Address" type="text" value=customer.addressTwo disabled=disabled
       hasError=customer.invalidAddress helpText=customer.invalidAddressReason}}
 
   {{form-group label="Postcode" type="text" value=customer.postcode disabled=disabled
