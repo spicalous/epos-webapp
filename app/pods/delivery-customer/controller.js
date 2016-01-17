@@ -70,7 +70,10 @@ export default Ember.Controller.extend({
         _this.send('dismissMessage', 'loader');
         _this.send('showMessage', 'overlay', {
           header: 'Deleted ^^',
-          body: 'Customer deleted successfully'
+          body: 'Customer deleted successfully',
+          callback: function() {
+            _this.transitionToRoute('customers');
+          }
         });
       }).catch(function(response) {
         _this.send('dismissMessage', 'loader');
