@@ -13,8 +13,8 @@
     {{#btn-button class="btn-primary btn-lg" action="searchCustomer" disabled=emptySearch}}Search{{/btn-button}}
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-6">
+<div class="row top-bottom-gutter left-right-gutter">
+  <div class="col-xs-12 col-sm-offset-1 col-sm-10">
     {{delivery-customer-list deliveryCustomers=deliveryCustomerResults selectDeliveryCustomer=(action "transitionToCustomer")}}
   </div>
 </div>
