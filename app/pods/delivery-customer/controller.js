@@ -46,10 +46,14 @@ export default Ember.Controller.extend({
         this.get('model').save().then(function() {
           _this.send('dismissMessage', 'loader');
           _this.set('editable', false);
+          _this.send('showMessage', 'overlay', {
+            header: 'Updated ^^',
+            body: 'Customer updated successfully'
+          });
         }).catch(function(response) {
           _this.send('dismissMessage', 'loader');
           _this.send('showMessage', 'overlay', {
-            header: 'Failed to  update the customer :(',
+            header: 'Failed to update the customer :(',
             body: response.errors[0].message
           });
         });
@@ -65,7 +69,7 @@ export default Ember.Controller.extend({
       this.get('model').destroyRecord().then(function() {
         _this.send('dismissMessage', 'loader');
         _this.send('showMessage', 'overlay', {
-          header: 'Customer Deleted ^^',
+          header: 'Deleted ^^',
           body: 'Customer deleted successfully'
         });
       }).catch(function(response) {
