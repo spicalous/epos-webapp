@@ -114,7 +114,7 @@ export default Ember.Controller.extend({
         }).catch(function(response) {
           _this.set('debouncedSearch', '');
           _this.send('showMessage', 'overlay', {
-            header: 'Failed to save :(',
+            header: 'Error searching for customers :(',
             body: response.errors[0].message
           });
         });

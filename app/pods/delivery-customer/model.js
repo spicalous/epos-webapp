@@ -29,7 +29,7 @@ export default Customer.extend({
     let addressOne = this.get('addressOne');
     let addressTwo = this.get('addressTwo');
 
-    if (!addressOne.trim() && !addressTwo.trim()) {
+    if (!(addressOne.trim() + !addressTwo.trim())) {
       return "Address must not be empty.";
     }
     if (addressOne.length > 100 || addressTwo.length > 100) {
