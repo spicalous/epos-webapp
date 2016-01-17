@@ -12,6 +12,9 @@ export default DS.Model.extend({
   invalidTelephoneReason: Ember.computed('contactNumber', function() {
     let contactNumber = this.get('contactNumber');
 
+    if (!contactNumber) {
+      return "Telephone number must not be empty.";
+    }
     if (!contactNumber.trim()) {
       return "Telephone number must not be empty.";
     }
