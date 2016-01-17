@@ -13,7 +13,8 @@ module.exports = function(app) {
     for (var i = 0; i < numberOfCustomers; i++) {
       var customer = {
         id: i,
-        address: i + " road name road",
+        addressOne: i + "",
+        addressTwo: "RANDOM ROAD",
         postcode: "AB" + i + " 1CD",
         contactNumber: "0" + (2090000000 - i)
       }
@@ -36,26 +37,32 @@ module.exports = function(app) {
     var body;
 
     if (success) {
-      if (req.query.address || req.query.postcode || req.query.contactNumber) {
+      if (req.query.addressOne || req.query.addressTwo || req.query.postcode || req.query.contactNumber) {
         body = customers.filter(function(customer) {
           var result = false,
               failed = false,
               prev = false;
 
-          if (req.query.address) {
-            result = customer.address.startsWith(req.query.address);
+          if (req.query.addressOne) {
+            result = customer.addressOne.startsWith(req.query.addressOne);
             failed = !result
+          }
+          if (!failed && req.query.addressTwo) {
+            result = result ?
+                result && customer.addressTwo.startsWith(req.query.addressTwo) :
+                result = customer.addressTwo.startsWith(req.query.addressTwo);
+            failed = !result;
           }
           if (!failed && req.query.postcode) {
             result = result ?
-                result && customer.postcode.startsWith(req.query.postcode)
-                : result = customer.postcode.startsWith(req.query.postcode);
+                result && customer.postcode.startsWith(req.query.postcode) :
+                result = customer.postcode.startsWith(req.query.postcode);
             failed = !result;
           }
           if (!failed && req.query.contactNumber) {
             result = result ?
-                result = result && customer.contactNumber.startsWith(req.query.contactNumber)
-                : result = customer.contactNumber.startsWith(req.query.contactNumber);
+                result = result && customer.contactNumber.startsWith(req.query.contactNumber) :
+                result = customer.contactNumber.startsWith(req.query.contactNumber);
             failed = !result;
           }
 
