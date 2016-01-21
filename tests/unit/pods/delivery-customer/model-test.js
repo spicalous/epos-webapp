@@ -1,4 +1,5 @@
 import { moduleForModel, test } from 'ember-qunit';
+import Ember from 'ember';
 
 moduleForModel('delivery-customer', 'Unit | Model | delivery customer', {
   // Specify the other units that are required for this test.
@@ -17,7 +18,7 @@ test('address one only', function(assert) {
 
   Ember.run(function() {
     address = model.get('address');
-  })
+  });
 
   assert.equal(address, 'addressOne');
 });
@@ -28,7 +29,7 @@ test('address two only', function(assert) {
 
   Ember.run(function() {
     address = model.get('address');
-  })
+  });
 
   assert.equal(address, 'addressTwo');
 });
@@ -43,7 +44,7 @@ test('address one and two', function(assert) {
 
   Ember.run(function() {
     address = model.get('address');
-  })
+  });
 
   assert.equal(address, 'addressOne addressTwo');
 });
