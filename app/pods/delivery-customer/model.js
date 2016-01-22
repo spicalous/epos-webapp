@@ -13,8 +13,8 @@ export default Customer.extend({
     let addressTwo = this.get('addressTwo');
 
     return addressOne ?
-        addressOne + (addressTwo ? ' ' + addressTwo : '') :
-        addressTwo;
+        addressOne.trim() + (addressTwo ? ' ' + addressTwo.trim() : '') :
+        addressTwo.trim();
   }),
 
   invalidAddress: Ember.computed('invalidAddressReason', function() {
@@ -25,11 +25,14 @@ export default Customer.extend({
     return !!this.get('invalidPostcodeReason');
   }),
 
-  invalidAddressReason: Ember.computed('address', function() {
+  invalidAddressReason: Ember.computed('addressOne', 'addressTwo', function() {
     let addressOne = this.get('addressOne');
     let addressTwo = this.get('addressTwo');
 
-    if (!(addressOne.trim() + addressTwo.trim())) {
+    if (!addressOne && !addressTwo) {
+      return "Address must not be empty.";
+    }
+    if (!this.get('address')) {
       return "Address must not be empty.";
     }
     if (addressOne.length > 100 || addressTwo.length > 100) {
