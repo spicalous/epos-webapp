@@ -1,8 +1,20 @@
 <div class="top-bottom-gutter">
   <form class="form-horizontal">
-    {{form-group label="Tel" type="number" placeholder="Telephone" value=customer.contactNumber
-        hasError=customer.invalidTelephone helpText=customer.invalidTelephoneReason}}
-    {{form-group label="Name" type="text" placeholder="Name" value=customer.name
-        hasError=customer.invalidName helpText=customer.invalidNameReason}}
+    {{#form-group label="Tel" hasError=customer.invalidTelephone helpText=customer.invalidTelephoneReason}}
+      <div class="input-group">
+        {{input class="form-control" type="number" placeholder="Telephone" value=customer.contactNumber}}
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-earphone"></span>
+        </span>
+      </div>
+    {{/form-group}}
+    {{#form-group label="Name" hasError=customer.invalidName helpText=customer.invalidNameReason}}
+      <div class="input-group">
+        {{input class="form-control" type="text" placeholder="Name" value=customer.name}}
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-user"></span>
+        </span>
+      </div>
+    {{/form-group}}
   </form>
 </div>
