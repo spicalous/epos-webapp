@@ -7,12 +7,13 @@ export default Ember.Component.extend({
   classNameBindings: ['disabled'],
   classNames: ['btn'],
 
-  confirmMessage: '',
+  confirmMessage: 'Are you sure?',
+  messageToShow: 'confirm',
 
   click() {
     if (!this.get('disabled')) {
       if (this.get('showMessage')) {
-        this.sendAction('showMessage', 'confirm', {
+        this.sendAction('showMessage', this.get('messageToShow'), {
           message: this.get('confirmMessage'),
           confirm: this.get('confirmAction'),
           cancel: function() {}
