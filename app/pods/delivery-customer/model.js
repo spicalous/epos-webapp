@@ -29,7 +29,7 @@ export default Customer.extend({
     let addressOne = this.get('addressOne');
     let addressTwo = this.get('addressTwo');
 
-    if (!(addressOne.trim() + !addressTwo.trim())) {
+    if (!(addressOne.trim() + addressTwo.trim())) {
       return "Address must not be empty.";
     }
     if (addressOne.length > 100 || addressTwo.length > 100) {
@@ -41,10 +41,7 @@ export default Customer.extend({
   invalidPostcodeReason: Ember.computed('postcode', function() {
     let postcode = this.get('postcode');
 
-    if (!postcode.trim()) {
-      return "Postcode must not be empty.";
-    }
-    if (postcode.length > 10) {
+    if (postcode && postcode.length > 10) {
       return "Postcode not be more than 10 characters.";
     }
     return "";
