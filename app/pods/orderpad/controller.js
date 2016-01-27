@@ -61,6 +61,10 @@ export default Ember.Controller.extend({
               false);
   }),
 
+  cannotCancelOrder: Ember.computed('model.customer', 'emptyOrder', function() {
+    return this.get('emptyOrder') && !this.get('model.customer');
+  }),
+
   emptyOrder: Ember.computed('model.order.size', function() {
     return this.get('model.order.size') > 0 ? false : true;
   }),
