@@ -9,12 +9,12 @@ export default Customer.extend({
   postcode: DS.attr('string'),
 
   address: Ember.computed('addressOne', 'addressTwo', function() {
-    let addressOne = this.get('addressOne');
-    let addressTwo = this.get('addressTwo');
+    let addressOne = this.get('addressOne') ? this.get('addressOne').trim() : '';
+    let addressTwo = this.get('addressTwo') ? this.get('addressTwo').trim() : '';
 
     return addressOne ?
-        addressOne.trim() + (addressTwo ? ' ' + addressTwo.trim() : '') :
-        addressTwo.trim();
+        addressOne + (addressTwo ? ' ' + addressTwo : '') :
+        addressTwo;
   }),
 
   invalidAddress: Ember.computed('invalidAddressReason', function() {
@@ -29,13 +29,10 @@ export default Customer.extend({
     let addressOne = this.get('addressOne');
     let addressTwo = this.get('addressTwo');
 
-    if (!addressOne && !addressTwo) {
-      return "Address must not be empty.";
-    }
     if (!this.get('address')) {
       return "Address must not be empty.";
     }
-    if (addressOne.length > 100 || addressTwo.length > 100) {
+    if ((addressOne && addressOne.length > 100) || (addressTwo && addressTwo.length > 100)) {
       return "Address must not be more than 100 characters.";
     }
     return "";
