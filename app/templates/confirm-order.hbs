@@ -1,13 +1,16 @@
 <div class="confirm-order">
   <div class="container-fluid">
 
-    <div id="confirm-order-top">
-      <div class="row top-bottom-gutter">
-        <div class="col-xs-12 col-sm-offset-1 col-sm-10 left-right-gutter">
-          <div class="lead top-bottom-gutter">
-            Review order
-          </div>
+    <div id="confirm-order-list-header" class="row">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 left-right-gutter top-bottom-gutter">
+        <div class="lead">
+          Review order
         </div>
+      </div>
+    </div>
+    <div id="confirm-order-list" class="row scroll-y top-bottom-gutter">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 left-right-gutter">
+        {{order-list order=model.order}}
       </div>
     </div>
 
@@ -32,7 +35,7 @@
           <div class="lead top-bottom-gutter">
             Notes
           </div>
-          {{textarea class="form-control" rows="3" value=model.order.notes}}
+          {{textarea class="form-control" rows="2" value=model.order.notes}}
         </div>
       </div>
       <div style="height:20px"></div>
@@ -43,7 +46,7 @@
           {{/btn-button}}
         </div>
         <div class="col-xs-6">
-          {{#btn-button class="btn-lg btn-success" action="submitOrder"}}
+          {{#btn-button class="btn-lg btn-success" disabled=invalidOrder action="submitOrder"}}
             CONFIRM
           {{/btn-button}}
         </div>

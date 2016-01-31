@@ -40,8 +40,9 @@ export default Ember.Component.extend({
         $('#orderpad-bottom').outerHeight()));
     $('#customer-browser-bottom').outerHeight(windowHeight -
         $('#customer-browser-top').outerHeight());
-    $('#confirm-order-top').outerHeight(windowHeight -
-        $('#confirm-order-bottom').outerHeight());
+    $('#confirm-order-list').outerHeight(windowHeight - (
+        $('#confirm-order-list-header').outerHeight() +
+        $('#confirm-order-bottom').outerHeight()));
   },
 
   didInsertElement() {
