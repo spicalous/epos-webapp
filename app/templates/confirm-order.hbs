@@ -17,27 +17,13 @@
           <div class="lead top-bottom-gutter">
             Estimated Delivery Time
           </div>
-          <select class="form-control">
-            <option>20</option>
-            <option>25</option>
-            <option>30</option>
-            <option>35</option>
-            <option>40</option>
-            <option>45</option>
-            <option>50</option>
-            <option>55</option>
-            <option>60+</option>
-          </select>
+          {{select-component content=estimatedDeliveryTimes selectedValue=model.order.estimatedTime action=(action (mut model.order.estimatedTime))}}
         </div>
         <div class="col-xs-6 col-sm-5 left-right-gutter">
           <div class="lead top-bottom-gutter">
             Payment Method
           </div>
-          <select class="form-control">
-            <option>CASH</option>
-            <option>CARD</option>
-            <option>ONLINE</option>
-          </select>
+          {{select-component content=paymentMethods selectedValue=model.order.paymentMethod action=(action (mut model.order.paymentMethod))}}
         </div>
       </div>
 

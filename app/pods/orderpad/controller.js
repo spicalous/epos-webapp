@@ -9,6 +9,8 @@ export default Ember.Controller.extend({
 
   selectedCategory: '',
   numpadValue: '',
+  paymentMethods: ['CASH', 'CARD', 'ONLINE'],
+  estimatedDeliveryTimes: ['20', '25', '30', '35', '40', '45', '50', '55', '60', '60+'],
 
   searchAddressOne: Ember.computed('searchAddressOneRaw', function() {
     return this.get('searchAddressOneRaw') ? this.get('searchAddressOneRaw').trim() : '';
@@ -224,7 +226,7 @@ export default Ember.Controller.extend({
           header: 'Confirmed ^.^',
           body: 'Order submitted successfully',
           callback: function() {
-            _this.set('model.order', _this.store.createRecord('order', {}));
+            _this.set('model.order', _this.store.createRecord('order'));
             _this.send('hideConfirmOrder');
           }
         });
@@ -248,7 +250,7 @@ export default Ember.Controller.extend({
     cancelOrder() {
       this.send('reset');
       this.get('model.order').destroyRecord();
-      this.set('model.order', this.store.createRecord('order', {}));
+      this.set('model.order', this.store.createRecord('order'));
       this.send('showMessage', 'overlay', {
         header: 'Order Cancelled'
       });
