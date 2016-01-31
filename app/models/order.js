@@ -2,6 +2,9 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   dateTime: DS.attr('date'),
+  estimatedTime: DS.attr('date'),
+  paymentMethod: DS.attr('string'),
+  notes: DS.attr('string'),
   orderItems: DS.hasMany('order-item'),
   customer: DS.belongsTo('customer', { polymorphic: true }),
 

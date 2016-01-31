@@ -32,6 +32,27 @@ export default Ember.Route.extend({
         outlet: 'customer-browser',
         parentView: 'orderpad'
       });
+    },
+
+    showConfirmOrder() {
+      $('#orderpad-modal').modal('hide');
+
+      this.render('confirm-order', {
+        into: 'orderpad',
+        outlet: 'confirm-order',
+      });
+
+      Ember.run.scheduleOnce('afterRender', this, function() {
+        $(window).resize();
+      });
+    },
+
+    hideConfirmOrder() {
+      this.disconnectOutlet({
+        outlet: 'confirm-order',
+        parentView: 'orderpad'
+      });
     }
+
   }
 });

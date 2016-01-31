@@ -225,7 +225,7 @@ export default Ember.Controller.extend({
           body: 'Order submitted successfully',
           callback: function() {
             _this.set('model.order', _this.store.createRecord('order', {}));
-            _this.set('model.customer', null);
+            _this.send('hideConfirmOrder');
           }
         });
 

@@ -21,14 +21,15 @@ export default Ember.Component.extend({
       this.notifyPropertyChange('NAV_HEIGHT'); //recalculate window.height
       windowHeight = windowHeight - this.get('NAV_HEIGHT');
     }
+
     if (windowWidth < 768) {
       $('#orderpad-menu').height(windowHeight - (
-          16 + //menu inline padding in orderpad template
+          16 + //menu inline padding in orderpad template style="padding:8px" id="orderpad-menu"
           $('#orderpad-customer-small').outerHeight() +
           $('#orderpad-categories').outerHeight()));
     } else {
       $('#orderpad-menu').height(windowHeight - (
-          16 + //menu inline padding in orderpad template
+          16 + //menu inline padding in orderpad template style="padding:8px" id="orderpad-menu"
           $('#orderpad-categories').outerHeight()));
       $('#orderpad-numpad').height(windowHeight -
           $('#orderpad-categories').outerHeight());
@@ -39,6 +40,8 @@ export default Ember.Component.extend({
         $('#orderpad-bottom').outerHeight()));
     $('#customer-browser-bottom').outerHeight(windowHeight -
         $('#customer-browser-top').outerHeight());
+    $('#confirm-order-top').outerHeight(windowHeight -
+        $('#confirm-order-bottom').outerHeight());
   },
 
   didInsertElement() {

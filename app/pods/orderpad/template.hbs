@@ -5,6 +5,8 @@
     <div style="padding-top:50px"></div>
   {{/if}}
 
+  {{outlet "confirm-order"}}
+
   {{outlet "customer-browser"}}
 
   <div class="container-fluid">
@@ -76,10 +78,7 @@
               {{/btn-button}}
             </div>
             <div class="col-xs-6">
-              {{#btn-button class="btn-lg btn-success" confirmAction=(action "submitOrder")
-              disabled=invalidOrder
-              showMessage="showMessage"
-              confirmMessage="Submit the order?"}}
+              {{#btn-button class="btn-lg btn-success" action="showConfirmOrder" disabled=invalidOrder}}
                 SUBMIT ORDER
               {{/btn-button}}
             </div>
@@ -109,10 +108,10 @@
 
       <div class="row">
         <div class="col-xs-6">
-          {{#btn-button class="btn-danger btn-lg" action="cancelOrder" disabled=emptyOrder}}CANCEL ORDER{{/btn-button}}
+          {{#btn-button class="btn-danger btn-lg" action="cancelOrder" disabled=cannotCancelOrder}}CANCEL ORDER{{/btn-button}}
         </div>
         <div class="col-xs-6">
-          {{#btn-button class="btn-success btn-lg" action="submitOrder" disabled=invalidOrder}}SUBMIT ORDER{{/btn-button}}
+          {{#btn-button class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}SUBMIT ORDER{{/btn-button}}
         </div>
         <div class="col-xs-12">
           {{#btn-button class="btn-default btn-close btn-lg" data-dismiss="modal"}}CLOSE{{/btn-button}}
