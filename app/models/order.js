@@ -13,7 +13,7 @@ export default DS.Model.extend({
       function(prev, orderItem) {
         return prev + orderItem.get('total');
       }, 0);
-  }.property('orderItems.@each.quantity'),  //TODO: BUG WITH EMBER 2.2.0
+  }.property('orderItems.@each.quantity', 'orderItems.@each.total'),  //TODO: (Warning) Bug with ember 2.2.0 when upgrading
 
   displayTotal: function() {
     return (this.get('total') / 100).toFixed(2);
@@ -24,7 +24,7 @@ export default DS.Model.extend({
       function(prev, orderItem) {
         return prev + orderItem.get('quantity');
       }, 0);
-  }.property('orderItems.@each.quantity'), //TODO: BUG WITH EMBER 2.2.0
+  }.property('orderItems.@each.quantity'), //TODO: (Warning) Bug with ember 2.2.0 when upgrading
 
   addItem: function(menuItem) {
     var orderItems = this.get('orderItems');

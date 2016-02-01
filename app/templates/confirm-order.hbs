@@ -8,6 +8,7 @@
         </div>
       </div>
     </div>
+
     <div id="confirm-order-list" class="row scroll-y top-bottom-gutter">
       <div class="col-xs-12 col-sm-offset-1 col-sm-10 left-right-gutter">
         {{order-list order=model.order}}
@@ -15,6 +16,14 @@
     </div>
 
     <div id="confirm-order-bottom">
+      <div class="row top-bottom-gutter">
+        <div class="col-xs-6 col-sm-offset-1 col-sm-5 text-center top-bottom-gutter top-bottom-border">
+          <span class="lead">ITEMS: {{model.order.size}}</span>
+        </div>
+        <div class="col-xs-6 col-sm-5 text-center top-bottom-gutter top-bottom-border">
+          <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
+        </div>
+      </div>
       <div class="row top-bottom-gutter">
         <div class="col-xs-6 col-sm-offset-1 col-sm-5 left-right-gutter">
           <div class="lead top-bottom-gutter">
