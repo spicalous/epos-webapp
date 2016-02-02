@@ -10,21 +10,24 @@ export default DS.Model.extend({
   }),
 
   invalidTelephoneReason: Ember.computed('contactNumber', function() {
+    let customerType = this.get('customerType');
     let contactNumber = this.get('contactNumber');
 
     if (!contactNumber) {
-      return "Telephone number must not be empty.";
+      return (customerType === 'takeaway-customer') ?
+      '' :
+      'Telephone number must not be empty.';
     }
     if (!contactNumber.trim()) {
-      return "Telephone number must not be empty.";
+      return 'Telephone number must not be empty.';
     }
     if (contactNumber.length < 11) {
-      return "Telephone number too short.";
+      return 'Telephone number too short.';
     }
     if (contactNumber.length > 11) {
-      return "Telephone number too long.";
+      return 'Telephone number too long.';
     }
-    return "";
+    return '';
   })
 
 });

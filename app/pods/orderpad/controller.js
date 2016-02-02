@@ -50,17 +50,18 @@ export default Ember.Controller.extend({
     return this.get('emptyOrder') || !this.get('validCustomer');
   }),
 
-  validCustomer: Ember.computed('model.customer', 'model.customer.name', 'model.customer.contactNumber', function() {
+  validCustomer: Ember.computed('model.customer', 'model.customer.invalidTelephone',
+      'model.customer.invalidAddress', 'invalidPostcode', function() {
+
     let customer = this.get('model.customer');
+
     if (!customer) {
       return false;
     }
-    return !!customer.get('contactNumber') && customer.get('contactNumber').length === 11 &&
-        ((customer.get('customerType') === 'takeaway-customer') ?
-            !!customer.get('name') :
-            (customer.get('customerType') === 'delivery-customer') ?
-              (!!customer.get('address') && !!customer.get('postcode')) :
-              false);
+    if (customer.get('customerType') === 'takeaway-customer') {
+      return !customer.get('invalidTelephone');
+    }
+    return !customer.get('invalidTelephone') && !customer.get('invalidAddress') && !customer.get('invalidPostcode');
   }),
 
   cannotCancelOrder: Ember.computed('model.customer', 'emptyOrder', function() {
