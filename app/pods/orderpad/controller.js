@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
 
   selectedCategory: '',
   numpadValue: '',
-  paymentMethods: ['CASH', 'CARD', 'ONLINE'],
+  paymentMethods: ['', 'CASH', 'CARD', 'ONLINE'],
   estimatedDeliveryTimes: ['20', '25', '30', '35', '40', '45', '50', '55', '60', '70'],
 
   searchAddressOne: Ember.computed('searchAddressOneRaw', function() {
