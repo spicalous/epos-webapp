@@ -42,7 +42,7 @@ export default Customer.extend({
     let postcode = this.get('postcode');
 
     if (postcode && postcode.length > 10) {
-      return 'Postcode not be more than 10 characters.';
+      return 'Postcode must not be more than 10 characters.';
     }
     return '';
   }),

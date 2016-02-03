@@ -2,11 +2,7 @@
 <div style="padding-top:50px"></div>
 <div class="row top-bottom-gutter">
   <div class="col-xs-12">
-    {{customer-form
-        searchAddressOneRaw=searchAddressOneRaw
-        searchAddressTwoRaw=searchAddressTwoRaw
-        searchPostcodeRaw=searchPostcodeRaw
-        searchContactNumberRaw=searchContactNumberRaw}}
+    {{customer-form customer=model validate=false}}
   </div>
 </div>
 <div class="row">

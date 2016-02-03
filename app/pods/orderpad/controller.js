@@ -12,38 +12,14 @@ export default Ember.Controller.extend({
   paymentMethods: ['', 'CASH', 'CARD', 'ONLINE'],
   estimatedDeliveryTimes: ['20', '25', '30', '35', '40', '45', '50', '55', '60', '70'],
 
-  searchAddressOne: Ember.computed('searchAddressOneRaw', function() {
-    return this.get('searchAddressOneRaw') ? this.get('searchAddressOneRaw').trim() : '';
-  }),
-
-  searchAddressTwo: Ember.computed('searchAddressTwoRaw', function() {
-    return this.get('searchAddressTwoRaw') ? this.get('searchAddressTwoRaw').trim() : '';
-  }),
-
-  searchPostcode: Ember.computed('searchPostcodeRaw', function() {
-    return this.get('searchPostcodeRaw') ? this.get('searchPostcodeRaw').trim() : '';
-  }),
-
-  searchContactNumber: Ember.computed('searchContactNumberRaw', function() {
-    return this.get('searchContactNumberRaw') ? this.get('searchContactNumberRaw').trim() : '';
-  }),
-
-  canSaveCustomer: Ember.computed('validSearchDeliveryCustomer', 'emptySearchResults', 'debouncedSearch', function() {
-    return this.get('validSearchDeliveryCustomer') && this.get('emptySearchResults') && !this.get('debouncedSearch');
+  canSaveCustomer: Ember.computed('validCustomer', 'emptySearchResults', 'debouncedSearch', function() {
+    return this.get('validCustomer') && this.get('emptySearchResults') && !this.get('debouncedSearch');
   }),
 
   emptySearchResults: Ember.computed.empty('deliveryCustomerResults'),
 
-  validSearchDeliveryCustomer: Ember.computed('customerFieldsNonEmpty', 'searchContactNumber', function() {
-    return this.get('customerFieldsNonEmpty') && this.get('searchContactNumber').length === 11;
-  }),
-
-  customerFieldsNonEmpty: Ember.computed('searchAddressOne', 'searchAddressTwo', 'searchPostcode', 'searchContactNumber', function() {
-    return (this.get('searchAddressOne') || this.get('searchAddressTwo')) && this.get('searchPostcode') && this.get('searchContactNumber');
-  }),
-
-  hasCustomerQuery: Ember.computed('searchAddressOne', 'searchAddressTwo', 'searchPostcode', 'searchContactNumber', function() {
-    return this.get('searchAddressOne') || this.get('searchAddressTwo') || this.get('searchPostcode') || this.get('searchContactNumber');
+  hasCustomerQuery: Ember.computed('model.customer.contactNumber', 'model.customer.addressOne', 'model.customer.addressTwo', 'model.customer.postcode', function() {
+    return this.get('model.customer.contactNumber') || this.get('model.customer.addressOne') || this.get('model.customer.addressTwo') || this.get('model.customer.postcode');
   }),
 
   invalidOrder: Ember.computed('emptyOrder', 'validCustomer', function() {
@@ -98,11 +74,11 @@ export default Ember.Controller.extend({
     this.set('menu', filteredMenu);
   }),
 
-  customerSearch: Ember.observer('searchAddressOneRaw', 'searchAddressTwoRaw', 'searchPostcodeRaw', 'searchContactNumberRaw', function() {
-    let addressOne = this.get('searchAddressOne');
-    let addressTwo = this.get('searchAddressTwo');
-    let postcode = this.get('searchPostcode');
-    let contactNumber = this.get('searchContactNumber');
+  customerSearch: Ember.observer('model.customer.contactNumber', 'model.customer.addressOne', 'model.customer.addressTwo', 'model.customer.postcode', function() {
+    let contactNumber = this.get('model.customer.contactNumber');
+    let addressOne = this.get('model.customer.addressOne');
+    let addressTwo = this.get('model.customer.addressTwo');
+    let postcode = this.get('model.customer.postcode');
     let _this = this;
 
     Ember.run.cancel(this.get('debouncedSearch'));
@@ -154,10 +130,9 @@ export default Ember.Controller.extend({
     },
 
     setCustomer(type) {
-      if (type === 'takeaway-customer') {
-        let customer = this.store.createRecord(type);
-        this.set('model.customer', customer);
-      }
+      let customer = this.store.createRecord(type);
+      this.set('model.customer', customer);
+
       if (type === 'delivery-customer') {
         this.send('showCustomerBrowser');
       }
@@ -169,21 +144,14 @@ export default Ember.Controller.extend({
     },
 
     saveAndSelectCustomer() {
-      let customer = this.store.createRecord('delivery-customer', {
-        addressOne: this.get('searchAddressOne'),
-        addressTwo: this.get('searchAddressTwo'),
-        postcode: this.get('searchPostcode'),
-        contactNumber: this.get('searchContactNumber')
-      });
-
       let _this = this;
-      let _customer = customer;
+      let customer = this.get('model.customer');
 
       this.send('showMessage', 'loader', { message: 'Saving customer..' });
 
       customer.save().then(function() {
         _this.send('dismissMessage', 'loader');
-        _this.send('selectCustomer', _customer);
+        _this.send('hideCustomerBrowser');
         _this.send('showMessage', 'toast', {
           body: 'Customer saved successfully'
         });
@@ -200,13 +168,9 @@ export default Ember.Controller.extend({
       this.set('model.customer', null);
     },
 
-    hideCustomerBrowser() {
-      this.set('searchAddressOneRaw', '');
-      this.set('searchAddressTwoRaw', '');
-      this.set('searchPostcodeRaw', '');
-      this.set('searchContactNumberRaw', '');
-
-      return true; //bubble to the route
+    removeAndHideCustomerBrowser() {
+      this.send('removeCustomer');
+      this.send('hideCustomerBrowser');
     },
 
     submitOrder() {

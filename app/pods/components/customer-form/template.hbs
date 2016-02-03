@@ -1,13 +1,16 @@
 <form class="form-horizontal">
-  {{#form-group label="Telephone"}}
+  {{#form-group label="Telephone" hasError=(if validate customer.invalidTelephone)}}
     <div class="input-group">
-      {{input class="form-control" type="number" placeholder="Telephone" value=searchContactNumberRaw}}
+      {{input class="form-control" type="number" placeholder="Telephone" value=customer.contactNumber}}
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-earphone"></span>
       </span>
     </div>
   {{/form-group}}
-  {{form-group label="Flat/House" type="text" placeholder="Flat or house number" value=searchAddressOneRaw}}
-  {{form-group label="Address" type="text" placeholder="Road name" value=searchAddressTwoRaw}}
-  {{form-group label="Postcode" type="text" placeholder="Postcode" value=searchPostcodeRaw}}
+  {{form-group label="Flat/House" type="text" placeholder="Flat or house number"
+      value=customer.addressOne hasError=(if validate customer.invalidAddress)}}
+  {{form-group label="Address" type="text" placeholder="Road name"
+      value=customer.addressTwo hasError=(if validate customer.invalidAddress)}}
+  {{form-group label="Postcode" type="text" placeholder="Postcode"
+      value=customer.postcode hasError=(if validate customer.invalidPostcode)}}
 </form>

@@ -4,11 +4,7 @@
     <div id="customer-browser-top" class="top-bottom-gutter">
       <div class="row top-bottom-gutter">
         <div class="col-xs-12">
-          {{customer-form
-          searchAddressOneRaw=searchAddressOneRaw
-          searchAddressTwoRaw=searchAddressTwoRaw
-          searchPostcodeRaw=searchPostcodeRaw
-          searchContactNumberRaw=searchContactNumberRaw}}
+          {{customer-form customer=model.customer}}
         </div>
       </div>
 
@@ -16,8 +12,10 @@
         <div class="row top-bottom-gutter">
           <div class="col-xs-12 col-sm-offset-2 col-sm-10 left-right-gutter">
             {{#alert-box alertType="info"}}
-              Please enter a unique address, postcode and an 11 digit contact number to
-              save the customer
+              {{if model.customer.invalidTelephone model.customer.invalidTelephoneReason}}
+              {{if model.customer.invalidAddress model.customer.invalidAddressReason}}
+              {{if model.customer.invalidPostcode model.customer.invalidPostcodeReason}}
+              Please enter a unique address to save the customer
             {{/alert-box}}
           </div>
         </div>
@@ -27,7 +25,7 @@
 
         {{#if canSaveCustomer}}
           <div class="col-xs-6 col-sm-offset-2 col-sm-5 left-right-gutter">
-            {{#btn-button class="btn-default btn-lg btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
+            {{#btn-button class="btn-default btn-lg btn-close" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
           <div class="col-xs-6 col-sm-5">
             {{#btn-button class="btn-primary btn-lg" confirmAction=(action "saveAndSelectCustomer")
@@ -38,7 +36,7 @@
           </div>
         {{else}}
           <div class="col-xs-12 col-sm-offset-7 col-sm-5">
-            {{#btn-button class="btn-default btn-lg btn-close" action="hideCustomerBrowser"}}Cancel{{/btn-button}}
+            {{#btn-button class="btn-default btn-lg btn-close" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
         {{/if}}
 
