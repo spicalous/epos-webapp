@@ -16,16 +16,16 @@ export default DS.Model.extend({
     if (!contactNumber) {
       return (customerType === 'takeaway-customer') ?
       '' :
-      'Telephone number must not be empty.';
+      'Telephone number required.';
     }
     if (!contactNumber.trim()) {
-      return 'Telephone number must not be empty.';
+      return 'Telephone number required.';
     }
     if (contactNumber.length < 11) {
-      return 'Telephone number too short.';
+      return 'Telephone number is too short.';
     }
     if (contactNumber.length > 11) {
-      return 'Telephone number too long.';
+      return 'Telephone number is too long.';
     }
     return '';
   })

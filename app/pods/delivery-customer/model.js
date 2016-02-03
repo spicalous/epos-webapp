@@ -30,7 +30,7 @@ export default Customer.extend({
     let addressTwo = this.get('addressTwo');
 
     if (!this.get('address')) {
-      return 'Address must not be empty.';
+      return 'Address required.';
     }
     if ((addressOne && addressOne.length > 100) || (addressTwo && addressTwo.length > 100)) {
       return 'Address must not be more than 100 characters.';
