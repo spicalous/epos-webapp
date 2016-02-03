@@ -18,8 +18,8 @@ export default Ember.Controller.extend({
 
   emptySearchResults: Ember.computed.empty('deliveryCustomerResults'),
 
-  hasCustomerQuery: Ember.computed('model.customer.contactNumber', 'model.customer.addressOne', 'model.customer.addressTwo', 'model.customer.postcode', function() {
-    return this.get('model.customer.contactNumber') || this.get('model.customer.addressOne') || this.get('model.customer.addressTwo') || this.get('model.customer.postcode');
+  hasCustomerQuery: Ember.computed('model.customer.telephone', 'model.customer.addressOne', 'model.customer.addressTwo', 'model.customer.postcode', function() {
+    return this.get('model.customer.telephone') || this.get('model.customer.addressOne') || this.get('model.customer.addressTwo') || this.get('model.customer.postcode');
   }),
 
   invalidOrder: Ember.computed('emptyOrder', 'validCustomer', function() {
@@ -74,8 +74,8 @@ export default Ember.Controller.extend({
     this.set('menu', filteredMenu);
   }),
 
-  customerSearch: Ember.observer('model.customer.contactNumber', 'model.customer.addressOne', 'model.customer.addressTwo', 'model.customer.postcode', function() {
-    let contactNumber = this.get('model.customer.contactNumber');
+  customerSearch: Ember.observer('model.customer.telephone', 'model.customer.addressOne', 'model.customer.addressTwo', 'model.customer.postcode', function() {
+    let telephone = this.get('model.customer.telephone');
     let addressOne = this.get('model.customer.addressOne');
     let addressTwo = this.get('model.customer.addressTwo');
     let postcode = this.get('model.customer.postcode');
@@ -83,14 +83,14 @@ export default Ember.Controller.extend({
 
     Ember.run.cancel(this.get('debouncedSearch'));
 
-    if (addressOne || addressTwo || postcode || contactNumber) {
+    if (addressOne || addressTwo || postcode || telephone) {
 
       this.set('debouncedSearch', Ember.run.debounce(this, function() {
         this.store.query('delivery-customer', {
           addressOne: addressOne,
           addressTwo: addressTwo,
           postcode: postcode,
-          contactNumber: contactNumber
+          telephone: telephone
         }).then(function(customers) {
           _this.set('deliveryCustomerResults', customers);
           _this.set('debouncedSearch', '');

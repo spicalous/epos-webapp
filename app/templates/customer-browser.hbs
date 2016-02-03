@@ -30,7 +30,7 @@
           <div class="col-xs-6 col-sm-5">
             {{#btn-button class="btn-primary btn-lg" confirmAction=(action "saveAndSelectCustomer")
             showMessage="showMessage"
-            confirmMessage=(concat "Confirm saving customer: " model.customer.address (if model.customer.postcode (concat ", " model.customer.postcode)) ", " model.customer.contactNumber)}}
+            confirmMessage=(concat "Confirm saving customer: " model.customer.address (if model.customer.postcode (concat ", " model.customer.postcode)) ", " model.customer.telephone)}}
               Save
             {{/btn-button}}
           </div>

@@ -2,14 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  emptySearch: Ember.computed('model.contactNumber', 'model.addressOne', 'model.addressTwo', 'model.postcode', function() {
-    return !(this.get('model.contactNumber') || this.get('model.addressOne') || this.get('model.addressTwo') || this.get('model.postcode'));
+  emptySearch: Ember.computed('model.telephone', 'model.addressOne', 'model.addressTwo', 'model.postcode', function() {
+    return !(this.get('model.telephone') || this.get('model.addressOne') || this.get('model.addressTwo') || this.get('model.postcode'));
   }),
 
   actions: {
 
     searchCustomer() {
-      let contactNumber = this.get('model.contactNumber');
+      let telephone = this.get('model.telephone');
       let addressOne = this.get('model.addressOne');
       let addressTwo = this.get('model.addressTwo');
       let postcode = this.get('model.postcode');
@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
         addressOne: addressOne,
         addressTwo: addressTwo,
         postcode: postcode,
-        contactNumber: contactNumber
+        telephone: telephone
       }).then(function(customers) {
         _this.send('dismissMessage', 'loader');
         _this.set('deliveryCustomerResults', customers);

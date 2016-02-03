@@ -16,7 +16,7 @@ module.exports = function(app) {
         addressOne: i + "",
         addressTwo: "RANDOM ROAD",
         postcode: "AB" + i + " 1CD",
-        contactNumber: "0" + (2090000000 - i)
+        telephone: "0" + (2090000000 - i)
       }
       result.push(customer);
     }
@@ -37,7 +37,7 @@ module.exports = function(app) {
     var body;
 
     if (success) {
-      if (req.query.addressOne || req.query.addressTwo || req.query.postcode || req.query.contactNumber) {
+      if (req.query.addressOne || req.query.addressTwo || req.query.postcode || req.query.telephone) {
         body = customers.filter(function(customer) {
           var result = false,
               failed = false,
@@ -59,10 +59,10 @@ module.exports = function(app) {
                 result = customer.postcode.startsWith(req.query.postcode);
             failed = !result;
           }
-          if (!failed && req.query.contactNumber) {
+          if (!failed && req.query.telephone) {
             result = result ?
-                result = result && customer.contactNumber.startsWith(req.query.contactNumber) :
-                result = customer.contactNumber.startsWith(req.query.contactNumber);
+                result = result && customer.telephone.startsWith(req.query.telephone) :
+                result = customer.telephone.startsWith(req.query.telephone);
             failed = !result;
           }
 

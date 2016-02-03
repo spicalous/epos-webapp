@@ -1,7 +1,7 @@
 <form class="form-horizontal">
   {{form-group label="ID" type="text" value=customer.id readonly=true}}
 
-  {{form-group label="Telephone" type="number" value=customer.contactNumber disabled=disabled
+  {{form-group label="Telephone" type="number" value=customer.telephone disabled=disabled
       hasError=customer.invalidTelephone helpText=customer.invalidTelephoneReason}}
 
   {{form-group label="Flat/House number" type="text" value=customer.addressOne disabled=disabled
