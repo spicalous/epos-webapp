@@ -10,7 +10,12 @@ export default Ember.Controller.extend({
   selectedCategory: '',
   numpadValue: '',
   paymentMethods: [null, 'CASH', 'CARD', 'ONLINE'],
-  estimatedDeliveryTimes: ['20', '25', '30', '35', '40', '45', '50', '55', '60', '70'],
+  estimatedDeliveryTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
+
+  computedEstimate: Ember.computed('model.order.estimatedTime', function() {
+    let time = new Date(Date.now() + (this.get('model.order.estimatedTime') * 1000 * 60)).toLocaleTimeString();
+    return time.substring(0, time.length - 6);
+  }),
 
   canSaveCustomer: Ember.computed('validCustomer', 'emptySearchResults', 'debouncedSearch', function() {
     return this.get('validCustomer') && this.get('emptySearchResults') && !this.get('debouncedSearch');
