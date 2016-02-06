@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
 
   selectedCategory: '',
   numpadValue: '',
+  customerBrowserVisible: false,
   paymentMethods: [null, 'CASH', 'CARD', 'ONLINE'],
   estimatedDeliveryTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
 
@@ -91,6 +92,10 @@ export default Ember.Controller.extend({
 
     Ember.run.cancel(this.get('debouncedSearch'));
 
+    if (!this.get('customerBrowserVisible')) {
+      return
+    }
+
     if (addressOne || addressTwo || postcode || telephone) {
 
       this.set('debouncedSearch', Ember.run.debounce(this, function() {
@@ -110,7 +115,7 @@ export default Ember.Controller.extend({
           });
         });
 
-      }, 1000));
+      }, 1500));
 
     } else {
       this.set('deliveryCustomerResults', []);
@@ -147,8 +152,10 @@ export default Ember.Controller.extend({
     },
 
     selectCustomer(deliveryCustomer) {
-      this.set('model.customer', deliveryCustomer);
+      //the order of these is important as we now set 'customerBrowserVisible' to false
+      //so that any property changes on model.customer does not trigger an ajax request
       this.send('hideCustomerBrowser');
+      this.set('model.customer', deliveryCustomer);
     },
 
     saveAndSelectCustomer() {

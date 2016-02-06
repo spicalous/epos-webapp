@@ -21,6 +21,7 @@ export default Ember.Route.extend({
   actions: {
 
     showCustomerBrowser() {
+      this.controller.set('customerBrowserVisible', true);
       this.render('customer-browser', {
         into: 'orderpad',
         outlet: 'customer-browser',
@@ -28,6 +29,7 @@ export default Ember.Route.extend({
     },
 
     hideCustomerBrowser() {
+      this.controller.set('customerBrowserVisible', false);
       this.disconnectOutlet({
         outlet: 'customer-browser',
         parentView: 'orderpad'
