@@ -93,7 +93,7 @@ export default Ember.Controller.extend({
     Ember.run.cancel(this.get('debouncedSearch'));
 
     if (!this.get('customerBrowserVisible')) {
-      return
+      return;
     }
 
     if (addressOne || addressTwo || postcode || telephone) {
