@@ -28,11 +28,11 @@ export default Ember.Route.extend({
       });
 
       Ember.run.scheduleOnce('afterRender', this, function() {
-        $('#postcodeSuggestionDropdownTrigger').click(function(e) {
-          e.stopPropagation();
+        $('#postcodeSuggestionDropdownTrigger').on('click tap', function(e) {
+          e.stopImmediatePropagation();
         });
-        $('#addressSuggestionDropdownTrigger').click(function(e) {
-          e.stopPropagation();
+        $('#addressSuggestionDropdownTrigger').on('click tap', function(e) {
+          e.stopImmediatePropagation();
         });
       });
     },
