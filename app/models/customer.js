@@ -2,7 +2,7 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  telephone: DS.attr('string'),
+  telephone: DS.attr('string', { defaultValue: '' }),
   customerType: Ember.computed.alias('constructor.modelName'),
 
   invalidTelephone: Ember.computed('invalidTelephoneReason', function() {

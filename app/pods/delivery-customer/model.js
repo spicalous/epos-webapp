@@ -4,9 +4,9 @@ import Ember from 'ember';
 
 
 export default Customer.extend({
-  addressOne: DS.attr('string'),
-  addressTwo: DS.attr('string'),
-  postcode: DS.attr('string'),
+  addressOne: DS.attr('string', { defaultValue: '' }),
+  addressTwo: DS.attr('string', { defaultValue: '' }),
+  postcode: DS.attr('string', { defaultValue: '' }),
 
   address: Ember.computed('addressOne', 'addressTwo', function() {
     let addressOne = this.get('addressOne') ? this.get('addressOne').trim() : '';
