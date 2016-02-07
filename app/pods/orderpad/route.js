@@ -26,6 +26,15 @@ export default Ember.Route.extend({
         into: 'orderpad',
         outlet: 'customer-browser',
       });
+
+      Ember.run.scheduleOnce('afterRender', this, function() {
+        $('#postcodeSuggestionDropdownTrigger').click(function(e) {
+          e.stopPropagation();
+        });
+        $('#addressSuggestionDropdownTrigger').click(function(e) {
+          e.stopPropagation();
+        });
+      });
     },
 
     hideCustomerBrowser() {

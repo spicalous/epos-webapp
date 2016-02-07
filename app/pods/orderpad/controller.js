@@ -28,7 +28,10 @@ export default Ember.Controller.extend({
   emptySearchResults: Ember.computed.empty('deliveryCustomerResults'),
 
   hasCustomerQuery: Ember.computed('model.customer.telephone', 'model.customer.addressOne', 'model.customer.addressTwo', 'model.customer.postcode', function() {
-    return this.get('model.customer.telephone') || this.get('model.customer.addressOne') || this.get('model.customer.addressTwo') || this.get('model.customer.postcode');
+    return (this.get('model.customer.telephone') && this.get('model.customer.telephone').length > 2) ||
+           (this.get('model.customer.addressOne') && this.get('model.customer.addressOne').length > 2) ||
+           (this.get('model.customer.addressTwo') && this.get('model.customer.addressTwo').length > 2) ||
+           (this.get('model.customer.postcode') && this.get('model.customer.postcode').length > 2);
   }),
 
   invalidOrder: Ember.computed('emptyOrder', 'validCustomer', function() {
@@ -83,6 +86,94 @@ export default Ember.Controller.extend({
     this.set('menu', filteredMenu);
   }),
 
+  roadSuggestionSearch: Ember.observer('model.customer.addressTwo', function() {
+    const dropdownTrigger = $('#addressSuggestionDropdownTrigger');
+    const debouncedSuggestionName = 'debouncedAddressTwoSuggestion';
+    let addressTwo = this.get('model.customer.addressTwo');
+    let _this = this;
+
+    Ember.run.cancel(this.get(debouncedSuggestionName));
+
+    if (!this.get('customerBrowserVisible')) {
+      return;
+    }
+    if (this.get('dontSuggestRoad')) {
+      this.set('dontSuggestRoad', false);
+      return;
+    }
+
+    if (addressTwo && addressTwo.length > 1) {
+
+      this.set(debouncedSuggestionName, Ember.run.debounce(this, function() {
+
+        this.store.query('road', {
+          road: addressTwo
+        }).then(function(roads) {
+          _this.set(debouncedSuggestionName, '');
+          _this.set('roadSuggestions', roads);
+          _this.set('roadSuggestionError', false);
+          if (!dropdownTrigger.parent().hasClass('open')) {
+            dropdownTrigger.dropdown('toggle');
+          }
+        }).catch(function() {
+          _this.set(debouncedSuggestionName, '');
+          _this.set('roadSuggestions', []);
+          _this.set('roadSuggestionError', true);
+          if (!dropdownTrigger.parent().hasClass('open')) {
+            dropdownTrigger.dropdown('toggle');
+          }
+        });
+
+      }, 500));
+    } else {
+      dropdownTrigger.parent().removeClass('open');
+    }
+  }),
+
+  postcodeSuggestionSearch: Ember.observer('model.customer.postcode', function() {
+    const dropdownTrigger = $('#postcodeSuggestionDropdownTrigger');
+    const debouncedSuggestionName = 'debouncedPostcodeSuggestion';
+    let postcode = this.get('model.customer.postcode');
+    let _this = this;
+
+    Ember.run.cancel(this.get(debouncedSuggestionName));
+
+    if (!this.get('customerBrowserVisible')) {
+      return;
+    }
+    if (this.get('dontSuggestPostcode')) {
+      this.set('dontSuggestPostcode', false);
+      return;
+    }
+
+    if (postcode && postcode.length > 1) {
+
+      this.set(debouncedSuggestionName, Ember.run.debounce(this, function() {
+
+        this.store.query('postcode', {
+          postcode: postcode
+        }).then(function(roads) {
+          _this.set(debouncedSuggestionName, '');
+          _this.set('postcodeSuggestions', roads);
+          _this.set('postcodeSuggestionError', false);
+          if (!dropdownTrigger.parent().hasClass('open')) {
+            dropdownTrigger.dropdown('toggle');
+          }
+        }).catch(function() {
+          _this.set(debouncedSuggestionName, '');
+          _this.set('postcodeSuggestions', []);
+          _this.set('postcodeSuggestionError', true);
+          if (!dropdownTrigger.parent().hasClass('open')) {
+            dropdownTrigger.dropdown('toggle');
+          }
+        });
+
+      }, 500));
+    } else {
+      dropdownTrigger.parent().removeClass('open');
+    }
+  }),
+
   customerSearch: Ember.observer('model.customer.telephone', 'model.customer.addressOne', 'model.customer.addressTwo', 'model.customer.postcode', function() {
     let telephone = this.get('model.customer.telephone');
     let addressOne = this.get('model.customer.addressOne');
@@ -96,7 +187,8 @@ export default Ember.Controller.extend({
       return;
     }
 
-    if (addressOne || addressTwo || postcode || telephone) {
+    if ((addressOne && addressOne.length > 2) || (addressTwo && addressTwo.length > 2) ||
+          (postcode && postcode.length > 2) || (telephone && telephone.length > 2)) {
 
       this.set('debouncedSearch', Ember.run.debounce(this, function() {
         this.store.query('delivery-customer', {
@@ -115,7 +207,7 @@ export default Ember.Controller.extend({
           });
         });
 
-      }, 1500));
+      }, 3000));
 
     } else {
       this.set('deliveryCustomerResults', []);
@@ -150,6 +242,22 @@ export default Ember.Controller.extend({
         this.send('showCustomerBrowser');
       }
     },
+
+    setAddressTwo(addressTwo) {
+      const dropdownTrigger = $('#addressSuggestionDropdownTrigger');
+      dropdownTrigger.parent().removeClass('open');
+
+      this.set('dontSuggestRoad', true);
+      this.set('model.customer.addressTwo', addressTwo);
+    },
+
+    setPostcode(postcode) {
+      const dropdownTrigger = $('#postcodeSuggestionDropdownTrigger');
+      dropdownTrigger.parent().removeClass('open');
+
+      this.set('dontSuggestPostcode', true);
+      this.set('model.customer.postcode', postcode);
+        },
 
     selectCustomer(deliveryCustomer) {
       //the order of these is important as we now set 'customerBrowserVisible' to false

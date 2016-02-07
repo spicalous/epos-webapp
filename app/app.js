@@ -15,4 +15,8 @@ App = Ember.Application.extend({
 
 loadInitializers(App, config.modulePrefix);
 
+Ember.TextField.reopen({
+  attributeBindings: ['data-toggle', 'aria-haspopup', 'aria-expanded']
+});
+
 export default App;

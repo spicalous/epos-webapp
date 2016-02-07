@@ -5,6 +5,7 @@
       <div class="row top-bottom-gutter">
         <div class="col-xs-12">
           <form class="form-horizontal">
+
             {{#form-group label="Telephone" hasError=model.customer.invalidTelephone}}
               <div class="input-group">
                 {{input class="form-control" type="number" placeholder="Telephone" value=model.customer.telephone}}
@@ -13,9 +14,53 @@
                 </span>
               </div>
             {{/form-group}}
+
             {{form-group label="Flat/House" type="text" placeholder="Flat or house number" value=model.customer.addressOne hasError=model.customer.invalidAddress}}
-            {{form-group label="Address" type="text" placeholder="Road name" value=model.customer.addressTwo hasError=model.customer.invalidAddress}}
-            {{form-group label="Postcode" type="text" placeholder="Postcode" value=model.customer.postcode hasError=model.customer.invalidPostcode}}
+
+            {{#form-group label="Address" hasError=model.customer.invalidAddress}}
+              <div class="dropdown">
+                {{input id="addressSuggestionDropdownTrigger" class="form-control" type="text" placeholder="Road" value=model.customer.addressTwo data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
+                <ul class="dropdown-menu lead" style="width: 100%;">
+                  {{#each roadSuggestions as |road index|}}
+                    <li><a class="lead"{{action "setAddressTwo" road.name}}>{{road.name}}</a></li>
+                    {{#unless (is-equal index (minus roadSuggestions.length 1))}}
+                      <!-- Do not add separator if last element -->
+                      <li role="separator" class="divider"></li>
+                    {{/unless}}
+                  {{else}}
+                    {{#if roadSuggestionError}}
+                      <li><a class="lead">Error :(</a></li>
+                    {{else}}
+                      <li><a class="lead">No results</a></li>
+                    {{/if}}
+                  {{/each}}
+                </ul>
+              </div>
+            {{/form-group}}
+
+            {{#form-group label="Postcode" hasError=model.customer.invalidPostcode}}
+              <div class="dropdown">
+                {{input id="postcodeSuggestionDropdownTrigger" class="form-control" type="text" placeholder="Postcode" value=model.customer.postcode data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
+                <ul class="dropdown-menu lead" style="width: 100%;">
+                  {{#each postcodeSuggestions as |postcode index|}}
+                    <li><a
+                        class="lead"{{action "setPostcode" postcode.postcode}}>{{postcode.postcode}}</a>
+                    </li>
+                    {{#unless (is-equal index (minus postcodeSuggestions.length 1))}}
+                      <!-- Do not add separator if last element -->
+                      <li role="separator" class="divider"></li>
+                    {{/unless}}
+                  {{else}}
+                    {{#if postcodeSuggestionError}}
+                      <li><a class="lead">Error :(</a></li>
+                    {{else}}
+                      <li><a class="lead">No results</a></li>
+                    {{/if}}
+                  {{/each}}
+                </ul>
+              </div>
+            {{/form-group}}
+
           </form>
         </div>
       </div>
