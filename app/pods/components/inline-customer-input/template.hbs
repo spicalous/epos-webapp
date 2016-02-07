@@ -7,13 +7,15 @@
 
 {{else}}
 
-  {{#btn-button class="col-xs-12 btn-danger btn-lg" data-toggle="dropdown"}}
-    Select Customer
-  {{/btn-button}}
-  <ul class="dropdown-menu" style="width: 100%;">
-    <li><a {{action "setCustomer" "takeaway-customer"}}>Take away</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a {{action "setCustomer" "delivery-customer"}}>Delivery</a></li>
-  </ul>
+  <div class="dropdown">
+    {{#btn-button class="btn-danger btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
+      Select Customer
+    {{/btn-button}}
+    <ul class="dropdown-menu" style="width: 100%;">
+      <li><a {{action "setCustomer" "takeaway-customer"}}>Take away</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a {{action "setCustomer" "delivery-customer"}}>Delivery</a></li>
+    </ul>
+  </div>
 
 {{/if}}

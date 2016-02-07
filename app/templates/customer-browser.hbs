@@ -4,7 +4,19 @@
     <div id="customer-browser-top" class="top-bottom-gutter">
       <div class="row top-bottom-gutter">
         <div class="col-xs-12">
-          {{customer-form customer=model.customer}}
+          <form class="form-horizontal">
+            {{#form-group label="Telephone" hasError=model.customer.invalidTelephone}}
+              <div class="input-group">
+                {{input class="form-control" type="number" placeholder="Telephone" value=model.customer.telephone}}
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-earphone"></span>
+                </span>
+              </div>
+            {{/form-group}}
+            {{form-group label="Flat/House" type="text" placeholder="Flat or house number" value=model.customer.addressOne hasError=model.customer.invalidAddress}}
+            {{form-group label="Address" type="text" placeholder="Road name" value=model.customer.addressTwo hasError=model.customer.invalidAddress}}
+            {{form-group label="Postcode" type="text" placeholder="Postcode" value=model.customer.postcode hasError=model.customer.invalidPostcode}}
+          </form>
         </div>
       </div>
 

@@ -2,7 +2,19 @@
 <div style="padding-top:50px"></div>
 <div class="row top-bottom-gutter">
   <div class="col-xs-12">
-    {{customer-form customer=model validate=false}}
+    <form class="form-horizontal">
+      {{#form-group label="Telephone"}}
+        <div class="input-group">
+          {{input class="form-control" type="number" placeholder="Telephone" value=model.telephone}}
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-earphone"></span>
+          </span>
+        </div>
+      {{/form-group}}
+      {{form-group label="Flat/House" type="text" placeholder="Flat or house number" value=model.addressOne}}
+      {{form-group label="Address" type="text" placeholder="Road name" value=model.addressTwo}}
+      {{form-group label="Postcode" type="text" placeholder="Postcode" value=model.postcode}}
+    </form>
   </div>
 </div>
 <div class="row">
