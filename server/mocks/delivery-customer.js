@@ -2,104 +2,72 @@ module.exports = function(app) {
   var express = require('express');
   var bodyParser = require('body-parser');
   var deliveryCustomerRouter = express.Router();
-
   deliveryCustomerRouter.use(bodyParser.json());
 
-  var customers = generateCustomers(100);
-
   function generateCustomers(numberOfCustomers) {
-    var result = [];
+    var customers = [];
 
     for (var i = 0; i < numberOfCustomers; i++) {
-      var customer = {
+      customers.push({
         id: i,
         addressOne: i + "",
         addressTwo: "RANDOM ROAD",
         postcode: "AB" + i + " 1CD",
         telephone: "0" + (2090000000 - i)
-      }
-      result.push(customer);
+      });
     }
 
-    return result;
+    return customers;
   }
 
-  if (!String.prototype.startsWith) {
-    String.prototype.startsWith = function(searchString, position) {
-      position = position || 0;
-      return this.indexOf(searchString, position) === position;
-    };
+  function searchCustomer(req, res) {
+    var body = [];
+
+    if (req.query.addressOne || req.query.addressTwo || req.query.postcode || req.query.telephone) {
+
+      body = customers.filter(function(customer) {
+        var match = false,
+            failedMatch = false;
+
+        if (req.query.addressOne) {
+          match = customer.addressOne.startsWith(req.query.addressOne);
+          failedMatch = !match;
+        }
+        if (!failedMatch && req.query.addressTwo) {
+          match = customer.addressTwo.startsWith(req.query.addressTwo);
+          failedMatch = !match;
+        }
+        if (!failedMatch && req.query.postcode) {
+          match = customer.postcode.startsWith(req.query.postcode);
+          failedMatch = !match;
+
+        }
+        if (!failedMatch && req.query.telephone) {
+          match = customer.telephone.startsWith(req.query.telephone);
+          failedMatch = !match;
+        }
+
+        //if even a single failedMatch we need to return false;
+        return !failedMatch && match;
+      });
+    }
+
+    return body;
   }
 
+  var customers = generateCustomers(100);
   var success = true;
 
   deliveryCustomerRouter.get('/', function(req, res) {
-    var body;
-
-    if (success) {
-      if (req.query.addressOne || req.query.addressTwo || req.query.postcode || req.query.telephone) {
-        body = customers.filter(function(customer) {
-          var result = false,
-              failed = false,
-              prev = false;
-
-          if (req.query.addressOne) {
-            result = customer.addressOne.startsWith(req.query.addressOne);
-            failed = !result
-          }
-          if (!failed && req.query.addressTwo) {
-            result = result ?
-                result && customer.addressTwo.startsWith(req.query.addressTwo) :
-                result = customer.addressTwo.startsWith(req.query.addressTwo);
-            failed = !result;
-          }
-          if (!failed && req.query.postcode) {
-            result = result ?
-                result && customer.postcode.startsWith(req.query.postcode) :
-                result = customer.postcode.startsWith(req.query.postcode);
-            failed = !result;
-          }
-          if (!failed && req.query.telephone) {
-            result = result ?
-                result = result && customer.telephone.startsWith(req.query.telephone) :
-                result = customer.telephone.startsWith(req.query.telephone);
-            failed = !result;
-          }
-
-          return !failed && result;
-        });
-      } else {
-        body = [];
-      }
-      res.send({
-        'deliveryCustomers': body
-      });
-    } else {
-      res.status(400).send({
-        errors: [{
-          error: "Bad Gateway",
-          exception: "com.lovetalaythai.eposdataservice.customer.exception",
-          message: "There was an error searching for the customer",
-          status: 400,
-          timestamp: 1445811517596
-        }]
-      });
-    }
-
+    success ?
+      res.send({ 'deliveryCustomers': searchCustomer(req) }) :
+      res.status(400).send(genericError(502, "Error searching for customer"));
   });
 
   deliveryCustomerRouter.post('/', function(req, res) {
     success ?
-      res.status(201).send({'delivery-customer': { id: req .params.id } }) :
-      res.status(400).send({
-        errors: [{
-          error: "Bad Gateway",
-          exception: "com.lovetalaythai.eposdataservice.customer.exception",
-          message: "There was a problem saving the customer to the database",
-          status: 400,
-          timestamp: 1445811517596
-        }]
-      });
+      res.status(201).send({ 'delivery-customer': { id: req .params.id } }) :
+      res.status(400).send(genericError(400, "There was a problem saving the customer to the database"));
   });
 
   deliveryCustomerRouter.get('/:id', function(req, res) {
@@ -111,15 +79,7 @@ module.exports = function(app) {
   deliveryCustomerRouter.put('/:id', function(req, res) {
     success ?
       res.send({ 'delivery-customer': { id: req .params.id } }) :
-      res.status(400).send({
-        errors: [{
-          error: "Bad Gateway",
-          exception: "com.lovetalaythai.eposdataservice.customer.exception",
-          message: "There was a problem updating the customer",
-          status: 400,
-          timestamp: 1445811517596
-        }]
-      });
+      res.status(400).send(genericError(400, "There was a problem updating the customer"));
   });
 
   deliveryCustomerRouter.delete('/:id', function(req, res) {

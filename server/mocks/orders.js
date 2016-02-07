@@ -2,34 +2,7 @@ module.exports = function(app) {
   var express = require('express');
   var bodyParser = require('body-parser');
   var ordersRouter = express.Router();
-
   ordersRouter.use(bodyParser.json());
-
-  var orders = [];
-
-  ordersRouter.get('/', function(req, res) {
-    res.send({
-      'orders': orders
-    });
-  });
-
-  var success = true;
-
-  ordersRouter.post('/', function(req, res) {
-    success ?
-      res.status(201).send({id:addOrder(req.body)}) :
-      res.status(400).send({
-        errors: [
-          {
-            error: "Bad Gateway",
-            exception: "com.lovetalaythai.eposdataservice.printer.USBPrinter",
-            message: "Printer was not found. Please check that the printer is connected and switched on",
-            httpStatus: 502,
-            timestamp: 1445811517596
-          }
-        ]
-      });
-  });
 
   function addOrder(order) {
     var id = orders.length;
@@ -37,6 +10,22 @@ module.exports = function(app) {
     orders.push(order);
     return id;
   }
+
+  var orders = [];
+  var success = true;
+
+  ordersRouter.get('/', function(req, res) {
+    res.send({
+      'orders': orders
+    });
+  });
+
+  ordersRouter.post('/', function(req, res) {
+    success ?
+      res.status(201).send({id:addOrder(req.body)}) :
+      res.status(400).send(genericError(502, "Printer was not found. Please check that the printer is connected and switched on"));
+  });
+
 
 //  ordersRouter.get('/:id', function(req, res) {
 //    res.send({
