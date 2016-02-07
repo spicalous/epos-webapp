@@ -20,7 +20,7 @@ module.exports = function(app) {
     return customers;
   }
 
-  function searchCustomer(req, res) {
+  function searchCustomer(req) {
     var body = [];
 
     if (req.query.addressOne || req.query.addressTwo || req.query.postcode || req.query.telephone) {
