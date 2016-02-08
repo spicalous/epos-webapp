@@ -61,13 +61,13 @@ module.exports = function(app) {
   deliveryCustomerRouter.get('/', function(req, res) {
     success ?
       res.send({ 'deliveryCustomers': searchCustomer(req) }) :
-      res.status(400).send(genericError(502, "Error searching for customer"));
+      res.status(502).send(app.genericError("502", "Error searching for customer"));
   });
 
   deliveryCustomerRouter.post('/', function(req, res) {
     success ?
       res.status(201).send({ 'delivery-customer': { id: req .params.id } }) :
-      res.status(400).send(genericError(400, "There was a problem saving the customer to the database"));
+      res.status(400).send(app.genericError("400", "There was a problem saving the customer to the database"));
   });
 
   deliveryCustomerRouter.get('/:id', function(req, res) {
@@ -79,7 +79,7 @@ module.exports = function(app) {
   deliveryCustomerRouter.put('/:id', function(req, res) {
     success ?
       res.send({ 'delivery-customer': { id: req .params.id } }) :
-      res.status(400).send(genericError(400, "There was a problem updating the customer"));
+      res.status(400).send(app.genericError("400", "There was a problem updating the customer"));
   });
 
   deliveryCustomerRouter.delete('/:id', function(req, res) {

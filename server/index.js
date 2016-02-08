@@ -23,17 +23,17 @@ module.exports = function(app) {
     };
   }
 
-  function genericError(status, message) {
-    var status = {};
-    status["400"] = "Bad Request";
-    status["502"] = "Bad Gateway";
+  app.genericError = function genericError(status, message) {
+    var statusMap = {};
+    statusMap["400"] = "Bad Request";
+    statusMap["502"] = "Bad Gateway";
 
     return {
       errors: [{
-        error: status[400],
+        error: statusMap[status],
         exception: "com.lovetalaythai.eposdataservice.generic.exception",
         message: message,
-        status: status,
+        status: parseInt(status),
         timestamp: 1445811517596
       }]
     }

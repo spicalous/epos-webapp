@@ -13,7 +13,7 @@ module.exports = function(app) {
       for (var j = 0; j < numberOfPostcodes; j++) {
         postcodes.push({
           id: postcodes.length + 1,
-          postcode: possible[i] + possibleTail[j] });
+          postcode: possible[i] + " " + possibleTail[j] });
       }
     }
 
@@ -34,7 +34,7 @@ module.exports = function(app) {
   postcodesRouter.get('/', function(req, res) {
     success ?
       res.send({ 'postcodes': searchPostcode(req).slice(0, 5) }) :
-      res.status(400).send(genericError(502, "Error searching for postcode"));
+      res.status(502).send(app.genericError("502", "Error searching for postcode"));
   });
 
   postcodesRouter.post('/', function(req, res) {

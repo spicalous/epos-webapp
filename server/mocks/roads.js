@@ -10,7 +10,7 @@ module.exports = function(app) {
   function generateRoads() {
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var roads = [];
-    var numberOfRoads = 1;
+    var numberOfRoads = 10;
 
     for (var i = 0; i < possible.length; i++) {
 
@@ -21,8 +21,6 @@ module.exports = function(app) {
           id: roads.length + 1,
           name: c + c + c + possible.charAt(j) + " ROAD" });
       }
-
-      numberOfRoads++;
     }
 
     return roads;
@@ -37,12 +35,12 @@ module.exports = function(app) {
   }
 
   var roads = generateRoads();
-  var success = true;
+  var success = false;
 
   roadsRouter.get('/', function(req, res) {
     success ?
       res.send({ 'roads': searchRoad(req).slice(0, 5) }) :
-      res.status(400).send(genericError(502, "Error searching for road"));
+      res.status(502).send(app.genericError("502", "Error searching for road"));
   });
 
   roadsRouter.post('/', function(req, res) {

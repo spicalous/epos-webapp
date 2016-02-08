@@ -23,7 +23,7 @@ module.exports = function(app) {
   ordersRouter.post('/', function(req, res) {
     success ?
       res.status(201).send({id:addOrder(req.body)}) :
-      res.status(400).send(genericError(502, "Printer was not found. Please check that the printer is connected and switched on"));
+      res.status(502).send(app.genericError("502", "Printer was not found. Please check that the printer is connected and switched on"));
   });
 
 
