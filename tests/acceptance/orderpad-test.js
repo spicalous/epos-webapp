@@ -5,153 +5,159 @@ import startApp from 'talaythai-webapp/tests/helpers/start-app';
 var application;
 
 module('Acceptance | orderpad', {
-  beforeEach: function() {
-    application = startApp();
-  },
-
-  afterEach: function() {
-    Ember.run(application, 'destroy');
-  }
+  beforeEach: () => application = startApp(),
+  afterEach: () => Ember.run(application, 'destroy')
 });
 
 // ### CSS CONSTANTS ###
-
-var VISIBLE_MENU_LIST = '#orderpad-menu .list-group-item',
-    VISIBLE_CATEGORY_BUTTONS = '#orderpad-categories button',
-    VISIBLE_ORDER_LIST = '#orderpad-orderlist .list-group-item';
+var menuItems = '#orderpad-menu .list-group-item',
+    categoryButtons = '#orderpad-categories button',
+    orderItemsInOrderpad = '#orderpad-orderlist .list-group-item',
+    deliveryCustomerSelectionButton = '#orderpad-customer .dropdown > ul > li:nth-child(3) > a';
+// ### END CONSTANTS ###
 
 test('Displays correct number of categories and menu items', function(assert) {
-
   assert.expect(2);
-  visit('/orderpad').then(function() {
-    assert.equal(find(VISIBLE_MENU_LIST).length, 162, 'Wrong number of menu items');
-    assert.equal(find(VISIBLE_CATEGORY_BUTTONS).length, 17, 'Wrong number of category items');
-  });
 
+  visit('/orderpad').then(() => {
+    assert.equal(find(menuItems).length, 162);
+    assert.equal(find(categoryButtons).length, 17);
+  });
 });
 
 test('Selecting a category', function(assert) {
-
   assert.expect(1);
-  visit('/orderpad');
-  click('#orderpad-categories button:first');
-  andThen(function() {
-    assert.equal(find(VISIBLE_MENU_LIST).length, 18, 'Correct number of menu items after filtering');
-  });
 
+  visit('/orderpad');
+  click(categoryButtons + ':first');
+  andThen(() => assert.equal(find(menuItems).length, 18));
 });
 
 test('Adding an item', function(assert) {
-
   assert.expect(3);
+
   visit('/orderpad');
-  click('#orderpad-menu .list-group-item:first-child');
-  andThen(function() {
-    assert.equal(find(VISIBLE_ORDER_LIST).length, 1, 'Correctly added menu item to main order item list');
-    assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 1'), 'Correctly updates the item count text');
-    assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 2.95'), 'Correctly updates the total text');
+  click(menuItems + ':first-child');
+  andThen(() => {
+    assert.equal(find(orderItemsInOrderpad).length, 1);
+    assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 1'));
+    assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 2.95'));
   });
 
 });
 
 test('Adding an item [Modal]', function(assert) {
-
   assert.expect(3);
+
   visit('/orderpad');
-  click('#orderpad-menu .list-group-item:first-child');
-  andThen(function() {
-    assert.equal(find(VISIBLE_ORDER_LIST).length, 1, 'Correctly added menu item to modal order item list');
-    assert.ok(find('#orderpad-modal .modal-footer').text().includes('ITEMS: 1'), 'Correctly updates the item count text');
-    assert.ok(find('#orderpad-modal .modal-footer').text().includes('TOTAL: 2.95'), 'Correctly updates the total text');
+  click(menuItems + ':first-child');
+  andThen(() => {
+    assert.equal(find(orderItemsInOrderpad).length, 1);
+    assert.ok(find('#orderpad-modal .modal-footer').text().includes('ITEMS: 1'));
+    assert.ok(find('#orderpad-modal .modal-footer').text().includes('TOTAL: 2.95'));
   });
 
 });
 
 test('Removing an item', function(assert) {
-
   assert.expect(3);
+
   visit('/orderpad');
-  click('#orderpad-menu .list-group-item:first-child');
+  click(menuItems + ':first-child');
   click('#orderpad-orderlist .decrement-btn');
-  andThen(function() {
-    assert.equal(find(VISIBLE_ORDER_LIST).length, 0, 'Correctly removes menu item from main order item list');
-    assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 0'), 'Correctly updates the item count text');
-    assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 0.00'), 'Correctly updates the total text');
+  andThen(() => {
+    assert.equal(find(orderItemsInOrderpad).length, 0);
+    assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 0'));
+    assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 0.00'));
   });
 
 });
 
 test('Removing an item [Modal] ', function(assert) {
-
   assert.expect(3);
+
   visit('/orderpad');
-  click('#orderpad-menu .list-group-item:first');
+  click(menuItems + ':first-child');
   click('#orderpad-modal .decrement-btn:first');
-  andThen(function() {
-    assert.equal(find(VISIBLE_ORDER_LIST).length, 0, 'Correctly removes menu item from modal order item list');
-    assert.ok(find('#orderpad-modal .modal-footer').text().includes('ITEMS: 0'), 'Correctly updates the item count text');
-    assert.ok(find('#orderpad-modal .modal-footer').text().includes('TOTAL: 0.00'), 'Correctly updates the total text');
+  andThen(() => {
+    assert.equal(find(orderItemsInOrderpad).length, 0);
+    assert.ok(find('#orderpad-modal .modal-footer').text().includes('ITEMS: 0'));
+    assert.ok(find('#orderpad-modal .modal-footer').text().includes('TOTAL: 0.00'));
   });
 
 });
 
 test('Adding two order items increments to 2', function(assert) {
-
   assert.expect(3);
+
   visit('/orderpad');
-  click('#orderpad-menu .list-group-item:first-child');
-  click('#orderpad-menu .list-group-item:first-child');
-  andThen(function() {
-    assert.ok(find('#orderpad-orderlist .list-group-item:first-child').text().includes('2'), 'Correctly removes menu item from main order item list');
-    assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 2'), 'Correctly updates the item count text');
-    assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 5.90'), 'Correctly updates the total text');
+  click(menuItems + ':first-child');
+  click(menuItems + ':first-child');
+  andThen(() => {
+    assert.ok(find('#orderpad-orderlist .list-group-item:first-child').text().includes('2'));
+    assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 2'));
+    assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 5.90'));
   });
 
 });
 
 test('Deleting an order item with quantity of 2 decrements to 1', function(assert) {
-
   assert.expect(3);
+
   visit('/orderpad');
-  click('#orderpad-menu .list-group-item:first-child');
-  click('#orderpad-menu .list-group-item:first-child');
+  click(menuItems + ':first-child');
+  click(menuItems + ':first-child');
   click('#orderpad-orderlist .decrement-btn');
-  andThen(function() {
-    assert.ok(find('#orderpad-orderlist .list-group-item:first-child').text().includes('1'), 'Correctly removes menu item from main order item list');
-    assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 1'), 'Correctly updates the item count text');
-    assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 2.95'), 'Correctly updates the total text');
+  andThen(() => {
+    assert.ok(find('#orderpad-orderlist .list-group-item:first-child').text().includes('1'));
+    assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 1'));
+    assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 2.95'));
   });
 
 });
 
 test('Numpad filtering', function(assert) {
-
   assert.expect(2);
 
   visit('/orderpad');
   click('#orderpad-numpad .keypad-container .row:nth-child(1) div:nth-child(1) button');
   click('#orderpad-numpad .keypad-container .row:nth-child(1) div:nth-child(2) button');
-  andThen(function() {
-    assert.equal(find(VISIBLE_MENU_LIST).length, 1, 'Wrong number of filtered menu items');
-    assert.ok(find('#orderpad-numpad').text().trim().startsWith('12'), 'Incorrect numberpad value displayed');
+  andThen(() => {
+    assert.equal(find(menuItems).length, 1);
+    assert.ok(find('#orderpad-numpad').text().trim().startsWith('12'));
   });
 
 });
 
-//Enable in PROD
-//test('Submitting an order transitions to index', function(assert) {
-//
-//  assert.expect(1);
-//  visit('/orderpad');
-//  click('#orderpad-order .submit-btn');
-//
-//  andThen(function() {
-//    var current = currentRouteName(),
-//        expected = 'index';
-//    assert.equal(current, 'index', 'Expected: ' + expected + ', got: ' + current);
-//  });
-//
-//});
+test('Customer browser is visible', function(assert) {
+  assert.expect(1);
+
+  visit('/orderpad');
+  click('#orderpad-customer button');
+  click(deliveryCustomerSelectionButton);
+  andThen(() => assert.equal(find('.customer-browser').length, 1));
+});
+
+test('Searching customer address shows a dropdown', function(assert) {
+  assert.expect(1);
+
+  visit('/orderpad');
+  click('#orderpad-customer button');
+  click(deliveryCustomerSelectionButton);
+  fillIn('input[placeholder=Road]', 'CC');
+  andThen(() => assert.equal(find('input[placeholder=Road] + ul li a').length, 3));
+});
+
+test('Searching customer postcode shows a dropdown', function(assert) {
+  assert.expect(1);
+
+  visit('/orderpad');
+  click('#orderpad-customer button');
+  click(deliveryCustomerSelectionButton);
+  fillIn('input[placeholder=Postcode]', 'SW');
+  andThen(() => assert.equal(find('input[placeholder=Postcode] + ul li a').length, 5));
+});
+
 
 //test('Canceling an order hides the modal', function(assert) {
 
