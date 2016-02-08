@@ -135,7 +135,27 @@ test('Customer browser is visible', function(assert) {
   visit('/orderpad');
   click('#orderpad-customer button');
   click(deliveryCustomerSelectionButton);
-  andThen(() => assert.equal(find('.customer-browser').length, 1));
+  andThen(() => assert.equal(find('.customer-browser:visible').length, 1));
+});
+
+test('Tapping empty address does not show the dropdown', function(assert) {
+  assert.expect(1);
+
+  visit('/orderpad');
+  click('#orderpad-customer button');
+  click(deliveryCustomerSelectionButton);
+  click('input[placeholder=Road]');
+  andThen(() => assert.equal(find('input[placeholder=Address] + ul li a:visible').length, 0));
+});
+
+test('Tapping empty postcode does not show the dropdown', function(assert) {
+  assert.expect(1);
+
+  visit('/orderpad');
+  click('#orderpad-customer button');
+  click(deliveryCustomerSelectionButton);
+  click('input[placeholder=Postcode]');
+  andThen(() => assert.equal(find('input[placeholder=Postcode] + ul li a:visible').length, 0));
 });
 
 test('Searching customer address shows a dropdown', function(assert) {
@@ -145,7 +165,7 @@ test('Searching customer address shows a dropdown', function(assert) {
   click('#orderpad-customer button');
   click(deliveryCustomerSelectionButton);
   fillIn('input[placeholder=Road]', 'CC');
-  andThen(() => assert.equal(find('input[placeholder=Road] + ul li a').length, 3));
+  andThen(() => assert.equal(find('input[placeholder=Road] + ul li a:visible').length, 3));
 });
 
 test('Searching customer postcode shows a dropdown', function(assert) {
@@ -155,7 +175,7 @@ test('Searching customer postcode shows a dropdown', function(assert) {
   click('#orderpad-customer button');
   click(deliveryCustomerSelectionButton);
   fillIn('input[placeholder=Postcode]', 'SW');
-  andThen(() => assert.equal(find('input[placeholder=Postcode] + ul li a').length, 5));
+  andThen(() => assert.equal(find('input[placeholder=Postcode] + ul li a:visible').length, 5));
 });
 
 
