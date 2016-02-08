@@ -43,9 +43,7 @@
                 {{input id="postcodeSuggestionDropdownTrigger" class="form-control" type="text" placeholder="Postcode" value=model.customer.postcode data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
                 <ul class="dropdown-menu lead" style="width: 100%;">
                   {{#each postcodeSuggestions as |postcode index|}}
-                    <li><a
-                        class="lead"{{action "setPostcode" postcode.postcode}}>{{postcode.postcode}}</a>
-                    </li>
+                    <li><a class="lead"{{action "setPostcode" postcode.postcode}}>{{postcode.postcode}}</a></li>
                     {{#unless (is-equal index (minus postcodeSuggestions.length 1))}}
                       <!-- Do not add separator if last element -->
                       <li role="separator" class="divider"></li>
