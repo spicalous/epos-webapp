@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
   dateTime: DS.attr('date'),
@@ -8,28 +9,24 @@ export default DS.Model.extend({
   orderItems: DS.hasMany('order-item'),
   customer: DS.belongsTo('customer', { polymorphic: true }),
 
-  total: function() {
-    return this.get('orderItems').reduce(
-      function(prev, orderItem) {
-        return prev + orderItem.get('total');
-      }, 0);
-  }.property('orderItems.@each.quantity', 'orderItems.@each.total'),  //TODO: (Warning) Bug with ember 2.2.0 when upgrading
+  //TODO: (Warning) Bug with @each in ember 2.2.0
+  total: Ember.computed('orderItems.@each.quantity', 'orderItems.@each.total', function() {
+    return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('total'), 0);
+  }),
 
-  displayTotal: function() {
+  displayTotal: Ember.computed('total', function() {
     return (this.get('total') / 100).toFixed(2);
-  }.property('total'),
+  }),
 
-  size: function() {
-    return this.get('orderItems').reduce(
-      function(prev, orderItem) {
-        return prev + orderItem.get('quantity');
-      }, 0);
-  }.property('orderItems.@each.quantity'), //TODO: (Warning) Bug with ember 2.2.0 when upgrading
+  //TODO: (Warning) Bug with @each ember 2.2.0
+  size: Ember.computed('orderItems.@each.quantity', function() {
+    return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('quantity'), 0);
+  }),
 
-  addItem: function(menuItem) {
-    var orderItems = this.get('orderItems');
+  addItem(menuItem) {
+    let orderItems = this.get('orderItems');
 
-    var orderItem = orderItems.any(function(orderItem) {
+    let orderItem = orderItems.any(function(orderItem) {
       if (orderItem.isMenuItem(menuItem) && orderItem.hasNoEditOptions()) {
         return orderItem;
       }

@@ -11,41 +11,35 @@ export default Ember.Component.extend({
   * Fires when the user selects an item to edit (itemToEdit === orderItem)
   */
   editItemObserver: Ember.observer('order.itemToEdit', function() {
-    var itemToEdit = this.get('order.itemToEdit');
+    let itemToEdit = this.get('order.itemToEdit');
 
     if (!itemToEdit) {
       return;
     }
 
-    var orderItemEditOptions = itemToEdit.get('editOptions'),
-        editOptions = this.get('editOptions');
+    let orderItemEditOptions = itemToEdit.get('editOptions');
+    let editCategories = itemToEdit.get('menuItem.editCategories');
+    let editOptions = this.get('editOptions');
 
-    editOptions.forEach(function(option) {
-      if (orderItemEditOptions.indexOf(option) > -1) {
-        option.set('checked', true);
-      } else {
-        option.set('checked', false);
-      }
-    });
-
-    var editCategories = itemToEdit.get('menuItem.editCategories');
+    editOptions.forEach(
+        (option) => option.set('checked', orderItemEditOptions.indexOf(option) > -1));
 
     this.set('editItemTabs', editCategories);
-    this.set('selected', editCategories.get('firstObject'));
+    this.set('selectedEditCategory', editCategories.get('firstObject'));
   }),
 
-  filteredEditOptions: Ember.computed('selected', function() {
-    if (!this.get('selected')) {
+  filteredEditOptions: Ember.computed('selectedEditCategory', function() {
+    if (!this.get('selectedEditCategory')) {
       return;
     }
-    var selectedEditCategoryId = this.get('selected').get('id');
+    let selectedEditCategoryId = this.get('selectedEditCategory').get('id');
     return this.get('editOptions').filterBy('editCategory', parseInt(selectedEditCategoryId));
   }),
 
   actions: {
 
     tabClick(editCategory) {
-      this.set('selected', editCategory);
+      this.set('selectedEditCategory', editCategory);
     },
 
     editOptionToggle(option) {
