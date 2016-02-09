@@ -312,6 +312,7 @@ export default Ember.Controller.extend({
       this.send('removeCustomer');
       this.set('selectedCategory', '');
       this.set('numpadValue', '');
+      this.set('deliveryCustomerResults', '');
       $('#orderpad-modal').modal('hide');
     }
   }
