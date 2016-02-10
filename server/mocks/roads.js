@@ -35,7 +35,7 @@ module.exports = function(app) {
   }
 
   var roads = generateRoads();
-  var success = false;
+  var success = true;
 
   roadsRouter.get('/', function(req, res) {
     success ?
