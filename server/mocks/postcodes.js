@@ -3,23 +3,6 @@ module.exports = function(app) {
   var express = require('express');
   var postcodesRouter = express.Router();
 
-  function generatePostcodes() {
-    var possible = ["SW2", "SW16", "SE24", "SE27"];
-    var possibleTail = ["AA", "BB", "CC", "DD", "EE"];
-    var postcodes = [];
-    var numberOfPostcodes = 5;
-
-    for (var i = 0; i < possible.length; i++) {
-      for (var j = 0; j < numberOfPostcodes; j++) {
-        postcodes.push({
-          id: postcodes.length + 1,
-          postcode: possible[i] + " " + possibleTail[j] });
-      }
-    }
-
-    return postcodes;
-  }
-
   function searchPostcode(req) {
     return !req.query.postcode ?
       postcodes :
@@ -28,7 +11,7 @@ module.exports = function(app) {
       });
   }
 
-  var postcodes = generatePostcodes();
+  var postcodes = app.testHelper.postcodes;
   var success = true;
 
   postcodesRouter.get('/', function(req, res) {

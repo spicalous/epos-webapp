@@ -4,22 +4,6 @@ module.exports = function(app) {
   var deliveryCustomerRouter = express.Router();
   deliveryCustomerRouter.use(bodyParser.json());
 
-  function generateCustomers(numberOfCustomers) {
-    var customers = [];
-
-    for (var i = 0; i < numberOfCustomers; i++) {
-      customers.push({
-        id: i,
-        addressOne: i + "",
-        addressTwo: "RANDOM ROAD",
-        postcode: "AB" + i + " 1CD",
-        telephone: "0" + (2090000000 - i)
-      });
-    }
-
-    return customers;
-  }
-
   function searchCustomer(req) {
     var body = [];
 
@@ -55,7 +39,7 @@ module.exports = function(app) {
     return body;
   }
 
-  var customers = generateCustomers(100);
+  var customers = app.testHelper.customers;
   var success = true;
 
   deliveryCustomerRouter.get('/', function(req, res) {

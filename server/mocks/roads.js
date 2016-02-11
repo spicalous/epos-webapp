@@ -3,29 +3,6 @@ module.exports = function(app) {
   var express = require('express');
   var roadsRouter = express.Router();
 
-  /**
-   * Generate roads starting with each letter with the number of roads for each
-   * letter increasing by one each time
-   */
-  function generateRoads() {
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var roads = [];
-    var numberOfRoads = 10;
-
-    for (var i = 0; i < possible.length; i++) {
-
-      var c = possible.charAt(i);
-
-      for (var j = 0; j < numberOfRoads; j++) {
-        roads.push({
-          id: roads.length + 1,
-          name: c + c + c + possible.charAt(j) + " ROAD" });
-      }
-    }
-
-    return roads;
-  }
-
   function searchRoad(req) {
     return !req.query.road ?
       roads :
@@ -34,7 +11,7 @@ module.exports = function(app) {
       });
   }
 
-  var roads = generateRoads();
+  var roads = app.testHelper.roads;
   var success = true;
 
   roadsRouter.get('/', function(req, res) {
