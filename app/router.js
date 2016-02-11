@@ -7,12 +7,11 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('orderpad');
+  this.route('customers');
+  this.route('deliveryCustomer', { path: '/deliveryCustomer/:customer_id' });
+
   this.route('orders');
   this.route('restaurant');
-  this.resource('customers');
-  this.resource('deliveryCustomer', { path: '/deliveryCustomer/:customer_id' }, function() {
-    this.route('edit');
-  });
 });
 
 export default Router;
