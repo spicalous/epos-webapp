@@ -1,19 +1,13 @@
-import Ember from 'ember';
-import { module, test } from 'qunit';
-import startApp from 'talaythai-webapp/tests/helpers/start-app';
+import { test } from 'qunit';
+import moduleForAcceptance from 'talaythai-webapp/tests/helpers/module-for-acceptance';
 
-var application;
-
-module('Acceptance | orderpad', {
-  beforeEach: () => application = startApp(),
-  afterEach: () => Ember.run(application, 'destroy')
-});
+moduleForAcceptance('Acceptance | orderpad');
 
 // ### CSS CONSTANTS ###
-var menuItems = '#orderpad-menu .list-group-item',
-    categoryButtons = '#orderpad-categories button',
-    orderItemsInOrderpad = '#orderpad-orderlist .list-group-item',
-    deliveryCustomerSelectionButton = '#orderpad-customer .dropdown > ul > li:nth-child(3) > a';
+const menuItems = '#orderpad-menu .list-group-item';
+const categoryButtons = '#orderpad-categories button';
+const orderItemsInOrderpad = '#orderpad-orderlist .list-group-item';
+const deliveryCustomerSelectionButton = '#orderpad-customer .dropdown > ul > li:nth-child(3) > a';
 // ### END CONSTANTS ###
 
 test('Displays correct number of categories and menu items', function(assert) {
@@ -164,8 +158,8 @@ test('Searching customer address shows a dropdown', function(assert) {
   visit('/orderpad');
   click('#orderpad-customer button');
   click(deliveryCustomerSelectionButton);
-  fillIn('input[placeholder=Road]', 'CC');
-  andThen(() => assert.equal(find('input[placeholder=Road] + ul li a:visible').length, 3));
+  fillIn('input[placeholder=Road]', 'AA');
+  andThen(() => assert.equal(find('input[placeholder=Road] + ul li a:visible').length, 4));
 });
 
 test('Searching customer postcode shows a dropdown', function(assert) {
@@ -174,8 +168,8 @@ test('Searching customer postcode shows a dropdown', function(assert) {
   visit('/orderpad');
   click('#orderpad-customer button');
   click(deliveryCustomerSelectionButton);
-  fillIn('input[placeholder=Postcode]', 'SW');
-  andThen(() => assert.equal(find('input[placeholder=Postcode] + ul li a:visible').length, 5));
+  fillIn('input[placeholder=Postcode]', 'AA');
+  andThen(() => assert.equal(find('input[placeholder=Postcode] + ul li a:visible').length, 4));
 });
 
 
