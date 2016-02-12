@@ -3,11 +3,11 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   willDestroy() {
-    $(window).resize();
+    Ember.$(window).resize();
   },
 
   didInsertElement() {
-    $(window).resize();
+    Ember.$(window).resize();
   }
 
 });

@@ -130,7 +130,7 @@ export default Ember.Controller.extend({
   },
 
   roadSuggestionSearch: Ember.observer('model.customer.addressTwo', function() {
-    const trigger = $('#addressSuggestionDropdownTrigger');
+    const trigger = Ember.$('#addressSuggestionDropdownTrigger');
     const debounceId = 'debouncedAddressTwoSuggestion';
     let addressTwo = this.get('model.customer.addressTwo');
 
@@ -138,7 +138,7 @@ export default Ember.Controller.extend({
   }),
 
   postcodeSuggestionSearch: Ember.observer('model.customer.postcode', function() {
-    const trigger = $('#postcodeSuggestionDropdownTrigger');
+    const trigger = Ember.$('#postcodeSuggestionDropdownTrigger');
     const debounceId = 'debouncedPostcodeSuggestion';
     let postcode = this.get('model.customer.postcode');
 
@@ -212,7 +212,7 @@ export default Ember.Controller.extend({
     },
 
     setAddressTwo(addressTwo) {
-      const dropdownTrigger = $('#addressSuggestionDropdownTrigger');
+      const dropdownTrigger = Ember.$('#addressSuggestionDropdownTrigger');
       dropdownTrigger.parent().removeClass('open');
 
       this.set('dontSuggestRoad', true);
@@ -220,7 +220,7 @@ export default Ember.Controller.extend({
     },
 
     setPostcode(postcode) {
-      const dropdownTrigger = $('#postcodeSuggestionDropdownTrigger');
+      const dropdownTrigger = Ember.$('#postcodeSuggestionDropdownTrigger');
       dropdownTrigger.parent().removeClass('open');
 
       this.set('dontSuggestPostcode', true);
@@ -267,9 +267,9 @@ export default Ember.Controller.extend({
     submitOrder() {
       let _this = this,
           order = this.get('model.order'),
-          modalWasOpen = $('#orderpad-modal').hasClass('in');
+          modalWasOpen = Ember.$('#orderpad-modal').hasClass('in');
 
-      $('#orderpad-modal').modal('hide');
+      Ember.$('#orderpad-modal').modal('hide');
       this.send('showMessage', 'loader', { message: 'Sending order..' });
 
       order.set('dateTime', new Date());
@@ -292,7 +292,7 @@ export default Ember.Controller.extend({
           body: response.errors[0].message,
           callback: function() {
             if (modalWasOpen) {
-              $('#orderpad-modal').modal('show');
+              Ember.$('#orderpad-modal').modal('show');
             }
           }
         });
@@ -313,7 +313,7 @@ export default Ember.Controller.extend({
       this.set('selectedCategory', '');
       this.set('numpadValue', '');
       this.set('deliveryCustomerResults', '');
-      $('#orderpad-modal').modal('hide');
+      Ember.$('#orderpad-modal').modal('hide');
     }
   }
 });

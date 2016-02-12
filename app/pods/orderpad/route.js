@@ -28,10 +28,10 @@ export default Ember.Route.extend({
       });
 
       Ember.run.scheduleOnce('afterRender', this, function() {
-        $('#postcodeSuggestionDropdownTrigger').on('click tap', function(e) {
+        Ember.$('#postcodeSuggestionDropdownTrigger').on('click tap', function(e) {
           e.stopImmediatePropagation();
         });
-        $('#addressSuggestionDropdownTrigger').on('click tap', function(e) {
+        Ember.$('#addressSuggestionDropdownTrigger').on('click tap', function(e) {
           e.stopImmediatePropagation();
         });
       });
@@ -46,16 +46,14 @@ export default Ember.Route.extend({
     },
 
     showConfirmOrder() {
-      $('#orderpad-modal').modal('hide');
+      Ember.$('#orderpad-modal').modal('hide');
 
       this.render('confirm-order', {
         into: 'orderpad',
         outlet: 'confirm-order',
       });
 
-      Ember.run.scheduleOnce('afterRender', this, function() {
-        $(window).resize();
-      });
+      Ember.run.scheduleOnce('afterRender', this, () => Ember.$(window).resize());
     },
 
     hideConfirmOrder() {
