@@ -1,0 +1,22 @@
+{{talaythai-nav}}
+<div style="padding-top:50px"></div>
+<div class="container-fluid">
+  <div class="row gutter">
+    {{input class="form-control" placeholder="Search for roads..." value=model.search}}
+  </div>
+  <div class="col-xs-12 col-sm-offset-7 col-sm-5 col-md-offset-8 col-md-4 left-right-gutter">
+    {{#btn-button class="btn-primary btn-lg" action="searchRoads" disabled=emptySearch}}
+      Search Roads
+    {{/btn-button}}
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    {{#each searchResults as |road|}}
+      <div>
+        {{road.name}}
+      </div>
+    {{/each}}
+  </div>
+
+  {{outlet}}
+
+</div>
