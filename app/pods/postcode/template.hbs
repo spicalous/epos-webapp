@@ -1,0 +1,32 @@
+{{talaythai-nav}}
+<div style="padding-top:50px"></div>
+<div class="container-fluid">
+  <div id="postcode-search">
+    <div class="row gutter-top-bottom">
+      <div class="col-xs-12">
+        {{input class="form-control" placeholder="Search for postcodes..." value=model.search}}
+      </div>
+    </div>
+    <div class="row gutter-bottom">
+      <div class="col-xs-12">
+        {{#btn-button class="btn-primary btn-lg" action="searchPostcodes" disabled=emptySearch}}
+          Search Postcode
+        {{/btn-button}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div id="postcode-search-list" class="scroll-y col-xs-12 col-sm-6">
+      <div class="gutter-top-bottom">
+        <ul class="list-group">
+          {{#each searchResults as |postcode|}}
+            {{postcode-item postcode=postcode action="transitionToPostcode"}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div id="postcode-edit" class="col-xs-12 col-sm-6 gutter-top-bottom">
+      {{outlet}}
+    </div>
+  </div>
+</div>

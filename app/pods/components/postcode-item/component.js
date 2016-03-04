@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   classNames: ['list-group-item'],
 
   click() {
-    this.sendAction('action', this.get('road'));
+    this.sendAction('action', this.get('postcode'));
   }
 
 });

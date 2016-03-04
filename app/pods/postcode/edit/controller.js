@@ -2,9 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  validRoad: Ember.computed('model.name', function() {
-    let road = this.get('model.name');
-    return road && road.length > 1;
+  validPostcode: Ember.computed('model.postcode', function() {
+    let postcode = this.get('model.postcode');
+    return postcode && postcode.length > 1;
   }),
 
   editable: false,
@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
 
   saveDisabled: Ember.computed.not('canSave'),
 
-  canSave: Ember.computed.and('model.hasDirtyAttributes', 'validRoad'),
+  canSave: Ember.computed.and('model.hasDirtyAttributes', 'validPostcode'),
 
   actions: {
 
@@ -41,21 +41,21 @@ export default Ember.Controller.extend({
       if (hasChangedAfterTrimming) {
         let _this = this;
 
-        this.send('showMessage', 'loader', { message: 'Updating road name..' });
+        this.send('showMessage', 'loader', { message: 'Updating postcode name..' });
         this.get('model').save().then(function() {
           _this.send('dismissMessage', 'loader');
           _this.set('editable', false);
           _this.send('showMessage', 'overlay', {
             header: 'Updated ^^',
-            body: 'Road name updated successfully',
+            body: 'Postcode name updated successfully',
             callback: function() {
-              _this.transitionToRoute('road');
+              _this.transitionToRoute('postcode');
             }
           });
         }).catch(function(response) {
           _this.send('dismissMessage', 'loader');
           _this.send('showMessage', 'overlay', {
-            header: 'Failed to update road name :(',
+            header: 'Failed to update postcode :(',
             body: response.errors[0].message
           });
         });
@@ -67,20 +67,20 @@ export default Ember.Controller.extend({
     deleteRecord() {
       let _this = this;
 
-      this.send('showMessage', 'loader', { message: 'Deleting road..' });
+      this.send('showMessage', 'loader', { message: 'Deleting postcode..' });
       this.get('model').destroyRecord().then(function() {
         _this.send('dismissMessage', 'loader');
         _this.send('showMessage', 'overlay', {
           header: 'Deleted ^^',
-          body: 'Road deleted successfully',
+          body: 'Postcode deleted successfully',
           callback: function() {
-            _this.transitionToRoute('road');
+            _this.transitionToRoute('postcode');
           }
         });
       }).catch(function(response) {
         _this.send('dismissMessage', 'loader');
         _this.send('showMessage', 'overlay', {
-          header: 'Failed to delete the road :(',
+          header: 'Failed to delete the postcode :(',
           body: response.errors[0].message
         });
       });

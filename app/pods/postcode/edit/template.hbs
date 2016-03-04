@@ -1,6 +1,6 @@
 <div class="row gutter-bottom">
   <div class="col-xs-12">
-    {{input class="form-control" value=model.name disabled=editDisabled}}
+    {{input class="form-control" value=model.postcode disabled=editDisabled}}
   </div>
 </div>
 <div class="row gutter-bottom">
@@ -11,7 +11,7 @@
       {{/btn-button}}
     </div>
     <div class="col-xs-6">
-      {{#btn-button class="btn-danger btn-lg" confirmAction=(action "deleteRecord") showMessage="showMessage" confirmMessage="Really delete the road?"}}
+      {{#btn-button class="btn-danger btn-lg" confirmAction=(action "deleteRecord") showMessage="showMessage" confirmMessage="Really delete the postcode?"}}
         Delete
       {{/btn-button}}
     </div>

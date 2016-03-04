@@ -12,6 +12,9 @@ Router.map(function() {
   this.route('road', function() {
     this.route('edit', { path: '/:road_id' });
   });
+  this.route('postcode', function() {
+    this.route('edit', { path: '/:postcode_id' });
+  });
 
   this.route('orders');
   this.route('restaurant');
