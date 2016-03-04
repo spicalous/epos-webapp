@@ -82,6 +82,10 @@ export default Ember.Controller.extend({
           body: response.errors[0].message
         });
       });
+    },
+
+    closeEdit() {
+      this.transitionToRoute('delivery-customer');
     }
 
   }

@@ -14,29 +14,6 @@ export default Ember.Controller.extend({
     return !(this.get('telephone') || this.get('addressOne') || this.get('addressTwo') || this.get('postcode'));
   }),
 
-  handleResize() {
-    let windowHeight = Ember.$(window).height();
-    let windowWidth = Ember.$(window).width();
-
-    if (windowWidth < 768) {
-      Ember.$('#delivery-customer-search-list').height(windowHeight - (
-        Ember.$('#delivery-customer-search').outerHeight() +
-        50 +
-        (Ember.$('#delivery-customer-edit').height() ? 297 : 8))); //#delivery-customer-edit expanded = 297;
-    } else {
-      Ember.$('#delivery-customer-search-list').height(windowHeight - (
-        Ember.$('#delivery-customer-search').outerHeight() +
-        50));
-    }
-  },
-
-  bindResize: Ember.on('init', function() {
-    Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      this.handleResize();
-    });
-  }),
-
   actions: {
 
     searchCustomer() {
@@ -66,9 +43,6 @@ export default Ember.Controller.extend({
 
     transitionToCustomer(customer) {
       this.transitionToRoute('delivery-customer.edit', customer);
-      Ember.run.scheduleOnce('afterRender', this, function() {
-        this.handleResize();
-      });
     }
 
   }

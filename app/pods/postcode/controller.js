@@ -8,29 +8,6 @@ export default Ember.Controller.extend({
     return !this.get('search');
   }),
 
-  handleResize() {
-    let windowHeight = Ember.$(window).height();
-    let windowWidth = Ember.$(window).width();
-
-    if (windowWidth < 768) {
-      Ember.$('#postcode-search-list').height(windowHeight - (
-        Ember.$('#postcode-search').outerHeight() +
-        50 +
-        (Ember.$('#postcode-edit').height() ? 146 : 8))); //#postcode-edit expanded = 146;
-    } else {
-      Ember.$('#postcode-search-list').height(windowHeight - (
-        Ember.$('#postcode-search').outerHeight() +
-        50));
-    }
-  },
-
-  bindResize: Ember.on('init', function() {
-    Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      this.handleResize();
-    });
-  }),
-
   actions: {
 
     searchPostcodes() {
@@ -54,9 +31,6 @@ export default Ember.Controller.extend({
 
     transitionToPostcode(postcode) {
       this.transitionToRoute('postcode.edit', postcode);
-      Ember.run.scheduleOnce('afterRender', this, function() {
-        this.handleResize();
-      });
     }
   }
 
