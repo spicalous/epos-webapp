@@ -22,8 +22,11 @@ export default Ember.Controller.extend({
       Ember.$('#delivery-customer-search-list').height(windowHeight - (
         Ember.$('#delivery-customer-search').outerHeight() +
         50 +
-        297));
-        //#delivery-customer-edit expanded = 297;
+        (Ember.$('#delivery-customer-edit').height() ? 297 : 8))); //#delivery-customer-edit expanded = 297;
+    } else {
+      Ember.$('#delivery-customer-search-list').height(windowHeight - (
+        Ember.$('#delivery-customer-search').outerHeight() +
+        50));
     }
   },
 
@@ -63,6 +66,9 @@ export default Ember.Controller.extend({
 
     transitionToCustomer(customer) {
       this.transitionToRoute('delivery-customer.edit', customer);
+      Ember.run.scheduleOnce('afterRender', this, function() {
+        this.handleResize();
+      });
     }
 
   }

@@ -16,8 +16,11 @@ export default Ember.Controller.extend({
       Ember.$('#postcode-search-list').height(windowHeight - (
         Ember.$('#postcode-search').outerHeight() +
         50 +
-        146));
-        //#postcode-edit expanded = 146;
+        (Ember.$('#postcode-edit').height() ? 146 : 8))); //#postcode-edit expanded = 146;
+    } else {
+      Ember.$('#postcode-search-list').height(windowHeight - (
+        Ember.$('#postcode-search').outerHeight() +
+        50));
     }
   },
 
@@ -51,6 +54,9 @@ export default Ember.Controller.extend({
 
     transitionToPostcode(postcode) {
       this.transitionToRoute('postcode.edit', postcode);
+      Ember.run.scheduleOnce('afterRender', this, function() {
+        this.handleResize();
+      });
     }
   }
 
