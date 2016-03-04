@@ -1,7 +1,7 @@
 {{#if customer.customerType}}
 
   {{#btn-button class="btn-sm btn-danger" action="removeCustomer"}}Remove Customer{{/btn-button}}
-  <div class="top-bottom-gutter bottom-divider">
+  <div class="gutter-top-bottom bottom-divider">
     {{component (concat 'selected-' customer.customerType) customer=customer}}
   </div>
 

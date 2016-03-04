@@ -10,7 +10,32 @@
 @zindex-toast: @zindex-confirm + 1;
 @zindex-overlay: @zindex-toast + 1;
 
-@talaythai-gutter: 4px;
+.no-padding {
+   padding-left: 0 !important;
+   padding-right: 0 !important;
+}
+
+.gutter {
+
+  &-top {
+    padding-top: @grid-gutter-width;
+  }
+
+  &-bottom {
+    padding-bottom: @grid-gutter-width;
+  }
+
+  &-top-bottom {
+    padding-top: @grid-gutter-width;
+    padding-bottom: @grid-gutter-width;
+  }
+
+}
+
+.top-bottom-border {
+  border-top:    1px solid @page-header-border-color;
+  border-bottom: 1px solid @page-header-border-color;
+}
 
 //Allows touch events to be fired on touch devices
 a, a:focus, a:hover, a:active, a:visited {
@@ -27,29 +52,6 @@ html {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-.gutter {
-  padding: @talaythai-gutter;
-}
-
-.bottom-gutter {
-  padding-bottom: @talaythai-gutter;
-}
-
-.top-bottom-gutter {
-  padding-top: @talaythai-gutter;
-  padding-bottom: @talaythai-gutter;
-}
-
-.left-right-gutter {
-  padding-left: @talaythai-gutter;
-  padding-right: @talaythai-gutter;
-}
-
-.top-bottom-border {
-  border-top:    1px solid @page-header-border-color;
-  border-bottom: 1px solid @page-header-border-color;
 }
 
 .confirm-dialog {

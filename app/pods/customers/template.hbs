@@ -1,6 +1,6 @@
 {{talaythai-nav}}
 <div style="padding-top:50px"></div>
-<div class="row top-bottom-gutter">
+<div class="row gutter-top-bottom">
   <div class="col-xs-12">
     <form class="form-horizontal">
       {{#form-group label="Telephone"}}
@@ -17,17 +17,17 @@
     </form>
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-12 col-sm-offset-7 col-sm-5 col-md-offset-8 col-md-4 left-right-gutter">
+<div class="row gutter-bottom">
+  <div class="col-xs-12 col-sm-offset-2 col-sm-9">
     {{#btn-button class="btn-primary btn-lg" action="searchCustomer" disabled=emptySearch}}Search{{/btn-button}}
   </div>
 </div>
-<div class="row top-bottom-gutter left-right-gutter">
+<div class="row gutter-top-bottom">
   <div class="col-xs-12 col-sm-offset-1 col-sm-10">
     {{delivery-customer-list deliveryCustomers=deliveryCustomerResults selectDeliveryCustomer=(action "transitionToCustomer")}}
   </div>
 </div>
-<div class="row">
+<div class="row gutter-top-bottom">
   <div class="col-xs-6">
     {{outlet}}
   </div>

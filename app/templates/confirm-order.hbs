@@ -2,46 +2,46 @@
   <div class="container-fluid">
 
     <div id="confirm-order-list-header" class="row">
-      <div class="col-xs-12 col-sm-offset-1 col-sm-10 left-right-gutter top-bottom-gutter text-center">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 gutter-top-bottom text-center">
         <div class="lead">
           Review order
         </div>
       </div>
     </div>
 
-    <div id="confirm-order-list" class="row scroll-y top-bottom-gutter">
-      <div class="col-xs-12 col-sm-offset-1 col-sm-10 left-right-gutter lead">
+    <div id="confirm-order-list" class="row scroll-y gutter-top-bottom">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 lead">
         {{order-list order=model.order}}
       </div>
     </div>
 
     <div id="confirm-order-bottom">
-      <div class="row top-bottom-gutter">
-        <div class="col-xs-6 col-sm-offset-1 col-sm-5 text-center top-bottom-gutter top-bottom-border">
+      <div class="row gutter-top-bottom">
+        <div class="col-xs-6 col-sm-offset-1 col-sm-5 text-center gutter-top-bottom top-bottom-border">
           <span class="lead">ITEMS: {{model.order.size}}</span>
         </div>
-        <div class="col-xs-6 col-sm-5 text-center top-bottom-gutter top-bottom-border">
+        <div class="col-xs-6 col-sm-5 text-center gutter-top-bottom top-bottom-border">
           <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
         </div>
       </div>
-      <div class="row top-bottom-gutter">
-        <div class="col-xs-6 col-sm-offset-1 col-sm-5 left-right-gutter">
-          <div class="lead top-bottom-gutter">
+      <div class="row gutter-top-bottom">
+        <div class="col-xs-6 col-sm-offset-1 col-sm-5">
+          <div class="lead gutter-top-bottom">
             Estimate Time ({{computedEstimate}})
           </div>
           {{select-component content=estimatedDeliveryTimes selectedValue=model.order.estimatedTime action=(action (mut model.order.estimatedTime))}}
         </div>
-        <div class="col-xs-6 col-sm-5 left-right-gutter">
-          <div class="lead top-bottom-gutter">
+        <div class="col-xs-6 col-sm-5">
+          <div class="lead gutter-top-bottom">
             Payment Method
           </div>
           {{select-component content=paymentMethods selectedValue=model.order.paymentMethod action=(action (mut model.order.paymentMethod))}}
         </div>
       </div>
 
-      <div class="row top-bottom-gutter">
-        <div class="col-xs-12 col-sm-offset-1 col-sm-10 left-right-gutter">
-          <div class="lead top-bottom-gutter">
+      <div class="row gutter-top-bottom">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+          <div class="lead gutter-top-bottom">
             Notes
           </div>
           {{textarea class="form-control" rows="2" value=model.order.notes}}
@@ -49,12 +49,12 @@
       </div>
       <div style="height:20px"></div>
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-6 no-padding">
           {{#btn-button class="btn-lg btn-default" action="hideConfirmOrder"}}
             CANCEL
           {{/btn-button}}
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-6 no-padding">
           {{#btn-button class="btn-lg btn-success" disabled=invalidOrder action="submitOrder"}}
             CONFIRM
           {{/btn-button}}

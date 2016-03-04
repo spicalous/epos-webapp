@@ -1,22 +1,22 @@
 {{talaythai-nav}}
 <div style="padding-top:50px"></div>
 <div class="container-fluid">
-  <div class="row top-bottom-gutter">
+  <div class="row gutter-top-bottom">
     {{delivery-customer-component customer=model disabled=editDisabled}}
   </div>
-  <div class="row">
+  <div class="row gutter-bottom">
     {{#if editable}}
-      <div class="col-xs-6 col-sm-offset-2 col-sm-5 top-bottom-gutter left-right-gutter">
+      <div class="col-xs-6 col-sm-offset-1 col-sm-5">
         {{#btn-button class="btn-primary btn-lg" action="saveEdit" disabled=saveDisabled}}Save{{/btn-button}}
       </div>
-      <div class="col-xs-6 col-sm-5 top-bottom-gutter left-right-gutter">
+      <div class="col-xs-6 col-sm-5">
         {{#btn-button class="btn-danger btn-lg" confirmAction=(action "deleteCustomer") showMessage="showMessage" confirmMessage="Really delete the customer?"}}Delete{{/btn-button}}
       </div>
-      <div class="col-xs-12 col-sm-offset-2 col-sm-10 top-bottom-gutter left-right-gutter">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 gutter-top">
         {{#btn-button class="btn-default btn-lg btn-close" action="disableEdit"}}Cancel{{/btn-button}}
       </div>
     {{else}}
-      <div class="col-xs-12 col-sm-offset-2 col-sm-5 top-bottom-gutter left-right-gutter">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 gutter-bottom">
         {{#btn-button class="btn-primary btn-lg" action="enableEdit"}}Edit{{/btn-button}}
       </div>
     {{/if}}

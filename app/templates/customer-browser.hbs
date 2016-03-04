@@ -1,8 +1,8 @@
 <div class="customer-browser">
   <div class="container-fluid">
 
-    <div id="customer-browser-top" class="top-bottom-gutter">
-      <div class="row top-bottom-gutter">
+    <div id="customer-browser-top" class="gutter-top-bottom">
+      <div class="row gutter-top-bottom">
         <div class="col-xs-12">
           <form class="form-horizontal">
 
@@ -64,8 +64,8 @@
       </div>
 
       {{#unless canSaveCustomer}}
-        <div class="row top-bottom-gutter">
-          <div class="col-xs-12 col-sm-offset-2 col-sm-10 left-right-gutter">
+        <div class="row gutter-top-bottom">
+          <div class="col-xs-12 col-sm-offset-2 col-sm-9">
             {{#alert-box alertType=(if validCustomer "info" "danger")}}
               {{if model.customer.invalidTelephone model.customer.invalidTelephoneReason}}
               {{if model.customer.invalidAddress model.customer.invalidAddressReason}}
@@ -76,10 +76,10 @@
         </div>
       {{/unless}}
 
-      <div class="row top-bottom-gutter left-right-gutter">
+      <div class="row gutter-top-bottom">
 
         {{#if canSaveCustomer}}
-          <div class="col-xs-6 col-sm-offset-2 col-sm-5 left-right-gutter">
+          <div class="col-xs-6 col-sm-offset-1 col-sm-5">
             {{#btn-button class="btn-default btn-lg btn-close" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
           <div class="col-xs-6 col-sm-5">
@@ -90,7 +90,7 @@
             {{/btn-button}}
           </div>
         {{else}}
-          <div class="col-xs-12 col-sm-offset-7 col-sm-5">
+          <div class="col-xs-12 col-sm-offset-6 col-sm-5">
             {{#btn-button class="btn-default btn-lg btn-close" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
         {{/if}}
@@ -100,7 +100,7 @@
     </div>
 
     <div id="customer-browser-bottom" class="scroll-y">
-      <div class="row top-bottom-gutter left-right-gutter">
+      <div class="row gutter-top-bottom">
         <div class="col-xs-12 col-sm-offset-1 col-sm-10">
 
           {{#if debouncedSearch}}
