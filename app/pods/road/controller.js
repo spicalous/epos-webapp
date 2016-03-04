@@ -2,8 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  emptySearch: Ember.computed('model.search', function() {
-    return !this.get('model.search');
+  search: '',
+
+  emptySearch: Ember.computed('search', function() {
+    return !this.get('search');
   }),
 
   handleResize() {
@@ -27,7 +29,7 @@ export default Ember.Controller.extend({
   actions: {
 
     searchRoads() {
-      let road = this.get('model.search');
+      let road = this.get('search');
       let _this = this;
 
       this.send('showMessage', 'loader', { message: 'Searching roads..' });
