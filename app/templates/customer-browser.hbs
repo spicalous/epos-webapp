@@ -107,7 +107,11 @@
             {{loading-spinner text="Searching customers..."}}
           {{else}}
             {{#if deliveryCustomerResults}}
-              {{delivery-customer-list deliveryCustomers=deliveryCustomerResults selectDeliveryCustomer=(action "selectCustomer")}}
+              <ul class="list-group">
+                {{#each deliveryCustomerResults as |customer|}}
+                  {{delivery-customer-list-item customer=customer onClick=(action "selectCustomer" customer)}}
+                {{/each}}
+              </ul>
             {{else}}
               {{#if hasCustomerQuery}}
                 <div class="text-center">
