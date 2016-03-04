@@ -2,87 +2,69 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  validTelephone: Ember.computed.not('model.invalidTelephone'),
+  telephone: '',
 
-  validAddress: Ember.computed.not('model.invalidAddress'),
+  addressOne: '',
 
-  validPostcode: Ember.computed.not('model.invalidPostcode'),
+  addressTwo: '',
 
-  editable: false,
+  postcode: '',
 
-  editDisabled: Ember.computed.not('editable'),
+  emptySearch: Ember.computed('telephone', 'addressOne', 'addressTwo', 'postcode', function() {
+    return !(this.get('telephone') || this.get('addressOne') || this.get('addressTwo') || this.get('postcode'));
+  }),
 
-  saveDisabled: Ember.computed.not('canSave'),
+  handleResize() {
+    let windowHeight = Ember.$(window).height();
+    let windowWidth = Ember.$(window).width();
 
-  canSave: Ember.computed.and('model.hasDirtyAttributes', 'validTelephone', 'validAddress', 'validPostcode'),
+    if (windowWidth < 768) {
+      Ember.$('#delivery-customer-search-list').height(windowHeight - (
+        Ember.$('#delivery-customer-search').outerHeight() +
+        50 +
+        297));
+        //#delivery-customer-edit expanded = 297;
+    }
+  },
+
+  bindResize: Ember.on('init', function() {
+    Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      this.handleResize();
+    });
+  }),
 
   actions: {
 
-    enableEdit() {
-      this.set('editable', true);
-    },
-
-    disableEdit() {
-      this.get('model').rollbackAttributes();
-      this.set('editable', false);
-    },
-
-    saveEdit() {
-      //trailing whitespace is not disregarded so we check that here
-      let changedAttributes = this.get('model').changedAttributes();
-      let hasChangedAfterTrimming = false;
-      for (var attributes in changedAttributes) {
-        let oldVal = changedAttributes[attributes][0];
-        let newVal = changedAttributes[attributes][1];
-        if (oldVal !== newVal.trim()) {
-          hasChangedAfterTrimming = true;
-        }
-      }
-
-      if (hasChangedAfterTrimming) {
-        let _this = this;
-
-        this.send('showMessage', 'loader', { message: 'Updating customer..' });
-        this.get('model').save().then(function() {
-          _this.send('dismissMessage', 'loader');
-          _this.set('editable', false);
-          _this.send('showMessage', 'overlay', {
-            header: 'Updated ^^',
-            body: 'Customer updated successfully'
-          });
-        }).catch(function(response) {
-          _this.send('dismissMessage', 'loader');
-          _this.send('showMessage', 'overlay', {
-            header: 'Failed to update the customer :(',
-            body: response.errors[0].message
-          });
-        });
-      } else {
-        this.send('disableEdit');
-      }
-    },
-
-    deleteCustomer() {
+    searchCustomer() {
+      let telephone = this.get('telephone');
+      let addressOne = this.get('addressOne');
+      let addressTwo = this.get('addressTwo');
+      let postcode = this.get('postcode');
       let _this = this;
 
-      this.send('showMessage', 'loader', { message: 'Deleting customer..' });
-      this.get('model').destroyRecord().then(function() {
+      this.send('showMessage', 'loader', { message: 'Searching customer..' });
+      this.store.query('delivery-customer', {
+        addressOne: addressOne,
+        addressTwo: addressTwo,
+        postcode: postcode,
+        telephone: telephone
+      }).then(function(customers) {
         _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
-          header: 'Deleted ^^',
-          body: 'Customer deleted successfully',
-          callback: function() {
-            _this.transitionToRoute('customers');
-          }
-        });
+        _this.set('deliveryCustomerResults', customers);
       }).catch(function(response) {
         _this.send('dismissMessage', 'loader');
         _this.send('showMessage', 'overlay', {
-          header: 'Failed to delete the customer :(',
+          header: 'Error searching for customers :(',
           body: response.errors[0].message
         });
       });
+    },
+
+    transitionToCustomer(customer) {
+      this.transitionToRoute('delivery-customer.edit', customer);
     }
+
   }
 
 });

@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:customers', 'Unit | Route | customers', {
+moduleFor('route:delivery-customer/edit', 'Unit | Route | delivery customer/edit', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

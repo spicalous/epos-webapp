@@ -1,0 +1,30 @@
+<div class="row gutter-bottom">
+  <div class="col-xs-12">
+    {{delivery-customer-component customer=model disabled=editDisabled}}
+  </div>
+</div>
+<div class="row gutter-bottom">
+  {{#if editable}}
+    <div class="col-xs-6">
+      {{#btn-button class="btn-primary btn-lg" action="saveEdit" disabled=saveDisabled}}
+        Save
+      {{/btn-button}}
+    </div>
+    <div class="col-xs-6">
+      {{#btn-button class="btn-danger btn-lg" confirmAction=(action "deleteRecord") showMessage="showMessage" confirmMessage="Really delete the postcode?"}}
+        Delete
+      {{/btn-button}}
+    </div>
+    <div class="col-xs-12 gutter-top">
+      {{#btn-button class="btn-default btn-lg btn-close" action="disableEdit"}}
+        Cancel
+      {{/btn-button}}
+    </div>
+  {{else}}
+    <div class="col-xs-12 gutter-bottom">
+      {{#btn-button class="btn-primary btn-lg" action="enableEdit"}}
+        Edit
+      {{/btn-button}}
+    </div>
+  {{/if}}
+</div>

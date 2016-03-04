@@ -23,7 +23,9 @@ export default Ember.Controller.extend({
 
   bindResize: Ember.on('init', function() {
     Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
-    this.handleResize();
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      this.handleResize();
+    });
   }),
 
   actions: {
