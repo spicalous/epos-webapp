@@ -1,22 +1,32 @@
 {{talaythai-nav}}
 <div style="padding-top:50px"></div>
 <div class="container-fluid">
-  <div class="row gutter">
-    {{input class="form-control" placeholder="Search for roads..." value=model.search}}
-  </div>
-  <div class="col-xs-12 col-sm-offset-7 col-sm-5 col-md-offset-8 col-md-4 left-right-gutter">
-    {{#btn-button class="btn-primary btn-lg" action="searchRoads" disabled=emptySearch}}
-      Search Roads
-    {{/btn-button}}
-  </div>
-  <div class="col-xs-12 col-sm-6">
-    {{#each searchResults as |road|}}
-      <div>
-        {{road.name}}
+  <div id="road-search">
+    <div class="row gutter-top-bottom">
+      <div class="col-xs-12">
+        {{input class="form-control" placeholder="Search for roads..." value=model.search}}
       </div>
-    {{/each}}
+    </div>
+    <div class="row gutter-bottom">
+      <div class="col-xs-12">
+        {{#btn-button class="btn-primary btn-lg" action="searchRoads" disabled=emptySearch}}
+          Search Roads
+        {{/btn-button}}
+      </div>
+    </div>
   </div>
-
-  {{outlet}}
-
+  <div class="row">
+    <div id="road-search-list" class="scroll-y col-xs-12 col-sm-6">
+      <div class="gutter-top-bottom">
+        <ul class="list-group">
+          {{#each searchResults as |road|}}
+            {{road-item road=road action="transitionToRoad"}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div id="road-edit" class="col-xs-12 col-sm-6 gutter-top-bottom">
+      {{outlet}}
+    </div>
+  </div>
 </div>
