@@ -80,7 +80,7 @@
 
         {{#if canSaveCustomer}}
           <div class="col-xs-6 col-sm-offset-1 col-sm-5">
-            {{#btn-button class="btn-default btn-lg btn-close" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
+            {{#btn-button class="btn-default btn-lg" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
           <div class="col-xs-6 col-sm-5">
             {{#btn-button class="btn-primary btn-lg" confirmAction=(action "saveAndSelectCustomer")
@@ -91,7 +91,7 @@
           </div>
         {{else}}
           <div class="col-xs-12 col-sm-offset-6 col-sm-5">
-            {{#btn-button class="btn-default btn-lg btn-close" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
+            {{#btn-button class="btn-default btn-lg" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
           </div>
         {{/if}}
 
