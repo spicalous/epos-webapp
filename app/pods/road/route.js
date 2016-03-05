@@ -5,17 +5,12 @@ export default Ember.Route.extend({
   handleResize() {
     let windowHeight = Ember.$(window).height();
     let windowWidth = Ember.$(window).width();
+    let size = windowHeight - (Ember.$('#road-search').outerHeight() + 50);
 
-    if (windowWidth < 768) {
-      Ember.$('#road-search-list').height(windowHeight - (
-        Ember.$('#road-search').outerHeight() +
-        50 +
-        Ember.$('#road-edit').outerHeight())); //#road-edit expanded = 146;
-    } else {
-      Ember.$('#road-search-list').height(windowHeight - (
-        Ember.$('#road-search').outerHeight() +
-        50));
-    }
+    Ember.$('#road-search-list').height(
+      windowWidth < 768 ?
+        size - Ember.$('#road-edit').outerHeight() :
+        size);
   },
 
   bindResize: Ember.on('init', function() {

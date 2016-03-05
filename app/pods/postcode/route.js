@@ -5,17 +5,12 @@ export default Ember.Route.extend({
   handleResize() {
     let windowHeight = Ember.$(window).height();
     let windowWidth = Ember.$(window).width();
+    let size = windowHeight - (Ember.$('#postcode-search').outerHeight() + 50);
 
-    if (windowWidth < 768) {
-      Ember.$('#postcode-search-list').height(windowHeight - (
-        Ember.$('#postcode-search').outerHeight() +
-        50 +
-        Ember.$('#postcode-edit').outerHeight()));
-    } else {
-      Ember.$('#postcode-search-list').height(windowHeight - (
-        Ember.$('#postcode-search').outerHeight() +
-        50));
-    }
+    Ember.$('#postcode-search-list').height(
+      windowWidth < 768 ?
+        size - Ember.$('#postcode-edit').outerHeight() :
+        size);
   },
 
   bindResize: Ember.on('init', function() {
