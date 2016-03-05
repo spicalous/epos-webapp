@@ -1,18 +1,18 @@
 <div class="row gutter-bottom">
   <div class="col-xs-12">
     <form class="form-horizontal">
-      {{form-group label="ID" type="text" value=model.id readonly=true}}
+      {{form-group inputCol="col-sm-10" label="ID" type="text" value=model.id readonly=true}}
 
-      {{form-group label="Telephone" type="number" value=model.telephone disabled=editDisabled
+      {{form-group inputCol="col-sm-10" label="Telephone" type="number" value=model.telephone disabled=editDisabled
       hasError=model.invalidTelephone helpText=model.invalidTelephoneReason}}
 
-      {{form-group label="Number" type="text" value=model.addressOne disabled=editDisabled
+      {{form-group inputCol="col-sm-10" label="Number" type="text" value=model.addressOne disabled=editDisabled
       hasError=model.invalidAddress}}
 
-      {{form-group label="Address" type="text" value=model.addressTwo disabled=editDisabled
+      {{form-group inputCol="col-sm-10" label="Address" type="text" value=model.addressTwo disabled=editDisabled
       hasError=model.invalidAddress helpText=model.invalidAddressReason}}
 
-      {{form-group label="Postcode" type="text" value=model.postcode disabled=editDisabled
+      {{form-group inputCol="col-sm-10" label="Postcode" type="text" value=model.postcode disabled=editDisabled
       hasError=model.invalidPostcode helpText=model.invalidPostcodeReason}}
     </form>
   </div>

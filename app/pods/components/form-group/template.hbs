@@ -1,6 +1,6 @@
 <div class="form-group">
-  <label class="col-sm-2 hidden-xs control-label">{{label}}</label>
-  <div class="col-sm-9">
+  <label class="{{labelCol}} hidden-xs control-label">{{label}}</label>
+  <div class="{{inputCol}}">
     {{#if hasBlock}}
       {{yield}}
     {{else}}
@@ -9,7 +9,7 @@
   </div>
   {{#if hasError}}
     {{#if helpText}}
-      <div class="col-sm-offset-2 col-sm-9">
+      <div class="{{helpCol}}">
         <span class="help-block">{{helpText}}</span>
       </div>
     {{/if}}
