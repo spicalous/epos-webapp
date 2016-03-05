@@ -1,6 +1,9 @@
 <div class="row gutter-bottom">
   <div class="col-xs-12">
-    {{input class="form-control" value=model.name disabled=editDisabled}}
+    <form class="form-horizontal">
+      {{form-group inputCol="col-sm-10" label="ID" type="text" value=model.id readonly=true}}
+      {{form-group inputCol="col-sm-10" label="Road" type="text" value=model.name disabled=editDisabled}}
+    </form>
   </div>
 </div>
 <div class="row gutter-bottom">
