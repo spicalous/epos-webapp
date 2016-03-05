@@ -20,9 +20,7 @@ export default Ember.Route.extend({
   actions: {
 
     didTransition() {
-      Ember.run.scheduleOnce('afterRender', this, function() {
-        this.handleResize();
-      });
+      Ember.run.scheduleOnce('afterRender', this, () => this.handleResize());
     }
 
   }
