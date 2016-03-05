@@ -1,130 +1,126 @@
-{{#temp/orderpad-wrapper}}
+{{#if featureFlags.NAV_BAR_ENABLED}}
+  {{talaythai-nav}}
+  <div style="padding-top:50px"></div>
+{{/if}}
 
-  {{#if featureFlags.NAV_BAR_ENABLED}}
-    {{talaythai-nav}}
-    <div style="padding-top:50px"></div>
-  {{/if}}
+{{outlet "confirm-order"}}
 
-  {{outlet "confirm-order"}}
+{{outlet "customer-browser"}}
 
-  {{outlet "customer-browser"}}
+<div class="container-fluid">
+  <div class="row">
 
-  <div class="container-fluid">
-    <div class="row">
+    <div class="col-xs-12 visible-xs no-padding" id="orderpad-customer-small">
+      {{inline-customer-input customer=model.customer
+      setCustomer="setCustomer"
+      removeCustomer="removeCustomer"}}
+    </div>
 
-      <div class="col-xs-12 visible-xs no-padding" id="orderpad-customer-small">
-        {{inline-customer-input customer=model.customer
-        setCustomer="setCustomer"
-        removeCustomer="removeCustomer"}}
+    <div class="col-xs-12 col-sm-7 col-md-8">
+      <div class="row" id="orderpad-categories">
+        {{#each model.categories as |item|}}
+          <div class="col-xs-4 col-sm-3 col-md-2 no-padding">
+            {{category-item category=item action="categoryItemClick" selected=selectedCategory}}
+          </div>
+        {{/each}}
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-8 scroll-y" style="padding:8px" id="orderpad-menu">
+          {{#menu-list menuItems=menu as |menuItem|}}
+            {{menu-item menuItem=menuItem action="menuItemClick"}}
+          {{/menu-list}}
+        </div>
+        <div class="hidden-xs col-sm-5 col-md-4 text-center" id="orderpad-numpad">
+          <div class="col-xs-12" style="position:absolute; width=100%; bottom:0;">
+            <span style="font-size: 80px">{{numpadValue}}</span>
+            {{number-pad value=numpadValue maxLength=4}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden-xs col-sm-5 col-md-4">
+      <div class="row" id="orderpad-customer">
+        <div class="col-sm-12 no-padding">
+          {{inline-customer-input customer=model.customer
+          setCustomer="setCustomer"
+          removeCustomer="removeCustomer"}}
+        </div>
       </div>
 
-      <div class="col-xs-12 col-sm-7 col-md-8">
-        <div class="row" id="orderpad-categories">
-          {{#each model.categories as |item|}}
-            <div class="col-xs-4 col-sm-3 col-md-2 no-padding">
-              {{category-item category=item action="categoryItemClick" selected=selectedCategory}}
-            </div>
-          {{/each}}
+      <div class="row scroll-y" id="orderpad-orderlist">
+        <div class="col-sm-12">
+          <div class="lead">
+            {{order-list order=model.order}}
+          </div>
         </div>
+      </div>
+
+      <div id="orderpad-bottom">
+        <div class="row gutter-top-bottom">
+          <div class="col-xs-6 text-center">
+            <span class="lead">ITEMS: {{model.order.size}}</span>
+          </div>
+          <div class="col-xs-6 text-center">
+            <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
+          </div>
+        </div>
+
         <div class="row">
-          <div class="col-xs-12 col-sm-7 col-md-8 scroll-y" style="padding:8px" id="orderpad-menu">
-            {{#menu-list menuItems=menu as |menuItem|}}
-              {{menu-item menuItem=menuItem action="menuItemClick"}}
-            {{/menu-list}}
+          <div class="col-xs-6 no-padding">
+            {{#btn-button class="btn-lg btn-danger" confirmAction=(action "cancelOrder")
+            disabled=cannotCancelOrder
+            showMessage="showMessage"
+            confirmMessage="Cancel the order?"}}
+              CANCEL ORDER
+            {{/btn-button}}
           </div>
-          <div class="hidden-xs col-sm-5 col-md-4 text-center" id="orderpad-numpad">
-            <div class="col-xs-12" style="position:absolute; width=100%; bottom:0;">
-              <span style="font-size: 80px">{{numpadValue}}</span>
-              {{number-pad value=numpadValue maxLength=4}}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hidden-xs col-sm-5 col-md-4">
-        <div class="row" id="orderpad-customer">
-          <div class="col-sm-12 no-padding">
-            {{inline-customer-input customer=model.customer
-            setCustomer="setCustomer"
-            removeCustomer="removeCustomer"}}
-          </div>
-        </div>
-
-        <div class="row scroll-y" id="orderpad-orderlist">
-          <div class="col-sm-12">
-            <div class="lead">
-              {{order-list order=model.order}}
-            </div>
-          </div>
-        </div>
-
-        <div id="orderpad-bottom">
-          <div class="row gutter-top-bottom">
-            <div class="col-xs-6 text-center">
-              <span class="lead">ITEMS: {{model.order.size}}</span>
-            </div>
-            <div class="col-xs-6 text-center">
-              <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-6 no-padding">
-              {{#btn-button class="btn-lg btn-danger" confirmAction=(action "cancelOrder")
-              disabled=cannotCancelOrder
-              showMessage="showMessage"
-              confirmMessage="Cancel the order?"}}
-                CANCEL ORDER
-              {{/btn-button}}
-            </div>
-            <div class="col-xs-6 no-padding">
-              {{#btn-button class="btn-lg btn-success" action="showConfirmOrder" disabled=invalidOrder}}
-                SUBMIT ORDER
-              {{/btn-button}}
-            </div>
+          <div class="col-xs-6 no-padding">
+            {{#btn-button class="btn-lg btn-success" action="showConfirmOrder" disabled=invalidOrder}}
+              SUBMIT ORDER
+            {{/btn-button}}
           </div>
         </div>
       </div>
+    </div>
 
+  </div>
+</div>
+
+{{#orderpad-modal order=model.order title="Order Items"}}
+  <div class="modal-body" style="padding: 0px;">
+    <small>
+      {{order-list order=model.order}}
+    </small>
+  </div>
+  <div class="modal-footer" style="border-top:none;">
+
+    <div class="gutter-top-bottom">
+      <div class="col-xs-6 text-center">
+        <span class="lead">ITEMS: {{model.order.size}}</span>
+      </div>
+      <div class="col-xs-6 text-center">
+        <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
+      </div>
+    </div>
+
+    <div class="row" style="padding-left:2px; padding-right:2px">
+      <div class="col-xs-6 no-padding">
+        {{#btn-button class="btn-danger btn-lg" action="cancelOrder" disabled=cannotCancelOrder}}CANCEL ORDER{{/btn-button}}
+      </div>
+      <div class="col-xs-6 no-padding">
+        {{#btn-button class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}SUBMIT ORDER{{/btn-button}}
+      </div>
+      <div class="col-xs-12 no-padding">
+        {{#btn-button class="btn-default btn-lg" data-dismiss="modal"}}CLOSE{{/btn-button}}
+      </div>
     </div>
   </div>
+{{/orderpad-modal}}
 
-  {{#orderpad-modal order=model.order title="Order Items"}}
-    <div class="modal-body" style="padding: 0px;">
-      <small>
-        {{order-list order=model.order}}
-      </small>
-    </div>
-    <div class="modal-footer" style="border-top:none;">
+{{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}
 
-      <div class="gutter-top-bottom">
-        <div class="col-xs-6 text-center">
-          <span class="lead">ITEMS: {{model.order.size}}</span>
-        </div>
-        <div class="col-xs-6 text-center">
-          <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
-        </div>
-      </div>
-
-      <div class="row" style="padding-left:2px; padding-right:2px">
-        <div class="col-xs-6 no-padding">
-          {{#btn-button class="btn-danger btn-lg" action="cancelOrder" disabled=cannotCancelOrder}}CANCEL ORDER{{/btn-button}}
-        </div>
-        <div class="col-xs-6 no-padding">
-          {{#btn-button class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}SUBMIT ORDER{{/btn-button}}
-        </div>
-        <div class="col-xs-12 no-padding">
-          {{#btn-button class="btn-default btn-lg" data-dismiss="modal"}}CLOSE{{/btn-button}}
-        </div>
-      </div>
-    </div>
-  {{/orderpad-modal}}
-
-  {{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}
-
-  {{#btn-button class="btn-default btn-lg toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
-    {{model.order.size}}
-    <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
-  {{/btn-button}}
-
-{{/temp/orderpad-wrapper}}
+{{#btn-button class="btn-default btn-lg toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
+  {{model.order.size}}
+  <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+{{/btn-button}}

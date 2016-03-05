@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../../config/environment';
 
 export default Ember.Route.extend({
 
@@ -18,7 +19,50 @@ export default Ember.Route.extend({
     controller.set('menu', model.menu);
   },
 
+  NAV_HEIGHT: 50,
+
+  handleResize() {
+    const NAV_BAR_ENABLED = config.APP.NAV_BAR_ENABLED;
+    let windowHeight = Ember.$(window).height();
+    let windowWidth = Ember.$(window).width();
+
+    if (NAV_BAR_ENABLED) {
+      this.notifyPropertyChange('NAV_HEIGHT'); //recalculate window.height
+      windowHeight = windowHeight - this.get('NAV_HEIGHT');
+    }
+
+    if (windowWidth < 768) {
+      Ember.$('#orderpad-menu').height(windowHeight - (
+          16 + //menu inline padding in orderpad template style="padding:8px" id="orderpad-menu"
+          Ember.$('#orderpad-customer-small').outerHeight() +
+          Ember.$('#orderpad-categories').outerHeight()));
+    } else {
+      Ember.$('#orderpad-menu').height(windowHeight - (
+          16 + //menu inline padding in orderpad template style="padding:8px" id="orderpad-menu"
+          Ember.$('#orderpad-categories').outerHeight()));
+      Ember.$('#orderpad-numpad').height(windowHeight -
+          Ember.$('#orderpad-categories').outerHeight());
+    }
+
+    Ember.$('#orderpad-orderlist').outerHeight(windowHeight - (
+        Ember.$('#orderpad-customer').outerHeight() +
+        Ember.$('#orderpad-bottom').outerHeight()));
+    Ember.$('#customer-browser-bottom').outerHeight(windowHeight -
+        Ember.$('#customer-browser-top').outerHeight());
+    Ember.$('#confirm-order-list').outerHeight(windowHeight - (
+        Ember.$('#confirm-order-list-header').outerHeight() +
+        Ember.$('#confirm-order-bottom').outerHeight()));
+  },
+
+  bindResize: Ember.on('init', function() {
+    Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
+  }),
+
   actions: {
+
+    didTransition() {
+      Ember.run.scheduleOnce('afterRender', this, () => this.handleResize());
+    },
 
     showCustomerBrowser() {
       this.controller.set('customerBrowserVisible', true);
@@ -53,7 +97,7 @@ export default Ember.Route.extend({
         outlet: 'confirm-order',
       });
 
-      Ember.run.scheduleOnce('afterRender', this, () => Ember.$(window).resize());
+      Ember.run.scheduleOnce('afterRender', this, () => this.handleResize());
     },
 
     hideConfirmOrder() {
