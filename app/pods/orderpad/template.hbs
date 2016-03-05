@@ -30,7 +30,7 @@
             {{menu-item menuItem=menuItem action="menuItemClick"}}
           {{/menu-list}}
         </div>
-        <div class="hidden-xs col-sm-5 col-md-4 text-center" id="orderpad-numpad">
+        <div class="hidden-xs col-sm-5 col-md-4 text-center no-padding" id="orderpad-numpad">
           <div class="col-xs-12" style="position:absolute; width=100%; bottom:0;">
             <span style="font-size: 80px">{{numpadValue}}</span>
             {{number-pad value=numpadValue maxLength=4}}
@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div class="row scroll-y" id="orderpad-orderlist">
+      <div id="orderpad-orderlist" class="row scroll-y">
         <div class="col-sm-12">
           <div class="lead">
             {{order-list order=model.order}}
@@ -56,29 +56,30 @@
         </div>
       </div>
 
-      <div id="orderpad-bottom">
-        <div class="row gutter-top-bottom">
-          <div class="col-xs-6 text-center">
-            <span class="lead">ITEMS: {{model.order.size}}</span>
+      <div id="orderpad-bottom" class="row">
+        <div class="col-xs-12">
+          <div class="row gutter-top-bottom">
+            <div class="col-xs-6 text-center">
+              <span class="lead">ITEMS: {{model.order.size}}</span>
+            </div>
+            <div class="col-xs-6 text-center">
+              <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
+            </div>
           </div>
-          <div class="col-xs-6 text-center">
-            <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-6 no-padding">
-            {{#btn-button class="btn-lg btn-danger" confirmAction=(action "cancelOrder")
-            disabled=cannotCancelOrder
-            showMessage="showMessage"
-            confirmMessage="Cancel the order?"}}
-              CANCEL ORDER
-            {{/btn-button}}
-          </div>
-          <div class="col-xs-6 no-padding">
-            {{#btn-button class="btn-lg btn-success" action="showConfirmOrder" disabled=invalidOrder}}
-              SUBMIT ORDER
-            {{/btn-button}}
+          <div class="row">
+            <div class="col-xs-6 no-padding">
+              {{#btn-button class="btn-lg btn-danger" confirmAction=(action "cancelOrder")
+              disabled=cannotCancelOrder
+              showMessage="showMessage"
+              confirmMessage="Cancel the order?"}}
+                CANCEL ORDER
+              {{/btn-button}}
+            </div>
+            <div class="col-xs-6 no-padding">
+              {{#btn-button class="btn-lg btn-success" action="showConfirmOrder" disabled=invalidOrder}}
+                SUBMIT ORDER
+              {{/btn-button}}
+            </div>
           </div>
         </div>
       </div>
