@@ -256,6 +256,10 @@ export default Ember.Controller.extend({
     },
 
     removeCustomer() {
+      let customerType = this.get('model.customer.customerType');
+      if (customerType === 'takeaway-customer') {
+        this.get('model.customer').destroyRecord();
+      }
       this.set('model.customer', null);
     },
 
