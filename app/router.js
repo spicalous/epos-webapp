@@ -6,18 +6,23 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+
   this.route('orderpad');
+
+  this.route('order');
+
   this.route('delivery-customer', function() {
     this.route('edit', { path: '/:delivery_customer_id' });
   });
+
   this.route('road', function() {
     this.route('edit', { path: '/:road_id' });
   });
+
   this.route('postcode', function() {
     this.route('edit', { path: '/:postcode_id' });
   });
 
-  this.route('orders');
   this.route('restaurant');
 });
 

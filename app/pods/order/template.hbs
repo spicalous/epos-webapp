@@ -1,0 +1,20 @@
+Orders
+<ul class="list-group">
+  {{#each model as |order|}}
+    <div class="list-group-item">
+      <div>ID: {{order.id}}</div>
+      <div>Time: {{order.dateTime}}</div>
+      <div>Customer: {{order.customer.customerType}} {{order.customer}}</div>
+      <div>Payment: {{order.paymentMethod}}</div>
+      <div>Estimated: {{order.estimatedTime}}</div>
+      <div>Notes: {{order.notes}}</div>
+      <div>Items:
+        {{#each order.orderItems as |orderItem|}}
+          {{orderItem.quantity}}
+          {{orderItem.menuItem}}
+        {{/each}}
+      </div>
+      <div>Total: {{order.displayTotal}}</div>
+    </div>
+  {{/each}}
+</ul>
