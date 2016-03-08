@@ -3,17 +3,18 @@ import DS from 'ember-data';
 export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
     orderItems: {
-      serialize: 'records',
-      deserialize: 'ids'
+      embedded: 'always'
     },
     customer: {
-      serialize: 'records'
+      embedded: 'always'
     }
   },
   serialize(snapshot, options) {
-    var json = this._super(...arguments);
+    var json = this._super(snapshot, options);
 
-    json['@type'] = snapshot.record.get('customer.customerType');
+    if (json.customer) {
+      json.customer.type = snapshot.record.get('customer.customerType');
+    }
 
     return json;
   }
