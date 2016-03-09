@@ -14,11 +14,7 @@ export default Ember.Controller.extend({
   estimatedDeliveryTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
 
   computedEstimate: Ember.computed('model.order.estimatedTime', function() {
-    let date = new Date(Date.now() + (this.get('model.order.estimatedTime') * 1000 * 60));
-    let hours = date.getHours();
-    let mins = date.getMinutes();
-
-    return (hours < 10 ? "0" + hours : hours) + ":" + (mins < 10 ? "0" + mins : mins);
+    return new Date(Date.now() + (this.get('model.order.estimatedTime') * 1000 * 60));
   }),
 
   canSaveCustomer: Ember.computed('validCustomer', 'emptySearchResults', 'debouncedSearch', function() {

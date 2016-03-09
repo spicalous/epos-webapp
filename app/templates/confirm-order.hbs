@@ -27,7 +27,7 @@
       <div class="row gutter-top-bottom">
         <div class="col-xs-6 col-sm-offset-1 col-sm-5">
           <div class="lead gutter-top-bottom">
-            Estimate Time ({{computedEstimate}})
+            Estimate Time ({{format-time computedEstimate}})
           </div>
           {{select-component content=estimatedDeliveryTimes selectedValue=model.order.estimatedTime action=(action (mut model.order.estimatedTime))}}
         </div>
