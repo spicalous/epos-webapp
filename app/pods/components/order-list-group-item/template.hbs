@@ -1,0 +1,23 @@
+<div>ID: {{order.id}}</div>
+<div>Ordered at {{format-time order.dateTime}}</div>
+{{#if order.notes}}
+  <div>Notes: {{order.notes}}</div>
+{{/if}}
+<div>
+  Total: £{{order.displayTotal}}
+  {{#if order.paymentMethod}}
+    PAID {{order.paymentMethod}}
+  {{else}}
+    NOT PAID
+  {{/if}}
+</div>
+<!--<div>Customer: {{order.customer.customerType}} {{order.customer}}</div>-->
+<!--
+            <div>Items:
+              {{#each order.orderItems as |orderItem|}}
+  {{orderItem.quantity}}
+  {{orderItem.menuItem}}
+{{/each}}
+            </div>
+            -->
+
