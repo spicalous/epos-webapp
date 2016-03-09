@@ -9,10 +9,6 @@ export default DS.Model.extend({
     return this.get('quantity') * (this.get('menuItem.price') + this.get('editOptionTotal'));
   }.property('quantity', 'menuItem', 'editOptions.[]'),
 
-  displayTotal: function() {
-    return (this.get('total') / 100).toFixed(2);
-  }.property('total'),
-
   editOptionTotal: function() {
     return this.get('editOptions').reduce(
       function(prev, item) {

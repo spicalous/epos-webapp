@@ -21,7 +21,7 @@
           <span class="lead">ITEMS: {{model.order.size}}</span>
         </div>
         <div class="col-xs-6 col-sm-5 text-center gutter-top-bottom top-bottom-border">
-          <span class="lead">TOTAL: {{model.order.displayTotal}}</span>
+          <span class="lead">TOTAL: {{format-currency model.order.total}}</span>
         </div>
       </div>
       <div class="row gutter-top-bottom">

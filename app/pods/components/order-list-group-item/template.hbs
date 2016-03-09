@@ -4,7 +4,7 @@
   <div>Notes: {{order.notes}}</div>
 {{/if}}
 <div>
-  Total: £{{order.displayTotal}}
+  Total: £{{format-currency order.total}}
   {{#if order.paymentMethod}}
     PAID {{order.paymentMethod}}
   {{else}}

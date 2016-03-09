@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export function minus(params/*, hash*/) {
+export function formatTime(params/*, hash*/) {
   if (!params[0]) {
     return '';
   }
@@ -13,4 +13,4 @@ export function minus(params/*, hash*/) {
   return (hours < 10 ? "0" + hours : hours) + ":" + (mins < 10 ? "0" + mins : mins);
 }
 
-export default Ember.Helper.helper(minus);
+export default Ember.Helper.helper(formatTime);

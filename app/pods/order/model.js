@@ -14,10 +14,6 @@ export default DS.Model.extend({
     return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('total'), 0);
   }),
 
-  displayTotal: Ember.computed('total', function() {
-    return (this.get('total') / 100).toFixed(2);
-  }),
-
   //TODO: (Warning) Bug with @each ember 2.2.0
   size: Ember.computed('orderItems.@each.quantity', function() {
     return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('quantity'), 0);
