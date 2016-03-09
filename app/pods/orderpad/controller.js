@@ -15,10 +15,10 @@ export default Ember.Controller.extend({
 
   computedEstimate: Ember.computed('model.order.estimatedTime', function() {
     let date = new Date(Date.now() + (this.get('model.order.estimatedTime') * 1000 * 60));
-    let time = date.toLocaleTimeString();
-    const trimLength = date.getHours > 9 ? 7 : 6;
+    let hours = date.getHours();
+    let mins = date.getMinutes();
 
-    return time.substring(0, time.length - trimLength);
+    return (hours < 10 ? "0" + hours : hours) + ":" + (mins < 10 ? "0" + mins : mins);
   }),
 
   canSaveCustomer: Ember.computed('validCustomer', 'emptySearchResults', 'debouncedSearch', function() {
