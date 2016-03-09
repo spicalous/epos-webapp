@@ -20,7 +20,20 @@ module.exports = function(app) {
         {
           "id":0,
           "dateTime":"2016-03-09T00:07:56.495Z",
-          "orderItems":[{"id":0,"menuItem":{"id":1,"menuId":"","name":"Spicy PC","description":"","price":250,"categories":[0],"editCategories":[0,1]},"quantity":1,"editOptions":[]},{"id":0,"menuItem":{"id":3,"menuId":"2","name":"Prawn Rolls","description":"","price":575,"categories":[0],"editCategories":[0,1]},"quantity":1,"editOptions":[]},{"id":0,"menuItem":{"id":47,"menuId":"34","name":"Beef Massaman","description":"","price":850,"categories":[3],"editCategories":[0,1]},"quantity":1,"editOptions":[]},{"id":0,"menuItem":{"id":99,"menuId":"82","name":"Steamed Rice","description":"","price":250,"categories":[12],"editCategories":[0,1]},"quantity":1,"editOptions":[]}],
+          "orderItems":[
+            {
+              "id":0,"menuItem":{"id":1,"menuId":"","name":"Spicy PC","description":"","price":250,"categories":[0],"editCategories":[0,1]},"quantity":1,"editOptions":[]
+            },
+            {
+              "id":1,"menuItem":{"id":3,"menuId":"2","name":"Prawn Rolls","description":"","price":575,"categories":[0],"editCategories":[0,1]},"quantity":1,"editOptions":[]
+            },
+            {
+              "id":2,"menuItem":{"id":47,"menuId":"34","name":"Beef Massaman","description":"","price":850,"categories":[3],"editCategories":[0,1]},"quantity":1,"editOptions":[]
+            },
+            {
+              "id":3,"menuItem":{"id":99,"menuId":"82","name":"Steamed Rice","description":"","price":250,"categories":[12],"editCategories":[0,1]},"quantity":1,"editOptions":[]
+            }
+          ],
           "customer":{
             "type":"takeaway-customer",
             "id":0,
@@ -34,7 +47,20 @@ module.exports = function(app) {
         {
           "id":1,
           "dateTime":"2016-03-09T00:09:10.679Z",
-          "orderItems":[{"id":0,"menuItem":{"id":17,"menuId":"17","name":"Mix Starter (2pp)","description":"","price":1350,"categories":[0],"editCategories":[0,1]},"quantity":1,"editOptions":[]},{"id":0,"menuItem":{"id":35,"menuId":"31","name":"Chicken Red Curry","description":"","price":795,"categories":[3],"editCategories":[0,1]},"quantity":1,"editOptions":[{"id":2,"editCategory":0,"name":"ADD BEEF","price":150},{"id":9,"editCategory":1,"name":"VERY HOT","price":0}]},{"id":0,"menuItem":{"id":93,"menuId":"76","name":"Pad Thai","description":"","price":795,"categories":[11],"editCategories":[0,1]},"quantity":1,"editOptions":[]},{"id":0,"menuItem":{"id":99,"menuId":"82","name":"Steamed Rice","description":"","price":250,"categories":[12],"editCategories":[0,1]},"quantity":1,"editOptions":[]}],
+          "orderItems":[
+            {
+              "id":4,"menuItem":{"id":17,"menuId":"17","name":"Mix Starter (2pp)","description":"","price":1350,"categories":[0],"editCategories":[0,1]},"quantity":1,"editOptions":[]
+            },
+            {
+              "id":5,"menuItem":{"id":35,"menuId":"31","name":"Chicken Red Curry","description":"","price":795,"categories":[3],"editCategories":[0,1]},"quantity":1,"editOptions":[{"id":2,"editCategory":0,"name":"ADD BEEF","price":150},{"id":9,"editCategory":1,"name":"VERY HOT","price":0}]
+            },
+            {
+              "id":6,"menuItem":{"id":93,"menuId":"76","name":"Pad Thai","description":"","price":795,"categories":[11],"editCategories":[0,1]},"quantity":1,"editOptions":[]
+            },
+            {
+              "id":7,"menuItem":{"id":99,"menuId":"82","name":"Steamed Rice","description":"","price":250,"categories":[12],"editCategories":[0,1]},"quantity":1,"editOptions":[]
+            }
+          ],
           "customer":{
             "type":"delivery-customer",
             "id":23,
