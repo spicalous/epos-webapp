@@ -1,23 +1,23 @@
-<div>ID: {{order.id}}</div>
+<div>ID {{order.id}}</div>
 <div>Ordered at {{format-time order.dateTime}}</div>
-{{#if order.notes}}
-  <div>Notes: {{order.notes}}</div>
-{{/if}}
 <div>
-  Total: £{{format-currency order.total}}
+  £{{format-currency order.total}}
   {{#if order.paymentMethod}}
-    PAID {{order.paymentMethod}}
+    {{order.paymentMethod}}
   {{else}}
     NOT PAID
   {{/if}}
 </div>
-<!--<div>Customer: {{order.customer.customerType}} {{order.customer}}</div>-->
+{{#if order.notes}}
+  <div>Notes: {{order.notes}}</div>
+{{/if}}
+<div> {{component (concat "order-" order.customer.customerType) customer=order.customer}}</div>
 <!--
-            <div>Items:
-              {{#each order.orderItems as |orderItem|}}
+<div>Items:
+{{#each order.orderItems as |orderItem|}}
   {{orderItem.quantity}}
   {{orderItem.menuItem}}
 {{/each}}
-            </div>
-            -->
+</div>
+-->
 
