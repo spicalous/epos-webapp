@@ -8,10 +8,14 @@
     NOT PAID
   {{/if}}
 </div>
+<div>
 {{#if order.notes}}
-  <div>Notes: {{order.notes}}</div>
+    Notes: {{order.notes}}
 {{/if}}
-<div> {{component (concat "order-" order.customer.customerType) customer=order.customer}}</div>
+</div>
+<div>
+  {{component (concat "order-" order.customer.customerType) customer=order.customer}}
+</div>
 <!--
 <div>Items:
 {{#each order.orderItems as |orderItem|}}
