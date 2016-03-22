@@ -9,8 +9,7 @@ export default Ember.Route.extend({
       categories: this.store.peekAll('category'),
       editCategories: this.store.peekAll('edit-category'),
       editOptions: this.store.peekAll('edit-option'),
-      order: this.store.createRecord('order'),
-      customer: null
+      order: this.store.createRecord('order')
     });
   },
 
