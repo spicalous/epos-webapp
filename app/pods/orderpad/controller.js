@@ -48,10 +48,9 @@ export default Ember.Controller.extend({
     if (!customer) {
       return false;
     }
-    if (customer.get('customerType') === 'takeaway-customer') {
-      return !customer.get('invalidTelephone');
-    }
-    return !customer.get('invalidTelephone') && !customer.get('invalidAddress') && !customer.get('invalidPostcode');
+    return customer.get('customerType') === 'takeaway-customer' ?
+      !customer.get('invalidTelephone') :
+      !customer.get('invalidTelephone') && !customer.get('invalidAddress') && !customer.get('invalidPostcode');
   }),
 
   cannotCancelOrder: Ember.computed('customer', 'emptyOrder', function() {
