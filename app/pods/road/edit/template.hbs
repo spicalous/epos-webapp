@@ -9,13 +9,13 @@
 <div class="row gutter-bottom">
   {{#if editable}}
     <div class="col-xs-6">
-      {{#btn-button class="btn-primary btn-lg" action="saveEdit" disabled=saveDisabled}}
-        Save
+      {{#btn-button class="btn-danger btn-lg" confirmAction=(action "deleteRecord") showMessage="showMessage" confirmMessage="Really delete the road?"}}
+        Delete
       {{/btn-button}}
     </div>
     <div class="col-xs-6">
-      {{#btn-button class="btn-danger btn-lg" confirmAction=(action "deleteRecord") showMessage="showMessage" confirmMessage="Really delete the road?"}}
-        Delete
+      {{#btn-button class="btn-success btn-lg" action="saveEdit" disabled=saveDisabled}}
+        Save
       {{/btn-button}}
     </div>
     <div class="col-xs-12 gutter-top">
