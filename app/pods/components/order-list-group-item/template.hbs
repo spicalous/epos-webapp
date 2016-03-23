@@ -1,12 +1,7 @@
 <div>ID {{order.id}}</div>
 <div>Ordered at {{format-time order.dateTime}}</div>
 <div>
-  £{{format-currency order.total}}
-  {{#if order.paymentMethod}}
-    {{order.paymentMethod}}
-  {{else}}
-    NOT PAID
-  {{/if}}
+  £{{format-currency order.total}} {{format-payment-method order.paymentMethod}}
 </div>
 {{#if order.notes}}
   <div>{{order.notes}}</div>
