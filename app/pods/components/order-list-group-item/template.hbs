@@ -9,12 +9,10 @@
 <div>
   {{component (concat "order-" order.customer.customerType) customer=order.customer}}
 </div>
-<!--
-<div>Items:
-{{#each order.orderItems as |orderItem|}}
-  {{orderItem.quantity}}
-  {{orderItem.menuItem}}
-{{/each}}
-</div>
--->
-
+<ul class="list-group">
+  {{#each order.orderItems as |orderItem|}}
+    <li class="list-group-item">
+      {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
+    </li>
+  {{/each}}
+</ul>
