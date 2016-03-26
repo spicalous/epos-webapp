@@ -11,7 +11,7 @@
       <ul class="list-group">
         {{#each model as |order|}}
           {{#if order.id}}
-            {{order-list-group-item order=order}}
+            {{order-list-group-item order=order onPrintOrder=(action "printOrder")}}
           {{/if}}
         {{/each}}
       </ul>
