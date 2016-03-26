@@ -7,9 +7,8 @@ export default Ember.Component.extend({
   classNames: ['modal', 'fade'],
 
   /**
-  *
-  * Fires when the user selects an item to edit (itemToEdit === orderItem)
-  */
+   * Fires when the user selects an item to edit (itemToEdit = orderItem)
+   */
   editItemObserver: Ember.observer('order.itemToEdit', function() {
     let itemToEdit = this.get('order.itemToEdit');
 

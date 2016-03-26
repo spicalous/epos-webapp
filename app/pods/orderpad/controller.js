@@ -7,18 +7,43 @@ export default Ember.Controller.extend({
     NAV_BAR_ENABLED: config.APP.NAV_BAR_ENABLED
   },
 
+  /**
+   * @type {Customer}
+   * @see {@link models/customer}
+   */
   customer: null,
 
+  /**
+   * @type {Category}
+   * @see {@link models/category}
+   */
   selectedCategory: '',
 
+  /**
+   * used for filtering the menu
+   * @type {string}
+   */
   numpadValue: '',
 
+  /**
+   * boolean dependant on the visibility of the customer browser
+   * @type {boolean}
+   */
   customerBrowserVisible: false,
 
+  /**
+   * @type {null|string}
+   */
   paymentMethods: [null, 'CASH', 'CARD', 'ONLINE'],
 
+  /**
+   * @type {number}
+   */
   estimatedDeliveryTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
 
+  /**
+   * computes the estimated time for delivery
+   */
   computedEstimate: Ember.computed('model.order.estimatedTime', function() {
     return new Date(Date.now() + (this.get('model.order.estimatedTime') * 1000 * 60));
   }),
@@ -84,12 +109,14 @@ export default Ember.Controller.extend({
   }),
 
   /**
-   *  @param dropdownTrigger        - Element responsible for triggering the bootstrap dropdown for suggestion
-   *  @param {string} debounceId    - ID for debounce handling
-   *  @param {string} model         - Model name for query
-   *  @param {Object} query         - Query params
-   *  @param {Valid}  valid         - Search if valid() evaluates to true
-   *  @param {string} blockingFlag  - If this property on the controller is true then don't search and set flag to false
+   * @param {HTMLElement} dropdownTrigger  - element responsible for triggering the
+   *                                         bootstrap dropdown for suggestion
+   * @param {string} debounceId            - id for debounce handling
+   * @param {string} model                 - model name for query
+   * @param {object} query                 - query params
+   * @param {function} valid               - execute search if valid() evaluates true
+   * @param {string} blockingFlag          - if this property on the controller is true
+   *                                         then don't search and set flag to false
    */
   suggestionSearch(dropdownTrigger, debounceId, model, query, valid, blockingFlag) {
     let _this = this;
