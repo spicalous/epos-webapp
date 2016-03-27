@@ -68,17 +68,15 @@
           </div>
           <div class="row">
             <div class="col-xs-6 no-padding">
-              {{#btn-button class="btn-lg btn-danger" confirmAction=(action "cancelOrder")
-              disabled=cannotCancelOrder
-              showMessage="showMessage"
-              confirmMessage="Cancel the order?"}}
+              {{#btn/btn-confirm class="btn-danger btn-lg" showMessage="showMessage" confirm=(action "cancelOrder")
+              disabled=cannotCancelOrder message="Cancel the order?"}}
                 CANCEL ORDER
-              {{/btn-button}}
+              {{/btn/btn-confirm}}
             </div>
             <div class="col-xs-6 no-padding">
-              {{#btn-button class="btn-lg btn-success" action="showConfirmOrder" disabled=invalidOrder}}
+              {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}
                 SUBMIT ORDER
-              {{/btn-button}}
+              {{/btn/btn-default}}
             </div>
           </div>
         </div>
@@ -107,13 +105,17 @@
 
     <div class="row" style="padding-left:2px; padding-right:2px">
       <div class="col-xs-6 no-padding">
-        {{#btn-button class="btn-danger btn-lg" action="cancelOrder" disabled=cannotCancelOrder}}CANCEL ORDER{{/btn-button}}
+        {{#btn/btn-default class="btn-danger btn-lg" action="cancelOrder" disabled=cannotCancelOrder}}
+          CANCEL ORDER
+        {{/btn/btn-default}}
       </div>
       <div class="col-xs-6 no-padding">
-        {{#btn-button class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}SUBMIT ORDER{{/btn-button}}
+        {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}
+          SUBMIT ORDER
+        {{/btn/btn-default}}
       </div>
       <div class="col-xs-12 no-padding">
-        {{#btn-button class="btn-default btn-lg" data-dismiss="modal"}}CLOSE{{/btn-button}}
+        {{#btn/btn-default class="btn-default btn-lg" data-dismiss="modal"}}CLOSE{{/btn/btn-default}}
       </div>
     </div>
   </div>
@@ -121,7 +123,7 @@
 
 {{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}
 
-{{#btn-button class="btn-default btn-lg toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
+{{#btn/btn-default class="btn-default btn-lg toggle-menu" data-toggle="modal" data-target="#orderpad-modal"}}
   {{model.order.size}}
   <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
-{{/btn-button}}
+{{/btn/btn-default}}

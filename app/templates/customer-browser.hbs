@@ -80,18 +80,17 @@
 
         {{#if canSaveCustomer}}
           <div class="col-xs-6 col-sm-offset-1 col-sm-5">
-            {{#btn-button class="btn-default btn-lg" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
+            {{#btn/btn-default class="btn-default btn-lg" action="removeAndHideCustomerBrowser"}}Cancel{{/btn/btn-default}}
           </div>
           <div class="col-xs-6 col-sm-5">
-            {{#btn-button class="btn-primary btn-lg" confirmAction=(action "saveAndSelectCustomer")
-            showMessage="showMessage"
-            confirmMessage=(concat "Confirm saving customer: " customer.address (if customer.postcode (concat ", " customer.postcode)) ", " customer.telephone)}}
+            {{#btn/btn-confirm class="btn-primary btn-lg" showMessage="showMessage" confirm=(action "saveAndSelectCustomer")
+            message=(concat "Confirm saving customer: " customer.address (if customer.postcode (concat ", " customer.postcode)) ", " customer.telephone)}}
               Save
-            {{/btn-button}}
+            {{/btn/btn-confirm}}
           </div>
         {{else}}
           <div class="col-xs-12 col-sm-offset-6 col-sm-5">
-            {{#btn-button class="btn-default btn-lg" action="removeAndHideCustomerBrowser"}}Cancel{{/btn-button}}
+            {{#btn/btn-default class="btn-default btn-lg" action="removeAndHideCustomerBrowser"}}Cancel{{/btn/btn-default}}
           </div>
         {{/if}}
 

@@ -286,7 +286,8 @@ export default Ember.Controller.extend({
 
     removeCustomer() {
       let customer = this.get('customer');
-      if (customer.get('id') === null) {
+
+      if (customer && customer.get('id') === null) {
         customer.destroyRecord();
       }
       this.set('customer', null);

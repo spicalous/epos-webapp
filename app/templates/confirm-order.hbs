@@ -50,14 +50,14 @@
       <div style="height:20px"></div>
       <div class="row">
         <div class="col-xs-6 no-padding">
-          {{#btn-button class="btn-lg btn-default" action="hideConfirmOrder"}}
+          {{#btn/btn-default class="btn-default btn-lg" action="hideConfirmOrder"}}
             CANCEL
-          {{/btn-button}}
+          {{/btn/btn-default}}
         </div>
         <div class="col-xs-6 no-padding">
-          {{#btn-button class="btn-lg btn-success" disabled=invalidOrder action="submitOrder"}}
+          {{#btn/btn-default class="btn-success btn-lg" action="submitOrder" disabled=invalidOrder}}
             CONFIRM
-          {{/btn-button}}
+          {{/btn/btn-default}}
         </div>
       </div>
     </div>
