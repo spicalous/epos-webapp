@@ -1,7 +1,7 @@
 {{#if customer.customerType}}
 
   {{#btn/btn-default class="btn-danger btn-sm" action="removeCustomer"}}
-    Remove Customer
+    REMOVE CUSTOMER
   {{/btn/btn-default}}
   <div class="gutter-top-bottom bottom-divider">
     {{component (concat 'selected-' customer.customerType) customer=customer}}
@@ -11,7 +11,7 @@
 
   <div class="dropdown">
     {{#btn/btn-default class="btn-danger btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-      Select Customer
+      SELECT CUSTOMER
     {{/btn/btn-default}}
     <ul class="dropdown-menu" style="width: 100%;">
       <li><a {{action "setCustomer" "takeaway-customer"}}>Take away</a></li>
