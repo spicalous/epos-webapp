@@ -46,7 +46,7 @@ export default Ember.Controller.extend({
   actions: {
 
     printOrder(id) {
-      let url = [this._getPrinterNamespaceURL(), 'order', id].join('/');
+      let url = [this._getPrinterNamespaceURL(), 'order/eat_in', id].join('/');
       Ember.$.get(url).then();
     },
 
