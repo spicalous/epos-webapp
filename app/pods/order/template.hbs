@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row gutter-bottom">
     <div class="col-xs-2 text-right">
       <p>Cash</p>
       <p>Card</p>
@@ -38,6 +38,11 @@
         <p>{{format-currency totalNotPaid}}</p>
         <p>{{format-currency totalAll}}</p>
       </strong>
+    </div>
+    <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+      {{#btn/btn-default class="btn-primary" action="printOrderSummary"}}
+        PRINT SUMMARY
+      {{/btn/btn-default}}
     </div>
   </div>
 </div>
