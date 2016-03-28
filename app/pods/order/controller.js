@@ -46,8 +46,12 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    printOrder(id) {
-      let url = [this._getPrinterNamespaceURL(), 'order', ReceiptType.EAT_IN, id].join('/');
+    /**
+     * @param {number} id - id of order to print
+     * @param {ReceiptType} receiptType - receipt type for printing
+     */
+    printOrder(id, receiptType) {
+      let url = [this._getPrinterNamespaceURL(), 'order', receiptType || ReceiptType.EAT_IN, id].join('/');
       Ember.$.get(url).then();
     },
 

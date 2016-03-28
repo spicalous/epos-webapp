@@ -1,19 +1,31 @@
-<div>ID {{order.id}}</div>
-<div>Ordered at {{format-time order.dateTime}}</div>
-<div>
-  £{{format-currency order.total}} {{format-payment-method order.paymentMethod}}
+<div class="row">
+  <div class="col-xs-12">ID {{order.id}}</div>
+  <div class="col-xs-12">Ordered at {{format-time order.dateTime}}</div>
+  <div class="col-xs-12">
+    £{{format-currency order.total}} {{format-payment-method order.paymentMethod}}
+  </div>
+  {{#if order.notes}}
+    <div class="col-xs-12">{{order.notes}}</div>
+  {{/if}}
+  <div class="col-xs-12">
+    {{component (concat "order-" order.customer.customerType) customer=order.customer}}
+  </div>
+  <div class="col-xs-12">
+    <ul class="list-group">
+      {{#each order.orderItems as |orderItem|}}
+        <li class="list-group-item">
+          {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
+          {{#each orderItem.editOptions as |editOption|}}
+            <div>{{editOption.name}}</div>
+          {{/each}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="col-xs-6">
+    {{#btn/btn-default class="btn-primary" action="printOrderAsEatIn"}}Reprint (small){{/btn/btn-default}}
+  </div>
+  <div class="col-xs-6">
+    {{#btn/btn-default class="btn-primary" action="printOrderAsDelivery"}}Reprint (large){{/btn/btn-default}}
+  </div>
 </div>
-{{#if order.notes}}
-  <div>{{order.notes}}</div>
-{{/if}}
-<div>
-  {{component (concat "order-" order.customer.customerType) customer=order.customer}}
-</div>
-<ul class="list-group">
-  {{#each order.orderItems as |orderItem|}}
-    <li class="list-group-item">
-      {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
-    </li>
-  {{/each}}
-</ul>
-{{#btn/btn-default class="btn-primary" action="printOrder"}}PRINT{{/btn/btn-default}}
