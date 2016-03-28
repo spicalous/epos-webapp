@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { ReceiptType } from '../../models/receipt-type';
 
 export default Ember.Controller.extend({
 
@@ -46,7 +47,7 @@ export default Ember.Controller.extend({
   actions: {
 
     printOrder(id) {
-      let url = [this._getPrinterNamespaceURL(), 'order/eat_in', id].join('/');
+      let url = [this._getPrinterNamespaceURL(), 'order', ReceiptType.EAT_IN, id].join('/');
       Ember.$.get(url).then();
     },
 
