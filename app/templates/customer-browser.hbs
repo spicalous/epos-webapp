@@ -20,7 +20,7 @@
             {{#form-group label="Address" hasError=customer.invalidAddress}}
               <div class="dropdown">
                 {{input id="addressSuggestionDropdownTrigger" class="form-control" type="text" placeholder="Road" value=customer.addressTwo data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-                <ul class="dropdown-menu lead" style="width: 100%;">
+                <ul class="dropdown-menu" style="width: 100%;">
                   {{#each roadSuggestions as |road index|}}
                     <li><a class="lead"{{action "setAddressTwo" road.name}}>{{road.name}}</a></li>
                     {{#unless (is-equal index (minus roadSuggestions.length 1))}}
@@ -31,7 +31,7 @@
                     {{#if roadSuggestionError}}
                       <li><a>Error while searching</a></li>
                     {{else}}
-                      <li><a>No results</a></li>
+                      <li><a>No suggestions</a></li>
                     {{/if}}
                   {{/each}}
                 </ul>
@@ -52,7 +52,7 @@
                     {{#if postcodeSuggestionError}}
                       <li><a>Error while searching</a></li>
                     {{else}}
-                      <li><a>No results</a></li>
+                      <li><a>No suggestions</a></li>
                     {{/if}}
                   {{/each}}
                 </ul>

@@ -12,8 +12,8 @@
 
     <div class="col-xs-12 visible-xs no-padding" id="orderpad-customer-small">
       {{inline-customer-input customer=customer
-      setCustomer="setCustomer"
-      removeCustomer="removeCustomer"}}
+          setCustomer="setCustomer"
+          removeCustomer="removeCustomer"}}
     </div>
 
     <div class="col-xs-12 col-sm-7 col-md-8">
@@ -42,8 +42,8 @@
       <div class="row" id="orderpad-customer">
         <div class="col-sm-12 no-padding">
           {{inline-customer-input customer=customer
-          setCustomer="setCustomer"
-          removeCustomer="removeCustomer"}}
+              setCustomer="setCustomer"
+              removeCustomer="removeCustomer"}}
         </div>
       </div>
 
@@ -67,13 +67,16 @@
           </div>
           <div class="row">
             <div class="col-xs-6 no-padding">
-              {{#btn/btn-confirm class="btn-danger btn-lg" showMessage="showMessage" confirm=(action "cancelOrder")
-              disabled=cannotCancelOrder message="Cancel the order?"}}
+              {{#btn/btn-confirm class="btn-danger btn-lg" showMessage="showMessage"
+                  disabled=cannotCancelOrder
+                  confirm=(action "cancelOrder")
+                  message="Cancel the order?"}}
                 CANCEL ORDER
               {{/btn/btn-confirm}}
             </div>
             <div class="col-xs-6 no-padding">
-              {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}
+              {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder"
+                  disabled=invalidOrder}}
                 SUBMIT ORDER
               {{/btn/btn-default}}
             </div>
