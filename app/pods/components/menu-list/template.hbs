@@ -1,7 +1,5 @@
 <ul class="list-group">
-  {{#if hasBlock}}
-    {{#each menuItems as |menuItem|}}
-      {{yield menuItem}}
-    {{/each}}
-  {{/if}}
+  {{#each menuItems as |menuItem|}}
+    {{menu-list-item menuItem=menuItem action="clickedMenuItem"}}
+  {{/each}}
 </ul>

@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
    * @type {Category}
    * @see {@link models/category}
    */
-  selectedCategory: '',
+  selectedCategory: null,
 
   /**
    * used for filtering the menu
@@ -84,28 +84,6 @@ export default Ember.Controller.extend({
 
   emptyOrder: Ember.computed('model.order.size', function() {
     return this.get('model.order.size') > 0 ? false : true;
-  }),
-
-  filterMenu: Ember.observer('selectedCategory', 'numpadValue', function() {
-    var menu = this.get('model.menu'),
-        selectedCategory = this.get('selectedCategory'),
-        menuIdFilter = this.get('numpadValue'),
-        filteredMenu;
-
-    if (selectedCategory) {
-      filteredMenu = menu.filter(function(item) {
-        var _selectedCategory = this;
-        return item.get('categories').any(function(category) {
-          return _selectedCategory === category;
-        });
-      }, selectedCategory);
-    } else {
-      filteredMenu = menu;
-    }
-
-    this.set('menu', menuIdFilter ?
-      filteredMenu.filter((item) => item.get('menuId').startsWith(menuIdFilter)) :
-      filteredMenu);
   }),
 
   /**
@@ -218,10 +196,10 @@ export default Ember.Controller.extend({
 
     categoryItemClick(category) {
       let selectedCategory = this.get('selectedCategory');
-      this.set('selectedCategory', selectedCategory === category ? '' : category);
+      this.set('selectedCategory', selectedCategory === category ? null : category);
     },
 
-    menuItemClick(menuItem) {
+    addMenuItem(menuItem) {
       this.get('model.order').addItem(menuItem);
       this.set('numpadValue', '');
 

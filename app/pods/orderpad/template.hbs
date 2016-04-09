@@ -25,11 +25,14 @@
         {{/each}}
       </div>
       <div class="row">
+
         <div class="col-xs-12 col-sm-7 col-md-8 scroll-y" style="padding:8px" id="orderpad-menu">
-          {{#menu-list menuItems=menu as |menuItem|}}
-            {{menu-item menuItem=menuItem action="menuItemClick"}}
-          {{/menu-list}}
+          {{menu-list menu=model.menu
+              onMenuItemClick=(action "addMenuItem")
+              categoryFilter=selectedCategory
+              menuIdFilter=numpadValue}}
         </div>
+
         <div class="hidden-xs col-sm-5 col-md-4 text-center no-padding" id="orderpad-numpad">
           <div class="col-xs-12" style="position:absolute; width=100%; bottom:0;">
             <span style="font-size: 80px">{{numpadValue}}</span>
