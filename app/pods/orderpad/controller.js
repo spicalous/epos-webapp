@@ -194,7 +194,7 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    categoryItemClick(category) {
+    selectMenuCategory(category) {
       let selectedCategory = this.get('selectedCategory');
       this.set('selectedCategory', selectedCategory === category ? null : category);
     },
