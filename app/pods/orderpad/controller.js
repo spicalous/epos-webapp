@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
    * boolean dependant on the visibility of the customer browser
    * @type {boolean}
    */
-  customerBrowserVisible: false,
+  showCustomerBrowser: false,
 
   /**
    * @type {null|string}
@@ -48,23 +48,6 @@ export default Ember.Controller.extend({
     return new Date(Date.now() + (this.get('model.order.estimatedTime') * 1000 * 60));
   }),
 
-  canSaveCustomer: Ember.computed('validCustomer', 'emptySearchResults', 'debouncedSearch', function() {
-    return this.get('validCustomer') && this.get('emptySearchResults') && !this.get('debouncedSearch');
-  }),
-
-  emptySearchResults: Ember.computed.empty('deliveryCustomerResults'),
-
-  hasCustomerQuery: Ember.computed('customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
-    return (this.get('customer.telephone') && this.get('customer.telephone').length > 2) ||
-           (this.get('customer.addressOne') && this.get('customer.addressOne').length > 2) ||
-           (this.get('customer.addressTwo') && this.get('customer.addressTwo').length > 2) ||
-           (this.get('customer.postcode') && this.get('customer.postcode').length > 2);
-  }),
-
-  invalidOrder: Ember.computed('emptyOrder', 'validCustomer', function() {
-    return this.get('emptyOrder') || !this.get('validCustomer');
-  }),
-
   validCustomer: Ember.computed('customer', 'customer.invalidTelephone',
       'customer.invalidAddress', 'customer.invalidPostcode', function() {
 
@@ -78,119 +61,15 @@ export default Ember.Controller.extend({
       !customer.get('invalidTelephone') && !customer.get('invalidAddress') && !customer.get('invalidPostcode');
   }),
 
-  cannotCancelOrder: Ember.computed('customer', 'emptyOrder', function() {
-    return this.get('emptyOrder') && !this.get('customer');
-  }),
+  emptyCustomer: Ember.computed.empty('customer'),
 
-  emptyOrder: Ember.computed('model.order.size', function() {
-    return this.get('model.order.size') > 0 ? false : true;
-  }),
+  cannotCancelOrder: Ember.computed.and('emptyCustomer', 'emptyOrder'),
 
-  /**
-   * @param {HTMLElement} dropdownTrigger  - element responsible for triggering the
-   *                                         bootstrap dropdown for suggestion
-   * @param {string} debounceId            - id for debounce handling
-   * @param {string} model                 - model name for query
-   * @param {object} query                 - query params
-   * @param {function} valid               - execute search if valid() evaluates true
-   * @param {string} blockingFlag          - if this property on the controller is true
-   *                                         then don't search and set flag to false
-   */
-  suggestionSearch(dropdownTrigger, debounceId, model, query, valid, blockingFlag) {
-    let _this = this;
+  emptyOrder: Ember.computed.empty('model.order.orderItems'),
 
-    Ember.run.cancel(this.get(debounceId));
+  invalidCustomer: Ember.computed.not('validCustomer'),
 
-    if (!this.get('customerBrowserVisible')) {
-      return;
-    }
-    if (this.get(blockingFlag)) {
-      this.set(blockingFlag, false);
-      return;
-    }
-
-    if (valid()) {
-
-      this.set(debounceId, Ember.run.debounce(this, function() {
-
-        this.store.query(model, query).then(function(roads) {
-          _this.set(debounceId, '');
-          _this.set(model + 'Suggestions', roads);
-          _this.set(model + 'SuggestionError', false);
-          if (!dropdownTrigger.parent().hasClass('open')) {
-            dropdownTrigger.dropdown('toggle');
-          }
-        }).catch(function() {
-          _this.set(debounceId, '');
-          _this.set(model + 'Suggestions', []);
-          _this.set(model + 'SuggestionError', true);
-          if (!dropdownTrigger.parent().hasClass('open')) {
-            dropdownTrigger.dropdown('toggle');
-          }
-        });
-
-      }, 500));
-    } else {
-      dropdownTrigger.parent().removeClass('open');
-    }
-  },
-
-  roadSuggestionSearch: Ember.observer('customer', 'customer.addressTwo', function() {
-    const trigger = Ember.$('#addressSuggestionDropdownTrigger');
-    const debounceId = 'debouncedAddressTwoSuggestion';
-    let addressTwo = this.get('customer.addressTwo');
-
-    this.suggestionSearch(trigger, debounceId, 'road', { road: addressTwo }, () => addressTwo && addressTwo.length > 1, 'dontSuggestRoad');
-  }),
-
-  postcodeSuggestionSearch: Ember.observer('customer', 'customer.postcode', function() {
-    const trigger = Ember.$('#postcodeSuggestionDropdownTrigger');
-    const debounceId = 'debouncedPostcodeSuggestion';
-    let postcode = this.get('customer.postcode');
-
-    this.suggestionSearch(trigger, debounceId, 'postcode', { postcode: postcode }, () => postcode && postcode.length > 1, 'dontSuggestPostcode');
-  }),
-
-  customerSearch: Ember.observer('customer', 'customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
-    let telephone = this.get('customer.telephone');
-    let addressOne = this.get('customer.addressOne');
-    let addressTwo = this.get('customer.addressTwo');
-    let postcode = this.get('customer.postcode');
-    let _this = this;
-
-    Ember.run.cancel(this.get('debouncedSearch'));
-
-    if (!this.get('customerBrowserVisible')) {
-      return;
-    }
-
-    if ((addressOne && addressOne.length > 2) || (addressTwo && addressTwo.length > 2) ||
-          (postcode && postcode.length > 2) || (telephone && telephone.length > 2)) {
-
-      this.set('debouncedSearch', Ember.run.debounce(this, function() {
-        this.store.query('delivery-customer', {
-          addressOne: addressOne,
-          addressTwo: addressTwo,
-          postcode: postcode,
-          telephone: telephone
-        }).then(function(customers) {
-          _this.set('deliveryCustomerResults', customers);
-          _this.set('debouncedSearch', '');
-        }).catch(function(response) {
-          _this.set('debouncedSearch', '');
-          _this.send('showMessage', 'overlay', {
-            header: 'Error searching for customers :(',
-            body: response.errors[0].message
-          });
-        });
-
-      }, 1500));
-
-    } else {
-      this.set('deliveryCustomerResults', []);
-      this.set('debouncedSearch', '');
-    }
-  }),
+  invalidOrder: Ember.computed.or('emptyOrder', 'invalidCustomer'),
 
   actions: {
 
@@ -208,7 +87,7 @@ export default Ember.Controller.extend({
       });
     },
 
-    setCustomer(type) {
+    createCustomer(type) {
       let customer = this.store.createRecord(type);
       this.set('customer', customer);
 
@@ -217,25 +96,34 @@ export default Ember.Controller.extend({
       }
     },
 
-    setAddressTwo(addressTwo) {
-      const dropdownTrigger = Ember.$('#addressSuggestionDropdownTrigger');
-      dropdownTrigger.parent().removeClass('open');
+    removeCustomer() {
+      let customer = this.get('customer');
 
-      this.set('dontSuggestRoad', true);
-      this.set('customer.addressTwo', addressTwo);
+      if (customer && customer.get('id') === null) {
+        customer.destroyRecord();
+      }
+      this.set('customer', null);
     },
 
-    setPostcode(postcode) {
-      const dropdownTrigger = Ember.$('#postcodeSuggestionDropdownTrigger');
-      dropdownTrigger.parent().removeClass('open');
+    setCustomer(customer) {
+      this.send('removeCustomer');
+      this.set('customer', customer);
+    },
 
-      this.set('dontSuggestPostcode', true);
-      this.set('customer.postcode', postcode);
+    showCustomerBrowser() {
+      this.set('showCustomerBrowser', true);
+    },
+
+    hideCustomerBrowser() {
+      this.set('showCustomerBrowser', false);
+    },
+
+    cancelCustomerBrowser() {
+      this.send('removeCustomer');
+      this.set('showCustomerBrowser', false);
     },
 
     selectCustomer(deliveryCustomer) {
-      //the order of these is important as we now set 'customerBrowserVisible' to false
-      //so that any property changes on customer does not trigger an ajax request
       this.send('hideCustomerBrowser');
       this.send('removeCustomer');
       this.set('customer', deliveryCustomer);
@@ -260,20 +148,6 @@ export default Ember.Controller.extend({
           body: response.errors[0].message
         });
       });
-    },
-
-    removeCustomer() {
-      let customer = this.get('customer');
-
-      if (customer && customer.get('id') === null) {
-        customer.destroyRecord();
-      }
-      this.set('customer', null);
-    },
-
-    removeAndHideCustomerBrowser() {
-      this.send('removeCustomer');
-      this.send('hideCustomerBrowser');
     },
 
     submitOrder() {

@@ -22,7 +22,9 @@
                 {{input id="addressSuggestionDropdownTrigger" class="form-control" type="text" placeholder="Road" value=customer.addressTwo data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
                 <ul class="dropdown-menu" style="width: 100%;">
                   {{#each roadSuggestions as |road index|}}
-                    <li><a class="lead"{{action "setAddressTwo" road.name}}>{{road.name}}</a></li>
+                    <li>
+                      <a class="lead"{{action "setAddressTwo" road.name}}>{{road.name}}</a>
+                    </li>
                     {{#unless (is-equal index (minus roadSuggestions.length 1))}}
                       <!-- Do not add separator if last element -->
                       <li role="separator" class="divider"></li>
@@ -43,7 +45,9 @@
                 {{input id="postcodeSuggestionDropdownTrigger" class="form-control" type="text" placeholder="Postcode" value=customer.postcode data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
                 <ul class="dropdown-menu lead" style="width: 100%;">
                   {{#each postcodeSuggestions as |postcode index|}}
-                    <li><a class="lead"{{action "setPostcode" postcode.postcode}}>{{postcode.postcode}}</a></li>
+                    <li>
+                      <a class="lead"{{action "setPostcode" postcode.postcode}}>{{postcode.postcode}}</a>
+                    </li>
                     {{#unless (is-equal index (minus postcodeSuggestions.length 1))}}
                       <!-- Do not add separator if last element -->
                       <li role="separator" class="divider"></li>
@@ -80,17 +84,20 @@
 
         {{#if canSaveCustomer}}
           <div class="col-xs-6 col-sm-offset-1 col-sm-5">
-            {{#btn/btn-default class="btn-default btn-lg" action="removeAndHideCustomerBrowser"}}Cancel{{/btn/btn-default}}
+            {{#btn/btn-default class="btn-default btn-lg" action="cancel"}}
+              Cancel
+            {{/btn/btn-default}}
           </div>
           <div class="col-xs-6 col-sm-5">
-            {{#btn/btn-confirm class="btn-primary btn-lg" showMessage="showMessage" confirm=(action "saveAndSelectCustomer")
-            message=(concat "Confirm saving customer: " customer.address (if customer.postcode (concat ", " customer.postcode)) ", " customer.telephone)}}
+            {{#btn/btn-default class="btn-primary btn-lg" action="saveAndSelectCustomer"}}
               Save
-            {{/btn/btn-confirm}}
+            {{/btn/btn-default}}
           </div>
         {{else}}
           <div class="col-xs-12 col-sm-offset-6 col-sm-5">
-            {{#btn/btn-default class="btn-default btn-lg" action="removeAndHideCustomerBrowser"}}Cancel{{/btn/btn-default}}
+            {{#btn/btn-default class="btn-default btn-lg" action="cancel"}}
+              Cancel
+            {{/btn/btn-default}}
           </div>
         {{/if}}
 

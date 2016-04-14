@@ -63,31 +63,6 @@ export default Ember.Route.extend({
       Ember.run.scheduleOnce('afterRender', this, () => this.handleResize());
     },
 
-    showCustomerBrowser() {
-      this.controller.set('customerBrowserVisible', true);
-      this.render('customer-browser', {
-        into: 'orderpad',
-        outlet: 'customer-browser',
-      });
-
-      Ember.run.scheduleOnce('afterRender', this, function() {
-        Ember.$('#postcodeSuggestionDropdownTrigger').on('click tap', function(e) {
-          e.stopImmediatePropagation();
-        });
-        Ember.$('#addressSuggestionDropdownTrigger').on('click tap', function(e) {
-          e.stopImmediatePropagation();
-        });
-      });
-    },
-
-    hideCustomerBrowser() {
-      this.controller.set('customerBrowserVisible', false);
-      this.disconnectOutlet({
-        outlet: 'customer-browser',
-        parentView: 'orderpad'
-      });
-    },
-
     showConfirmOrder() {
       Ember.$('#orderpad-modal').modal('hide');
 

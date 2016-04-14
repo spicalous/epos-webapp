@@ -4,8 +4,8 @@ export default Ember.Component.extend({
 
   actions: {
 
-    setCustomer(type) {
-      this.sendAction('setCustomer', type);
+    createCustomer(type) {
+      this.sendAction('createCustomer', type);
     },
 
     removeCustomer() {
