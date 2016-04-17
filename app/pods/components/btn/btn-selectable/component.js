@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import ButtonDefault from '../btn-default/component';
 
 export default ButtonDefault.extend({
