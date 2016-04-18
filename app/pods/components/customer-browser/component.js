@@ -72,7 +72,7 @@ export default Ember.Component.extend({
   roadSuggestionSearch: Ember.observer('customer', 'customer.addressTwo', function() {
     const trigger = Ember.$('#addressSuggestionDropdownTrigger');
     const debounceId = 'debouncedAddressTwoSuggestion';
-    let addressTwo = this.get('customer.addressTwo');
+    let addressTwo = this.get('customer.addressTwo') ? this.get('customer.addressTwo').trim() : '';
 
     this.suggestionSearch(trigger, debounceId, 'road', { road: addressTwo }, () => addressTwo && addressTwo.length > 1, 'dontSuggestRoad');
   }),
@@ -80,23 +80,22 @@ export default Ember.Component.extend({
   postcodeSuggestionSearch: Ember.observer('customer', 'customer.postcode', function() {
     const trigger = Ember.$('#postcodeSuggestionDropdownTrigger');
     const debounceId = 'debouncedPostcodeSuggestion';
-    let postcode = this.get('customer.postcode');
+    let postcode = this.get('customer.postcode') ? this.get('customer.postcode').trim() : '';
 
     this.suggestionSearch(trigger, debounceId, 'postcode', { postcode: postcode }, () => postcode && postcode.length > 1, 'dontSuggestPostcode');
   }),
 
   customerSearch: Ember.observer('customer', 'customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
-    let telephone = this.get('customer.telephone');
-    let addressOne = this.get('customer.addressOne');
-    let addressTwo = this.get('customer.addressTwo');
-    let postcode = this.get('customer.postcode');
+    let telephone = this.get('customer.telephone') ? this.get('customer.telephone').trim() : '';
+    let addressOne = this.get('customer.addressOne') ? this.get('customer.addressOne').trim() : '';
+    let addressTwo = this.get('customer.addressTwo') ? this.get('customer.addressTwo').trim() : '';
+    let postcode = this.get('customer.postcode') ? this.get('customer.postcode').trim() : '';
     let store = this.get('store');
     let _this = this;
 
     Ember.run.cancel(this.get('debouncedSearch'));
 
-    if ((addressOne && addressOne.length > 2) || (addressTwo && addressTwo.length > 2) ||
-          (postcode && postcode.length > 2) || (telephone && telephone.length > 2)) {
+    if ((addressOne.length > 2) || (addressTwo.length > 2) || (postcode.length > 2) || (telephone.length > 2)) {
 
       this.set('debouncedSearch', Ember.run.debounce(this, function() {
         store.query('delivery-customer', {

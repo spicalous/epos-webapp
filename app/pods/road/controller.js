@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
   actions: {
 
     searchRoads() {
-      let road = this.get('search');
+      let road = this.get('search') ? this.get('search').trim() : '';
       let _this = this;
 
       this.send('showMessage', 'loader', { message: 'Searching roads..' });

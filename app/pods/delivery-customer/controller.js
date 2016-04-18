@@ -17,10 +17,10 @@ export default Ember.Controller.extend({
   actions: {
 
     searchCustomer() {
-      let telephone = this.get('telephone');
-      let addressOne = this.get('addressOne');
-      let addressTwo = this.get('addressTwo');
-      let postcode = this.get('postcode');
+      let telephone = this.get('telephone') ? this.get('telephone').trim() : '';
+      let addressOne = this.get('addressOne') ? this.get('addressOne').trim() : '';
+      let addressTwo = this.get('addressTwo') ? this.get('addressTwo').trim() : '';
+      let postcode = this.get('postcode') ? this.get('postcode').trim() : '';
       let _this = this;
 
       this.send('showMessage', 'loader', { message: 'Searching customer..' });

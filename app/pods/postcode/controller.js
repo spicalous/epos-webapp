@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
   actions: {
 
     searchPostcodes() {
-      let postcode = this.get('search');
+      let postcode = this.get('search') ? this.get('search').trim() : '';
       let _this = this;
 
       this.send('showMessage', 'loader', { message: 'Searching postcodes..' });
