@@ -15,7 +15,7 @@
       <ul class="nav nav-stacked">
         {{#each filteredEditOptions as |option|}}
           <li>
-            <a class="edit-option" {{action "editOptionToggle" option}}>
+            <a class="edit-option" {{action "editOptionToggle" option preventDefault=false}}>
               {{input type="checkbox" name=option.name checked=option.checked}}
               <span>{{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}</span>
             </a>
