@@ -171,6 +171,11 @@ export default Ember.Controller.extend({
             _this.send('hideConfirmOrder');
           }
         });
+
+        // TODO: work around to remove order items with null ids from the store after
+        //       being saved
+        _this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
+
       }, function(response) {
         _this.send('dismissMessage', 'loader');
         _this.send('showMessage', 'overlay', {
