@@ -17,7 +17,7 @@
 
             {{form-group label="Flat/House" type="text" placeholder="Flat or house number" value=customer.addressOne hasError=customer.invalidAddress}}
 
-            {{#form-group label="Address" hasError=customer.invalidAddress}}
+            {{#form-group label="Road" hasError=customer.invalidAddress}}
               <div class="dropdown">
                 {{input id="addressSuggestionDropdownTrigger" class="form-control" type="text" placeholder="Road" value=customer.addressTwo data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
                 <ul class="dropdown-menu" style="width: 100%;">
