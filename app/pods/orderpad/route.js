@@ -13,11 +13,6 @@ export default Ember.Route.extend({
     });
   },
 
-  setupController(controller, model) {
-    controller.set('model', model);
-    controller.set('menu', model.menu);
-  },
-
   NAV_HEIGHT: 50,
 
   handleResize() {
