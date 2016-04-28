@@ -9,12 +9,10 @@ export default DS.Model.extend({
   orderItems: DS.hasMany('order-item'),
   customer: DS.belongsTo('customer', { polymorphic: true }),
 
-  //TODO: (Warning) Bug with @each in ember 2.2.0
   total: Ember.computed('orderItems.@each.quantity', 'orderItems.@each.total', function() {
     return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('total'), 0);
   }),
 
-  //TODO: (Warning) Bug with @each ember 2.2.0
   size: Ember.computed('orderItems.@each.quantity', function() {
     return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('quantity'), 0);
   }),
