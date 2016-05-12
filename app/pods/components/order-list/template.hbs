@@ -1,7 +1,7 @@
 <ul class="list-group">
   {{#each order.orderItems as |item|}}
     <li class="list-group-item clearfix">
-      {{decrement-btn action="decrementItem" orderItem=item}}
+      {{decrement-btn click=(action "decrementItem" item)}}
       <a><span style="padding-left:7px;" {{action "incrementItem" item}}>{{item.menuItem.name}}</span></a>
       <div>
         <span style="padding-left:45px;">
