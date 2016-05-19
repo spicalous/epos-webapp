@@ -12,17 +12,16 @@ export default Ember.Controller.extend({
 
     searchPostcodes() {
       let postcode = this.get('search') ? this.get('search').trim() : '';
-      let _this = this;
 
       this.send('showMessage', 'loader', { message: 'Searching postcodes..' });
       this.store.query('postcode', {
         postcode: postcode
-      }).then(function(postcodes) {
-        _this.send('dismissMessage', 'loader');
-        _this.set('searchResults', postcodes);
-      }).catch(function(response) {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      }).then((postcodes) => {
+        this.send('dismissMessage', 'loader');
+        this.set('searchResults', postcodes);
+      }).catch((response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Error searching for postcodes :(',
           body: response.errors[0].message
         });

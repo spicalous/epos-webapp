@@ -130,20 +130,19 @@ export default Ember.Controller.extend({
     },
 
     saveAndSelectCustomer() {
-      let _this = this;
       let customer = this.get('customer');
 
       this.send('showMessage', 'loader', { message: 'Saving customer..' });
 
-      customer.save().then(function() {
-        _this.send('dismissMessage', 'loader');
-        _this.send('hideCustomerBrowser');
-        _this.send('showMessage', 'toast', {
+      customer.save().then(() => {
+        this.send('dismissMessage', 'loader');
+        this.send('hideCustomerBrowser');
+        this.send('showMessage', 'toast', {
           body: 'Customer saved successfully'
         });
-      }).catch(function(response) {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      }).catch((response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Failed to save :(',
           body: response.errors[0].message
         });
@@ -151,37 +150,36 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      let _this = this,
-          order = this.get('model.order'),
-          modalWasOpen = Ember.$('#orderpad-modal').hasClass('in');
+      let order = this.get('model.order');
+      let modalWasOpen = Ember.$('#orderpad-modal').hasClass('in');
 
       Ember.$('#orderpad-modal').modal('hide');
       this.send('showMessage', 'loader', { message: 'Sending order..' });
 
       order.set('dateTime', new Date());
       order.set('customer', this.get('customer'));
-      order.save().then(function() {
-        _this.send('dismissMessage', 'loader');
-        _this.send('reset');
-        _this.send('showMessage', 'overlay', {
+      order.save().then(() => {
+        this.send('dismissMessage', 'loader');
+        this.send('reset');
+        this.send('showMessage', 'overlay', {
           header: 'Confirmed ^.^',
           body: 'Order submitted successfully',
-          callback: function() {
-            _this.set('model.order', _this.store.createRecord('order'));
-            _this.send('hideConfirmOrder');
+          callback: () => {
+            this.set('model.order', this.store.createRecord('order'));
+            this.send('hideConfirmOrder');
           }
         });
 
         // TODO: work around to remove order items with null ids from the store after
         //       being saved
-        _this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
+        this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
 
-      }, function(response) {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      }, (response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Failed :(',
           body: response.errors[0].message,
-          callback: function() {
+          callback: () => {
             if (modalWasOpen) {
               Ember.$('#orderpad-modal').modal('show');
             }

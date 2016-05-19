@@ -12,17 +12,16 @@ export default Ember.Controller.extend({
 
     searchRoads() {
       let road = this.get('search') ? this.get('search').trim() : '';
-      let _this = this;
 
       this.send('showMessage', 'loader', { message: 'Searching roads..' });
       this.store.query('road', {
         road: road
-      }).then(function(roads) {
-        _this.send('dismissMessage', 'loader');
-        _this.set('searchResults', roads);
-      }).catch(function(response) {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      }).then((roads) => {
+        this.send('dismissMessage', 'loader');
+        this.set('searchResults', roads);
+      }).catch((response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Error searching for roads :(',
           body: response.errors[0].message
         });

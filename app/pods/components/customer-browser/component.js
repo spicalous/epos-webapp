@@ -33,9 +33,6 @@ export default Ember.Component.extend({
    *                                         then don't search and set flag to false
    */
   suggestionSearch(dropdownTrigger, debounceId, model, query, valid, blockingFlag) {
-    let store = this.get('store');
-    let _this = this;
-
     Ember.run.cancel(this.get(debounceId));
 
     if (this.get(blockingFlag)) {
@@ -45,19 +42,19 @@ export default Ember.Component.extend({
 
     if (valid()) {
 
-      this.set(debounceId, Ember.run.debounce(this, function() {
+      this.set(debounceId, Ember.run.debounce(this, () => {
 
-        store.query(model, query).then(function(roads) {
-          _this.set(debounceId, '');
-          _this.set(model + 'Suggestions', roads);
-          _this.set(model + 'SuggestionError', false);
+        this.store.query(model, query).then((roads) => {
+          this.set(debounceId, '');
+          this.set(model + 'Suggestions', roads);
+          this.set(model + 'SuggestionError', false);
           if (!dropdownTrigger.parent().hasClass('open')) {
             dropdownTrigger.dropdown('toggle');
           }
-        }).catch(function() {
-          _this.set(debounceId, '');
-          _this.set(model + 'Suggestions', []);
-          _this.set(model + 'SuggestionError', true);
+        }).catch(() => {
+          this.set(debounceId, '');
+          this.set(model + 'Suggestions', []);
+          this.set(model + 'SuggestionError', true);
           if (!dropdownTrigger.parent().hasClass('open')) {
             dropdownTrigger.dropdown('toggle');
           }
@@ -90,25 +87,23 @@ export default Ember.Component.extend({
     let addressOne = this.get('customer.addressOne') ? this.get('customer.addressOne').trim() : '';
     let addressTwo = this.get('customer.addressTwo') ? this.get('customer.addressTwo').trim() : '';
     let postcode = this.get('customer.postcode') ? this.get('customer.postcode').trim() : '';
-    let store = this.get('store');
-    let _this = this;
 
     Ember.run.cancel(this.get('debouncedSearch'));
 
     if ((addressOne.length > 2) || (addressTwo.length > 2) || (postcode.length > 2) || (telephone.length > 2)) {
 
-      this.set('debouncedSearch', Ember.run.debounce(this, function() {
-        store.query('delivery-customer', {
+      this.set('debouncedSearch', Ember.run.debounce(this, () => {
+        this.store.query('delivery-customer', {
           addressOne: addressOne,
           addressTwo: addressTwo,
           postcode: postcode,
           telephone: telephone
-        }).then(function(customers) {
-          _this.set('deliveryCustomerResults', customers);
-          _this.set('debouncedSearch', '');
-        }).catch(function(response) {
-          _this.set('debouncedSearch', '');
-          _this.send('showMessage', 'overlay', {
+        }).then((customers) => {
+          this.set('deliveryCustomerResults', customers);
+          this.set('debouncedSearch', '');
+        }).catch((response) => {
+          this.set('debouncedSearch', '');
+          this.send('showMessage', 'overlay', {
             header: 'Error searching for customers :(',
             body: response.errors[0].message
           });

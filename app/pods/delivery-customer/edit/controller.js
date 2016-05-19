@@ -40,19 +40,17 @@ export default Ember.Controller.extend({
       }
 
       if (hasChangedAfterTrimming) {
-        let _this = this;
-
         this.send('showMessage', 'loader', { message: 'Updating customer..' });
-        this.get('model').save().then(function() {
-          _this.send('dismissMessage', 'loader');
-          _this.set('editable', false);
-          _this.send('showMessage', 'overlay', {
+        this.get('model').save().then(() => {
+          this.send('dismissMessage', 'loader');
+          this.set('editable', false);
+          this.send('showMessage', 'overlay', {
             header: 'Updated ^^',
             body: 'Customer updated successfully'
           });
-        }).catch(function(response) {
-          _this.send('dismissMessage', 'loader');
-          _this.send('showMessage', 'overlay', {
+        }).catch((response) => {
+          this.send('dismissMessage', 'loader');
+          this.send('showMessage', 'overlay', {
             header: 'Failed to update the customer :(',
             body: response.errors[0].message
           });
@@ -63,21 +61,17 @@ export default Ember.Controller.extend({
     },
 
     deleteRecord() {
-      let _this = this;
-
       this.send('showMessage', 'loader', { message: 'Deleting customer..' });
-      this.get('model').destroyRecord().then(function() {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      this.get('model').destroyRecord().then(() => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Deleted ^^',
           body: 'Customer deleted successfully',
-          callback: function() {
-            _this.transitionToRoute('deliveryCustomer');
-          }
+          callback: () => { this.transitionToRoute('delivery-customer'); }
         });
-      }).catch(function(response) {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      }).catch((response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Failed to delete the customer :(',
           body: response.errors[0].message
         });

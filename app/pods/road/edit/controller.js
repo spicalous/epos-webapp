@@ -39,22 +39,18 @@ export default Ember.Controller.extend({
       }
 
       if (hasChangedAfterTrimming) {
-        let _this = this;
-
         this.send('showMessage', 'loader', { message: 'Updating road name..' });
-        this.get('model').save().then(function() {
-          _this.send('dismissMessage', 'loader');
-          _this.set('editable', false);
-          _this.send('showMessage', 'overlay', {
+        this.get('model').save().then(() => {
+          this.send('dismissMessage', 'loader');
+          this.set('editable', false);
+          this.send('showMessage', 'overlay', {
             header: 'Updated ^^',
             body: 'Road name updated successfully',
-            callback: function() {
-              _this.transitionToRoute('road');
-            }
+            callback: () => { this.transitionToRoute('road'); }
           });
-        }).catch(function(response) {
-          _this.send('dismissMessage', 'loader');
-          _this.send('showMessage', 'overlay', {
+        }).catch((response) => {
+          this.send('dismissMessage', 'loader');
+          this.send('showMessage', 'overlay', {
             header: 'Failed to update road name :(',
             body: response.errors[0].message
           });
@@ -65,21 +61,17 @@ export default Ember.Controller.extend({
     },
 
     deleteRecord() {
-      let _this = this;
-
       this.send('showMessage', 'loader', { message: 'Deleting road..' });
-      this.get('model').destroyRecord().then(function() {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      this.get('model').destroyRecord().then(() => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Deleted ^^',
           body: 'Road deleted successfully',
-          callback: function() {
-            _this.transitionToRoute('road');
-          }
+          callback: () => { this.transitionToRoute('road'); }
         });
-      }).catch(function(response) {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      }).catch((response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Failed to delete the road :(',
           body: response.errors[0].message
         });

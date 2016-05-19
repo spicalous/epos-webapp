@@ -21,7 +21,6 @@ export default Ember.Controller.extend({
       let addressOne = this.get('addressOne') ? this.get('addressOne').trim() : '';
       let addressTwo = this.get('addressTwo') ? this.get('addressTwo').trim() : '';
       let postcode = this.get('postcode') ? this.get('postcode').trim() : '';
-      let _this = this;
 
       this.send('showMessage', 'loader', { message: 'Searching customer..' });
       this.store.query('delivery-customer', {
@@ -29,12 +28,12 @@ export default Ember.Controller.extend({
         addressTwo: addressTwo,
         postcode: postcode,
         telephone: telephone
-      }).then(function(customers) {
-        _this.send('dismissMessage', 'loader');
-        _this.set('deliveryCustomerResults', customers);
-      }).catch(function(response) {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      }).then((customers) => {
+        this.send('dismissMessage', 'loader');
+        this.set('deliveryCustomerResults', customers);
+      }).catch((response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Error searching for customers :(',
           body: response.errors[0].message
         });

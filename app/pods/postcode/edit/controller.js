@@ -39,22 +39,18 @@ export default Ember.Controller.extend({
       }
 
       if (hasChangedAfterTrimming) {
-        let _this = this;
-
         this.send('showMessage', 'loader', { message: 'Updating postcode name..' });
-        this.get('model').save().then(function() {
-          _this.send('dismissMessage', 'loader');
-          _this.set('editable', false);
-          _this.send('showMessage', 'overlay', {
+        this.get('model').save().then(() => {
+          this.send('dismissMessage', 'loader');
+          this.set('editable', false);
+          this.send('showMessage', 'overlay', {
             header: 'Updated ^^',
             body: 'Postcode name updated successfully',
-            callback: function() {
-              _this.transitionToRoute('postcode');
-            }
+            callback: () => { this.transitionToRoute('postcode'); }
           });
-        }).catch(function(response) {
-          _this.send('dismissMessage', 'loader');
-          _this.send('showMessage', 'overlay', {
+        }).catch((response) => {
+          this.send('dismissMessage', 'loader');
+          this.send('showMessage', 'overlay', {
             header: 'Failed to update postcode :(',
             body: response.errors[0].message
           });
@@ -65,21 +61,17 @@ export default Ember.Controller.extend({
     },
 
     deleteRecord() {
-      let _this = this;
-
       this.send('showMessage', 'loader', { message: 'Deleting postcode..' });
-      this.get('model').destroyRecord().then(function() {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      this.get('model').destroyRecord().then(() => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Deleted ^^',
           body: 'Postcode deleted successfully',
-          callback: function() {
-            _this.transitionToRoute('postcode');
-          }
+          callback: () => { this.transitionToRoute('postcode'); }
         });
-      }).catch(function(response) {
-        _this.send('dismissMessage', 'loader');
-        _this.send('showMessage', 'overlay', {
+      }).catch((response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
           header: 'Failed to delete the postcode :(',
           body: response.errors[0].message
         });
