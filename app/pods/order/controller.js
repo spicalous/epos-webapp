@@ -9,12 +9,25 @@ export default Ember.Controller.extend({
     });
   },
 
-  _getPrinterNamespaceURL() {
-    let host = this.store.adapterFor('application').get('host');
+  _getNamespace() {
     let namespace = this.store.adapterFor('application').get('namespace');
-    let url = [host, namespace, 'printer'].join('/');
+    return [namespace, 'printer'].join('/');
+  },
 
-    return url;
+  _getRequest(url, loadingMessage, successMessage, errorMessage) {
+    this.send('showMessage', 'loader', { message: loadingMessage });
+
+    Ember.$.get(url)
+      .then(() => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', { header: successMessage });
+      }, (response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
+          header: errorMessage,
+          body: response.responseText ? response.responseText : response.errors[0].message
+        });
+      });
   },
 
   totalCard: Ember.computed('model', function() {
@@ -51,14 +64,14 @@ export default Ember.Controller.extend({
      * @param {ReceiptType} receiptType - receipt type for printing
      */
     printOrder(id, receiptType) {
-      let url = [this._getPrinterNamespaceURL(), 'order', receiptType || ReceiptType.EAT_IN, id].join('/');
-      Ember.$.get(url).then();
+      let url = [this._getNamespace(), 'order', receiptType || ReceiptType.EAT_IN, id].join('/');
+      this._getRequest(url, 'Printing receipt', 'Order printed successfully', 'Order failed to print');
     },
 
-     printOrderSummary() {
-       let url = [this._getPrinterNamespaceURL(), 'order-summary'].join('/');
-       Ember.$.get(url).then();
-     }
+    printOrderSummary() {
+      let url = [this._getNamespace(), 'order-summary'].join('/');
+      this._getRequest(url, 'Printing summary', 'Summary printed successfully', 'Summary failed to print');
+    }
 
   }
 
