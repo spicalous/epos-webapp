@@ -60,7 +60,7 @@ export default Ember.Component.extend({
           }
         });
 
-      }, 500));
+      }, 100));
     } else {
       dropdownTrigger.parent().removeClass('open');
     }
