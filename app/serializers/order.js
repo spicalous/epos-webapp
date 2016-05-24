@@ -15,6 +15,9 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     if (json.customer) {
       json.customer.type = snapshot.record.get('customer.customerType');
     }
+    if (json.customerType) {
+      delete json.customerType;
+    }
 
     return json;
   }

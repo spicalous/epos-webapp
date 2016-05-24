@@ -1,31 +1,57 @@
 <div class="row">
-  <div class="col-xs-12">ID {{order.id}}</div>
-  <div class="col-xs-12">Ordered at {{format-time order.dateTime}}</div>
   <div class="col-xs-12">
-    £{{format-currency order.total}} {{format-payment-method order.paymentMethod}}
+    Ordered at {{format-time order.dateTime}}
   </div>
-  {{#if order.notes}}
-    <div class="col-xs-12">{{order.notes}}</div>
-  {{/if}}
+  <div class="col-xs-12">
+    £{{format-currency order.total}}
+    {{format-payment-method order.paymentMethod}}
+  </div>
   <div class="col-xs-12">
     {{component (concat "order-" order.customer.customerType) customer=order.customer}}
   </div>
-  <div class="col-xs-12">
-    <ul class="list-group">
-      {{#each order.orderItems as |orderItem|}}
-        <li class="list-group-item">
-          {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
-          {{#each orderItem.editOptions as |editOption|}}
-            <div>{{editOption.name}}</div>
-          {{/each}}
-        </li>
-      {{/each}}
-    </ul>
-  </div>
-  <div class="col-xs-6">
-    {{#btn/btn-default class="btn-primary" action="printOrderAsEatIn"}}RE-PRINT (small){{/btn/btn-default}}
-  </div>
-  <div class="col-xs-6">
-    {{#btn/btn-default class="btn-primary" action="printOrderAsDelivery"}}RE-PRINT (large){{/btn/btn-default}}
-  </div>
 </div>
+
+{{#if showOrderItems}}
+  <div class="row gutter-top-bottom">
+    <div class="col-xs-12">
+      {{#if order.notes}}
+        {{order.notes}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="row gutter-top-bottom">
+    <div class="col-xs-12">
+      <ul class="list-group">
+        {{#each order.orderItems as |orderItem|}}
+          <li class="list-group-item">
+            {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
+            {{#each orderItem.editOptions as |editOption|}}
+              <div>{{editOption.name}}</div>
+            {{/each}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  <div class="row gutter-top-bottom">
+    <div class="col-xs-6">
+      {{#btn/btn-default class="btn-primary" action="printOrderAsEatIn"}}Print small{{/btn/btn-default}}
+    </div>
+    <div class="col-xs-6">
+      {{#btn/btn-default class="btn-primary" action="printOrderAsDelivery"}}Print large{{/btn/btn-default}}
+    </div>
+  </div>
+  <div class="row gutter-top-bottom">
+    <div class="col-xs-12">
+      {{#btn/btn-default class="btn-default btn-lg" action="toggleShowOrderItems"}}
+        Hide{{/btn/btn-default}}
+    </div>
+  </div>
+{{else}}
+  <div class="row gutter-top-bottom">
+    <div class="col-xs-12">
+      {{#btn/btn-default class="btn-default btn-lg" action="toggleShowOrderItems"}}Show{{/btn/btn-default}}
+    </div>
+  </div>
+{{/if}}
+

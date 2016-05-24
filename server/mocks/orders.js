@@ -38,7 +38,7 @@ module.exports = function(app) {
             "type":"takeaway-customer",
             "id":0,
             "telephone":"",
-            "name":""
+            "name":"name"
           },
           "notes":"This is a note",
           "paymentMethod":null,
