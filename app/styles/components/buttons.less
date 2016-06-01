@@ -1,5 +1,5 @@
-.btn-main:focus,
-.btn-main:active,
+.btn-home:focus,
+.btn-home:active,
 .btn-default:focus,
 .btn-default:active,
 .btn-primary:focus,
@@ -15,12 +15,7 @@
   outline: none !important;
 }
 
-.btn-default:focus,
-.btn-default:active,
-.btn-default:hover {
-  background-color: #FFF;
-}
-
+.btn-home,
 .btn-default,
 .btn-primary,
 .btn-success,
@@ -28,6 +23,12 @@
 .btn-warning,
 .btn-danger {
   width: 100%;
+}
+
+.btn-default:focus,
+.btn-default:active,
+.btn-default:hover {
+  background-color: #FFF;
 }
 
 .btn.disabled,
@@ -38,20 +39,39 @@
   border-color: #111;
 }
 
-.btn-main,
-.btn-main:focus {
-  background-color: #FFF;
-  color: @color-primary-0;
-  border-color: @color-primary-0;
-  border-width: 1px;
-}
-
-.btn-main:hover,
-.btn-main:active,
-.btn-default.is-selected,
-.btn-default.is-selected:focus {
+.selected() {
   background-color: @color-primary-0;
   color: #FFF;
+}
+
+.btn-home {
+  &,
+  &:focus {
+    padding: 18px;
+    background-color: #FFF;
+    color: @color-primary-0;
+    border-color: @color-primary-0;
+    border-width: 1px;
+  }
+
+  &:hover,
+  &:active {
+    .selected
+  }
+}
+
+.btn-default-selected {
+  &,
+  &:active,
+  &:hover,
+  &:focus {
+    .selected
+  }
+
+  &:focus:active {
+    background-color: darken(@color-primary-0, 5%);
+    color: #FFF;
+  }
 }
 
 .decrement-btn {
@@ -63,7 +83,7 @@
   padding: 5px;
 }
 
-.toggle-menu {
+.btn-orderpad-modal-toggle {
   position: fixed;
   bottom: 0px;
   left: 0px;
