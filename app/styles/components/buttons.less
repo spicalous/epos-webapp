@@ -1,20 +1,3 @@
-.btn-home:focus,
-.btn-home:active,
-.btn-default:focus,
-.btn-default:active,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-success:focus,
-.btn-success:active,
-.btn-info:focus,
-.btn-info:active,
-.btn-warning:focus,
-.btn-warning:active,
-.btn-danger:focus,
-.btn-danger:active {
-  outline: none !important;
-}
-
 .btn-home,
 .btn-default,
 .btn-primary,
@@ -23,12 +6,11 @@
 .btn-warning,
 .btn-danger {
   width: 100%;
-}
 
-.btn-default:focus,
-.btn-default:active,
-.btn-default:hover {
-  background-color: #FFF;
+  &:focus,
+  &:active {
+    outline: none !important;
+  }
 }
 
 .btn.disabled,
@@ -44,7 +26,30 @@
   color: #FFF;
 }
 
+.btn-default {
+
+  &:focus,
+  &:active,
+  &:hover {
+    background-color: #FFF;
+  }
+
+  &.is-selected {
+    &,
+    &:active,
+    &:hover,
+    &:focus {
+      .selected;
+    }
+
+    &:focus:active {
+      background-color: darken(@color-primary-0, 5%);
+    }
+  }
+}
+
 .btn-home {
+
   &,
   &:focus {
     padding: 18px;
@@ -54,23 +59,12 @@
     border-width: 1px;
   }
 
-  &:hover,
+  &:hover{
+    .selected;
+  }
+
   &:active {
-    .selected
-  }
-}
-
-.btn-default-selected {
-  &,
-  &:active,
-  &:hover,
-  &:focus {
-    .selected
-  }
-
-  &:focus:active {
     background-color: darken(@color-primary-0, 5%);
-    color: #FFF;
   }
 }
 
