@@ -15,7 +15,8 @@ export default Ember.Controller.extend({
 
       this.send('showMessage', 'loader', { message: 'Searching postcodes..' });
       this.store.query('postcode', {
-        postcode: postcode
+        postcode: postcode,
+        limit: 50
       }).then((postcodes) => {
         this.send('dismissMessage', 'loader');
         this.set('searchResults', postcodes);

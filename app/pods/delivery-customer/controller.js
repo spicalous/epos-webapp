@@ -27,7 +27,8 @@ export default Ember.Controller.extend({
         addressOne: addressOne,
         addressTwo: addressTwo,
         postcode: postcode,
-        telephone: telephone
+        telephone: telephone,
+        limit: 50
       }).then((customers) => {
         this.send('dismissMessage', 'loader');
         this.set('deliveryCustomerResults', customers);

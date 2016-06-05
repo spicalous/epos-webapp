@@ -15,7 +15,8 @@ export default Ember.Controller.extend({
 
       this.send('showMessage', 'loader', { message: 'Searching roads..' });
       this.store.query('road', {
-        road: road
+        road: road,
+        limit: 50
       }).then((roads) => {
         this.send('dismissMessage', 'loader');
         this.set('searchResults', roads);
