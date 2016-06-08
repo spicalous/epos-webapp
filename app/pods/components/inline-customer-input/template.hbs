@@ -13,10 +13,10 @@
     {{#btn/btn-default class="btn-danger btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
       SELECT CUSTOMER
     {{/btn/btn-default}}
-    <ul class="dropdown-menu" style="width: 100%;">
-      <li><a {{action "createCustomer" "takeaway-customer"}}>Take away</a></li>
+    <ul class="dropdown-menu">
+      <li><a class="lead"{{action "createCustomer" "takeaway-customer"}}>Take away</a></li>
       <li role="separator" class="divider"></li>
-      <li><a {{action "createCustomer" "delivery-customer"}}>Delivery</a></li>
+      <li><a class="lead"{{action "createCustomer" "delivery-customer"}}>Delivery</a></li>
     </ul>
   </div>
 
