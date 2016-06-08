@@ -107,11 +107,6 @@ export default Ember.Controller.extend({
       this.set('customer', null);
     },
 
-    setCustomer(customer) {
-      this.send('removeCustomer');
-      this.set('customer', customer);
-    },
-
     showCustomerBrowser() {
       this.set('showCustomerBrowser', true);
     },

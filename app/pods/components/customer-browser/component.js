@@ -119,7 +119,7 @@ export default Ember.Component.extend({
   actions:{
 
     cancel() {
-      this.sendAction('cancel');
+      this.get('cancel')();
     },
 
     setAddressTwo(addressTwo) {
@@ -139,12 +139,11 @@ export default Ember.Component.extend({
     },
 
     selectCustomer(customer) {
-      this.sendAction('onCustomerSelected', customer);
-      this.sendAction('hide');
+      this.get('onCustomerSelected')(customer);
     },
 
     saveAndSelectCustomer() {
-      this.sendAction('onCustomerSave');
+      this.get('onCustomerSave')();
     },
 
   }

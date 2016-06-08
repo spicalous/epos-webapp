@@ -9,9 +9,8 @@
   {{customer-browser store=store customer=customer
       validCustomer=validCustomer
       onCustomerSave=(action "saveAndSelectCustomer")
-      onCustomerSelected=(action "setCustomer")
-      cancel=(action "cancelCustomerBrowser")
-      hide=(action "hideCustomerBrowser")}}
+      onCustomerSelected=(action "selectCustomer")
+      cancel=(action "cancelCustomerBrowser")}}
 {{/if}}
 
 <div class="container-fluid" id="orderpad">
