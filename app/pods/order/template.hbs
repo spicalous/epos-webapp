@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
       <ul class="list-group">
-        {{#each model as |order|}}
+        {{#each ordersSortedByTimestamp as |order|}}
           {{#if order.id}}
             {{order-list-group-item order=order onPrintOrder=(action "printOrder")}}
           {{/if}}

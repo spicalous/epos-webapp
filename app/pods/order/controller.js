@@ -3,6 +3,10 @@ import { ReceiptType } from '../../models/receipt-type';
 
 export default Ember.Controller.extend({
 
+  sortByTime: ['dateTime:desc'],
+
+  ordersSortedByTimestamp: Ember.computed.sort('model', 'sortByTime'),
+
   _filterByPaymentMethod(orders, paymentMethod) {
     return orders.filter(function(order) {
       return order.get('paymentMethod') === paymentMethod;
