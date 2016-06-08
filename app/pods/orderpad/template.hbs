@@ -31,7 +31,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-8 scroll-y" style="padding:8px" id="orderpad-menu">
-          {{menu-list menu=model.menu
+          {{menu-list menu=sortedMenu
               onMenuItemClick=(action "addMenuItem")
               categoryFilter=selectedCategory
               menuIdFilter=numpadValue}}

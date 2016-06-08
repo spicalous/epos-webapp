@@ -41,6 +41,8 @@ export default Ember.Controller.extend({
    */
   estimatedDeliveryTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
 
+  sortedMenu: Ember.computed.sort('model.menu', (x, y) => x.get('id') - y.get('id')),
+
   /**
    * computes the estimated time for delivery
    */
