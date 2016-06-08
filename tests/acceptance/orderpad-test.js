@@ -28,7 +28,7 @@ test('Selecting a category', function(assert) {
 });
 
 test('Adding an item', function(assert) {
-  assert.expect(3);
+  assert.expect(5);
 
   visit('/orderpad');
   click(menuItems + ':first-child');
@@ -36,17 +36,6 @@ test('Adding an item', function(assert) {
     assert.equal(find(orderItemsInOrderpad).length, 1);
     assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 1'));
     assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 2.95'));
-  });
-
-});
-
-test('Adding an item [Modal]', function(assert) {
-  assert.expect(3);
-
-  visit('/orderpad');
-  click(menuItems + ':first-child');
-  andThen(() => {
-    assert.equal(find(orderItemsInOrderpad).length, 1);
     assert.ok(find('#orderpad-modal .modal-footer').text().includes('ITEMS: 1'));
     assert.ok(find('#orderpad-modal .modal-footer').text().includes('TOTAL: 2.95'));
   });
@@ -54,7 +43,7 @@ test('Adding an item [Modal]', function(assert) {
 });
 
 test('Removing an item', function(assert) {
-  assert.expect(3);
+  assert.expect(5);
 
   visit('/orderpad');
   click(menuItems + ':first-child');
@@ -63,18 +52,6 @@ test('Removing an item', function(assert) {
     assert.equal(find(orderItemsInOrderpad).length, 0);
     assert.ok(find('#orderpad-bottom').text().includes('ITEMS: 0'));
     assert.ok(find('#orderpad-bottom').text().includes('TOTAL: 0.00'));
-  });
-
-});
-
-test('Removing an item [Modal] ', function(assert) {
-  assert.expect(3);
-
-  visit('/orderpad');
-  click(menuItems + ':first-child');
-  click('#orderpad-modal .decrement-btn:first');
-  andThen(() => {
-    assert.equal(find(orderItemsInOrderpad).length, 0);
     assert.ok(find('#orderpad-modal .modal-footer').text().includes('ITEMS: 0'));
     assert.ok(find('#orderpad-modal .modal-footer').text().includes('TOTAL: 0.00'));
   });
