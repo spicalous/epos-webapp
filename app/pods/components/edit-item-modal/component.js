@@ -42,16 +42,15 @@ export default Ember.Component.extend({
     },
 
     editOptionToggle(option) {
-      let orderItem = this.get('order.itemToEdit');
-      let quantity = orderItem.get('quantity');
+      let editOptions = this.get('order.itemToEdit.editOptions');
 
-      if (orderItem.hasNoEditOptions() && quantity > 1) {
-        let order = this.get('order');
-        this.set('itemToEdit', order.addNewEditOption(orderItem, option));
+      if (editOptions.indexOf(option) === -1) {
+        editOptions.pushObject(option);
       } else {
-        orderItem.toggleOption(option);
-        option.set('checked', !option.get('checked'));
+        editOptions.removeObject(option);
       }
+
+      option.set('checked', !option.get('checked'));
     }
   }
 });

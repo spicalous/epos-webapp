@@ -34,18 +34,6 @@ export default DS.Model.extend({
         menuItem: menuItem
       }));
     }
-  },
-
-  addNewEditOption(orderItem, option) {
-    orderItem.decrementProperty('quantity');
-    let orderItems = this.get('orderItems');
-    let newOrderItem = this.store.createRecord('order-item', {
-      quantity: 1,
-      menuItem: orderItem.get('menuItem')
-    });
-
-    newOrderItem.toggleOption(option);
-    orderItems.pushObject(newOrderItem);
-    return newOrderItem;
   }
+
 });

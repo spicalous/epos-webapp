@@ -22,15 +22,6 @@ export default DS.Model.extend({
 
   hasNoEditOptions: function() {
     return this.get('editOptions').get('length') === 0;
-  },
-
-  toggleOption: function(option) {
-    var editOptions = this.get('editOptions');
-
-    if (editOptions.indexOf(option) === -1) {
-      editOptions.pushObject(option);
-    } else {
-      editOptions.removeObject(option);
-    }
   }
+
 });
