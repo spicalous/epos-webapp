@@ -7,9 +7,17 @@ moduleForComponent('order-list', 'Integration | Component | order list', {
 });
 
 test('it renders', function(assert) {
-  assert.expect(0);
 
-    //TODO Fix Test
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.render(hbs`{{order-list}}`);
+
+  assert.equal(this.$().text().trim(), '');
+
+  // Template block usage:" + EOL +
+  this.render(hbs`
+    {{#order-list}}
+      template block text
+    {{/order-list}}
+  `);
+
+  assert.equal(this.$().text().trim(), '');
 });

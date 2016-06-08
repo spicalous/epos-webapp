@@ -1,25 +1,29 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('order-delivery-customer', 'Integration | Component | order delivery customer', {
-  integration: true
+  integration: true,
+
+  beforeEach: function() {
+    this.inject.service('store', { as: 'store' });
+  }
 });
 
 test('it renders', function(assert) {
-  
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
-  this.render(hbs`{{order-delivery-customer}}`);
+  Ember.run(() => {
+    this.set('delivery-customer',
+      this.store.createRecord('delivery-customer', {
+        telephone: '12345678901',
+        addressOne: 'address one',
+        addressTwo: 'address two',
+        postcode: 'postcode'
+      })
+    );
+  });
 
-  assert.equal(this.$().text().trim(), '');
+  this.render(hbs`{{order-delivery-customer customer=delivery-customer}}`);
 
-  // Template block usage:" + EOL +
-  this.render(hbs`
-    {{#order-delivery-customer}}
-      template block text
-    {{/order-delivery-customer}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'address one address two\npostcode 12345678901');
 });

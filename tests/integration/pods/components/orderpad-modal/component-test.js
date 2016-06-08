@@ -7,9 +7,20 @@ moduleForComponent('orderpad-modal', 'Integration | Component | orderpad modal',
 });
 
 test('it renders', function(assert) {
-  assert.expect(0);
 
-  //TODO Fix Test
   // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
+
+  this.render(hbs`{{orderpad-modal}}`);
+
+  assert.equal(this.$().text().trim(), '');
+
+  // Template block usage:" + EOL +
+  this.render(hbs`
+    {{#orderpad-modal}}
+      template block text
+    {{/orderpad-modal}}
+  `);
+
+  assert.equal(this.$().text().trim(), '');
 });
