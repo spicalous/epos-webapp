@@ -32,12 +32,12 @@ export default Ember.Controller.extend({
   showCustomerBrowser: false,
 
   /**
-   * @type {null|string}
+   * @type {Array[]}
    */
   paymentMethods: [null, 'CASH', 'CARD', 'ONLINE'],
 
   /**
-   * @type {number}
+   * @type {Number[]}
    */
   estimatedDeliveryTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
 
