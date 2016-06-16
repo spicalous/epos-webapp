@@ -1,13 +1,15 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 import Ember from 'ember';
 
-export default DS.Model.extend({
-  dateTime: DS.attr('date'),
-  estimatedTime: DS.attr('number', { defaultValue: 45 }),
-  paymentMethod: DS.attr('string', { defaultValue: null }),
-  notes: DS.attr('string'),
-  orderItems: DS.hasMany('order-item'),
-  customer: DS.belongsTo('customer', { polymorphic: true }),
+export default Model.extend({
+  dateTime: attr('date'),
+  paymentMethod: attr('string', { defaultValue: null }),
+  notes: attr('string'),
+
+  orderItems: hasMany('order-item'),
+  customer: belongsTo('customer', { polymorphic: true }),
 
   total: Ember.computed('orderItems.@each.quantity', 'orderItems.@each.total', function() {
     return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('total'), 0);

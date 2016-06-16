@@ -39,15 +39,21 @@ export default Ember.Controller.extend({
   /**
    * @type {Number[]}
    */
-  estimatedDeliveryTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
+  estimatedTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
 
+  estimatedTime: 45,
+
+  /**
+   * @type {MenuItem[]}
+   * menu items sorted by ascending id
+   */
   sortedMenu: Ember.computed.sort('model.menu', (x, y) => x.get('id') - y.get('id')),
 
   /**
    * computes the estimated time for delivery
    */
-  computedEstimate: Ember.computed('model.order.estimatedTime', function() {
-    return new Date(Date.now() + (this.get('model.order.estimatedTime') * 1000 * 60));
+  computedEstimate: Ember.computed('estimatedTime', function() {
+    return new Date(Date.now() + (this.get('estimatedTime') * 1000 * 60));
   }),
 
   validCustomer: Ember.computed('customer', 'customer.invalidTelephone',
@@ -147,14 +153,21 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      let order = this.get('model.order');
+      let baseOrder = this.get('model.order');
+      let order = this.store.createRecord('order/eatOut', {
+        dateTime: new Date(),
+        customer: this.get('customer'),
+        estimatedTime: this.get('estimatedTime'),
+        orderItems: baseOrder.get('orderItems'),
+        paymentMethod: baseOrder.get('paymentMethod'),
+        notes: baseOrder.get('notes'),
+      });
+
       let modalWasOpen = Ember.$('#orderpad-modal').hasClass('in');
 
       Ember.$('#orderpad-modal').modal('hide');
       this.send('showMessage', 'loader', { message: 'Sending order..' });
 
-      order.set('dateTime', new Date());
-      order.set('customer', this.get('customer'));
       order.save().then(() => {
         this.send('dismissMessage', 'loader');
         this.send('reset');
