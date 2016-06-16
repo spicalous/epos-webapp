@@ -1,6 +1,22 @@
+import Ember from 'ember';
 import Customer from './customer';
-import DS from 'ember-data';
+import attr from 'ember-data/attr';
 
 export default Customer.extend({
-  name: DS.attr('string', { defaultValue: '' })
+  name: attr('string', { defaultValue: '' }),
+
+  /**
+   *  For take away customers - telephone is not required
+   *  @override
+   */
+  invalidTelephone: Ember.computed('invalidTakeAwayTelephoneReason', function() {
+    return !!this.get('invalidTakeAwayTelephoneReason');
+  }),
+
+  invalidTakeAwayTelephoneReason: Ember.computed('telephone', function() {
+    let telephone = this.get('telephone');
+
+    return (!telephone || telephone.trim()) ? '' : this.get('invalidTelephoneReason');
+  })
+
 });

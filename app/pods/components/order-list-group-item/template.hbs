@@ -7,7 +7,7 @@
     {{format-payment-method order.paymentMethod}}
   </div>
   <div class="col-xs-12">
-    {{component (concat "order-" order.customer.customerType) customer=order.customer}}
+    {{component (concat "order-" order.customer.content.constructor.modelName) customer=order.customer}}
   </div>
 </div>
 

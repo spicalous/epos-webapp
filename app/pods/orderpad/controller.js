@@ -64,9 +64,7 @@ export default Ember.Controller.extend({
     if (!customer) {
       return false;
     }
-    return customer.get('customerType') === 'takeaway-customer' ?
-      !customer.get('invalidTelephone') :
-      !customer.get('invalidTelephone') && !customer.get('invalidAddress') && !customer.get('invalidPostcode');
+    return !customer.get('invalidTelephone') && !customer.get('invalidAddress') && !customer.get('invalidPostcode');
   }),
 
   emptyCustomer: Ember.computed.empty('customer'),

@@ -1,11 +1,11 @@
-{{#if customer.customerType}}
+{{#if customer}}
 
   {{#btn/btn-default class="btn-danger btn-sm" action="removeCustomer"}}
     REMOVE CUSTOMER
   {{/btn/btn-default}}
 
   <div class="gutter-top-bottom bottom-divider">
-    {{component (concat 'inline-customer-input/selected/' customer.customerType) customer=customer}}
+    {{component (concat 'inline-customer-input/selected/' customer.constructor.modelName) customer=customer}}
   </div>
 
 {{else}}
