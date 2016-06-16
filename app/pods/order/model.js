@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { belongsTo, hasMany } from 'ember-data/relationships';
+import { hasMany } from 'ember-data/relationships';
 import Ember from 'ember';
 
 export default Model.extend({
@@ -9,7 +9,6 @@ export default Model.extend({
   notes: attr('string'),
 
   orderItems: hasMany('order-item'),
-  customer: belongsTo('customer', { polymorphic: true }),
 
   total: Ember.computed('orderItems.@each.quantity', 'orderItems.@each.total', function() {
     return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('total'), 0);
