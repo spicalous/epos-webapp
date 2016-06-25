@@ -6,7 +6,7 @@ export default Customer.extend({
   name: attr('string', { defaultValue: '' }),
 
   /**
-   *  For take away customers - telephone is not required
+   *  For take away customers - telephone is not required if empty
    *  @override
    */
   invalidTelephone: Ember.computed('invalidTakeAwayTelephoneReason', function() {
@@ -16,7 +16,7 @@ export default Customer.extend({
   invalidTakeAwayTelephoneReason: Ember.computed('telephone', function() {
     let telephone = this.get('telephone');
 
-    return (!telephone || telephone.trim()) ? '' : this.get('invalidTelephoneReason');
+    return (!telephone || !telephone.trim()) ? '' : this.get('invalidTelephoneReason');
   })
 
 });
