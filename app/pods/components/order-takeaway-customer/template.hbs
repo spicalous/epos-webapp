@@ -1,1 +1,5 @@
-TAKE AWAY {{#if customer.name}} - {{customer.name}} {{/if}}
+{{#if customer.name}}
+  {{customer.name}}
+{{else}}
+  TAKE AWAY
+{{/if}}

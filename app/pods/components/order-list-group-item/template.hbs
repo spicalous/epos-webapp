@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-xs-12">
-    Ordered at {{format-date-time order.dateTime}}
+    {{component (concat "order-" order.customer.customerType) customer=order.customer}}
   </div>
   <div class="col-xs-12">
     £{{format-currency order.total}}
     {{format-payment-method order.paymentMethod}}
   </div>
   <div class="col-xs-12">
-    {{component (concat "order-" order.customer.content.constructor.modelName) customer=order.customer}}
+    Ordered at {{format-date-time order.dateTime}}
   </div>
 </div>
 
