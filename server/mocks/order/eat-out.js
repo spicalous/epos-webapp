@@ -16,7 +16,7 @@ module.exports = function(app) {
 
   ordersRouter.get('/', function(req, res) {
     res.send({
-      "orders":[
+      "order/eatOuts":[
         {
           "id":0,
           "dateTime":"2016-03-09T00:07:56.495Z",
@@ -103,5 +103,5 @@ module.exports = function(app) {
 //    res.status(204).end();
 //  });
 
-  app.use('/EPOSDataService/api/orders', ordersRouter);
+  app.use('/EPOSDataService/api/order/eatOuts', ordersRouter);
 };
