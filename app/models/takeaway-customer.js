@@ -1,5 +1,5 @@
-import Ember from 'ember';
 import Customer from './customer';
+import Ember from 'ember';
 import attr from 'ember-data/attr';
 
 export default Customer.extend({

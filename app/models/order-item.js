@@ -1,26 +1,28 @@
-import DS from 'ember-data';
+import Ember from 'ember';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-  quantity: DS.attr('number'),
-  menuItem: DS.belongsTo('menu-item'),
-  editOptions: DS.hasMany('edit-option'),
+export default Model.extend({
+  quantity: attr('number'),
+  menuItem: belongsTo('menu-item'),
+  editOptions: hasMany('edit-option'),
 
-  total: function() {
+  total: Ember.computed('quantity', 'menuItem', 'editOptions.[]', function() {
     return this.get('quantity') * (this.get('menuItem.price') + this.get('editOptionTotal'));
-  }.property('quantity', 'menuItem', 'editOptions.[]'),
+  }),
 
-  editOptionTotal: function() {
-    return this.get('editOptions').reduce(
-      function(prev, item) {
-        return prev + item.get('price');
-      }, 0);
-  }.property('editOptions.[]'),
+  editOptionTotal: Ember.computed('editOptions.[]', function() {
+    return this.get('editOptions').reduce(function(prev, item) {
+      return prev + item.get('price');
+    }, 0);
+  }),
 
-  isMenuItem: function(menuItem) {
+  isMenuItem(menuItem) {
     return this.get('menuItem').get('id') === menuItem.get('id');
   },
 
-  hasNoEditOptions: function() {
+  hasNoEditOptions() {
     return this.get('editOptions').get('length') === 0;
   }
 

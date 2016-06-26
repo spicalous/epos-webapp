@@ -1,11 +1,14 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { hasMany } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-  menuId: DS.attr('string'),
-  name: DS.attr('string'),
-  description: DS.attr('string'),
-  price: DS.attr('number'),
-  emphasisOnPrint: DS.attr('boolean'),
-  categories: DS.hasMany('category'),
-  editCategories: DS.hasMany('edit-category')
+export default Model.extend({
+  menuId: attr('string'),
+  name: attr('string'),
+  description: attr('string'),
+  price: attr('number'),
+  emphasisOnPrint: attr('boolean'),
+
+  categories: hasMany('category'),
+  editCategories: hasMany('edit-category')
 });

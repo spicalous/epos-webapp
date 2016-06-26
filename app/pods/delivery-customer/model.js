@@ -1,12 +1,11 @@
 import Customer from 'talaythai-webapp/models/customer';
-import DS from 'ember-data';
 import Ember from 'ember';
-
+import attr from 'ember-data/attr';
 
 export default Customer.extend({
-  addressOne: DS.attr('string', { defaultValue: '' }),
-  addressTwo: DS.attr('string', { defaultValue: '' }),
-  postcode: DS.attr('string', { defaultValue: '' }),
+  addressOne: attr('string', { defaultValue: '' }),
+  addressTwo: attr('string', { defaultValue: '' }),
+  postcode: attr('string', { defaultValue: '' }),
 
   address: Ember.computed('addressOne', 'addressTwo', function() {
     let addressOne = this.get('addressOne') ? this.get('addressOne').trim() : '';
@@ -45,5 +44,6 @@ export default Customer.extend({
       return 'Postcode must not be more than 10 characters.';
     }
     return '';
-  }),
+  })
+
 });

@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   content: null,
   selectedValue: null,
 
-  didInitAttrs(_attrs) {
+  didInitAttrs(attrs) { // jshint ignore:line
     this._super(...arguments);
     var content = this.get('content');
 
