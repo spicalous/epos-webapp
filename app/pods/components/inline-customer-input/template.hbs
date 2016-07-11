@@ -15,9 +15,17 @@
       SELECT CUSTOMER
     {{/btn/btn-default}}
     <ul class="dropdown-menu">
-      <li><a class="lead"{{action "createCustomer" "takeaway-customer"}}>Take away</a></li>
+      <li>
+        <a class="lead"{{action "selectTakeaway"}}>Take away</a>
+      </li>
       <li role="separator" class="divider"></li>
-      <li><a class="lead"{{action "createCustomer" "delivery-customer"}}>Delivery</a></li>
+      <li>
+        <a class="lead"{{action "selectDelivery"}}>Delivery</a>
+      </li>
+      <li role="separator" class="divider"></li>
+      <li>
+        <a class="lead"{{action "selectEatIn"}}>Eat in</a>
+      </li>
     </ul>
   </div>
 

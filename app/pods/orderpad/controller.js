@@ -26,10 +26,14 @@ export default Ember.Controller.extend({
   numpadValue: '',
 
   /**
-   * boolean dependant on the visibility of the customer browser
    * @type {boolean}
    */
   showCustomerBrowser: false,
+
+  /**
+   * @type {boolean}
+   */
+  showTableBrowser: false,
 
   /**
    * @type {Array[]}
@@ -93,13 +97,17 @@ export default Ember.Controller.extend({
       });
     },
 
-    createCustomer(type) {
-      let customer = this.store.createRecord(type);
-      this.set('customer', customer);
+    selectTakeaway() {
+      this.set('customer', this.store.createRecord('takeaway-customer'));
+    },
 
-      if (type === 'delivery-customer') {
-        this.send('showCustomerBrowser');
-      }
+    selectDelivery() {
+      this.set('customer', this.store.createRecord('delivery-customer'));
+      this.set('showCustomerBrowser', true);
+    },
+
+    selectEatIn() {
+      this.set('showTableBrowser', true);
     },
 
     removeCustomer() {
@@ -111,21 +119,13 @@ export default Ember.Controller.extend({
       this.set('customer', null);
     },
 
-    showCustomerBrowser() {
-      this.set('showCustomerBrowser', true);
-    },
-
-    hideCustomerBrowser() {
-      this.set('showCustomerBrowser', false);
-    },
-
     cancelCustomerBrowser() {
       this.send('removeCustomer');
       this.set('showCustomerBrowser', false);
     },
 
     selectCustomer(deliveryCustomer) {
-      this.send('hideCustomerBrowser');
+      this.set('showCustomerBrowser', false);
       this.send('removeCustomer');
       this.set('customer', deliveryCustomer);
     },
@@ -137,7 +137,7 @@ export default Ember.Controller.extend({
 
       customer.save().then(() => {
         this.send('dismissMessage', 'loader');
-        this.send('hideCustomerBrowser');
+        this.set('showCustomerBrowser', false);
         this.send('showMessage', 'toast', {
           body: 'Customer saved successfully'
         });
@@ -212,5 +212,6 @@ export default Ember.Controller.extend({
       this.set('deliveryCustomerResults', '');
       Ember.$('#orderpad-modal').modal('hide');
     }
+
   }
 });

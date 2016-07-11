@@ -6,12 +6,20 @@ export default Ember.Component.extend({
 
   actions: {
 
-    createCustomer(type) {
-      this.sendAction('createCustomer', type);
+    selectTakeaway() {
+      this.get('selectTakeaway')();
+    },
+
+    selectDelivery() {
+      this.get('selectDelivery')();
+    },
+
+    selectEatIn() {
+      this.get('selectEatIn')();
     },
 
     removeCustomer() {
-      this.sendAction('removeCustomer');
+      this.get('removeCustomer')();
     }
 
   }
