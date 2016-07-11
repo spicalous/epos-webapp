@@ -32,8 +32,8 @@ export default Ember.Route.extend({
     Ember.$('#orderpad-orderlist').outerHeight(windowHeight - (
         Ember.$('#orderpad-customer').outerHeight() +
         Ember.$('#orderpad-bottom').outerHeight()));
-    Ember.$('#customer-browser-bottom').outerHeight(windowHeight -
-        Ember.$('#customer-browser-top').outerHeight());
+    Ember.$('.customer-browser_bottom').outerHeight(windowHeight -
+        Ember.$('.customer-browser_top').outerHeight());
     Ember.$('#confirm-order-list').outerHeight(windowHeight - (
         Ember.$('#confirm-order-list-header').outerHeight() +
         Ember.$('#confirm-order-bottom').outerHeight()));
