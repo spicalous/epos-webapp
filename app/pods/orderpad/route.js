@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import config from '../../config/environment';
 
 export default Ember.Route.extend({
 
@@ -13,17 +12,9 @@ export default Ember.Route.extend({
     });
   },
 
-  NAV_HEIGHT: 50,
-
   handleResize() {
-    const NAV_BAR_ENABLED = config.APP.NAV_BAR_ENABLED;
     let windowHeight = Ember.$(window).height();
     let windowWidth = Ember.$(window).width();
-
-    if (NAV_BAR_ENABLED) {
-      this.notifyPropertyChange('NAV_HEIGHT'); //recalculate window.height
-      windowHeight = windowHeight - this.get('NAV_HEIGHT');
-    }
 
     if (windowWidth < 768) {
       Ember.$('#orderpad-menu').height(windowHeight - (

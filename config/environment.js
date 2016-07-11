@@ -18,9 +18,7 @@ module.exports = function(environment) {
 
     APP: {
       name: 'Talay Thai WebPOS',
-      version: package.version,
-
-      NAV_BAR_ENABLED: false,
+      version: package.version
     }
   };
 

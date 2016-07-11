@@ -3,10 +3,6 @@ import config from '../../config/environment';
 
 export default Ember.Controller.extend({
 
-  featureFlags: {
-    NAV_BAR_ENABLED: config.APP.NAV_BAR_ENABLED
-  },
-
   /**
    * @type {Customer}
    * @see {@link models/customer}
