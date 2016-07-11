@@ -124,7 +124,7 @@ export default Ember.Controller.extend({
       this.set('showCustomerBrowser', false);
     },
 
-    selectCustomer(deliveryCustomer) {
+    selectDeliveryCustomer(deliveryCustomer) {
       this.set('showCustomerBrowser', false);
       this.send('removeCustomer');
       this.set('customer', deliveryCustomer);

@@ -115,7 +115,7 @@
             {{#if deliveryCustomerResults}}
               <ul class="list-group">
                 {{#each deliveryCustomerResults as |customer|}}
-                  {{delivery-customer-list-item customer=customer onClick=(action "selectCustomer" customer)}}
+                  {{delivery-customer-list-item customer=customer onClick=(action "selectDeliveryCustomer" customer)}}
                 {{/each}}
               </ul>
             {{else}}

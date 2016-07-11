@@ -138,7 +138,7 @@ export default Ember.Component.extend({
       this.set('customer.postcode', postcode);
     },
 
-    selectCustomer(customer) {
+    selectDeliveryCustomer(customer) {
       this.get('onCustomerSelected')(customer);
     },
 
