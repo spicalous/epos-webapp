@@ -9,6 +9,10 @@
       cancel=(action "cancelCustomerBrowser")}}
 {{/if}}
 
+{{#if showTableBrowser}}
+  {{table-browser store=store}}
+{{/if}}
+
 <div class="container-fluid" id="orderpad">
   <div class="row">
 
