@@ -1,12 +1,18 @@
 import Ember from 'ember';
 
+const addressSuggestionSelector = '#addressSuggestionDropdownTrigger';
+const postcodeSuggestionSelector = '#postcodeSuggestionDropdownTrigger';
+
 export default Ember.Component.extend({
 
   didInsertElement() {
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      Ember.$('#postcodeSuggestionDropdownTrigger').on('click tap', (event) => event.stopImmediatePropagation());
-      Ember.$('#addressSuggestionDropdownTrigger').on('click tap', (event) => event.stopImmediatePropagation());
-    });
+    this.$(addressSuggestionSelector).on('click tap', (event) => event.stopImmediatePropagation());
+    this.$(postcodeSuggestionSelector).on('click tap', (event) => event.stopImmediatePropagation());
+  },
+
+  willDestroyElement() {
+    this.$(addressSuggestionSelector).off();
+    this.$(postcodeSuggestionSelector).off();
   },
 
   canSaveCustomer: Ember.computed('validCustomer', 'emptySearchResults', 'debouncedSearch', function() {
@@ -67,16 +73,16 @@ export default Ember.Component.extend({
   },
 
   roadSuggestionSearch: Ember.observer('customer', 'customer.addressTwo', function() {
-    const trigger = Ember.$('#addressSuggestionDropdownTrigger');
     const debounceId = 'debouncedAddressTwoSuggestion';
+    const trigger = this.$(addressSuggestionSelector);
     let addressTwo = this.get('customer.addressTwo') ? this.get('customer.addressTwo').trim() : '';
 
     this.suggestionSearch(trigger, debounceId, 'road', { road: addressTwo }, () => addressTwo && addressTwo.length > 1, 'dontSuggestRoad');
   }),
 
   postcodeSuggestionSearch: Ember.observer('customer', 'customer.postcode', function() {
-    const trigger = Ember.$('#postcodeSuggestionDropdownTrigger');
     const debounceId = 'debouncedPostcodeSuggestion';
+    const trigger = this.$(postcodeSuggestionSelector);
     let postcode = this.get('customer.postcode') ? this.get('customer.postcode').trim() : '';
 
     this.suggestionSearch(trigger, debounceId, 'postcode', { postcode: postcode }, () => postcode && postcode.length > 1, 'dontSuggestPostcode');
@@ -123,17 +129,13 @@ export default Ember.Component.extend({
     },
 
     setAddressTwo(addressTwo) {
-      const dropdownTrigger = Ember.$('#addressSuggestionDropdownTrigger');
-      dropdownTrigger.parent().removeClass('open');
-
+      this.$(addressSuggestionSelector).parent().removeClass('open');
       this.set('dontSuggestRoad', true);
       this.set('customer.addressTwo', addressTwo);
     },
 
     setPostcode(postcode) {
-      const dropdownTrigger = Ember.$('#postcodeSuggestionDropdownTrigger');
-      dropdownTrigger.parent().removeClass('open');
-
+      this.$(postcodeSuggestionSelector).parent().removeClass('open');
       this.set('dontSuggestPostcode', true);
       this.set('customer.postcode', postcode);
     },
@@ -147,5 +149,4 @@ export default Ember.Component.extend({
     },
 
   }
-
 });
