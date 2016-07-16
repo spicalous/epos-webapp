@@ -1,18 +1,17 @@
-<div class="restaurant-table text-center">
+<div class="text-center">
   {{table.tableId}}
 </div>
-<div>
-  Status: {{table.status}}
-</div>
+
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Actions
-    <span class="caret"></span>
+    <span class="status {{table.status}}"></span>
+    {{table.status}}
   </button>
   <ul class="dropdown-menu">
-    <li><a href="#">Order</a></li>
-    <li><a href="#">Bill</a></li>
-    <li><a href="#">Complete</a></li>
+    {{#if isAvailable}}
+      <li><a {{action "selectTable"}}>Select</a></li>
+    {{/if}}
+    <!--<li><a href="#">Bill</a></li>-->
+    <!--<li><a href="#">Complete</a></li>-->
   </ul>
 </div>
-

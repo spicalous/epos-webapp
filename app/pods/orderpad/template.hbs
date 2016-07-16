@@ -10,7 +10,9 @@
 {{/if}}
 
 {{#if showTableBrowser}}
-  {{table-browser store=store}}
+  {{table-browser store=store
+      onTableSelected=(action "selectTable")
+      cancel=(action "cancelTableBrowser")}}
 {{/if}}
 
 <div class="container-fluid" id="orderpad">

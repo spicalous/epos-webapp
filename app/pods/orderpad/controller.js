@@ -114,9 +114,20 @@ export default Ember.Controller.extend({
       this.set('customer', null);
     },
 
+    cancelTableBrowser() {
+      this.send('removeCustomer');
+      this.set('showTableBrowser', false);
+    },
+
     cancelCustomerBrowser() {
       this.send('removeCustomer');
       this.set('showCustomerBrowser', false);
+    },
+
+    selectTable(table) {
+      this.set('showTableBrowser', false);
+      this.send('removeCustomer');
+      this.set('customer', table);
     },
 
     selectDeliveryCustomer(deliveryCustomer) {
@@ -173,8 +184,7 @@ export default Ember.Controller.extend({
           }
         });
 
-        // TODO: work around to remove order items with null ids from the store after
-        //       being saved
+        // TODO: work around to remove order items with null ids from the store after being saved
         this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
 
       }, (response) => {
