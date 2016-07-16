@@ -76,6 +76,27 @@ export default Ember.Controller.extend({
 
   invalidOrder: Ember.computed.or('emptyOrder', 'invalidCustomer'),
 
+  createEatInOrder(baseOrder) {
+    return this.store.createRecord('order/eatIn', {
+      dateTime: new Date(),
+      orderItems: baseOrder.get('orderItems'),
+      paymentMethod: baseOrder.get('paymentMethod'),
+      notes: baseOrder.get('notes'),
+      table: this.get('customer'),
+    });
+  },
+
+  createEatOutOrder(baseOrder) {
+    return this.store.createRecord('order/eatOut', {
+      dateTime: new Date(),
+      orderItems: baseOrder.get('orderItems'),
+      paymentMethod: baseOrder.get('paymentMethod'),
+      notes: baseOrder.get('notes'),
+      customer: this.get('customer'),
+      estimatedTime: this.get('estimatedTime'),
+    });
+  },
+
   actions: {
 
     selectMenuCategory(category) {
@@ -157,17 +178,10 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      let baseOrder = this.get('model.order');
-      let order = this.store.createRecord('order/eatOut', {
-        dateTime: new Date(),
-        customer: this.get('customer'),
-        estimatedTime: this.get('estimatedTime'),
-        orderItems: baseOrder.get('orderItems'),
-        paymentMethod: baseOrder.get('paymentMethod'),
-        notes: baseOrder.get('notes'),
-      });
-
       let modalWasOpen = Ember.$('#orderpad-modal').hasClass('in');
+      let order = this.get('customer.constructor.modelName') === 'table' ?
+        this.createEatInOrder(this.get('model.order')) :
+        this.createEatOutOrder(this.get('model.order'));
 
       Ember.$('#orderpad-modal').modal('hide');
       this.send('showMessage', 'loader', { message: 'Sending order..' });
