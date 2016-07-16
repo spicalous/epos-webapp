@@ -13,12 +13,12 @@ module.exports = function(app) {
         {
           'id': 1,
           'tableId': '2',
-          'status': 'AVAILABLE'
+          'status': 'OCCUPIED'
         },
         {
           'id': 2,
           'tableId': '3',
-          'status': 'AVAILABLE'
+          'status': 'PAYMENT_PENDING'
         },
         {
           'id': 3,
