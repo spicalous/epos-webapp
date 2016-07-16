@@ -10,7 +10,7 @@
 {{/if}}
 
 {{#if showTableBrowser}}
-  {{table-browser store=store
+  {{table-browser tables=tables
       onTableSelected=(action "selectTable")
       cancel=(action "cancelTableBrowser")}}
 {{/if}}

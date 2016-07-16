@@ -42,6 +42,8 @@ export default Ember.Controller.extend({
 
   estimatedTime: 45,
 
+  tables: null,
+
   /**
    * @type {MenuItem[]}
    * menu items sorted by ascending id
@@ -123,6 +125,7 @@ export default Ember.Controller.extend({
     },
 
     selectEatIn() {
+      this.set('tables', this.store.findAll('table'));
       this.set('showTableBrowser', true);
     },
 
