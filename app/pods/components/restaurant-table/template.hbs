@@ -5,13 +5,20 @@
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     <span class="status {{table.status}}"></span>
-    {{table.status}}
+    {{displayStatus}}
   </button>
   <ul class="dropdown-menu">
+
     {{#if isAvailable}}
-      <li><a {{action "selectTable"}}>Select</a></li>
+      <li><a {{action "selectTable"}}>Create order</a></li>
+    {{else}}
+      {{#if isOccupied}}
+        <li><a {{action "requestPayment"}}>Request Bill</a></li>
+      {{else}}
+        <li><a {{action "completeOrder"}}>Complete order</a></li>
+      {{/if}}
+      <li><a {{action "viewOrder"}}>View order</a></li>
     {{/if}}
-    <!--<li><a href="#">Bill</a></li>-->
-    <!--<li><a href="#">Complete</a></li>-->
+
   </ul>
 </div>

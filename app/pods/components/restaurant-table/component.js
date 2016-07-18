@@ -6,18 +6,34 @@ export default Ember.Component.extend({
 
   classNameBindings: ['status'],
 
-  status: Ember.computed('table.status', function() {
-    return this.get('table.status');
+  displayStatus: Ember.computed('table.status', function() {
+    return this.get('table.status').replace('_', ' ');
   }),
 
   isAvailable: Ember.computed('table.status', function() {
-    return this.get('status') === 'AVAILABLE';
+    return this.get('table.status') === 'AVAILABLE';
+  }),
+
+  isOccupied: Ember.computed('table.status', function() {
+    return this.get('table.status') === 'OCCUPIED';
   }),
 
   actions: {
 
     selectTable() {
       this.get('onTableSelected')(this.get('table'));
+    },
+
+    viewOrder() {
+
+    },
+
+    requestPayment() {
+
+    },
+
+    completeOrder() {
+
     }
 
   }
