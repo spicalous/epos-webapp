@@ -25,8 +25,6 @@ Router.map(function() {
 
   this.route('restaurant');
 
-  this.route('table');
-
 });
 
 export default Router;
