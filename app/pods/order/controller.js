@@ -7,11 +7,35 @@ export default Ember.Controller.extend({
 
   ordersSortedByTimestamp: Ember.computed.sort('model', 'sortByTime'),
 
-  _filterByPaymentMethod(orders, paymentMethod) {
-    return orders.filter(function(order) {
-      return order.get('paymentMethod') === paymentMethod;
-    });
-  },
+  cardOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CARD'),
+
+  cashOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CASH'),
+
+  notPaidOrders: Ember.computed.filterBy('model', 'paymentMethod', null),
+
+  totalCard: Ember.computed('model', function() {
+    let cardOrders = this.get('cardOrders');
+
+    return cardOrders.reduce((prev, order) => prev + order.get('total'), 0);
+  }),
+
+  totalCash: Ember.computed('model', function() {
+    let cashOrders = this.get('cashOrders');
+
+    return cashOrders.reduce((prev, order) => prev + order.get('total'), 0);
+  }),
+
+  totalNotPaid: Ember.computed('model', function() {
+    let notPaidOrders = this.get('notPaidOrders');
+
+    return notPaidOrders.reduce((prev, order) => prev + order.get('total'), 0);
+  }),
+
+  totalAll: Ember.computed('model', function() {
+    let orders = this.get('model');
+
+    return orders.reduce((prev, order) => prev + order.get('total'), 0);
+  }),
 
   _getNamespace() {
     let namespace = this.store.adapterFor('application').get('namespace');
@@ -33,33 +57,6 @@ export default Ember.Controller.extend({
         });
       });
   },
-
-  totalCard: Ember.computed('model', function() {
-    let orders = this.get('model');
-    let cardOrders = this._filterByPaymentMethod(orders, 'CARD');
-
-    return cardOrders.reduce((prev, order) => prev + order.get('total'), 0);
-  }),
-
-  totalCash: Ember.computed('model', function() {
-    let orders = this.get('model');
-    let cashOrders = this._filterByPaymentMethod(orders, 'CASH');
-
-    return cashOrders.reduce((prev, order) => prev + order.get('total'), 0);
-  }),
-
-  totalNotPaid: Ember.computed('model', function() {
-    let orders = this.get('model');
-    let notPaidOrders = this._filterByPaymentMethod(orders, null);
-
-    return notPaidOrders.reduce((prev, order) => prev + order.get('total'), 0);
-  }),
-
-  totalAll: Ember.computed('model', function() {
-    let orders = this.get('model');
-
-    return orders.reduce((prev, order) => prev + order.get('total'), 0);
-  }),
 
   actions: {
 
