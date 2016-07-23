@@ -1,10 +1,12 @@
 <div class="table-browser container-fluid">
   <div class="row">
     {{#each tables as |table|}}
-      <div class="col-md-2">
+      <div class="col-sm-4 col-md-3">
         {{restaurant-table table=table onTableSelected=onTableSelected}}
       </div>
     {{/each}}
   </div>
-  {{#btn/btn-default action="cancel"}}Cancel{{/btn/btn-default}}
+  <div class="row">
+    {{#btn/btn-default class="btn-default btn-lg" action="cancel"}}Cancel{{/btn/btn-default}}
+  </div>
 </div>
