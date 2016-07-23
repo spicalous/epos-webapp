@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { ReceiptType } from '../../models/receipt-type';
+import { ReceiptType } from '../../../models/receipt-type';
 
 export default Ember.Controller.extend({
 

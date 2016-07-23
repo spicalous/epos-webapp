@@ -9,7 +9,9 @@ Router.map(function() {
 
   this.route('orderpad');
 
-  this.route('order');
+  this.route('order', function() {
+    this.route('view');
+  });
 
   this.route('delivery-customer', function() {
     this.route('edit', { path: '/:delivery_customer_id' });

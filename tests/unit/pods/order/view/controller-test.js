@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:order', 'Unit | Controller | order', {
+moduleFor('controller:order/view', 'Unit | Controller | order/view', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
