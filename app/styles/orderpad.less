@@ -1,7 +1,7 @@
 @media (max-width: @screen-sm-min) {
 
   #orderpad-menu .list-group {
-    padding-bottom: 55px;
+    padding-bottom: 50px;
   }
 
 }
@@ -30,5 +30,23 @@
     padding: 10px 5px;
     border-left:    none;
     border-right:    none;
+  }
+}
+
+#orderpad {
+
+  .bottom-container {
+    pointer-events: none;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+
+    .btn-orderpad-modal-toggle {
+      pointer-events: initial;
+      margin-bottom: 15px;
+      color: black;
+      box-shadow: 0px 1px 5px -1px black;
+    }
   }
 }
