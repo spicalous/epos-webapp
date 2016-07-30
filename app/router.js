@@ -11,6 +11,7 @@ Router.map(function() {
 
   this.route('order', function() {
     this.route('view');
+    this.route('edit');
   });
 
   this.route('delivery-customer', function() {
