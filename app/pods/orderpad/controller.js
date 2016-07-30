@@ -115,6 +115,10 @@ export default Ember.Controller.extend({
       });
     },
 
+    editItem(orderItem) {
+      this.set('itemToEdit', orderItem);
+    },
+
     selectTakeaway() {
       this.set('customer', this.store.createRecord('takeaway-customer'));
     },

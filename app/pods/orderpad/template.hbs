@@ -62,7 +62,9 @@
       <div id="orderpad-orderlist" class="row scroll-y">
         <div class="col-sm-12">
           <div class="lead">
-            {{order-list order=model.order}}
+            {{order-list
+                orderItems=model.order.orderItems
+                onEditItem=(action "editItem")}}
           </div>
         </div>
       </div>
@@ -145,4 +147,4 @@
   </div>
 {{/orderpad-modal}}
 
-{{edit-item-modal order=model.order editCategories=model.editCategories editOptions=model.editOptions}}
+{{edit-item-modal itemToEdit=itemToEdit editCategories=model.editCategories editOptions=model.editOptions}}

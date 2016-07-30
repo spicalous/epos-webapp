@@ -9,8 +9,8 @@ export default Ember.Component.extend({
   /**
    * Fires when the user selects an item to edit (itemToEdit = orderItem)
    */
-  editItemObserver: Ember.observer('order.itemToEdit', function() {
-    let itemToEdit = this.get('order.itemToEdit');
+  editItemObserver: Ember.observer('itemToEdit', function() {
+    let itemToEdit = this.get('itemToEdit');
 
     if (!itemToEdit) {
       return;
@@ -42,7 +42,7 @@ export default Ember.Component.extend({
     },
 
     editOptionToggle(option) {
-      let editOptions = this.get('order.itemToEdit.editOptions');
+      let editOptions = this.get('itemToEdit.editOptions');
 
       if (editOptions.indexOf(option) === -1) {
         editOptions.pushObject(option);

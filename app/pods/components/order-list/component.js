@@ -18,8 +18,8 @@ export default Ember.Component.extend({
       }
     },
 
-    editItem(orderItem, order) {
-      order.set('itemToEdit', orderItem);
+    onEditItem(orderItem) {
+      this.get('onEditItem')(orderItem);
     }
 
   }
