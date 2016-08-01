@@ -1,13 +1,11 @@
 <div class="container-fluid order-edit">
   <div class="row">
     <div class="col-xs-12 col-sm-7 col-md-8">
-
       <div class="row order-edit__categories">
         {{category-list categories=model.categories
             onCategorySelected=(action "selectCategory")
             selectedCategory=selectedCategory}}
       </div>
-
       <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-8 order-edit__menu"> <!--style="padding:8px"-->
           {{menu-list menu=sortedMenu
@@ -15,7 +13,7 @@
               categoryFilter=selectedCategory
               menuIdFilter=numpadValue}}
         </div>
-        <div class="hidden-xs col-sm-5 col-md-4 order-edit__numpad"><!--position:absolute; bottom:0;-->
+        <div class="hidden-xs col-sm-5 col-md-4 order-edit__numpad">
           <div class="row order-edit__numpad-value">
             <div class="col-xs-12 text-center">
               <span>{{numpadValue}}</span>
@@ -28,7 +26,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="col-sm-5 col-md-4">
       {{outlet}}
