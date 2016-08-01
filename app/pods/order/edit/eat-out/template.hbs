@@ -1,0 +1,18 @@
+<div class="hidden-xs order-edit__eat-out">
+  <div class="row order-edit__eat-out-customer">
+    <div class="col-xs-12">
+      {{inline-customer-input canRemove=false customer=model.customer}}
+    </div>
+  </div>
+
+  <div class="row order-edit__eat-out-order">
+    <div class="col-xs-12 lead">
+      {{order-list
+          orderItems=orderService.items
+          onEditItem=(action "editItem")}}
+    </div>
+  </div>
+</div>
+
+{{edit-item-modal itemToEdit=itemToEdit editCategories=menu.editCategories editOptions=menu.editOptions}}
+

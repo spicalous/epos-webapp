@@ -20,6 +20,8 @@ export default Ember.Controller.extend({
    */
   sortedMenu: Ember.computed.sort('model.menu', (x, y) => x.get('id') - y.get('id')),
 
+  orderService: Ember.inject.service('order'),
+
   actions: {
 
     selectCategory(category) {
@@ -27,9 +29,8 @@ export default Ember.Controller.extend({
     },
 
     addMenuItem(menuItem) {
-      this.get('model.order').addItem(menuItem);
+      this.get('orderService').add(menuItem);
       this.set('numpadValue', '');
-
       this.send('showMessage', 'toast', {
         body: 'Added ' + menuItem.get('name')
       });
