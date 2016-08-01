@@ -17,9 +17,12 @@ export default Ember.Route.extend({
     let windowHeight = Ember.$(window).height();
     let windowWidth = Ember.$(window).width();
     let customerHeight = Ember.$('.order-edit__eat-out-customer').outerHeight();
+    let orderDetails = Ember.$('.order-edit__eat-out-details').outerHeight();
+    let orderActions = Ember.$('.order-edit__eat-out-actions').outerHeight();
 
     if (MAX_MOBILE_WIDTH < windowWidth) {
-      Ember.$('.order-edit__eat-out-order').outerHeight(windowHeight - customerHeight);
+      Ember.$('.order-edit__eat-out-order').outerHeight(windowHeight -
+        (customerHeight + orderDetails + orderActions));
     }
   },
 

@@ -8,7 +8,16 @@ export default Ember.Controller.extend({
 
     editItem(orderItem) {
       this.set('itemToEdit', orderItem);
-    }
+    },
+
+    cancelEdit() {
+      this.get('orderService').clear();
+      this.transitionToRoute('order.view');
+    },
+
+    showConfirmEdit() {
+      console.log('confirm');
+    },
 
   }
 });

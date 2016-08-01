@@ -11,6 +11,14 @@ export default Ember.Service.extend({
     this.set('items', []);
   },
 
+  total: Ember.computed('items.@each.quantity', 'items.@each.total', function() {
+    return this.get('items').reduce((prev, item) => prev + item.get('total'), 0);
+  }),
+
+  size: Ember.computed('items.@each.quantity', function() {
+    return this.get('items').reduce((prev, item) => prev + item.get('quantity'), 0);
+  }),
+
   add(menuItem) {
     let items = this.get('items');
 
@@ -32,6 +40,10 @@ export default Ember.Service.extend({
 
   setItems(items) {
     this.set('items', items);
+  },
+
+  clear() {
+    this.get('items').clear();
   }
 
 });

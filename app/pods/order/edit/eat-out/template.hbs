@@ -12,6 +12,34 @@
           onEditItem=(action "editItem")}}
     </div>
   </div>
+
+  <div class="row order-edit__eat-out-details">
+    <div class="col-xs-6 text-center">
+      <span class="lead">ITEMS: {{orderService.size}}</span>
+    </div>
+    <div class="col-xs-6 text-center">
+      <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
+    </div>
+  </div>
+
+  <div class="row order-edit__eat-out-actions">
+    <div class="col-xs-6 no-padding">
+      {{#btn/btn-confirm class="btn-danger btn-lg"
+          showMessage="showMessage"
+          confirm=(action "cancelEdit")
+          message="All changes will be discarded"}}
+        CANCEL EDIT
+      {{/btn/btn-confirm}}
+    </div>
+    <div class="col-xs-6 no-padding">
+      {{#btn/btn-default class="btn-success btn-lg"
+          action="showConfirmEdit"
+          disabled=invalidOrder}}
+        SUBMIT EDIT
+      {{/btn/btn-default}}
+    </div>
+  </div>
+
 </div>
 
 {{edit-item-modal itemToEdit=itemToEdit editCategories=menu.editCategories editOptions=menu.editOptions}}
