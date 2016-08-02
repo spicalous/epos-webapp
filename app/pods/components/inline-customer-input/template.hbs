@@ -1,7 +1,7 @@
 {{#if customer}}
 
   {{#if canRemove}}
-    {{#btn/btn-default class="btn-danger btn-sm" action="removeCustomer"}}
+    {{#btn/btn-default class="btn-danger btn-sm" action="onRemoveCustomer"}}
       REMOVE CUSTOMER
     {{/btn/btn-default}}
   {{/if}}
@@ -18,15 +18,15 @@
     {{/btn/btn-default}}
     <ul class="dropdown-menu">
       <li>
-        <a class="lead"{{action "selectTakeaway"}}>Take away</a>
+        <a class="lead"{{action "onSelectTakeaway"}}>Take away</a>
       </li>
       <li role="separator" class="divider"></li>
       <li>
-        <a class="lead"{{action "selectDelivery"}}>Delivery</a>
+        <a class="lead"{{action "onSelectDelivery"}}>Delivery</a>
       </li>
       <li role="separator" class="divider"></li>
       <li>
-        <a class="lead"{{action "selectEatIn"}}>Eat in</a>
+        <a class="lead"{{action "onSelectEatIn"}}>Eat in</a>
       </li>
     </ul>
   </div>

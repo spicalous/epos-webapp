@@ -1,0 +1,10 @@
+<div class="row visible-xs order-edit__create-customer-mobile">
+  <div class="col-xs-12">
+    {{inline-customer-input
+        customer=customer
+        onSelectTakeaway=(action "setNewTakeawayCustomer")
+        onSelectDelivery=(action "showCustomerBrowser")
+        onSelectEatIn=(action "showTableBrowser")
+        onRemoveCustomer=(action "removeCustomer")}}
+  </div>
+</div>

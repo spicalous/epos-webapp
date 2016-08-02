@@ -16,20 +16,20 @@ export default Ember.Component.extend({
 
   actions: {
 
-    selectTakeaway() {
-      this.get('selectTakeaway')();
+    onSelectTakeaway() {
+      this.get('onSelectTakeaway')();
     },
 
-    selectDelivery() {
-      this.get('selectDelivery')();
+    onSelectDelivery() {
+      this.get('onSelectDelivery')();
     },
 
-    selectEatIn() {
-      this.get('selectEatIn')();
+    onSelectEatIn() {
+      this.get('onSelectEatIn')();
     },
 
-    removeCustomer() {
-      this.get('removeCustomer')();
+    onRemoveCustomer() {
+      this.get('onRemoveCustomer')();
     }
 
   }
