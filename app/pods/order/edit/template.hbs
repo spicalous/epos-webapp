@@ -7,7 +7,7 @@
             selectedCategory=selectedCategory}}
       </div>
       <div class="row">
-        <div class="col-xs-12 col-sm-7 col-md-8 order-edit__menu"> <!--style="padding:8px"-->
+        <div class="col-xs-12 col-sm-7 col-md-8 order-edit__menu">
           {{menu-list menu=sortedMenu
               onMenuItemClick=(action "addMenuItem")
               categoryFilter=selectedCategory
@@ -32,8 +32,6 @@
     </div>
   </div>
   <div class="order-edit__float-bottom-container">
-    <div class="row">
-      {{outlet "float-bottom-container"}}
-    </div>
+    {{outlet "float-bottom-container"}}
   </div>
 </div>
