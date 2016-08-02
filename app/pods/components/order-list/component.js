@@ -11,11 +11,7 @@ export default Ember.Component.extend({
     },
 
     decrementItem(orderItem) {
-      if (orderItem.get('quantity') === 1) {
-         orderItem.destroyRecord();
-      } else {
-         orderItem.decrementProperty('quantity');
-      }
+      this.get('onDecrementItem')(orderItem);
     },
 
     onEditItem(orderItem) {

@@ -12,7 +12,13 @@ export default Ember.Controller.extend({
       this.set('itemToEdit', orderItem);
     },
 
+    decrementItem(orderItem) {
+      this.get('orderService').decrement(orderItem);
+    },
+
     cancelEdit() {
+      this.get('model').rollbackAttributes();
+      this.get('orderService').invokeRollback();
       this.get('orderService').clear();
       this.transitionToRoute('order.view');
     },

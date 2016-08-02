@@ -6,9 +6,12 @@ export default Ember.Service.extend({
 
   items: null,
 
+  deletedItems: null,
+
   init() {
     this._super(...arguments);
     this.set('items', []);
+    this.set('deletedItems', []);
   },
 
   total: Ember.computed('items.@each.quantity', 'items.@each.total', function() {
@@ -38,12 +41,29 @@ export default Ember.Service.extend({
     }
   },
 
+  decrement(item) {
+    if (2 < item.get('quantity')) {
+      item.decrementProperty('quantity');
+    } else {
+      item.deleteRecord();
+      this.get('items').removeObject(item);
+      this.get('deletedItems').pushObject(item);
+    }
+  },
+
   setItems(items) {
     this.set('items', items);
+    this.get('deletedItems').clear();
   },
 
   clear() {
     this.get('items').clear();
+    this.get('deletedItems').clear();
+  },
+
+  invokeRollback() {
+    this.get('items').invoke('rollbackAttributes');
+    this.get('deletedItems').invoke('rollbackAttributes');
   }
 
 });
