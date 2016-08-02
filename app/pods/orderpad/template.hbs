@@ -112,10 +112,12 @@
   </div>
 </div>
 
-{{#orderpad-modal order=model.order title="Order Items"}}
+{{#orderpad-modal id="orderpad-modal" title="Order Items"}}
   <div class="modal-body" style="padding: 0px;">
     <small>
-      {{order-list order=model.order}}
+      {{order-list
+          orderItems=model.order.orderItems
+          onEditItem=(action "editItem")}}
     </small>
   </div>
   <div class="modal-footer" style="border-top:none;">

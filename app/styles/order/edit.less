@@ -14,6 +14,21 @@
     margin-top: auto;
   }
 
+  .order-edit__float-bottom-container {
+    pointer-events: none;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+
+    .btn-order__modal-toggle {
+      pointer-events: initial;
+      margin-bottom: 15px;
+      color: black;
+      box-shadow: 0px 1px 5px -1px black;
+    }
+  }
+
   .order-edit__eat-out {
 
     .order-edit__eat-out-order {
@@ -24,6 +39,42 @@
       padding-top: @grid-gutter-width;
       padding-bottom: @grid-gutter-width;
       border-top: 1px solid @page-header-border-color;
+    }
+  }
+
+  #order-edit__eat-out-order-modal {
+
+    .modal-header {
+      padding: 12px;
+      border-bottom: none;
+    }
+
+    .modal-body {
+      padding: 0px;
+
+      .list-group {
+        margin-bottom: 0px;
+      }
+    }
+
+    .modal-footer {
+      border-top: none;
+
+      .order-edit__eat-out-order-modal {
+
+        &-details {
+          padding-top: @grid-gutter-width;
+          padding-bottom: @grid-gutter-width;
+        }
+
+        &-cancel {
+          padding-right: 0px;
+        }
+
+        &-submit {
+          padding-left: 0px;
+        }
+      }
     }
   }
 }

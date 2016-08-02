@@ -13,6 +13,13 @@ export default Ember.Route.extend({
     controller.get('orderService').setItems(model.get('orderItems'));
   },
 
+  renderTemplate(controller, model) {
+    this._super(controller, model);
+    this.render('modal-toggle-btn', {
+      outlet: 'float-bottom-container'
+    });
+  },
+
   handleResize() {
     let windowHeight = Ember.$(window).height();
     let windowWidth = Ember.$(window).width();

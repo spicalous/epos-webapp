@@ -32,15 +32,49 @@
       {{/btn/btn-confirm}}
     </div>
     <div class="col-xs-6 no-padding">
-      {{#btn/btn-default class="btn-success btn-lg"
-          action="showConfirmEdit"
-          disabled=invalidOrder}}
+      {{#btn/btn-default class="btn-success btn-lg" action="showConfirmEdit" disabled=invalidOrder}}
         SUBMIT EDIT
       {{/btn/btn-default}}
     </div>
   </div>
-
 </div>
+
+{{#orderpad-modal id=orderModalId title="Order Items"}}
+  <div class="modal-body">
+    <small>
+      {{order-list
+          orderItems=orderService.items
+          onEditItem=(action "editItem")}}
+    </small>
+  </div>
+  <div class="modal-footer">
+    <div class="row {{concat orderModalId "-details"}}">
+      <div class="col-xs-6 text-center">
+        <span class="lead">ITEMS: {{orderService.size}}</span>
+      </div>
+      <div class="col-xs-6 text-center">
+        <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 {{concat orderModalId "-cancel"}}">
+        {{#btn/btn-default class="btn-danger btn-lg" action="cancelEdit"}}
+          CANCEL EDIT
+        {{/btn/btn-default}}
+      </div>
+      <div class="col-xs-6 {{concat orderModalId "-submit"}}">
+        {{#btn/btn-default class="btn-success btn-lg" action="showConfirmEdit" disabled=invalidOrder}}
+          SUBMIT EDIT
+        {{/btn/btn-default}}
+      </div>
+      <div class="col-xs-12">
+        {{#btn/btn-default class="btn-default btn-lg" data-dismiss="modal"}}
+          CLOSE
+        {{/btn/btn-default}}
+      </div>
+    </div>
+  </div>
+{{/orderpad-modal}}
 
 {{edit-item-modal itemToEdit=itemToEdit editCategories=menu.editCategories editOptions=menu.editOptions}}
 
