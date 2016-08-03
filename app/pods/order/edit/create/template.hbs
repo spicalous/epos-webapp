@@ -1,0 +1,167 @@
+<div class="hidden-xs order-edit__create">
+  <div class="row order-edit__create-customer">
+    <div class="col-xs-12">
+      {{inline-customer-input
+          customer=customer
+          onSelectTakeaway=(action "setNewTakeawayCustomer")
+          onSelectDelivery=(action "showCustomerBrowser")
+          onSelectEatIn=(action "showTableBrowser")
+          onRemoveCustomer=(action "removeCustomer")}}
+    </div>
+  </div>
+  <div class="row order-edit__create-order">
+    <div class="col-xs-12 lead">
+      {{order-list
+          orderItems=orderService.items
+          onEditItem=(action "editItem")
+          onDecrementItem=(action "decrementItem")}}
+    </div>
+  </div>
+  <div class="row order-edit__create-details">
+    <div class="col-xs-6 text-center">
+      <span class="lead">ITEMS: {{orderService.size}}</span>
+    </div>
+    <div class="col-xs-6 text-center">
+      <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
+    </div>
+  </div>
+  <div class="row order-edit__create-actions">
+    <div class="col-xs-6 no-padding">
+      {{#btn/btn-confirm class="btn-danger btn-lg"
+      disabled=cannotCancelOrder
+      showMessage="showMessage"
+      confirm=(action "cancelOrder")
+      message="Are you sure you want to cancel?"}}
+        CANCEL ORDER
+      {{/btn/btn-confirm}}
+    </div>
+    <div class="col-xs-6 no-padding">
+      {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}
+        SUBMIT ORDER
+      {{/btn/btn-default}}
+    </div>
+  </div>
+</div>
+
+{{#orderpad-modal id=orderModalId title="Order Items"}}
+  <div class="modal-body">
+    <small>
+      {{order-list
+          orderItems=orderService.items
+          onEditItem=(action "editItem")
+          onDecrementItem=(action "decrementItem")}}
+    </small>
+  </div>
+  <div class="modal-footer">
+    <div class="row {{concat orderModalId "-details"}}">
+      <div class="col-xs-6 text-center">
+        <span class="lead">ITEMS: {{orderService.size}}</span>
+      </div>
+      <div class="col-xs-6 text-center">
+        <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 {{concat orderModalId "-cancel"}}">
+        {{#btn/btn-default class="btn-danger btn-lg" action="cancelOrder"}}
+          CANCEL EDIT
+        {{/btn/btn-default}}
+      </div>
+      <div class="col-xs-6 {{concat orderModalId "-submit"}}">
+        {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}
+          SUBMIT EDIT
+        {{/btn/btn-default}}
+      </div>
+      <div class="col-xs-12">
+        {{#btn/btn-default class="btn-default btn-lg" data-dismiss="modal"}}
+          CLOSE
+        {{/btn/btn-default}}
+      </div>
+    </div>
+  </div>
+{{/orderpad-modal}}
+
+{{edit-item-modal itemToEdit=itemToEdit editCategories=menu.editCategories editOptions=menu.editOptions}}
+
+{{#if showCustomerBrowser}}
+  {{customer-browser store=store customer=customer
+      validCustomer=validCustomer
+      onCustomerSave=(action "saveAndSelectCustomer")
+      onCustomerSelected=(action "selectDeliveryCustomer")
+      cancel=(action "cancelCustomerBrowser")}}
+{{/if}}
+
+{{#if showTableBrowser}}
+  {{table-browser tables=tables
+      onTableSelected=(action "selectTable")
+      cancel=(action "cancelTableBrowser")}}
+{{/if}}
+
+{{#if showConfirmOrder}}
+  <div class="confirm-order">
+    <div class="container-fluid">
+      <div id="confirm-order-list-header" class="row">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10 gutter-top-bottom text-center">
+          <div class="lead">
+            Review order
+          </div>
+        </div>
+      </div>
+      <div id="confirm-order-list" class="row scroll-y gutter-top-bottom">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10 lead">
+          {{order-list
+              orderItems=orderService.items
+              onEditItem=(action "editItem")
+              onDecrementItem=(action "decrementItem")}}
+        </div>
+      </div>
+      <div id="confirm-order-bottom">
+        <div class="row gutter-top-bottom">
+          <div
+              class="col-xs-6 col-sm-offset-1 col-sm-5 text-center gutter-top-bottom top-bottom-border">
+            <span class="lead">ITEMS: {{orderService.size}}</span>
+          </div>
+          <div
+              class="col-xs-6 col-sm-5 text-center gutter-top-bottom top-bottom-border">
+            <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
+          </div>
+        </div>
+        <div class="row gutter-top-bottom">
+          <div class="col-xs-6 col-sm-offset-1 col-sm-5">
+            <div class="lead gutter-top-bottom">
+              Estimate Time ({{format-time computedEstimate}})
+            </div>
+            {{select-component content=estimatedTimes selectedValue=estimatedTime action=(action (mut estimatedTime))}}
+          </div>
+          <div class="col-xs-6 col-sm-5">
+            <div class="lead gutter-top-bottom">
+              Payment Method
+            </div>
+            {{select-component content=paymentMethods selectedValue=paymentMethod action=(action (mut paymentMethod))}}
+          </div>
+        </div>
+        <div class="row gutter-top-bottom">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+            <div class="lead gutter-top-bottom">
+              Notes
+            </div>
+            {{textarea class="form-control" rows="2" value=notes}}
+          </div>
+        </div>
+        <div style="height:20px"></div>
+        <div class="row">
+          <div class="col-xs-6 no-padding">
+            {{#btn/btn-default class="btn-default btn-lg" action="hideConfirmOrder"}}
+              CANCEL
+            {{/btn/btn-default}}
+          </div>
+          <div class="col-xs-6 no-padding">
+            {{#btn/btn-default class="btn-success btn-lg" action="submitOrder" disabled=invalidOrder}}
+              CONFIRM
+            {{/btn/btn-default}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}

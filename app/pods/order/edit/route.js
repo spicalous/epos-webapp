@@ -12,7 +12,8 @@ export default Ember.Route.extend({
     });
   },
 
-  handleResize() {
+  handleEditResize() {
+    console.log('resized parent');
     let windowHeight = Ember.$(window).height();
     let windowWidth = Ember.$(window).width();
     let topContainerHeight = Ember.$('.order-edit__top-container').outerHeight();
@@ -25,15 +26,14 @@ export default Ember.Route.extend({
   },
 
   bindResize: Ember.on('init', function() {
-    Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
+    Ember.$(window).on('resize', Ember.run.bind(this, this.handleEditResize));
   }),
 
   actions: {
 
     didTransition() {
-      Ember.run.scheduleOnce('afterRender', this, () => this.handleResize());
+      Ember.run.scheduleOnce('afterRender', this, this.handleEditResize);
     }
 
   }
-
 });

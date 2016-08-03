@@ -37,15 +37,6 @@
   </div>
 </div>
 
-{{#if showConfirmEdit}}
-  <div class="order-edit__confirm-edit">
-    <div class="row">
-    </div>
-    <div class="row">
-    </div>
-  </div>
-{{/if}}
-
 {{#orderpad-modal id=orderModalId title="Order Items"}}
   <div class="modal-body">
     <small>
@@ -86,3 +77,11 @@
 
 {{edit-item-modal itemToEdit=itemToEdit editCategories=menu.editCategories editOptions=menu.editOptions}}
 
+{{#if showConfirmEdit}}
+  <div class="order-edit__confirm-edit">
+    <div class="row">
+    </div>
+    <div class="row">
+    </div>
+  </div>
+{{/if}}

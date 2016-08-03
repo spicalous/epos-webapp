@@ -42,7 +42,7 @@ export default Ember.Service.extend({
   },
 
   decrement(item) {
-    if (2 < item.get('quantity')) {
+    if (1 < item.get('quantity')) {
       item.decrementProperty('quantity');
     } else {
       item.deleteRecord();

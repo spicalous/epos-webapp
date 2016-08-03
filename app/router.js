@@ -13,6 +13,7 @@ Router.map(function() {
     this.route('view');
     this.route('edit', function() {
       this.route('eat-out', { path: '/:eat_out_id' });
+      this.route('create');
     });
   });
 
