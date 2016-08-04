@@ -98,57 +98,52 @@
 {{/if}}
 
 {{#if showConfirmOrder}}
-  <div class="confirm-order">
-    <div class="container-fluid">
-      <div id="confirm-order-list-header" class="row">
-        <div class="col-xs-12 col-sm-offset-1 col-sm-10 gutter-top-bottom text-center">
-          <div class="lead">
-            Review order
-          </div>
-        </div>
+  <div class="container-fluid create__confirm-order">
+    <div class="row create__confirm-order-header">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 text-center lead">
+        Review order
       </div>
-      <div id="confirm-order-list" class="row scroll-y gutter-top-bottom">
-        <div class="col-xs-12 col-sm-offset-1 col-sm-10 lead">
-          {{order-list
-              orderItems=orderService.items
-              onEditItem=(action "editItem")
-              onDecrementItem=(action "decrementItem")}}
-        </div>
+    </div>
+    <div class="row create__confirm-order-body">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 lead">
+        {{order-list
+            orderItems=orderService.items
+            onEditItem=(action "editItem")
+            onDecrementItem=(action "decrementItem")}}
       </div>
-      <div id="confirm-order-bottom">
-        <div class="row gutter-top-bottom">
-          <div
-              class="col-xs-6 col-sm-offset-1 col-sm-5 text-center gutter-top-bottom top-bottom-border">
+    </div>
+    <div class="row create__confirm-order-footer">
+      <div class="col-xs-12">
+        <div class="row create__confirm-order-details">
+          <div class="col-xs-6 col-sm-offset-1 col-sm-5 text-center create__confirm-order-items">
             <span class="lead">ITEMS: {{orderService.size}}</span>
           </div>
-          <div
-              class="col-xs-6 col-sm-5 text-center gutter-top-bottom top-bottom-border">
+          <div class="col-xs-6 col-sm-5 text-center create__confirm-order-total">
             <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
           </div>
         </div>
-        <div class="row gutter-top-bottom">
+        <div class="row ceate__confirm-order-select">
           <div class="col-xs-6 col-sm-offset-1 col-sm-5">
-            <div class="lead gutter-top-bottom">
+            <div class="lead">
               Estimate Time ({{format-time computedEstimate}})
             </div>
             {{select-component content=estimatedTimes selectedValue=estimatedTime action=(action (mut estimatedTime))}}
           </div>
           <div class="col-xs-6 col-sm-5">
-            <div class="lead gutter-top-bottom">
+            <div class="lead">
               Payment Method
             </div>
             {{select-component content=paymentMethods selectedValue=paymentMethod action=(action (mut paymentMethod))}}
           </div>
         </div>
-        <div class="row gutter-top-bottom">
+        <div class="row create__confirm-order-notes">
           <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-            <div class="lead gutter-top-bottom">
+            <div class="lead">
               Notes
             </div>
             {{textarea class="form-control" rows="2" value=notes}}
           </div>
         </div>
-        <div style="height:20px"></div>
         <div class="row">
           <div class="col-xs-6 no-padding">
             {{#btn/btn-default class="btn-default btn-lg" action="hideConfirmOrder"}}

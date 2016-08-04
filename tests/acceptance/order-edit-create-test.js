@@ -42,7 +42,6 @@ test('Adding an item', function(assert) {
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('ITEMS: 1'));
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('TOTAL: 2.95'));
   });
-
 });
 
 test('Removing an item', function(assert) {
@@ -58,7 +57,6 @@ test('Removing an item', function(assert) {
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('ITEMS: 0'));
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('TOTAL: 0.00'));
   });
-
 });
 
 test('Adding two order items increments to 2', function(assert) {
@@ -74,7 +72,6 @@ test('Adding two order items increments to 2', function(assert) {
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('ITEMS: 2'));
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('TOTAL: 5.90'));
   });
-
 });
 
 test('Deleting an order item with quantity of 2 decrements to 1', function(assert) {
@@ -91,7 +88,6 @@ test('Deleting an order item with quantity of 2 decrements to 1', function(asser
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('ITEMS: 1'));
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('TOTAL: 2.95'));
   });
-
 });
 
 test('Numpad filtering', function(assert) {
@@ -104,7 +100,6 @@ test('Numpad filtering', function(assert) {
     assert.equal(find(MENU_ITEMS).length, 1);
     assert.ok(find('.order-edit__numpad-value').text().trim().startsWith('12'));
   });
-
 });
 
 test('Customer browser is visible', function(assert) {
