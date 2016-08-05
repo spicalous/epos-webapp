@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+  orderService: Ember.inject.service('order'),
+
   /**
    * @type {Category}
    * @see {@link models/category}
@@ -20,8 +22,6 @@ export default Ember.Controller.extend({
    */
   sortedMenu: Ember.computed.sort('model.menu', (x, y) => x.get('id') - y.get('id')),
 
-  orderService: Ember.inject.service('order'),
-
   actions: {
 
     selectCategory(category) {
@@ -35,6 +35,11 @@ export default Ember.Controller.extend({
         body: 'Added ' + menuItem.get('name')
       });
     },
-  }
 
+    reset() {
+      this.set('numpadValue', '');
+      this.set('selectedCategory', null);
+    }
+
+  }
 });

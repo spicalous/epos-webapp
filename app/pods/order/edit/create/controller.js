@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+  editController: Ember.inject.controller('order.edit'),
+
   orderService: Ember.inject.service('order'),
 
   orderModalId: 'order-edit__create-order-modal',
@@ -284,6 +286,7 @@ export default Ember.Controller.extend({
       this.set('notes', null);
       this.set('paymentMethod', null);
       Ember.$(this.get('orderModalSelector')).modal('hide');
+      this.get('editController').send('reset');
     }
   }
 });
