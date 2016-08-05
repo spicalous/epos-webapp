@@ -17,11 +17,14 @@ export default Ember.Route.extend({
     let windowWidth = Ember.$(window).width();
     let topContainerHeight = Ember.$('.order-edit__top-container').outerHeight();
     let categoriesHeight = Ember.$('.order-edit__categories').outerHeight();
+    let $menu = Ember.$('.order-edit__menu');
+    let menuPadding = parseInt($menu.css('padding-top')) + parseInt($menu.css('padding-bottom'));
+
+    $menu.height(windowHeight - (categoriesHeight + topContainerHeight) - (isNaN(menuPadding) ? 0 : menuPadding));
 
     if (MAX_MOBILE_WIDTH < windowWidth) {
       Ember.$('.order-edit__numpad').height(windowHeight - categoriesHeight);
     }
-    Ember.$('.order-edit__menu').height(windowHeight - (categoriesHeight + topContainerHeight));
   },
 
   bindResize: Ember.on('init', function() {
