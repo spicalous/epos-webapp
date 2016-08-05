@@ -6,10 +6,10 @@ moduleForAcceptance('Acceptance | order/edit/create');
 // ### CSS CONSTANTS ###
 const MENU_ITEMS = '.order-edit__menu .list-group-item';
 const CATEGORY_BUTTONS = '.order-edit__categories button';
-const ORDER_ITEMS = '.order-edit__create-order .list-group-item';
-const ORDER_DETAILS = '.order-edit__create-details';
-const ORDER_MODAL_DETAILS = '.order-edit__create-order-modal-details';
-const SELECT_CUSTOMER = '.order-edit__create-customer';
+const ORDER_ITEMS = '.order-edit-create__order .list-group-item';
+const ORDER_DETAILS = '.order-edit-create__details';
+const ORDER_MODAL_DETAILS = '.order-edit-create__order-modal-details';
+const SELECT_CUSTOMER = '.order-edit-create__customer';
 const DELIVERY_CUSTOMER_DROPDOWN = SELECT_CUSTOMER + ' .dropdown > ul > li:nth-child(3) > a';
 // ### END CONSTANTS ###
 
@@ -101,6 +101,16 @@ test('Numpad filtering', function(assert) {
     assert.ok(find('.order-edit__numpad-value').text().trim().startsWith('12'));
   });
 });
+
+//test('Cancel order is disabled with no customer and no order items');
+//test('Cancel order is enabled with customer');
+//test('Cancel order is enabled with order items');
+//
+//test('Submit order order is disabled with no customer');
+//test('Submit order order is disabled with no order items');
+//test('Submit order order is enabled with customer and order items');
+//
+//test('Submitting the order displays confirm submit screen');
 
 test('Customer browser is visible', function(assert) {
   assert.expect(1);
