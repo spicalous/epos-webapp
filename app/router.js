@@ -7,8 +7,6 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
 
-  this.route('orderpad');
-
   this.route('order', function() {
     this.route('view');
     this.route('edit', function() {
