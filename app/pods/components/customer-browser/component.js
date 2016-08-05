@@ -8,6 +8,9 @@ export default Ember.Component.extend({
   didInsertElement() {
     this.$(addressSuggestionSelector).on('click tap', (event) => event.stopImmediatePropagation());
     this.$(postcodeSuggestionSelector).on('click tap', (event) => event.stopImmediatePropagation());
+    Ember.run.scheduleOnce('afterRender', this, () => {
+      Ember.$('.customer-browser_bottom').height(Ember.$(window).height() - Ember.$('.customer-browser_top').outerHeight());
+    });
   },
 
   willDestroyElement() {
