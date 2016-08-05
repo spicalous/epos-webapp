@@ -102,6 +102,21 @@ test('Numpad filtering', function(assert) {
   });
 });
 
+test('Editing an item displays edit options', function(assert) {
+  assert.expect(2);
+
+  visit('/order/edit/create');
+  click(MENU_ITEMS + ':first-child');
+  click('.edit-item-btn');
+  andThen(() => {
+    assert.equal($('#edit-item-modal .active a').text(), "Add Food");
+    assert.equal($('#edit-item-modal .modal-body ul li').length, 5);
+
+    //TODO: After hook
+    click('.edit-item-btn');
+  });
+});
+
 //test('Cancel order is disabled with no customer and no order items');
 //test('Cancel order is enabled with customer');
 //test('Cancel order is enabled with order items');

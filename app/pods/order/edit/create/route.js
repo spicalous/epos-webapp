@@ -7,6 +7,11 @@ export default Ember.Route.extend({
     return Ember.RSVP.Promise.resolve();
   },
 
+  setupController(controller, model) {
+    this._super(controller, model);
+    controller.set('menu', this.modelFor('order/edit'));
+  },
+
   renderTemplate(controller, model) {
     this._super(controller, model);
     this.render('create-order-customer-selector', {
