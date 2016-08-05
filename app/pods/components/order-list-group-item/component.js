@@ -9,6 +9,14 @@ export default Ember.Component.extend({
 
   showOrderItems: false,
 
+  /**
+   *  customer.constructor.modelName (store.createRecord)
+   *  customer.content.constructor.modelName (store.findRecord)
+   */
+  customerType: Ember.computed('order.customer', function() {
+    return this.get('order.customer.constructor.modelName') || this.get('order.customer.content.constructor.modelName');
+  }),
+
   actions: {
 
     toggleShowOrderItems() {
