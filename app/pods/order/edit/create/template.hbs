@@ -63,13 +63,13 @@
     </div>
     <div class="row">
       <div class="col-xs-6 {{concat orderModalId "-cancel"}}">
-        {{#btn/btn-default class="btn-danger btn-lg" action="cancelOrder"}}
-          CANCEL EDIT
+        {{#btn/btn-default class="btn-danger btn-lg" action="cancelOrder" disabled=cannotCancelOrder}}
+          CANCEL ORDER
         {{/btn/btn-default}}
       </div>
       <div class="col-xs-6 {{concat orderModalId "-submit"}}">
         {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}
-          SUBMIT EDIT
+          SUBMIT ORDER
         {{/btn/btn-default}}
       </div>
       <div class="col-xs-12">

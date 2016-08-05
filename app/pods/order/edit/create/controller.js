@@ -6,6 +6,10 @@ export default Ember.Controller.extend({
 
   orderModalId: 'order-edit__create-order-modal',
 
+  orderModalSelector: Ember.computed('orderModalId', function() {
+    return '#' + this.get('orderModalId');
+  }),
+
   /**
    * @type {Customer}
    * @see {@link models/customer}
@@ -43,6 +47,12 @@ export default Ember.Controller.extend({
    * @type {Number}
    */
   estimatedTime: 45,
+
+  /**
+   * notes regarding the order
+   @ @type {null|String}
+   */
+  notes: null,
 
   /**
    * List of tables and status' in the restaurant
@@ -91,12 +101,12 @@ export default Ember.Controller.extend({
     });
   },
 
-  createEatOutOrder(baseOrder) {
+  createEatOutOrder() {
     return this.store.createRecord('order/eatOut', {
       dateTime: new Date(),
-      orderItems: baseOrder.get('orderItems'),
-      paymentMethod: baseOrder.get('paymentMethod'),
-      notes: baseOrder.get('notes'),
+      orderItems: this.get('orderService.items'),
+      paymentMethod: this.get('paymentMethod'),
+      notes: this.get('notes'),
       customer: this.get('customer'),
       estimatedTime: this.get('estimatedTime'),
     });
@@ -214,6 +224,7 @@ export default Ember.Controller.extend({
     },
 
     showConfirmOrder() {
+      Ember.$(this.get('orderModalSelector')).modal('hide');
       this.set('showConfirmOrder', true);
       Ember.run.scheduleOnce('afterRender', this, () => Ember.$(window).resize());
     },
@@ -223,12 +234,12 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      let modalWasOpen = Ember.$('#orderpad-modal').hasClass('in');
+      let modalWasOpen = Ember.$(this.get('orderModalSelector')).hasClass('in');
       let order = this.get('customer.constructor.modelName') === 'table' ?
         this.createEatInOrder() :
         this.createEatOutOrder();
 
-      Ember.$('#orderpad-modal').modal('hide');
+      Ember.$(this.get('orderModalSelector')).modal('hide');
       this.send('showMessage', 'loader', { message: 'Sending order..' });
 
       order.save().then(() => {
@@ -252,7 +263,7 @@ export default Ember.Controller.extend({
           body: response.errors[0].message,
           callback: () => {
             if (modalWasOpen) {
-              Ember.$('#orderpad-modal').modal('show');
+              Ember.$(this.get('orderModalSelector')).modal('show');
             }
           }
         });
@@ -270,7 +281,9 @@ export default Ember.Controller.extend({
       this.send('removeCustomer');
       this.get('orderService').clear();
       this.set('deliveryCustomerResults', '');
-      Ember.$('#orderpad-modal').modal('hide');
+      this.set('notes', null);
+      this.set('paymentMethod', null);
+      Ember.$(this.get('orderModalSelector')).modal('hide');
     }
   }
 });
