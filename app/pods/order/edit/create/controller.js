@@ -215,6 +215,7 @@ export default Ember.Controller.extend({
 
     showConfirmOrder() {
       this.set('showConfirmOrder', true);
+      Ember.run.scheduleOnce('afterRender', this, () => Ember.$(window).resize());
     },
 
     hideConfirmOrder() {
