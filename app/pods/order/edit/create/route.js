@@ -20,18 +20,18 @@ export default Ember.Route.extend({
   handleResize() {
     let windowHeight = Ember.$(window).height();
     let windowWidth = Ember.$(window).width();
-    let confirmHeader = Ember.$('.create__confirm-order-header').outerHeight();
-    let confirmFooter = Ember.$('.create__confirm-order-footer').outerHeight();
+    let confirmHeader = Ember.$('.order-edit-create__confirm-order-header').outerHeight();
+    let confirmFooter = Ember.$('.order-edit-create__confirm-order-footer').outerHeight();
 
     if (MAX_MOBILE_WIDTH < windowWidth) {
-      let customerHeight = Ember.$('.order-edit__create-customer').outerHeight();
-      let orderDetails = Ember.$('.order-edit__create-details').outerHeight();
-      let orderActions = Ember.$('.order-edit__create-actions').outerHeight();
+      let customerHeight = Ember.$('.order-edit-create__customer').outerHeight();
+      let orderDetails = Ember.$('.order-edit-create__details').outerHeight();
+      let orderActions = Ember.$('.order-edit-create__actions').outerHeight();
 
-      Ember.$('.order-edit__create-order').outerHeight(windowHeight -
+      Ember.$('.order-edit-create__order').outerHeight(windowHeight -
         (customerHeight + orderDetails + orderActions));
     }
-    Ember.$('.create__confirm-order-body').outerHeight(windowHeight -
+    Ember.$('.order-edit-create__confirm-order-body').outerHeight(windowHeight -
         (confirmHeader + confirmFooter));
 
   },

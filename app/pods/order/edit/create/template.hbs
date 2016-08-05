@@ -1,6 +1,6 @@
-<div class="hidden-xs order-edit__create">
-  <div class="row order-edit__create-customer">
-    <div class="col-xs-12">
+<div class="hidden-xs order-edit-create">
+  <div class="row order-edit-create__customer">
+    <div class="col-xs-12 no-padding">
       {{inline-customer-input
           customer=customer
           onSelectTakeaway=(action "setNewTakeawayCustomer")
@@ -9,7 +9,7 @@
           onRemoveCustomer=(action "removeCustomer")}}
     </div>
   </div>
-  <div class="row order-edit__create-order">
+  <div class="row order-edit-create__order">
     <div class="col-xs-12 lead">
       {{order-list
           orderItems=orderService.items
@@ -17,7 +17,7 @@
           onDecrementItem=(action "decrementItem")}}
     </div>
   </div>
-  <div class="row order-edit__create-details">
+  <div class="row order-edit-create__details">
     <div class="col-xs-6 text-center">
       <span class="lead">ITEMS: {{orderService.size}}</span>
     </div>
@@ -25,7 +25,7 @@
       <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
     </div>
   </div>
-  <div class="row order-edit__create-actions">
+  <div class="row order-edit-create__actions">
     <div class="col-xs-6 no-padding">
       {{#btn/btn-confirm class="btn-danger btn-lg"
       disabled=cannotCancelOrder
@@ -98,13 +98,13 @@
 {{/if}}
 
 {{#if showConfirmOrder}}
-  <div class="container-fluid create__confirm-order">
-    <div class="row create__confirm-order-header">
+  <div class="container-fluid order-edit-create__confirm-order">
+    <div class="row order-edit-create__confirm-order-header">
       <div class="col-xs-12 col-sm-offset-1 col-sm-10 text-center lead">
         Review order
       </div>
     </div>
-    <div class="row create__confirm-order-body">
+    <div class="row order-edit-create__confirm-order-body">
       <div class="col-xs-12 col-sm-offset-1 col-sm-10 lead">
         {{order-list
             orderItems=orderService.items
@@ -112,17 +112,17 @@
             onDecrementItem=(action "decrementItem")}}
       </div>
     </div>
-    <div class="row create__confirm-order-footer">
+    <div class="row order-edit-create__confirm-order-footer">
       <div class="col-xs-12">
-        <div class="row create__confirm-order-details">
-          <div class="col-xs-6 col-sm-offset-1 col-sm-5 text-center create__confirm-order-items">
+        <div class="row order-edit-create__confirm-order-details">
+          <div class="col-xs-6 col-sm-offset-1 col-sm-5 text-center order-edit-create__confirm-order-items">
             <span class="lead">ITEMS: {{orderService.size}}</span>
           </div>
-          <div class="col-xs-6 col-sm-5 text-center create__confirm-order-total">
+          <div class="col-xs-6 col-sm-5 text-center order-edit-create__confirm-order-total">
             <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
           </div>
         </div>
-        <div class="row ceate__confirm-order-select">
+        <div class="row order-edit-create__confirm-order-select">
           <div class="col-xs-6 col-sm-offset-1 col-sm-5">
             <div class="lead">
               Estimate Time ({{format-time computedEstimate}})
@@ -136,7 +136,7 @@
             {{select-component content=paymentMethods selectedValue=paymentMethod action=(action (mut paymentMethod))}}
           </div>
         </div>
-        <div class="row create__confirm-order-notes">
+        <div class="row order-edit-create__confirm-order-notes">
           <div class="col-xs-12 col-sm-offset-1 col-sm-10">
             <div class="lead">
               Notes

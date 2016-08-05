@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
 
   orderService: Ember.inject.service('order'),
 
-  orderModalId: 'order-edit__create-order-modal',
+  orderModalId: 'order-edit-create__order-modal',
 
   orderModalSelector: Ember.computed('orderModalId', function() {
     return '#' + this.get('orderModalId');

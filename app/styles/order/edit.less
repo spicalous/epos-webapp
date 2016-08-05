@@ -30,9 +30,13 @@
   }
 
 
-  .order-edit__create {
+  .order-edit-create {
 
-    .order-edit__create-order {
+    .order-edit-create__customer {
+      border-bottom: 1px solid @page-header-border-color;
+    }
+
+    .order-edit-create__order {
       .scroll-y;
 
       .list-group-item {
@@ -40,48 +44,51 @@
       }
     }
 
-    .order-edit__create-details {
+    .order-edit-create__details {
       padding-top: @grid-gutter-width;
       padding-bottom: @grid-gutter-width;
       border-top: 1px solid @page-header-border-color;
     }
   }
 
-  .create__confirm-order-header {
-    padding-top: @grid-gutter-width;
-    padding-bottom: @grid-gutter-width;
-  }
+  .order-edit-create__confirm-order {
 
-  .create__confirm-order-body {
-    .scroll-y;
-    padding-bottom: @grid-gutter-width;
-  }
-
-  .create__confirm-order-footer {
-    padding-top: @grid-gutter-width;
-
-    .create__confirm-order-details {
+    .order-edit-create__confirm-order-header {
       padding-top: @grid-gutter-width;
       padding-bottom: @grid-gutter-width;
+    }
 
-      .create__confirm-order-items,
-      .create__confirm-order-total {
+    .order-edit-create__confirm-order-body {
+      .scroll-y;
+      padding-bottom: @grid-gutter-width;
+    }
+
+    .order-edit-create__confirm-order-footer {
+      padding-top: @grid-gutter-width;
+
+      .order-edit-create__confirm-order-details {
         padding-top: @grid-gutter-width;
         padding-bottom: @grid-gutter-width;
-        border-top: 1px solid @page-header-border-color;
-        border-bottom: 1px solid @page-header-border-color;
+
+        .order-edit-create__confirm-order-items,
+        .order-edit-create__confirm-order-total {
+          padding-top: @grid-gutter-width;
+          padding-bottom: @grid-gutter-width;
+          border-top: 1px solid @page-header-border-color;
+          border-bottom: 1px solid @page-header-border-color;
+        }
       }
-    }
 
-    .create__confirm-order-select {
-      padding-top: @grid-gutter-width;
-      padding-bottom: @grid-gutter-width;
-    }
+      .order-edit-create__confirm-order-select {
+        padding-top: @grid-gutter-width;
+        padding-bottom: @grid-gutter-width;
+      }
 
-    .create__confirm-order-notes {
-      margin-bottom: 25px;
-      padding-top: @grid-gutter-width;
-      padding-bottom: @grid-gutter-width;
+      .order-edit-create__confirm-order-notes {
+        margin-bottom: 25px;
+        padding-top: @grid-gutter-width;
+        padding-bottom: @grid-gutter-width;
+      }
     }
   }
 
@@ -103,6 +110,7 @@
     }
   }
 
+  #order-edit-create__order-modal,
   #order-edit__eat-out-order-modal {
 
     .modal-header {
@@ -121,6 +129,7 @@
     .modal-footer {
       border-top: none;
 
+      .order-edit-create__order-modal,
       .order-edit__eat-out-order-modal {
 
         &-details {
