@@ -285,6 +285,7 @@ export default Ember.Controller.extend({
       this.set('deliveryCustomerResults', '');
       this.set('notes', null);
       this.set('paymentMethod', null);
+      this.set('estimatedTime', 45);
       Ember.$(this.get('orderModalSelector')).modal('hide');
       this.get('editController').send('reset');
     }
