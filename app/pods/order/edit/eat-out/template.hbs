@@ -1,10 +1,10 @@
 <div class="hidden-xs order-edit__eat-out">
-  <div class="row order-edit__eat-out-customer">
+  <div class="row order-edit-eat-out__customer">
     <div class="col-xs-12">
       {{inline-customer-input canRemove=false customer=model.customer}}
     </div>
   </div>
-  <div class="row order-edit__eat-out-order">
+  <div class="row order-edit-eat-out__order">
     <div class="col-xs-12 lead">
       {{order-list
           orderItems=orderService.items
@@ -12,7 +12,7 @@
           onDecrementItem=(action "decrementItem")}}
     </div>
   </div>
-  <div class="row order-edit__eat-out-details">
+  <div class="row order-edit-eat-out__details">
     <div class="col-xs-6 text-center">
       <span class="lead">ITEMS: {{orderService.size}}</span>
     </div>
@@ -20,7 +20,7 @@
       <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
     </div>
   </div>
-  <div class="row order-edit__eat-out-actions">
+  <div class="row order-edit-eat-out__actions">
     <div class="col-xs-6 no-padding">
       {{#btn/btn-confirm class="btn-danger btn-lg"
           showMessage="showMessage"

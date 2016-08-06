@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
 
   orderService: Ember.inject.service('order'),
 
-  orderModalId: 'order-edit__eat-out-order-modal',
+  orderModalId: 'order-edit-eat-out__order-modal',
 
   actions: {
 

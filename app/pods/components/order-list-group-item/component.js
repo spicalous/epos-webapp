@@ -19,6 +19,10 @@ export default Ember.Component.extend({
 
   actions: {
 
+    editOrder() {
+      this.get('onEditOrder')(this.get('order.id'));
+    },
+
     toggleShowOrderItems() {
       this.toggleProperty('showOrderItems');
     },

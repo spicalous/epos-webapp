@@ -72,6 +72,10 @@ export default Ember.Controller.extend({
     printOrderSummary() {
       let url = [this._getNamespace(), 'order-summary'].join('/');
       this._getRequest(url, 'Printing summary', 'Summary printed successfully', 'Summary failed to print');
+    },
+
+    editOrder(orderId) {
+      this.transitionToRoute('order.edit.eat-out', orderId);
     }
 
   }
