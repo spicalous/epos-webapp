@@ -78,10 +78,18 @@
 {{edit-item-modal itemToEdit=itemToEdit editCategories=menu.editCategories editOptions=menu.editOptions}}
 
 {{#if showConfirmEdit}}
-  <div class="order-edit__confirm-edit">
+  <div class="order-edit-eat-out__confirm-edit">
     <div class="row">
-    </div>
-    <div class="row">
+      <div class="col-xs-6 no-padding">
+        {{#btn/btn-default class="btn-default btn-lg" action="hideConfirmEdit"}}
+          CANCEL
+        {{/btn/btn-default}}
+      </div>
+      <div class="col-xs-6 no-padding">
+        {{#btn/btn-default class="btn-success btn-lg" action="submitConfirmEdit" disabled=invalidOrder}}
+          CONFIRM EDIT
+        {{/btn/btn-default}}
+      </div>
     </div>
   </div>
 {{/if}}

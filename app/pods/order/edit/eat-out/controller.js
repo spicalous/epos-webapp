@@ -16,16 +16,24 @@ export default Ember.Controller.extend({
       this.get('orderService').decrement(orderItem);
     },
 
+    showConfirmEdit() {
+      this.set('showConfirmEdit', true);
+    },
+
+    hideConfirmEdit() {
+      this.set('showConfirmEdit', false);
+    },
+
+    submitConfirmEdit() {
+
+    },
+
     cancelEdit() {
       this.get('model').rollbackAttributes();
       this.get('orderService').invokeRollback();
       this.get('orderService').clear();
       this.transitionToRoute('order.view');
-    },
-
-    showConfirmEdit() {
-      console.log('confirm');
-    },
+    }
 
   }
 });

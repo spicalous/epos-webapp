@@ -45,7 +45,8 @@ a, a:focus, a:hover, a:active, a:visited {
 @zindex-table-browser: @zindex-toast + 1;
 @zindex-customer-browser: @zindex-table-browser + 1;
 @zindex-confirm-order: @zindex-customer-browser + 1;
-@zindex-confirm-dialog-backdrop: @zindex-confirm-order + 1;
+@zindex-confirm-edit: @zindex-confirm-order + 1;
+@zindex-confirm-dialog-backdrop: @zindex-confirm-edit + 1;
 @zindex-confirm-dialog: @zindex-confirm-dialog-backdrop + 1;
 @zindex-overlay: @zindex-confirm-dialog + 1;
 
@@ -92,12 +93,6 @@ a, a:focus, a:hover, a:active, a:visited {
   .fixed-fullscreen;
   background: rgba(0, 0, 0, 0.4);
   z-index: @zindex-confirm-dialog-backdrop;
-}
-
-.order-edit-create__confirm-order {
-  .fixed-fullscreen;
-  background: rgba(255, 255, 255, 1);
-  z-index: @zindex-confirm-order;
 }
 
 .customer-browser {
