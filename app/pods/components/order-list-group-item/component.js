@@ -17,6 +17,10 @@ export default Ember.Component.extend({
     return this.get('order.customer.constructor.modelName') || this.get('order.customer.content.constructor.modelName');
   }),
 
+  orderType: Ember.computed('order', function() {
+    return this.get('order.constructor.modelName');
+  }),
+
   actions: {
 
     editOrder() {
@@ -29,12 +33,16 @@ export default Ember.Component.extend({
 
     printOrderAsEatIn() {
       let id = this.get('order.id');
-      this.get('onPrintOrder')(id, ReceiptType.EAT_IN);
+      let orderType = this.get('orderType');
+
+      this.get('onPrintOrder')(id, orderType, ReceiptType.EAT_IN);
     },
 
     printOrderAsDelivery() {
       let id = this.get('order.id');
-      this.get('onPrintOrder')(id, ReceiptType.DELIVERY);
+      let orderType = this.get('orderType');
+
+      this.get('onPrintOrder')(id, orderType, ReceiptType.DELIVERY);
     }
   }
 });
