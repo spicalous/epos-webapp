@@ -49,7 +49,29 @@ export default Ember.Controller.extend({
     },
 
     submitConfirmEdit() {
+      this.send('showMessage', 'loader', { message: 'Sending order..' });
 
+      this.get('model').save().then(() => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
+          header: 'Confirmed ^.^',
+          body: 'Order edited successfully',
+          callback: () => {
+            this.send('hideConfirmOrder');
+            this.transitionToRoute('order.view');
+          }
+        });
+
+        // TODO: work around to remove order items with null ids from the store after being saved
+        this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
+
+      }, (response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
+          header: 'Failed :(',
+          body: response.errors[0].message
+        });
+      });
     },
 
     cancelEdit() {

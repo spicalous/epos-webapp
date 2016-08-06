@@ -235,12 +235,10 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      let modalWasOpen = Ember.$(this.get('orderModalSelector')).hasClass('in');
       let order = this.get('customer.constructor.modelName') === 'table' ?
         this.createEatInOrder() :
         this.createEatOutOrder();
 
-      Ember.$(this.get('orderModalSelector')).modal('hide');
       this.send('showMessage', 'loader', { message: 'Sending order..' });
 
       order.save().then(() => {
@@ -261,12 +259,7 @@ export default Ember.Controller.extend({
         this.send('dismissMessage', 'loader');
         this.send('showMessage', 'overlay', {
           header: 'Failed :(',
-          body: response.errors[0].message,
-          callback: () => {
-            if (modalWasOpen) {
-              Ember.$(this.get('orderModalSelector')).modal('show');
-            }
-          }
+          body: response.errors[0].message
         });
       });
     },
