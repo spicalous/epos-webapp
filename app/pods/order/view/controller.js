@@ -70,9 +70,8 @@ export default Ember.Controller.extend({
     },
 
     printOrderSummary() {
-      console.log('TODO');
-//      let url = [this._getNamespace(), 'order-summary'].join('/');
-//      this._getRequest(url, 'Printing summary', 'Summary printed successfully', 'Summary failed to print');
+      let url = [this._getNamespace(), 'order-summary'].join('/');
+      this._getRequest(url, 'Printing summary', 'Summary printed successfully', 'Summary failed to print');
     },
 
     editOrder(orderId) {

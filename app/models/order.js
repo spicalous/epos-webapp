@@ -8,5 +8,13 @@ export default Model.extend({
   paymentMethod: attr('string', { defaultValue: null }),
   notes: attr('string'),
 
-  orderItems: hasMany('order-item')
+  orderItems: hasMany('order-item'),
+
+  /**
+   * used to calculated the total of the order
+   */
+  total: Ember.computed('orderItems.@each.quantity', 'orderItems.@each.total', function() {
+    return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('total'), 0);
+  })
+
 });
