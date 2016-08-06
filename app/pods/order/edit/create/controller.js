@@ -246,12 +246,12 @@ export default Ember.Controller.extend({
 
       order.save().then(() => {
         this.send('dismissMessage', 'loader');
-        this.send('reset');
         this.send('showMessage', 'overlay', {
           header: 'Confirmed ^.^',
           body: 'Order submitted successfully',
           callback: () => {
             this.send('hideConfirmOrder');
+            this.send('reset');
           }
         });
 
