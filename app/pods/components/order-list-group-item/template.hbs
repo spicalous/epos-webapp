@@ -34,7 +34,7 @@
   </div>
 </div>
 
-{{#if showOrderItems}}
+{{#liquid-if showOrderItems class="toDown-toUp"}}
   {{#if order.notes}}
     <div class="row gutter-top-bottom">
       <div class="col-xs-12">
@@ -59,14 +59,17 @@
   <div class="row gutter-top-bottom">
     <div class="col-xs-12">
       {{#btn/btn-default class="btn-default btn-lg" action="toggleShowOrderItems"}}
-        Hide{{/btn/btn-default}}
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      {{/btn/btn-default}}
     </div>
   </div>
 {{else}}
   <div class="row gutter-top-bottom">
     <div class="col-xs-12">
-      {{#btn/btn-default class="btn-default btn-lg" action="toggleShowOrderItems"}}Show{{/btn/btn-default}}
+      {{#btn/btn-default class="btn-default btn-lg" action="toggleShowOrderItems"}}
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      {{/btn/btn-default}}
     </div>
   </div>
-{{/if}}
+{{/liquid-if}}
 
