@@ -1,25 +1,47 @@
 <div class="row">
-  <div class="col-xs-12">
-    {{component (concat "order-" customerType) customer=order.customer}}
+  <div class="col-xs-11">
+    <div class="row">
+      <div class="col-xs-12">
+        {{component (concat "order-" customerType) customer=order.customer}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        £{{format-currency order.total}} {{format-payment-method order.paymentMethod}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        Ordered at {{format-date-time order.dateTime}}
+      </div>
+    </div>
   </div>
-  <div class="col-xs-12">
-    £{{format-currency order.total}}
-    {{format-payment-method order.paymentMethod}}
+
+  <div class="col-xs-1">
+    <div class="btn-group pull-right">
+      {{#btn/btn-default class="btn-default dropdown-toggle order-actions-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
+        <span class="glyphicon glyphicon-option-vertical"></span>
+      {{/btn/btn-default}}
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li><a {{action "printOrderAsEatIn"}}>Print small copy</a></li>
+        <li><a {{action "printOrderAsDelivery"}}>Print large copy</a></li>
+        <!--
+        <li role="separator" class="divider"></li>
+        <li><a {{action "editOrder"}}>Edit order</a></li>
+        -->
+      </ul>
+    </div>
   </div>
-  <div class="col-xs-12">
-    Ordered at {{format-date-time order.dateTime}}
-  </div>
-  {{#btn/btn-default class="btn-primary" action="editOrder"}}EDIT{{/btn/btn-default}}
 </div>
 
 {{#if showOrderItems}}
-  <div class="row gutter-top-bottom">
-    <div class="col-xs-12">
-      {{#if order.notes}}
+  {{#if order.notes}}
+    <div class="row gutter-top-bottom">
+      <div class="col-xs-12">
         {{order.notes}}
-      {{/if}}
+      </div>
     </div>
-  </div>
+  {{/if}}
   <div class="row gutter-top-bottom">
     <div class="col-xs-12">
       <ul class="list-group">
@@ -32,14 +54,6 @@
           </li>
         {{/each}}
       </ul>
-    </div>
-  </div>
-  <div class="row gutter-top-bottom">
-    <div class="col-xs-6">
-      {{#btn/btn-default class="btn-primary" action="printOrderAsEatIn"}}Print small{{/btn/btn-default}}
-    </div>
-    <div class="col-xs-6">
-      {{#btn/btn-default class="btn-primary" action="printOrderAsDelivery"}}Print large{{/btn/btn-default}}
     </div>
   </div>
   <div class="row gutter-top-bottom">
