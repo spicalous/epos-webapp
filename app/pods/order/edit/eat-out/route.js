@@ -23,14 +23,18 @@ export default Ember.Route.extend({
   handleResize() {
     let windowHeight = Ember.$(window).height();
     let windowWidth = Ember.$(window).width();
-    let customerHeight = Ember.$('.order-edit-eat-out__customer').outerHeight();
-    let orderDetails = Ember.$('.order-edit-eat-out__details').outerHeight();
-    let orderActions = Ember.$('.order-edit-eat-out__actions').outerHeight();
+    let confirmHeader = Ember.$('.order-edit-eat-out__confirm-edit-header').outerHeight();
+    let confirmFooter = Ember.$('.order-edit-eat-out__confirm-edit-footer').outerHeight();
 
     if (MAX_MOBILE_WIDTH < windowWidth) {
+      let customerHeight = Ember.$('.order-edit-eat-out__customer').outerHeight();
+      let orderDetails = Ember.$('.order-edit-eat-out__details').outerHeight();
+      let orderActions = Ember.$('.order-edit-eat-out__actions').outerHeight();
       Ember.$('.order-edit-eat-out__order').outerHeight(windowHeight -
         (customerHeight + orderDetails + orderActions));
     }
+    Ember.$('.order-edit-eat-out__confirm-edit-body').outerHeight(windowHeight -
+            (confirmHeader + confirmFooter));
   },
 
   bindResize: Ember.on('init', function() {

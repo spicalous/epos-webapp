@@ -79,16 +79,65 @@
 
 {{#if showConfirmEdit}}
   <div class="order-edit-eat-out__confirm-edit">
-    <div class="row">
-      <div class="col-xs-6 no-padding">
-        {{#btn/btn-default class="btn-default btn-lg" action="hideConfirmEdit"}}
-          CANCEL
-        {{/btn/btn-default}}
+    <div class="row order-edit-eat-out__confirm-edit-header">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 text-center lead">
+        Review edit
       </div>
-      <div class="col-xs-6 no-padding">
-        {{#btn/btn-default class="btn-success btn-lg" action="submitConfirmEdit" disabled=invalidOrder}}
-          CONFIRM EDIT
-        {{/btn/btn-default}}
+    </div>
+    <div class="row order-edit-eat-out__confirm-edit-body">
+      <div class="col-xs-12 col-sm-offset-1 col-sm-10 lead">
+        {{order-list
+            orderItems=orderService.items
+            onEditItem=(action "editItem")
+            onDecrementItem=(action "decrementItem")}}
+      </div>
+    </div>
+    <div class="row order-edit-eat-out__confirm-edit-footer">
+      <div class="col-xs-12">
+        <div class="row order-edit-eat-out__confirm-edit-details">
+          <div
+              class="col-xs-6 col-sm-offset-1 col-sm-5 text-center order-edit-eat-out__confirm-edit-items">
+            <span class="lead">ITEMS: {{orderService.size}}</span>
+          </div>
+          <div
+              class="col-xs-6 col-sm-5 text-center order-edit-eat-out__confirm-edit-total">
+            <span class="lead">TOTAL: {{format-currency orderService.total}}</span>
+          </div>
+        </div>
+        <div class="row oorder-edit-eat-out__confirm-edit-select">
+          <div class="col-xs-6 col-sm-offset-1 col-sm-5">
+            <div class="lead">
+              Estimate Time ({{format-time computedEstimate}})
+            </div>
+            {{select-component content=estimatedTimes selectedValue=model.estimatedTime action=(action (mut model.estimatedTime))}}
+          </div>
+          <div class="col-xs-6 col-sm-5">
+            <div class="lead">
+              Payment Method
+            </div>
+            {{select-component content=paymentMethods selectedValue=model.paymentMethod action=(action (mut model.paymentMethod))}}
+          </div>
+        </div>
+        <div class="row order-edit-eat-out__confirm-edit-notes">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+            <div class="lead">
+              Notes
+            </div>
+            {{textarea class="form-control" rows="2" value=model.notes}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 no-padding">
+            {{#btn/btn-default class="btn-default btn-lg" action="hideConfirmEdit"}}
+              CANCEL
+            {{/btn/btn-default}}
+          </div>
+          <div class="col-xs-6 no-padding">
+            {{#btn/btn-default class="btn-success btn-lg" action="submitConfirmEdit" disabled=invalidOrder}}
+              CONFIRM EDIT
+            {{/btn/btn-default}}
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -6,6 +6,28 @@ export default Ember.Controller.extend({
 
   orderModalId: 'order-edit-eat-out__order-modal',
 
+  orderModalSelector: Ember.computed('orderModalId', function() {
+    return '#' + this.get('orderModalId');
+  }),
+
+  /**
+   * @type {Array[]}
+   */
+  paymentMethods: [null, 'CASH', 'CARD', 'ONLINE'],
+
+  /**
+   * @type {Number[]}
+   */
+  estimatedTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
+
+  /**
+   * Computes the estimated time for delivery
+   * @type {Date}
+   */
+  computedEstimate: Ember.computed('model.estimatedTime', function() {
+    return new Date(Date.now() + (this.get('model.estimatedTime') * 1000 * 60));
+  }),
+
   actions: {
 
     editItem(orderItem) {
@@ -17,7 +39,9 @@ export default Ember.Controller.extend({
     },
 
     showConfirmEdit() {
+      Ember.$(this.get('orderModalSelector')).modal('hide');
       this.set('showConfirmEdit', true);
+      Ember.run.scheduleOnce('afterRender', this, () => Ember.$(window).resize());
     },
 
     hideConfirmEdit() {

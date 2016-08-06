@@ -208,7 +208,6 @@ export default Ember.Controller.extend({
       });
     },
 
-
     /**
      * Sets the current order item to edit
      * @param {OrderItem} orderItem - the order item to edit
