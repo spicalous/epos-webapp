@@ -1,11 +1,11 @@
-<div class="hidden-xs order-edit__eat-out">
+<div class="hidden-xs">
   <div class="row order-edit-eat-out__customer">
     <div class="col-xs-12">
       {{inline-customer-input canRemove=false customer=model.customer}}
     </div>
   </div>
   <div class="row order-edit-eat-out__order">
-    <div class="col-xs-12 lead">
+    <div class="col-xs-12 lead no-padding">
       {{order-list
           orderItems=orderService.items
           onEditItem=(action "editItem")
