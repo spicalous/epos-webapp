@@ -64,14 +64,18 @@ export default Ember.Controller.extend({
      * @param {number} id - id of order to print
      * @param {ReceiptType} receiptType - receipt type for printing
      */
-    printOrder(id, receiptType) {
-      let url = [this._getNamespace(), 'order', receiptType || ReceiptType.EAT_IN, id].join('/');
+    printOrder(id, orderType, receiptType) {
+      let url = [this._getNamespace(), orderType, receiptType || ReceiptType.EAT_IN, id].join('/');
       this._getRequest(url, 'Printing receipt', 'Order printed successfully', 'Order failed to print');
     },
 
     printOrderSummary() {
       let url = [this._getNamespace(), 'order-summary'].join('/');
       this._getRequest(url, 'Printing summary', 'Summary printed successfully', 'Summary failed to print');
+    },
+
+    editOrder(orderId) {
+      this.transitionToRoute('order.edit.eat-out', orderId);
     }
 
   }
