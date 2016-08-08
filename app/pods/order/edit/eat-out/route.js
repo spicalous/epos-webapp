@@ -15,6 +15,9 @@ export default Ember.Route.extend({
 
   renderTemplate(controller, model) {
     this._super(controller, model);
+    this.render('edit-order-customer-selector', {
+      outlet: 'top-container'
+    });
     this.render('modal-toggle-btn', {
       outlet: 'float-bottom-container'
     });
