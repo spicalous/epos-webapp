@@ -62,7 +62,7 @@ export default Ember.Controller.extend({
           }
         });
 
-        // TODO: work around to remove order items with null ids from the store after being saved
+        // TODO: work around to remove embedded records that are not updated when saving the order: to be investigated
         this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
         this.store.peekAll('takeaway-customer').filterBy('id', null).invoke('destroyRecord');
 
