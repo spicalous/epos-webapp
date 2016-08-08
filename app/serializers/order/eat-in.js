@@ -8,6 +8,7 @@ export default RESTSerializer.extend(EmbeddedRecordsMixin, {
     orderItems: {
       embedded: 'always'
     },
+
     table: {
       embedded: 'always'
     }

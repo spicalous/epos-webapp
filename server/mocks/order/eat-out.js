@@ -9,6 +9,7 @@ module.exports = function(app) {
   function addOrder(order) {
     var id = orders.length;
     order.id = id;
+    order.customer.id = id
     orders.push(order);
     return id;
   }
@@ -22,7 +23,7 @@ module.exports = function(app) {
 
   ordersRouter.post('/', function(req, res) {
     success ?
-      res.status(201).send({id:addOrder(req.body)}) :
+      res.status(201).send({id:addOrder(req.body['order/eatOut'])}) :
       res.status(502).send(app.genericError("502", "Printer was not found. Please check that the printer is connected and switched on"));
   });
 

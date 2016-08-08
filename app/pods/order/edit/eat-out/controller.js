@@ -64,6 +64,7 @@ export default Ember.Controller.extend({
 
         // TODO: work around to remove order items with null ids from the store after being saved
         this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
+        this.store.peekAll('takeaway-customer').filterBy('id', null).invoke('destroyRecord');
 
       }, (response) => {
         this.send('dismissMessage', 'loader');
