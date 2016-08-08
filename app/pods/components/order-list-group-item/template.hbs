@@ -56,20 +56,18 @@
       </ul>
     </div>
   </div>
-  <div class="row gutter-top-bottom">
-    <div class="col-xs-12">
+{{/liquid-if}}
+
+<div class="row gutter-top-bottom">
+  <div class="col-xs-12">
+    {{#if showOrderItems}}
       {{#btn/btn-default class="btn-default btn-lg" action="toggleShowOrderItems"}}
         <span class="glyphicon glyphicon-chevron-up"></span>
       {{/btn/btn-default}}
-    </div>
-  </div>
-{{else}}
-  <div class="row gutter-top-bottom">
-    <div class="col-xs-12">
+    {{else}}
       {{#btn/btn-default class="btn-default btn-lg" action="toggleShowOrderItems"}}
         <span class="glyphicon glyphicon-chevron-down"></span>
       {{/btn/btn-default}}
-    </div>
+    {{/if}}
   </div>
-{{/liquid-if}}
-
+</div>
