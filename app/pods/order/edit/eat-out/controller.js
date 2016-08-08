@@ -57,7 +57,7 @@ export default Ember.Controller.extend({
           header: 'Confirmed ^.^',
           body: 'Order edited successfully',
           callback: () => {
-            this.send('hideConfirmOrder');
+            this.send('hideConfirmEdit');
             this.transitionToRoute('order.view');
           }
         });
