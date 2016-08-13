@@ -249,11 +249,12 @@ export default Ember.Controller.extend({
           callback: () => {
             this.send('hideConfirmOrder');
             this.send('reset');
+            // TODO: work around to remove order items with null ids from the store after being saved
+            this.store.peekAll('order-item').filterBy('isNew').invoke('unloadRecord');
+            this.store.peekAll('takeaway-customer').filterBy('isNew').invoke('unloadRecord');
           }
         });
 
-        // TODO: work around to remove order items with null ids from the store after being saved
-        this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
 
       }, (response) => {
         this.send('dismissMessage', 'loader');

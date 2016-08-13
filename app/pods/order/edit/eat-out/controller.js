@@ -59,12 +59,12 @@ export default Ember.Controller.extend({
           callback: () => {
             this.send('hideConfirmEdit');
             this.transitionToRoute('order.view');
+            // TODO: work around to remove embedded records that are not updated when saving the order: to be investigated
+            this.store.peekAll('order-item').filterBy('isNew').invoke('unloadRecord');
+            this.store.peekAll('takeaway-customer').filterBy('isNew').invoke('unloadRecord');
           }
         });
 
-        // TODO: work around to remove embedded records that are not updated when saving the order: to be investigated
-        this.store.peekAll('order-item').filterBy('id', null).invoke('destroyRecord');
-        this.store.peekAll('takeaway-customer').filterBy('id', null).invoke('destroyRecord');
 
       }, (response) => {
         this.send('dismissMessage', 'loader');

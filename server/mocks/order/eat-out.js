@@ -6,12 +6,17 @@ module.exports = function(app) {
 
   var eatOutArray = require('../../json/eat-out.json');
 
+  var orderItemId = 100;
+
   function addOrder(order) {
     var id = orders.length;
     order.id = id;
     order.customer.id = id
+    order.orderItems.forEach(function(item) {
+      item.id = orderItemId++;
+    });
     orders.push(order);
-    return id;
+    return order;
   }
 
   var orders = eatOutArray;
@@ -23,7 +28,7 @@ module.exports = function(app) {
 
   ordersRouter.post('/', function(req, res) {
     success ?
-      res.status(201).send({id:addOrder(req.body['order/eatOut'])}) :
+      res.status(201).send({ "order/eatOut": addOrder(req.body['order/eatOut']) }) :
       res.status(502).send(app.genericError("502", "Printer was not found. Please check that the printer is connected and switched on"));
   });
 
