@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
    * @type {Date}
    */
   computedEstimate: Ember.computed('model.estimatedTime', function() {
-    return new Date(Date.now() + (this.get('model.estimatedTime') * 1000 * 60));
+    return new Date(this.get('model.dateTime').getTime() + (this.get('model.estimatedTime') * 1000 * 60));
   }),
 
   actions: {
