@@ -23,13 +23,19 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <ul class="list-group">
-        {{#each ordersSortedByTimestamp as |order|}}
-          {{#if order.id}}
-            {{order-list-group-item order=order onEditOrder=(action "editOrder") onPrintOrder=(action "printOrder")}}
-          {{/if}}
-        {{/each}}
-      </ul>
+      {{#unless ordersSortedByTimestamp}}
+        <div class="text-center no-orders">
+          <span>No orders to display</span>
+        </div>
+      {{else}}
+        <ul class="list-group">
+          {{#each ordersSortedByTimestamp as |order|}}
+            {{#if order.id}}
+              {{order-list-group-item order=order onEditOrder=(action "editOrder") onPrintOrder=(action "printOrder")}}
+            {{/if}}
+          {{/each}}
+        </ul>
+      {{/unless}}
     </div>
   </div>
   <div class="row">
