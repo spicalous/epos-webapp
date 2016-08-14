@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { ReceiptType } from '../../../models/receipt-type';
+import { RECEIPT_TYPE } from '../../../models/receipt-type';
 
 export default Ember.Controller.extend({
 
@@ -89,10 +89,10 @@ export default Ember.Controller.extend({
 
     /**
      * @param {number} id - id of order to print
-     * @param {ReceiptType} receiptType - receipt type for printing
+     * @param {RECEIPT_TYPE} receiptType - receipt type for printing
      */
     printOrder(id, orderType, receiptType) {
-      let url = [this._getNamespace(), orderType, receiptType || ReceiptType.EAT_IN, id].join('/');
+      let url = [this._getNamespace(), orderType, receiptType || RECEIPT_TYPE.EAT_IN, id].join('/');
       this._getRequest(url, 'Printing receipt', 'Order printed successfully', 'Order failed to print');
     },
 

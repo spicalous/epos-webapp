@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { PAYMENT_METHODS } from '../../../../models/payment-method';
 
 export default Ember.Controller.extend({
 
@@ -31,7 +32,7 @@ export default Ember.Controller.extend({
   /**
    * @type {Array[]}
    */
-  paymentMethods: [null, 'CASH', 'CARD', 'ONLINE'],
+  paymentMethods: PAYMENT_METHODS,
 
   /**
    * @type {Number[]}
@@ -42,7 +43,7 @@ export default Ember.Controller.extend({
    * Customer payment method
    * @type {null|String}
    */
-   paymentMethod: null,
+  paymentMethod: null,
 
   /**
    * Time in minutes for delivery estimate

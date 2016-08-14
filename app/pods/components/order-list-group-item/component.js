@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { ReceiptType } from '../../../models/receipt-type';
+import { RECEIPT_TYPE } from '../../../models/receipt-type';
 
 export default Ember.Component.extend({
 
@@ -35,14 +35,14 @@ export default Ember.Component.extend({
       let id = this.get('order.id');
       let orderType = this.get('orderType');
 
-      this.get('onPrintOrder')(id, orderType, ReceiptType.EAT_IN);
+      this.get('onPrintOrder')(id, orderType, RECEIPT_TYPE.EAT_IN);
     },
 
     printOrderAsDelivery() {
       let id = this.get('order.id');
       let orderType = this.get('orderType');
 
-      this.get('onPrintOrder')(id, orderType, ReceiptType.DELIVERY);
+      this.get('onPrintOrder')(id, orderType, RECEIPT_TYPE.DELIVERY);
     }
   }
 });
