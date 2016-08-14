@@ -37,18 +37,24 @@ export default Ember.Controller.extend({
 
   ordersSortedByTimestamp: Ember.computed.sort('ordersToDisplay', 'sortByTime'),
 
-  cardOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', 'CARD'),
-
   cashOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', 'CASH'),
 
+  cardOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', 'CARD'),
+
+  onlineOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', 'ONLINE'),
+
   notPaidOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', null),
+
+  totalCash: Ember.computed('cashOrders', function() {
+    return this._calculateTotalsFor('cashOrders');
+  }),
 
   totalCard: Ember.computed('cardOrders', function() {
     return this._calculateTotalsFor('cardOrders');
   }),
 
-  totalCash: Ember.computed('cashOrders', function() {
-    return this._calculateTotalsFor('cashOrders');
+  totalOnline: Ember.computed('onlineOrders', function() {
+    return this._calculateTotalsFor('onlineOrders');
   }),
 
   totalNotPaid: Ember.computed('notPaidOrders', function() {
