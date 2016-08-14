@@ -76,6 +76,7 @@ export default Ember.Controller.extend({
     },
 
     cancelEdit() {
+      Ember.$(this.get('orderModalSelector')).modal('hide');
       this.get('model').rollbackAttributes();
       this.get('orderService').invokeRollback();
       this.get('orderService').clear();
