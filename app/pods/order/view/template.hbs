@@ -1,8 +1,23 @@
-<div class="container-fluid">
+<div class="container-fluid order-view">
   <div class="row">
-    <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <div class="page-header">
-        <h2>Orders</h2>
+    <div class="col-xs-12 col-sm-offset-1 col-sm-8">
+      <h2>Orders</h2>
+    </div>
+    <div class="col-xs-6 col-sm-2">
+      <div class="order-view__filter-dropdowns">
+        <div class="dropdown">
+          {{#btn/btn-default class="btn-default dropdown-toggle order-type-filter-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
+            <span>
+            Filter: {{#if orderTypeFilter}} {{orderTypeFilter}} {{else}} All {{/if}}
+          </span>
+            <span class="caret"></span>
+          {{/btn/btn-default}}
+          <ul class="dropdown-menu dropdown-menu-right">
+            {{#each orderTypes as |orderType|}}
+              <li><a {{action "setOrderTypeFilter" orderType}}>{{orderType}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
       </div>
     </div>
   </div>

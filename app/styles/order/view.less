@@ -1,9 +1,26 @@
-.order-actions-btn {
-  border: none;
-  width: 40px;
-  height: 40px;
+.order-view {
 
-  span {
-    font-size: 1.3em;
+  .order-view__filter-dropdowns {
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+    @media (max-width: @screen-sm-min) {
+      margin-top: 0px;
+    }
+
+    .order-type-filter-btn {
+      border-radius: 20px;
+    }
   }
+
+  .order-actions-btn {
+    border: none;
+    width: 40px;
+    height: 40px;
+
+    span {
+      font-size: 1.3em;
+    }
+  }
+
 }
