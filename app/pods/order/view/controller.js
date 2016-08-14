@@ -1,6 +1,16 @@
 import Ember from 'ember';
 import { RECEIPT_TYPE } from '../../../models/receipt-type';
 
+const filterByCustomerType = (customerType) => Ember.computed.filter('model', function(order) {
+  let modelName = order.get('customer.constructor.modelName') || order.get('customer.content.constructor.modelName');
+  return modelName === customerType;
+});
+
+const calculateTotalFor = (paymentTypeOrders) => Ember.computed(paymentTypeOrders, function() {
+  let orders = this.get(paymentTypeOrders);
+  return orders.reduce((prev, order) => prev + order.get('total'), 0);
+});
+
 export default Ember.Controller.extend({
 
   sortByTime: ['dateTime:desc'],
@@ -9,10 +19,15 @@ export default Ember.Controller.extend({
 
   orderTypes: ['All', 'Delivery', 'Takeaway'],
 
+  paymentTypeFilter: 'All',
+
+  paymentTypes: ['All', 'Not paid', 'Cash', 'Card', 'Online'],
+
   ordersToDisplay: Ember.A([]),
 
-  filteredOrders: Ember.observer('orderTypeFilter', function() {
+  filteredOrders: Ember.observer('orderTypeFilter', 'paymentTypeFilter', function() {
     let orderTypeFilter = this.get('orderTypeFilter');
+    let paymentTypeFilter = this.get('paymentTypeFilter');
 
     if (orderTypeFilter === 'Delivery') {
       this.set('ordersToDisplay', this.get('deliveryOrders'));
@@ -25,17 +40,11 @@ export default Ember.Controller.extend({
     this.set('ordersToDisplay', this.get('model'));
   }),
 
-  deliveryOrders: Ember.computed.filter('model', function(order) {
-    let modelName = order.get('customer.constructor.modelName') || order.get('customer.content.constructor.modelName');
-    return modelName === 'delivery-customer';
-  }),
-
-  takeawayOrders: Ember.computed.filter('model', function(order) {
-    let modelName = order.get('customer.constructor.modelName') || order.get('customer.content.constructor.modelName');
-    return modelName === 'takeaway-customer';
-  }),
-
   ordersSortedByTimestamp: Ember.computed.sort('ordersToDisplay', 'sortByTime'),
+
+  deliveryOrders: filterByCustomerType('delivery-customer'),
+
+  takeawayOrders: filterByCustomerType('takeaway-customer'),
 
   cashOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', 'CASH'),
 
@@ -45,30 +54,15 @@ export default Ember.Controller.extend({
 
   notPaidOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', null),
 
-  totalCash: Ember.computed('cashOrders', function() {
-    return this._calculateTotalsFor('cashOrders');
-  }),
+  totalCash: calculateTotalFor('cashOrders'),
 
-  totalCard: Ember.computed('cardOrders', function() {
-    return this._calculateTotalsFor('cardOrders');
-  }),
+  totalCard: calculateTotalFor('cardOrders'),
 
-  totalOnline: Ember.computed('onlineOrders', function() {
-    return this._calculateTotalsFor('onlineOrders');
-  }),
+  totalOnline: calculateTotalFor('onlineOrders'),
 
-  totalNotPaid: Ember.computed('notPaidOrders', function() {
-    return this._calculateTotalsFor('notPaidOrders');
-  }),
+  totalNotPaid: calculateTotalFor('notPaidOrders'),
 
-  totalAll: Ember.computed('ordersToDisplay', function() {
-    return this._calculateTotalsFor('ordersToDisplay');
-  }),
-
-  _calculateTotalsFor(propertyName) {
-    let orders = this.get(propertyName);
-    return orders.reduce((prev, order) => prev + order.get('total'), 0);
-  },
+  totalAll: calculateTotalFor('ordersToDisplay'),
 
   _getNamespace() {
     let namespace = this.store.adapterFor('application').get('namespace');
