@@ -106,9 +106,7 @@ export default Ember.Controller.extend({
     },
 
     setOrderTypeFilter(orderType) {
-      let orderTypeFilter = this.get('orderTypeFilter');
-
-      this.set('orderTypeFilter', orderType === orderTypeFilter ? '' : orderType);
+      this.set('orderTypeFilter', orderType);
     }
 
   }
