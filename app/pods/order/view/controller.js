@@ -23,46 +23,67 @@ export default Ember.Controller.extend({
 
   paymentTypes: ['All', 'Not paid', 'Cash', 'Card', 'Online'],
 
-  ordersToDisplay: Ember.A([]),
+  filteredOrders: Ember.computed.intersect('filteredByOrderType', 'filteredByPaymentType'),
 
-  filteredOrders: Ember.observer('orderTypeFilter', 'paymentTypeFilter', function() {
+  filteredByOrderType: Ember.computed('orderTypeFilter', function() {
     let orderTypeFilter = this.get('orderTypeFilter');
-    let paymentTypeFilter = this.get('paymentTypeFilter');
 
     if (orderTypeFilter === 'Delivery') {
-      this.set('ordersToDisplay', this.get('deliveryOrders'));
-      return;
+      return this.get('deliveryOrders');
+    } else if (orderTypeFilter === 'Takeaway') {
+      this.get('takeawayOrders');
+    } else {
+      return this.get('model').toArray();
     }
-    if (orderTypeFilter === 'Takeaway') {
-      this.set('ordersToDisplay', this.get('takeawayOrders'));
-      return;
-    }
-    this.set('ordersToDisplay', this.get('model'));
   }),
 
-  ordersSortedByTimestamp: Ember.computed.sort('ordersToDisplay', 'sortByTime'),
+  filteredByPaymentType: Ember.computed('paymentTypeFilter', function() {
+    let paymentTypeFilter = this.get('paymentTypeFilter');
+
+    if (paymentTypeFilter === 'Not paid') {
+      return this.get('notPaidOrders');
+    } else if (paymentTypeFilter === 'Cash') {
+      return this.get('cashOrders');
+    } else if (paymentTypeFilter === 'Card') {
+      return this.get('cardOrders');
+    } else if (paymentTypeFilter === 'Online') {
+      return this.get('onlineOrders');
+    } else {
+      return this.get('model').toArray();
+    }
+  }),
+
+  ordersSortedByTimestamp: Ember.computed.sort('filteredOrders', 'sortByTime'),
 
   deliveryOrders: filterByCustomerType('delivery-customer'),
 
   takeawayOrders: filterByCustomerType('takeaway-customer'),
 
-  cashOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', 'CASH'),
+  cashOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CASH'),
 
-  cardOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', 'CARD'),
+  cardOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CARD'),
 
-  onlineOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', 'ONLINE'),
+  onlineOrders: Ember.computed.filterBy('model', 'paymentMethod', 'ONLINE'),
 
-  notPaidOrders: Ember.computed.filterBy('ordersToDisplay', 'paymentMethod', null),
+  notPaidOrders: Ember.computed.filterBy('model', 'paymentMethod', null),
 
-  totalCash: calculateTotalFor('cashOrders'),
+  filteredCashOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'CASH'),
 
-  totalCard: calculateTotalFor('cardOrders'),
+  filteredCardOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'CARD'),
 
-  totalOnline: calculateTotalFor('onlineOrders'),
+  filteredOnlineOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'ONLINE'),
 
-  totalNotPaid: calculateTotalFor('notPaidOrders'),
+  filteredNotPaidOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', null),
 
-  totalAll: calculateTotalFor('ordersToDisplay'),
+  totalCash: calculateTotalFor('filteredCashOrders'),
+
+  totalCard: calculateTotalFor('filteredCardOrders'),
+
+  totalOnline: calculateTotalFor('filteredOnlineOrders'),
+
+  totalNotPaid: calculateTotalFor('filteredNotPaidOrders'),
+
+  totalAll: calculateTotalFor('filteredOrders'),
 
   _getNamespace() {
     let namespace = this.store.adapterFor('application').get('namespace');
@@ -107,6 +128,10 @@ export default Ember.Controller.extend({
 
     setOrderTypeFilter(orderType) {
       this.set('orderTypeFilter', orderType);
+    },
+
+    setPaymentTypeFilter(paymentFilter) {
+      this.set('paymentTypeFilter', paymentFilter);
     }
 
   }
