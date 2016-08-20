@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
     if (orderTypeFilter === 'Delivery') {
       return this.get('deliveryOrders');
     } else if (orderTypeFilter === 'Takeaway') {
-      this.get('takeawayOrders');
+      return this.get('takeawayOrders');
     } else {
       return this.get('model').toArray();
     }
