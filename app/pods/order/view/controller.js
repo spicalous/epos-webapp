@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
 
   filteredOrders: Ember.computed.intersect('filteredByOrderType', 'filteredByPaymentType'),
 
-  filteredByOrderType: Ember.computed('orderTypeFilter', function() {
+  filteredByOrderType: Ember.computed('orderTypeFilter', 'model.[]', function() {
     let orderTypeFilter = this.get('orderTypeFilter');
 
     if (orderTypeFilter === 'Delivery') {
@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
     }
   }),
 
-  filteredByPaymentType: Ember.computed('paymentTypeFilter', function() {
+  filteredByPaymentType: Ember.computed('paymentTypeFilter', 'model.@each.paymentMethod', function() {
     let paymentTypeFilter = this.get('paymentTypeFilter');
 
     if (paymentTypeFilter === 'Not paid') {
