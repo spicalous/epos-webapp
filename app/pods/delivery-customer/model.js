@@ -1,4 +1,4 @@
-import Customer from 'talaythai-webapp/models/customer';
+import Customer from 'epos-webapp/models/customer';
 import Ember from 'ember';
 import attr from 'ember-data/attr';
 

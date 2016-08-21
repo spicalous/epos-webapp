@@ -1,5 +1,5 @@
 import { test } from 'qunit';
-import moduleForAcceptance from 'talaythai-webapp/tests/helpers/module-for-acceptance';
+import moduleForAcceptance from 'epos-webapp/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | order/edit/create');
 

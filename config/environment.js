@@ -4,8 +4,8 @@ const package = require('../package.json');
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'talaythai-webapp',
-    podModulePrefix: 'talaythai-webapp/pods',
+    modulePrefix: 'epos-webapp',
+    podModulePrefix: 'epos-webapp/pods',
     environment: environment,
     baseURL: '/',
     locationType: 'hash',
@@ -17,7 +17,7 @@ module.exports = function(environment) {
     },
 
     APP: {
-      name: 'Talay Thai WebPOS',
+      name: 'EPOS Webapp',
       version: package.version
     }
   };
