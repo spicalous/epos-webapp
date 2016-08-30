@@ -19,7 +19,7 @@ export default Ember.Route.extend({
       outlet: 'top-container'
     });
     this.render('modal-toggle-btn', {
-      outlet: 'float-bottom-container'
+      outlet: 'order-edit-bottom'
     });
   },
 
