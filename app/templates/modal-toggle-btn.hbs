@@ -1,8 +1,10 @@
-<div class="row">
-  <div class="col-xs-offset-3 col-xs-6 visible-xs-inline-block">
-    {{#btn/btn-default class="btn-warning btn-order__modal-toggle" data-toggle="modal" data-target=(concat '#' orderModalId)}}
-      {{orderService.size}}
-      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-    {{/btn/btn-default}}
+<div class="container order-edit__float-bottom">
+  <div class="row">
+    <div class="col-xs-offset-3 col-xs-6 visible-xs-inline-block">
+      {{#btn/btn-default class="btn-warning btn-order__modal-toggle" data-toggle="modal" data-target=(concat '#' orderModalId)}}
+        {{orderService.size}}
+        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+      {{/btn/btn-default}}
+    </div>
   </div>
 </div>
