@@ -2,21 +2,21 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 
-moduleForComponent('order-list', 'Integration | Component | order list', {
+moduleForComponent('order-item-list', 'Integration | Component | order item list', {
   integration: true
 });
 
 test('it renders', function(assert) {
 
-  this.render(hbs`{{order-list}}`);
+  this.render(hbs`{{order-item-list}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:" + EOL +
   this.render(hbs`
-    {{#order-list}}
+    {{#order-item-list}}
       template block text
-    {{/order-list}}
+    {{/order-item-list}}
   `);
 
   assert.equal(this.$().text().trim(), '');

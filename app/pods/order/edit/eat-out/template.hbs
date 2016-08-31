@@ -6,7 +6,7 @@
   </div>
   <div class="row order-edit-eat-out__order">
     <div class="col-xs-12 lead no-padding">
-      {{order-list
+      {{order-item-list
           orderItems=orderService.items
           onEditItem=(action "editItem")
           onDecrementItem=(action "decrementItem")}}
@@ -40,7 +40,7 @@
 {{#orderpad-modal id=orderModalId title="Order Items"}}
   <div class="modal-body">
     <small>
-      {{order-list
+      {{order-item-list
           orderItems=orderService.items
           onEditItem=(action "editItem")
           onDecrementItem=(action "decrementItem")}}
@@ -86,7 +86,7 @@
     </div>
     <div class="row order-edit-eat-out__confirm-edit-body">
       <div class="col-xs-12 col-sm-offset-1 col-sm-10 lead">
-        {{order-list
+        {{order-item-list
             orderItems=orderService.items
             onEditItem=(action "editItem")
             onDecrementItem=(action "decrementItem")}}
