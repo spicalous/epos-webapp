@@ -1,8 +1,12 @@
 <ul class="list-group">
   {{#each orderItems as |item|}}
     <li class="list-group-item clearfix">
-      {{decrement-btn click=(action "decrementItem" item)}}
-      <a><span style="padding-left:7px;" {{action "incrementItem" item}}>{{item.menuItem.name}}</span></a>
+      <a class="btn-danger decrement-btn" {{action "decrementItem" item}}>
+        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+      </a>
+      <a {{action "incrementItem" item}}>
+        <span style="padding-left:7px;">{{item.menuItem.name}}</span>
+      </a>
       <div>
         <span style="padding-left:45px;">
           <b>{{item.quantity}} x {{item.menuItem.menuId}}</b>
