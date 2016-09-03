@@ -17,7 +17,11 @@
           <li>
             <a class="edit-option" {{action "editOptionToggle" option preventDefault=false}}>
               {{input type="checkbox" name=option.name checked=option.checked}}
-              <span>{{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}</span>
+              {{#if option.price}}
+                <span>{{option.name}} ({{format-currency option.price}})</span>
+              {{else}}
+                <span>{{option.name}}</span>
+              {{/if}}
             </a>
           </li>
         {{/each}}
