@@ -45,7 +45,7 @@
         <ul class="list-group">
           {{#each ordersSortedByTimestamp as |order|}}
             {{#if order.id}}
-              {{order-list-group-item order=order onEditOrder=(action "editOrder") onPrintOrder=(action "printOrder")}}
+              {{order-list-item order=order onEditOrder=(action "editOrder") onPrintOrder=(action "printOrder")}}
             {{/if}}
           {{/each}}
         </ul>
