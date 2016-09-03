@@ -1,38 +1,7 @@
 <ul class="list-group">
   {{#each orderItems as |item|}}
-    <li class="list-group-item clearfix">
-      <a class="btn-danger decrement-btn" {{action "decrementItem" item}}>
-        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-      </a>
-      <a {{action "incrementItem" item}}>
-        <span style="padding-left:7px;">{{item.menuItem.name}}</span>
-      </a>
-      <div>
-        <span style="padding-left:45px;">
-          <b>{{item.quantity}} x {{item.menuItem.menuId}}</b>
-        </span>
-        <div class="pull-right text-right">
-          {{format-currency item.total}}
-          {{#if item.menuItem.editCategories}}
-            <a class="edit-item-btn" data-toggle="modal"
-               data-target="#edit-item-modal" {{action "onEditItem" item}}>
-                <span class="glyphicon glyphicon-option-horizontal"
-                      aria-hidden="true"></span>
-            </a>
-          {{else}}
-            <a class="edit-item-btn">
-              <span class="glyphicon glyphicon-none"></span>
-            </a>
-          {{/if}}
-        </div>
-      </div>
-
-
-      {{#each item.editOptions as |option|}}
-        <div class="order-edit-option">
-          {{option.name}} {{#if option.displayPrice}}({{option.displayPrice}}){{/if}}
-        </div>
-      {{/each}}
-    </li>
+    {{order-item-list-item item=item
+        onEditItem=onEditItem
+        onDecrementItem=onDecrementItem}}
   {{/each}}
 </ul>
