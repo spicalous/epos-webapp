@@ -39,12 +39,10 @@
 
 {{#orderpad-modal id=orderModalId title="Order Items"}}
   <div class="modal-body">
-    <small>
-      {{order-item-list
-          orderItems=orderService.items
-          onEditItem=(action "editItem")
-          onDecrementItem=(action "decrementItem")}}
-    </small>
+    {{order-item-list
+        orderItems=orderService.items
+        onEditItem=(action "editItem")
+        onDecrementItem=(action "decrementItem")}}
   </div>
   <div class="modal-footer">
     <div class="row {{concat orderModalId "-details"}}">
