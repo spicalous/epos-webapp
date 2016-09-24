@@ -27,7 +27,7 @@
   </div>
   <div class="row order-edit-create__actions">
     <div class="col-xs-6 no-padding">
-      {{#btn/btn-confirm class="btn-danger btn-lg"
+      {{#btn/btn-confirm class="btn-danger btn-lg btn-block"
       disabled=cannotCancelOrder
       showMessage="showMessage"
       confirm=(action "cancelOrder")
@@ -36,7 +36,7 @@
       {{/btn/btn-confirm}}
     </div>
     <div class="col-xs-6 no-padding">
-      {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}
+      {{#btn/btn-default class="btn-success btn-lg btn-block" action="showConfirmOrder" disabled=invalidOrder}}
         SUBMIT ORDER
       {{/btn/btn-default}}
     </div>
@@ -61,17 +61,17 @@
     </div>
     <div class="row">
       <div class="col-xs-6 {{concat orderModalId "-cancel"}}">
-        {{#btn/btn-default class="btn-danger btn-lg" action="cancelOrder" disabled=cannotCancelOrder}}
+        {{#btn/btn-default class="btn-danger btn-lg btn-block" action="cancelOrder" disabled=cannotCancelOrder}}
           CANCEL ORDER
         {{/btn/btn-default}}
       </div>
       <div class="col-xs-6 {{concat orderModalId "-submit"}}">
-        {{#btn/btn-default class="btn-success btn-lg" action="showConfirmOrder" disabled=invalidOrder}}
+        {{#btn/btn-default class="btn-success btn-lg btn-block" action="showConfirmOrder" disabled=invalidOrder}}
           SUBMIT ORDER
         {{/btn/btn-default}}
       </div>
       <div class="col-xs-12">
-        {{#btn/btn-default class="btn-default btn-lg" data-dismiss="modal"}}
+        {{#btn/btn-default class="btn-default btn-lg btn-block" data-dismiss="modal"}}
           CLOSE
         {{/btn/btn-default}}
       </div>
@@ -144,12 +144,12 @@
         </div>
         <div class="row">
           <div class="col-xs-6 no-padding">
-            {{#btn/btn-default class="btn-default btn-lg" action="hideConfirmOrder"}}
+            {{#btn/btn-default class="btn-default btn-lg btn-block" action="hideConfirmOrder"}}
               CANCEL
             {{/btn/btn-default}}
           </div>
           <div class="col-xs-6 no-padding">
-            {{#btn/btn-default class="btn-success btn-lg" action="submitOrder" disabled=invalidOrder}}
+            {{#btn/btn-default class="btn-success btn-lg btn-block" action="submitOrder" disabled=invalidOrder}}
               CONFIRM ORDER
             {{/btn/btn-default}}
           </div>

@@ -9,29 +9,29 @@
 <div class="row gutter-bottom">
   {{#if editable}}
     <div class="col-xs-6">
-      {{#btn/btn-confirm class="btn-danger btn-lg" showMessage="showMessage" confirm=(action "deleteRecord") message="Really delete the road?"}}
+      {{#btn/btn-confirm class="btn-danger btn-lg btn-block" showMessage="showMessage" confirm=(action "deleteRecord") message="Really delete the road?"}}
         Delete
       {{/btn/btn-confirm}}
     </div>
     <div class="col-xs-6">
-      {{#btn/btn-default class="btn-success btn-lg" action="saveEdit" disabled=saveDisabled}}
+      {{#btn/btn-default class="btn-success btn-lg btn-block" action="saveEdit" disabled=saveDisabled}}
         Save
       {{/btn/btn-default}}
     </div>
     <div class="col-xs-12 gutter-top">
-      {{#btn/btn-default class="btn-default btn-lg" action="disableEdit"}}
+      {{#btn/btn-default class="btn-default btn-lg btn-block" action="disableEdit"}}
         Cancel
       {{/btn/btn-default}}
     </div>
   {{else}}
-    <div class="col-xs-12 gutter-bottom">
-      {{#btn/btn-default class="btn-primary btn-lg" action="enableEdit"}}
-        Edit
+    <div class="col-xs-6 gutter-bottom">
+      {{#btn/btn-default class="btn-default btn-lg btn-block" action="closeEdit"}}
+        Close
       {{/btn/btn-default}}
     </div>
-    <div class="col-xs-12 gutter-bottom">
-      {{#btn/btn-default class="btn-default btn-lg" action="closeEdit"}}
-        Close
+    <div class="col-xs-6 gutter-bottom">
+      {{#btn/btn-default class="btn-primary btn-lg btn-block" action="enableEdit"}}
+        Edit
       {{/btn/btn-default}}
     </div>
   {{/if}}

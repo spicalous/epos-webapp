@@ -22,7 +22,7 @@
   </div>
   <div class="row order-edit-eat-out__actions">
     <div class="col-xs-6 no-padding">
-      {{#btn/btn-confirm class="btn-danger btn-lg"
+      {{#btn/btn-confirm class="btn-danger btn-lg btn-block"
           showMessage="showMessage"
           confirm=(action "cancelEdit")
           message="All changes will be discarded"}}
@@ -30,7 +30,7 @@
       {{/btn/btn-confirm}}
     </div>
     <div class="col-xs-6 no-padding">
-      {{#btn/btn-default class="btn-success btn-lg" action="showConfirmEdit" disabled=invalidOrder}}
+      {{#btn/btn-default class="btn-success btn-lg btn-block" action="showConfirmEdit" disabled=invalidOrder}}
         SUBMIT EDIT
       {{/btn/btn-default}}
     </div>
@@ -55,17 +55,17 @@
     </div>
     <div class="row">
       <div class="col-xs-6 {{concat orderModalId "-cancel"}}">
-        {{#btn/btn-default class="btn-danger btn-lg" action="cancelEdit"}}
+        {{#btn/btn-default class="btn-danger btn-lg btn-block" action="cancelEdit"}}
           CANCEL EDIT
         {{/btn/btn-default}}
       </div>
       <div class="col-xs-6 {{concat orderModalId "-submit"}}">
-        {{#btn/btn-default class="btn-success btn-lg" action="showConfirmEdit" disabled=invalidOrder}}
+        {{#btn/btn-default class="btn-success btn-lg btn-block" action="showConfirmEdit" disabled=invalidOrder}}
           SUBMIT EDIT
         {{/btn/btn-default}}
       </div>
       <div class="col-xs-12">
-        {{#btn/btn-default class="btn-default btn-lg" data-dismiss="modal"}}
+        {{#btn/btn-default class="btn-default btn-lg btn-block" data-dismiss="modal"}}
           CLOSE
         {{/btn/btn-default}}
       </div>
@@ -126,12 +126,12 @@
         </div>
         <div class="row">
           <div class="col-xs-6 no-padding">
-            {{#btn/btn-default class="btn-default btn-lg" action="hideConfirmEdit"}}
+            {{#btn/btn-default class="btn-default btn-lg btn-block" action="hideConfirmEdit"}}
               CANCEL
             {{/btn/btn-default}}
           </div>
           <div class="col-xs-6 no-padding">
-            {{#btn/btn-default class="btn-success btn-lg" action="submitConfirmEdit" disabled=invalidOrder}}
+            {{#btn/btn-default class="btn-success btn-lg btn-block" action="submitConfirmEdit" disabled=invalidOrder}}
               CONFIRM EDIT
             {{/btn/btn-default}}
           </div>

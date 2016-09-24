@@ -1,6 +1,6 @@
 {{#each categories as |category|}}
   <div class="col-xs-4 col-sm-3 col-md-2 no-padding">
-    {{#btn/btn-selectable class="btn-default" model=category
+    {{#btn/btn-selectable class="btn-default btn-block" model=category
         selected=selectedCategory
         action="selectCategory"}}
       <small>{{category.name}}</small>
