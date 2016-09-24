@@ -9,6 +9,10 @@ export default Ember.Component.extend({
 
   showOrderItems: false,
 
+  showPaymentSelector: false,
+
+  updatingPaymentMethod: false,
+
   /**
    *  customer.constructor.modelName (store.createRecord)
    *  customer.content.constructor.modelName (store.findRecord)
@@ -22,6 +26,29 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+
+    showPaymentSelector() {
+      this.set('showPaymentSelector', true);
+    },
+
+    hidePaymentSelector() {
+      this.set('showPaymentSelector', false);
+    },
+
+    updatePayment(paymentMethod) {
+      let order = this.get('order');
+      order.set('paymentMethod', paymentMethod);
+
+      this.set('updatingPaymentMethod', true);
+      order.save().then(() => {
+        this.set('updatingPaymentMethod', false);
+        this.set('showPaymentSelector', false);
+      })
+      .catch(() => {
+        order.rollbackAttributes();
+        this.set('updatingPaymentMethod', false);
+      });
+    },
 
     editOrder() {
       this.get('onEditOrder')(this.get('order.id'));

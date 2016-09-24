@@ -56,33 +56,22 @@ export default Ember.Controller.extend({
   ordersSortedByTimestamp: Ember.computed.sort('filteredOrders', 'sortByTime'),
 
   deliveryOrders: filterByCustomerType('delivery-customer'),
-
   takeawayOrders: filterByCustomerType('takeaway-customer'),
 
   cashOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CASH'),
-
   cardOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CARD'),
-
   onlineOrders: Ember.computed.filterBy('model', 'paymentMethod', 'ONLINE'),
-
   notPaidOrders: Ember.computed.filterBy('model', 'paymentMethod', null),
 
   filteredCashOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'CASH'),
-
   filteredCardOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'CARD'),
-
   filteredOnlineOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'ONLINE'),
-
   filteredNotPaidOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', null),
 
   totalCash: calculateTotalFor('filteredCashOrders'),
-
   totalCard: calculateTotalFor('filteredCardOrders'),
-
   totalOnline: calculateTotalFor('filteredOnlineOrders'),
-
   totalNotPaid: calculateTotalFor('filteredNotPaidOrders'),
-
   totalAll: calculateTotalFor('filteredOrders'),
 
   _getNamespace() {

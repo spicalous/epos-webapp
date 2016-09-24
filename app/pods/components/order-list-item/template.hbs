@@ -7,7 +7,32 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        £{{format-currency order.total}} {{format-payment-method order.paymentMethod}}
+        £{{format-currency order.total}}
+        <button type="button" class="btn btn-default btn-expandable {{if showPaymentSelector 'expanded'}}" {{action "showPaymentSelector"}}>
+          {{#if showPaymentSelector}}
+            {{#if updatingPaymentMethod}}
+              {{loading-spinner}}
+            {{else}}
+              <button type="button" class="btn btn-default" {{action "updatePayment" null bubbles=false}}>
+                NOT PAID
+              </button>
+              <button type="button" class="btn btn-default" {{action "updatePayment" "CASH" bubbles=false}}>
+                CASH
+              </button>
+              <button type="button" class="btn btn-default" {{action "updatePayment" "CARD" bubbles=false}}>
+                CARD
+              </button>
+              <button type="button" class="btn btn-default" {{action "updatePayment" "ONLINE" bubbles=false}}>
+                ONLINE
+              </button>
+              <button type="button" class="btn btn-default" {{action "hidePaymentSelector" bubbles=false}}>
+                CANCEL
+              </button>
+            {{/if}}
+          {{else}}
+            {{format-payment-method order.paymentMethod}}
+          {{/if}}
+        </button>
       </div>
     </div>
     <div class="row">

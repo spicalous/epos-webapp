@@ -28,8 +28,7 @@
         {{/btn/btn-default}}
         <ul class="dropdown-menu dropdown-menu-right">
           {{#each paymentTypes as |paymentType|}}
-            <li><a {{action "setPaymentTypeFilter" paymentType}}>{{paymentType}}</a>
-            </li>
+            <li><a {{action "setPaymentTypeFilter" paymentType}}>{{paymentType}}</a></li>
           {{/each}}
         </ul>
       </div>
@@ -45,7 +44,9 @@
         <ul class="list-group">
           {{#each ordersSortedByTimestamp as |order|}}
             {{#if order.id}}
-              {{order-list-item order=order onEditOrder=(action "editOrder") onPrintOrder=(action "printOrder")}}
+              {{order-list-item order=order
+                  onEditOrder=(action "editOrder")
+                  onPrintOrder=(action "printOrder") }}
             {{/if}}
           {{/each}}
         </ul>
