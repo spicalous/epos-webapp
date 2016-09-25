@@ -19,7 +19,6 @@ export default Ember.Component.extend({
   },
 
   _handleOutsideClick(event) {
-    console.log('test');
     let $element = this.$();
     let $target = this.$(event.target);
 
