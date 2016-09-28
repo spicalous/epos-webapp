@@ -6,21 +6,53 @@ moduleFor('controller:order/view', 'Unit | Controller | order/view', {
   // needs: ['controller:foo']
 });
 
-// Replace this with your real tests.
-test('it filters orders by payment type', function(assert) {
-  let controller = this.subject();
+let mockOrderTypes = Ember.A([
+  Ember.Object.create({
+    customer: { constructor: { modelName: 'delivery-customer'} },
+    paymentMethod: null
+  }),
+  Ember.Object.create({
+    customer: { constructor: { modelName: 'delivery-customer'} },
+    paymentMethod: 'CASH'
+  }),
+  Ember.Object.create({
+    customer: { constructor: { modelName: 'takeaway-customer'} },
+    paymentMethod: 'CARD'
+  }),
+  Ember.Object.create({
+    customer: { constructor: { modelName: 'takeaway-customer'} },
+    paymentMethod: 'ONLINE'
+  })
+]);
 
-  Ember.run(() => {
+test('does not filter orders by default', function(assert) {
+  let controller = this.subject({ model: mockOrderTypes });
 
-    controller.set('model', Ember.A([
-      Ember.Object.create({ paymentMethod: 'CARD' }),
-      Ember.Object.create({ paymentMethod: 'CASH' }),
-      Ember.Object.create({ paymentMethod: null })
-    ]));
+  assert.equal(controller.get('filteredOrders').length, 4);
+});
 
-    assert.equal(controller.get('cardOrders').length, 1);
-    assert.equal(controller.get('cashOrders').length, 1);
-    assert.equal(controller.get('notPaidOrders').length, 1);
+test('filters orders by payment type', function(assert) {
+  let controller = this.subject({ model: mockOrderTypes });
+
+  ['Not paid', 'Cash', 'Card', 'Online'].forEach((filter) => {
+    controller.set('paymentTypeFilter', filter);
+    assert.equal(controller.get('filteredOrders').length, 1);
   });
+});
 
+test('filters orders by customer type', function(assert) {
+  let controller = this.subject({ model: mockOrderTypes });
+
+  ['Delivery', 'Takeaway'].forEach((filter) => {
+    controller.set('orderTypeFilter', filter);
+    assert.equal(controller.get('filteredOrders').length, 2);
+  });
+});
+
+test('intersects filtered orders when both filters are set', function(assert) {
+  let controller = this.subject({ model: mockOrderTypes });
+
+  controller.set('paymentTypeFilter', 'Not paid');
+  controller.set('orderTypeFilter', 'Delivery');
+  assert.equal(controller.get('filteredOrders').length, 1);
 });
