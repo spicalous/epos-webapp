@@ -55,7 +55,7 @@
 }
 
 .nav-justified {
-  @media (min-width: (@screen-xs-min - 120)) { // dont collapse for small screens
+  @media (min-width: 320px) { // dont collapse for smallest supported width (iPhone 5)
     > li {
       display: table-cell;
       width: 1%;
