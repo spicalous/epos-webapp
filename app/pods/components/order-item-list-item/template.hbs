@@ -30,24 +30,26 @@
 </div>
 
 {{#liquid-if expanded class="toDown-toUp"}}
-  <div class="order-item__bottom">
-    <div class="order-item__decrement" {{action "decrementItem" item}}>
-      <span class="glyphicon glyphicon-minus"></span>
+  {{#if expanded}}
+    <div class="order-item__bottom">
+      <div class="order-item__decrement" {{action "decrementItem" item}}>
+        <span class="glyphicon glyphicon-minus"></span>
+      </div>
+      <div class="order-item__quantity">
+        {{item.quantity}}
+      </div>
+      <div class="order-item__increment" {{action "incrementItem" item}}>
+        <span class="glyphicon glyphicon-plus"></span>
+      </div>
+      {{#if item.menuItem.editCategories}}
+        <a class="order-item__edit-btn" data-toggle="modal" data-target="#edit-item-modal" {{action "onEditItem" item}}>
+          <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
+        </a>
+      {{else}}
+        <a class="order-item__edit-btn">
+          <span class="glyphicon glyphicon-none"></span>
+        </a>
+      {{/if}}
     </div>
-    <div class="order-item__quantity">
-      {{item.quantity}}
-    </div>
-    <div class="order-item__increment" {{action "incrementItem" item}}>
-      <span class="glyphicon glyphicon-plus"></span>
-    </div>
-    {{#if item.menuItem.editCategories}}
-      <a class="order-item__edit-btn" data-toggle="modal" data-target="#edit-item-modal" {{action "onEditItem" item}}>
-        <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
-      </a>
-    {{else}}
-      <a class="order-item__edit-btn">
-        <span class="glyphicon glyphicon-none"></span>
-      </a>
-    {{/if}}
-  </div>
+  {{/if}}
 {{/liquid-if}}
