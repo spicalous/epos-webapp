@@ -162,7 +162,7 @@ export default Ember.Controller.extend({
     removeCustomer() {
       let customer = this.get('customer');
 
-      if (customer && customer.get('id') === null) {
+      if (customer && customer.get('id') === null && !customer.get('isDeleted')) {
         customer.destroyRecord();
       }
       this.set('customer', null);
@@ -236,9 +236,8 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      let order = this.get('customer.constructor.modelName') === 'table' ?
-        this.createEatInOrder() :
-        this.createEatOutOrder();
+      const isEatIn = this.get('customer.constructor.modelName') === 'table';
+      let order = isEatIn ? this.createEatInOrder() : this.createEatOutOrder();
 
       this.send('showMessage', 'loader', { message: 'Sending order..' });
 
@@ -248,11 +247,17 @@ export default Ember.Controller.extend({
           header: 'Confirmed ^.^',
           body: 'Order submitted successfully',
           callback: () => {
-            this.send('hideConfirmOrder');
-            this.send('reset');
-            // TODO: work around to remove order items with null ids from the store after being saved
+
+            // TODO: replace with proper solution ID:1829 (use this to search other todos)
+            // ### START
+            // remove original records from the store that were not replaced by
+            // side loaded response see https://github.com/emberjs/data/issues/1829
             this.store.peekAll('order-item').filterBy('isNew').invoke('unloadRecord');
             this.store.peekAll('takeaway-customer').filterBy('isNew').invoke('unloadRecord');
+            // ### END
+
+            this.send('hideConfirmOrder');
+            this.send('reset');
           }
         });
 
