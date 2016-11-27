@@ -49,7 +49,8 @@ test('Removing an item', function(assert) {
 
   visit('/order/edit/create');
   click(MENU_ITEMS + ':first-child');
-  click(ORDER_ITEMS + ' .decrement-btn');
+  click(ORDER_ITEMS + ' .order-item__top');
+  click(ORDER_ITEMS + ' .order-item__decrement');
   andThen(() => {
     assert.equal(find(ORDER_ITEMS).length, 0);
     assert.ok(find(ORDER_DETAILS).text().includes('ITEMS: 0'));
@@ -74,13 +75,14 @@ test('Adding two order items increments to 2', function(assert) {
   });
 });
 
-test('Deleting an order item with quantity of 2 decrements to 1', function(assert) {
+test('Decrementing an order item with quantity of 2 decrements to 1', function(assert) {
   assert.expect(5);
 
   visit('/order/edit/create');
   click(MENU_ITEMS + ':first-child');
   click(MENU_ITEMS + ':first-child');
-  click(ORDER_ITEMS + ' .decrement-btn');
+  click(ORDER_ITEMS + ' .order-item__top');
+  click(ORDER_ITEMS + ' .order-item__decrement');
   andThen(() => {
     assert.ok(find(ORDER_ITEMS + ':first-child').text().includes('1'));
     assert.ok(find(ORDER_DETAILS).text().includes('ITEMS: 1'));
@@ -107,13 +109,13 @@ test('Editing an item displays edit options', function(assert) {
 
   visit('/order/edit/create');
   click(MENU_ITEMS + ':first-child');
-  click('.edit-item-btn');
+  click(ORDER_ITEMS + ' .order-item__top');
+  click(ORDER_ITEMS + ' .order-item__edit-btn');
   andThen(() => {
     assert.equal($('#edit-item-modal .active a').text(), "Add Food");
     assert.equal($('#edit-item-modal .modal-body ul li').length, 5);
 
-    //TODO: After hook
-    click('.edit-item-btn');
+    //TODO: Submit and verify changes
   });
 });
 

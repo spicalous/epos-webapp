@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-xs-6 text-right">
+    {{setting.name}}
+  </div>
+  <div class="col-xs-6 text-left">
+    <label class="switch">
+      {{input type="checkbox" checked=setting.value}}
+    </label>
+  </div>
+</div>{{yield}}
