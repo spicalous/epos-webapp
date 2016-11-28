@@ -62,7 +62,7 @@ module.exports = function(app) {
 
   deliveryCustomerRouter.put('/:id', function(req, res) {
     success ?
-      res.send({ 'delivery-customer': { id: req .params.id } }) :
+      res.send({ 'delivery-customer': { id: req.params.id } }) :
       res.status(400).send(app.genericError("400", "There was a problem updating the customer"));
   });
 

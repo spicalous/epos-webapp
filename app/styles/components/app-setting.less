@@ -1,0 +1,55 @@
+.app-setting {
+
+  &__name {
+    padding-top: 5px;
+  }
+
+  .toggle > input {
+    display: none;
+  }
+
+  .toggle {
+    position: relative;
+    display: block;
+  }
+
+  .toggle span::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: 'OFF';
+    width: 70px;
+    height: 30px;
+    background: grey;
+    border-radius: 15px;
+    color: white;
+    box-sizing: border-box;
+    padding-top: 5px;
+    padding-left: 33px;
+  }
+
+  .toggle input:checked + span::before {
+    background: @color-primary-0;
+    content: 'ON';
+    padding-top: 5px;
+    padding-left: 12px;
+  }
+
+  .toggle span::after {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    margin: 2px;
+    content: '';
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    background: white;
+    transition: transform 200ms;
+  }
+
+  .toggle input:checked + span::after {
+    transform: translateX(40px);
+  }
+
+}

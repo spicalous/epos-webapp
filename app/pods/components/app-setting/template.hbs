@@ -1,10 +1,11 @@
 <div class="row">
-  <div class="col-xs-6 text-right">
-    {{setting.name}}
+  <div class="col-xs-6 text-center app-setting__name">
+    <strong>{{setting.name}}</strong>
   </div>
-  <div class="col-xs-6 text-left">
-    <label class="switch">
+  <div class="col-xs-6">
+    <label class="toggle">
       {{input type="checkbox" checked=setting.value}}
+      <span></span>
     </label>
   </div>
 </div>{{yield}}

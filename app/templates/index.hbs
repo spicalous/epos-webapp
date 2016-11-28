@@ -51,7 +51,7 @@
 
   <div class="row gutter-top-bottom">
     {{#each model as |setting|}}
-      <div class="col-xs-6 col-sm-4 col-md-3">
+      <div class="col-xs-12 col-sm-6 col-md-4">
         {{app-setting setting=setting onSaveError=(action "onSaveError")}}
       </div>
     {{/each}}
