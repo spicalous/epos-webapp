@@ -1,6 +1,6 @@
 {
   "name": "epos-webapp",
-  "version": "0.42.0",
+  "version": "0.43.0",
   "description": "A front end solution for an EPOS webapp",
   "private": true,
   "directories": {
