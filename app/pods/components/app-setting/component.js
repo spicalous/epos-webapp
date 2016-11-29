@@ -4,14 +4,17 @@ export default Ember.Component.extend({
 
   classNames: ['app-setting'],
 
-  onChange: Ember.observer('setting.value', function() {
-    const setting = this.get('setting');
+  actions: {
 
-    setting.save()
-      .catch(() => {
-        setting.rollbackAttributes();
-        this.get("onSaveError")();
-      });
-  })
+    toggleSetting() {
+      const setting = this.get('setting');
+      setting.toggleProperty('value');
 
+      setting.save()
+        .catch(() => {
+          setting.rollbackAttributes();
+          this.get("onSaveError")();
+        });
+    }
+  }
 });

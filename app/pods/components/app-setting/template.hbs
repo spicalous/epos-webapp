@@ -3,9 +3,9 @@
     <strong>{{setting.name}}</strong>
   </div>
   <div class="col-xs-6">
-    <label class="toggle">
+    <label class="toggle" {{action "toggleSetting"}}>
       {{input type="checkbox" checked=setting.value}}
       <span></span>
     </label>
   </div>
-</div>{{yield}}
+</div>
