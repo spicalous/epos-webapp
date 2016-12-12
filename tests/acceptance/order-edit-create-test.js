@@ -16,7 +16,8 @@ const DELIVERY_CUSTOMER_DROPDOWN = SELECT_CUSTOMER + ' .dropdown > ul > li:nth-c
 test('Displays correct number of categories and menu items', function(assert) {
   assert.expect(2);
 
-  visit('/order/edit/create').then(() => {
+  visit('/order/edit/create');
+  andThen(() => {
     assert.equal(find(MENU_ITEMS).length, 162);
     assert.equal(find(CATEGORY_BUTTONS).length, 17);
   });

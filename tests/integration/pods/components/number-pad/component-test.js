@@ -6,21 +6,8 @@ moduleForComponent('number-pad', 'Integration | Component | number pad', {
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
 
   this.render(hbs`{{number-pad}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#number-pad}}
-      template block text
-    {{/number-pad}}
-  `);
-
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('button').length, '12');
 });
