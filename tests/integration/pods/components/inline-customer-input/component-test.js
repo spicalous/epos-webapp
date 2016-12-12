@@ -5,22 +5,25 @@ moduleForComponent('inline-customer-input', 'Integration | Component | inline cu
   integration: true
 });
 
-test('it renders', function(assert) {
-  assert.expect(2);
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+test('displays select customer when no customer is selected', function(assert) {
 
   this.render(hbs`{{inline-customer-input}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#inline-customer-input}}
-      template block text
-    {{/inline-customer-input}}
-  `);
-
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('button').text().trim(), 'SELECT CUSTOMER');
 });
+
+//test('displays remove customer when customer is selected', function(assert) {
+//
+//});
+//
+//test('displays takeaway customer information', function(assert) {
+//
+//});
+//
+//test('displays delivery customer information', function(assert) {
+//
+//});
+
+//test('displays table customer information', function(assert) {
+//
+//});

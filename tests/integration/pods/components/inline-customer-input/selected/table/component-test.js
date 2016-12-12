@@ -6,19 +6,9 @@ moduleForComponent('inline-customer-input/selected/table', 'Integration | Compon
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.set('table', { tableId: 1 });
 
-  this.render(hbs`{{inline-customer-input/selected/table}}`);
+  this.render(hbs`{{inline-customer-input/selected/table customer=table}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#inline-customer-input/selected/table}}
-      template block text
-    {{/inline-customer-input/selected/table}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'TABLE 1');
 });
