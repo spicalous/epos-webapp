@@ -3,16 +3,15 @@
     <h3>Order</h3>
   </div>
 </div>
-
-<div class="row gutter-top-bottom text-center">
+<div class="row">
   <div class="col-xs-12 col-sm-6 gutter-top">
-    {{#link-to "order.edit.create"}}
-      {{#btn/btn-default class="btn btn-main btn-block"}}NEW{{/btn/btn-default}}
+    {{#link-to "order.edit.create" tagName="button" type="button" classNames="btn btn-main btn-block"}}
+      NEW
     {{/link-to}}
   </div>
   <div class="col-xs-12 col-sm-6 gutter-top">
-    {{#link-to "order.view"}}
-      {{#btn/btn-default class="btn btn-main btn-block"}}RECENT ORDERS{{/btn/btn-default}}
+    {{#link-to "order.view" tagName="button" type="button" classNames="btn btn-main btn-block"}}
+      RECENT ORDERS
     {{/link-to}}
   </div>
 </div>
@@ -22,21 +21,20 @@
     <h3>Management</h3>
   </div>
 </div>
-
-<div class="row gutter-top-bottom">
+<div class="row">
   <div class="col-xs-12 col-sm-4 gutter-top">
-    {{#link-to "delivery-customer"}}
-      {{#btn/btn-default class="btn btn-main btn-block"}}CUSTOMERS{{/btn/btn-default}}
+    {{#link-to "delivery-customer" tagName="button" type="button" classNames="btn btn-main btn-block"}}
+      CUSTOMERS
     {{/link-to}}
   </div>
   <div class="col-xs-12 col-sm-4 gutter-top">
-    {{#link-to "road"}}
-      {{#btn/btn-default class="btn btn-main btn-block"}}ROADS{{/btn/btn-default}}
+    {{#link-to "road" tagName="button" type="button" classNames="btn btn-main btn-block"}}
+      ROADS
     {{/link-to}}
   </div>
   <div class="col-xs-12 col-sm-4 gutter-top">
-    {{#link-to "postcode"}}
-      {{#btn/btn-default class="btn btn-main btn-block"}}POSTCODES{{/btn/btn-default}}
+    {{#link-to "postcode" tagName="button" type="button" classNames="btn btn-main btn-block"}}
+      POSTCODES
     {{/link-to}}
   </div>
 </div>
@@ -46,8 +44,7 @@
     <h3>Settings</h3>
   </div>
 </div>
-
-<div class="row gutter-top-bottom">
+<div class="row">
   {{#each model as |setting|}}
     <div class="col-xs-12 col-sm-6 col-md-4">
       {{app-setting setting=setting onSaveError=(action "onSaveError")}}
