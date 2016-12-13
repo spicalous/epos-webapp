@@ -1,9 +1,7 @@
-<div class="container-fluid">
-  <div class="row">
-    {{#each model as |table|}}
-      <div class="col-xs-12 col-sm-6">
-        {{restaurant-table table=table}}
-      </div>
-    {{/each}}
-  </div>
+<div class="row">
+  {{#each model as |table|}}
+    <div class="col-xs-12 col-sm-6">
+      {{restaurant-table table=table}}
+    </div>
+  {{/each}}
 </div>

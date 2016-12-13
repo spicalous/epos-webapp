@@ -1,42 +1,40 @@
-<div class="container-fluid">
-  <div id="delivery-customer-search">
-    <div class="row gutter-top-bottom">
-      <div class="col-xs-12">
-        <form class="form-horizontal">
-          {{#form-group label="Telephone"}}
-            <div class="input-group">
-              {{input class="form-control" type="number" placeholder="Telephone" value=telephone}}
-              <span class="input-group-addon">
+<div id="delivery-customer-search">
+  <div class="row gutter-top-bottom">
+    <div class="col-xs-12">
+      <form class="form-horizontal">
+        {{#form-group label="Telephone"}}
+          <div class="input-group">
+            {{input class="form-control" type="number" placeholder="Telephone" value=telephone}}
+            <span class="input-group-addon">
             <span class="glyphicon glyphicon-earphone"></span>
           </span>
-            </div>
-          {{/form-group}}
-          {{form-group label="Flat/House" type="text" placeholder="Flat or house number" value=addressOne}}
-          {{form-group label="Road" type="text" placeholder="Road name" value=addressTwo}}
-          {{form-group label="Postcode" type="text" placeholder="Postcode" value=postcode}}
-        </form>
-      </div>
-    </div>
-    <div class="row gutter-bottom">
-      <div class="col-xs-12 col-sm-offset-2 col-sm-9">
-        {{#btn/btn-default class="btn-primary btn-lg btn-block" action="searchCustomer" disabled=emptySearch}}
-          Search Delivery Customers
-        {{/btn/btn-default}}
-      </div>
+          </div>
+        {{/form-group}}
+        {{form-group label="Flat/House" type="text" placeholder="Flat or house number" value=addressOne}}
+        {{form-group label="Road" type="text" placeholder="Road name" value=addressTwo}}
+        {{form-group label="Postcode" type="text" placeholder="Postcode" value=postcode}}
+      </form>
     </div>
   </div>
-  <div class="row">
-    <div id="delivery-customer-search-list" class="scroll-y col-xs-12 col-sm-6">
-      <div class="gutter-top-bottom">
-        <ul class="list-group">
-          {{#each deliveryCustomerResults as |customer|}}
-            {{delivery-customer-list-item customer=customer onClick=(action "transitionToCustomer" customer)}}
-          {{/each}}
-        </ul>
-      </div>
+  <div class="row gutter-bottom">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-9">
+      {{#btn/btn-default class="btn-primary btn-lg btn-block" action="searchCustomer" disabled=emptySearch}}
+        Search Delivery Customers
+      {{/btn/btn-default}}
     </div>
-    <div id="delivery-customer-edit" class="col-xs-12 col-sm-6 gutter-top-bottom">
-      {{outlet}}
+  </div>
+</div>
+<div class="row">
+  <div id="delivery-customer-search-list" class="scroll-y col-xs-12 col-sm-6">
+    <div class="gutter-top-bottom">
+      <ul class="list-group">
+        {{#each deliveryCustomerResults as |customer|}}
+          {{delivery-customer-list-item customer=customer onClick=(action "transitionToCustomer" customer)}}
+        {{/each}}
+      </ul>
     </div>
+  </div>
+  <div id="delivery-customer-edit" class="col-xs-12 col-sm-6 gutter-top-bottom">
+    {{outlet}}
   </div>
 </div>
