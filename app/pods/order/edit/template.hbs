@@ -24,7 +24,7 @@
           </div>
           <div class="row">
             <div class="col-xs-12">
-              {{number-pad value=numpadValue maxLength=4}}
+              {{number-pad value=numpadValue onChange=(action "onNumpadValueChange") maxLength=4}}
             </div>
           </div>
         </div>

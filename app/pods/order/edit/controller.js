@@ -36,6 +36,10 @@ export default Ember.Controller.extend({
       });
     },
 
+    onNumpadValueChange(value) {
+      this.set('numpadValue', value);
+    },
+
     reset() {
       this.set('numpadValue', '');
       this.set('selectedCategory', null);

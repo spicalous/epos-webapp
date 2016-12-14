@@ -13,18 +13,18 @@ export default Ember.Component.extend({
           maxLength = this.get('maxLength') ? this.get('maxLength') : this.get('defaultMaxLength');
 
       if (oldVal.length < maxLength) {
-        this.set('value', oldVal + value);
+        this.get('onChange')(oldVal + value);
       }
     },
 
     numpadBackspace() {
       var oldVal = this.get('value');
 
-      this.set('value', oldVal.substring(0, oldVal.length - 1));
+      this.get('onChange')(oldVal.substring(0, oldVal.length - 1));
     },
 
     numpadClear() {
-      this.set('value', '');
+      this.get('onChange')('');
     }
   }
 });
