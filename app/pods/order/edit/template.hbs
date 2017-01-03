@@ -5,9 +5,11 @@
         {{outlet "top-container"}}
       </div>
       <div class="row order-edit__categories">
-        {{category-list categories=model.categories
-            onCategorySelected=(action "selectCategory")
-            selectedCategory=selectedCategory}}
+        {{#each model.categories as |category|}}
+          <div class="col-xs-4 col-sm-3 col-md-2 no-padding" {{action "selectCategory" category}}>
+            {{category-item category=category selected=selectedCategory}}
+          </div>
+        {{/each}}
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-8 order-edit__menu">
