@@ -16,11 +16,27 @@ export default Ember.Controller.extend({
    */
   numpadValue: '',
 
+  filterMenu: Ember.observer('model.menu', 'selectedCategory', 'numpadValue', function() {
+    const categoryFilter = this.get('selectedCategory');
+    const menuIdFilter = this.get('numpadValue');
+    let menuItems = this.get('model.menu');
+
+    if (categoryFilter) {
+      menuItems = menuItems.filter((item) =>
+        item.get('categories').any((category) => categoryFilter === category));
+    }
+    if (menuIdFilter) {
+      menuItems = menuItems.filter((item) => item.get('menuId').startsWith(menuIdFilter));
+    }
+
+    this.set('menuItems', menuItems);
+  }),
+
   /**
    * @type {MenuItem[]}
    * menu items sorted by ascending id
    */
-  sortedMenu: Ember.computed.sort('model.menu', (x, y) => x.get('id') - y.get('id')),
+  sortedMenu: Ember.computed.sort('menuItems', (x, y) => x.get('id') - y.get('id')),
 
   actions: {
 

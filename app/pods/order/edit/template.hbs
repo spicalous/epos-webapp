@@ -13,10 +13,11 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-8 order-edit__menu">
-          {{menu-list menu=sortedMenu
-              onMenuItemClick=(action "addMenuItem")
-              categoryFilter=selectedCategory
-              menuIdFilter=numpadValue}}
+          <ul class="list-group">
+            {{#each sortedMenu as |menuItem|}}
+              {{menu-list-item menuItem=menuItem onMenuItemClick=(action "addMenuItem")}}
+            {{/each}}
+          </ul>
         </div>
         <div class="hidden-xs col-sm-5 col-md-4 order-edit__numpad">
           <div class="row order-edit__numpad-value">

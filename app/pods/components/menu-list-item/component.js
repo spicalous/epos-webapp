@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   classNames: ['list-group-item'],
 
   click() {
-    this.sendAction('action', this.get('menuItem'));
+    this.get('onMenuItemClick')(this.get('menuItem'));
   }
 
 });
