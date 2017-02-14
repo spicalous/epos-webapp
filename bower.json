@@ -1,9 +1,6 @@
 {
   "name": "epos-webapp",
   "dependencies": {
-    "ember": "~2.10.1",
-    "ember-cli-shims": "0.1.3",
-    "bootstrap": "~3.3.4",
-    "fastclick": "~1.0.6"
+    "bootstrap": "~3.3.7"
   }
 }
