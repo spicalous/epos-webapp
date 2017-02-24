@@ -6,20 +6,8 @@ moduleForComponent('customer-browser', 'Integration | Component | customer brows
 });
 
 test('it renders', function(assert) {
-  
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
 
   this.render(hbs`{{customer-browser}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:" + EOL +
-  this.render(hbs`
-    {{#customer-browser}}
-      template block text
-    {{/customer-browser}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('.alert').text().trim(), 'Must be unique to save customer');
 });

@@ -8,19 +8,16 @@ moduleForComponent('orderpad-modal', 'Integration | Component | orderpad modal',
 
 test('it renders', function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
-
   this.render(hbs`{{orderpad-modal}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), '×');
 
   // Template block usage:" + EOL +
   this.render(hbs`
     {{#orderpad-modal}}
-      template block text
+      <div class='test-orderpad-modal-yield'>THIS IS THE YIELD</div>
     {{/orderpad-modal}}
   `);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(this.$('.test-orderpad-modal-yield').text().trim(), 'THIS IS THE YIELD');
 });

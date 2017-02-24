@@ -1,25 +1,43 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('order-list-item', 'Integration | Component | order list item', {
-  integration: true
+  integration: true,
+
+  beforeEach: function() {
+    this.inject.service('store', { as: 'store' });
+  }
 });
 
-test('it renders', function(assert) {
+test('it renders takeaway customer', function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });" + EOL + EOL +
+  Ember.run(() => {
+    this.set('order', this.store.createRecord('order', {
+      customer: this.store.createRecord('takeaway-customer')
+    }));
+  });
 
-  this.render(hbs`{{order-list-item}}`);
+  this.render(hbs`{{order-list-item order=order}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(this.$().text().includes('TAKE AWAY'));
+});
 
-  // Template block usage:" + EOL +
-  this.render(hbs`
-    {{#order-list-item}}
-      template block text
-    {{/order-list-item}}
-  `);
+test('it renders delivery customer', function(assert) {
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  Ember.run(() => {
+    this.set('order', this.store.createRecord('order', {
+      customer: this.store.createRecord('delivery-customer', {
+        telephone: '12345678901',
+        addressOne: 'ADDRESS ONE',
+        addressTwo: 'ADDRESS TWO',
+        postcode: 'AB12 3CD'
+      })
+    }));
+  });
+
+  this.render(hbs`{{order-list-item order=order}}`);
+
+  assert.ok(this.$().text().includes('ADDRESS ONE ADDRESS TWO'));
+  assert.ok(this.$().text().includes('AB12 3CD 12345678901'));
 });

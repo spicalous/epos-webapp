@@ -1,26 +1,27 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('restaurant-table', 'Integration | Component | restaurant table', {
-  integration: true
+  integration: true,
+
+  beforeEach: function() {
+    this.inject.service('store', { as: 'store' });
+  }
 });
 
 test('it renders', function(assert) {
   assert.expect(2);
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  Ember.run(() => {
+    this.set('table', this.store.createRecord('table', {
+      tableId: '1',
+      status: 'TABLE_STATUS'
+    }));
+  });
 
-  this.render(hbs`{{restaurant-table}}`);
+  this.render(hbs`{{restaurant-table table=table}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#restaurant-table}}
-      template block text
-    {{/restaurant-table}}
-  `);
-
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('.restaurant-table .table-id').text().trim(), '1');
+  assert.equal(this.$('.restaurant-table .dropdown button').text().trim(), 'TABLE STATUS');
 });
