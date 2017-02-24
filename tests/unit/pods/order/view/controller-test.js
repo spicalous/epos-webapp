@@ -2,8 +2,7 @@ import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:order/view', 'Unit | Controller | order/view', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['adapter:application']
 });
 
 let mockOrderTypes = Ember.A([
@@ -55,4 +54,11 @@ test('intersects filtered orders when both filters are set', function(assert) {
   controller.set('paymentTypeFilter', 'Not paid');
   controller.set('orderTypeFilter', 'Delivery');
   assert.equal(controller.get('filteredOrders').length, 1);
+});
+
+test('generates absolute namespace', function(assert) {
+  let controller = this.subject();
+  const namespace = controller._getNamespace();
+
+  assert.equal(namespace, '/EPOSDataService/api/printer');
 });

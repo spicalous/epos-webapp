@@ -76,7 +76,7 @@ export default Ember.Controller.extend({
 
   _getNamespace() {
     let namespace = this.store.adapterFor('application').get('namespace');
-    return [namespace, 'printer'].join('/');
+    return '/' + [namespace, 'printer'].join('/');
   },
 
   _getRequest(url, loadingMessage, successMessage, errorMessage) {
