@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
   /**
    * @type {Array[]}
    */
-  paymentMethods: PAYMENT_METHODS,
+  paymentMethods: Object.keys(PAYMENT_METHODS).map(function(method) { return PAYMENT_METHODS[method]; }),
 
   /**
    * @type {Number[]}
@@ -122,6 +122,16 @@ export default Ember.Controller.extend({
      */
     setNewTakeawayCustomer() {
       this.set('customer', this.store.createRecord('takeaway-customer'));
+      this.set('estimatedTime', 30);
+    },
+
+    /**
+     * Sets the customer to take away
+     */
+    setNewOnlineCustomer() {
+      this.set('customer', this.store.createRecord('online-customer'));
+      this.set('paymentMethod', PAYMENT_METHODS.ONLINE);
+      this.set('estimatedTime', 20);
     },
 
     /**
@@ -166,6 +176,8 @@ export default Ember.Controller.extend({
         customer.destroyRecord();
       }
       this.set('customer', null);
+      this.set('paymentMethod', null);
+      this.set('estimatedTime', 45);
     },
 
     /**

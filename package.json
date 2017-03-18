@@ -11,8 +11,9 @@
   "repository": "",
   "scripts": {
     "build": "node_modules/ember-cli/bin/ember build",
-    "start": "node_modules/ember-cli/bin/ember serve",
-    "test": "node_modules/ember-cli/bin/ember test"
+    "start": "node_modules/ember-cli/bin/ember server",
+    "test": "node_modules/ember-cli/bin/ember test",
+    "dev": "node_modules/ember-cli/bin/ember server --proxy http://localhost:8080"
   },
   "devDependencies": {
     "body-parser": "1.16.1",

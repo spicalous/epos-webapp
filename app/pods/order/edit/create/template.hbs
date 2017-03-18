@@ -5,6 +5,7 @@
           customer=customer
           onSelectTakeaway=(action "setNewTakeawayCustomer")
           onSelectDelivery=(action "showCustomerBrowser")
+          onSelectOnline=(action "setNewOnlineCustomer")
           onSelectEatIn=(action "showTableBrowser")
           onRemoveCustomer=(action "removeCustomer")}}
     </div>
@@ -123,13 +124,13 @@
         <div class="row order-edit-create__confirm-order-select">
           <div class="col-xs-6 col-sm-offset-1 col-sm-5">
             <div class="lead">
-              Estimate Time ({{format-time computedEstimate}})
+              Estimated time ({{format-time computedEstimate}})
             </div>
             {{select-component content=estimatedTimes selectedValue=estimatedTime action=(action (mut estimatedTime))}}
           </div>
           <div class="col-xs-6 col-sm-5">
             <div class="lead">
-              Payment Method
+              Payment method
             </div>
             {{select-component content=paymentMethods selectedValue=paymentMethod action=(action (mut paymentMethod))}}
           </div>

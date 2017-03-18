@@ -3,10 +3,10 @@ import Ember from 'ember';
 import attr from 'ember-data/attr';
 
 export default Customer.extend({
-  name: attr('string', { defaultValue: '' }),
+  orderId: attr('string', { defaultValue: '' }),
 
   /**
-   *  Telephone is not required for take away customers
+   *  Telephone is not required for online customers
    *  @override
    */
   invalidTelephone: Ember.computed('invalidTakeAwayTelephoneReason', function() {

@@ -24,6 +24,10 @@ export default Ember.Component.extend({
       this.get('onSelectDelivery')();
     },
 
+    onSelectOnline() {
+      this.get('onSelectOnline')();
+    },
+
     onSelectEatIn() {
       this.get('onSelectEatIn')();
     },
