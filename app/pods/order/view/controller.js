@@ -63,16 +63,11 @@ export default Ember.Controller.extend({
   onlineOrders: Ember.computed.filterBy('model', 'paymentMethod', 'ONLINE'),
   notPaidOrders: Ember.computed.filterBy('model', 'paymentMethod', null),
 
-  filteredCashOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'CASH'),
-  filteredCardOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'CARD'),
-  filteredOnlineOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', 'ONLINE'),
-  filteredNotPaidOrders: Ember.computed.filterBy('filteredOrders', 'paymentMethod', null),
-
-  totalCash: calculateTotalFor('filteredCashOrders'),
-  totalCard: calculateTotalFor('filteredCardOrders'),
-  totalOnline: calculateTotalFor('filteredOnlineOrders'),
-  totalNotPaid: calculateTotalFor('filteredNotPaidOrders'),
-  totalAll: calculateTotalFor('filteredOrders'),
+  totalCash: calculateTotalFor('cashOrders'),
+  totalCard: calculateTotalFor('cardOrders'),
+  totalOnline: calculateTotalFor('onlineOrders'),
+  totalNotPaid: calculateTotalFor('notPaidOrders'),
+  totalAll: calculateTotalFor('model'),
 
   _getNamespace() {
     let namespace = this.store.adapterFor('application').get('namespace');
