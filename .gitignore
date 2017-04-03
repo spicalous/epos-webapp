@@ -27,3 +27,4 @@ testem.log
 
 *.iml
 .idea/*.xml
+.idea/shelf/*
