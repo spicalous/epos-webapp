@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
   /**
    * @type {Number[]}
    */
-  estimatedTimes: [20, 25, 30, 35, 40, 45, 50, 55, 60, 70],
+  estimatedTimes: [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 75],
 
   /**
    * Customer payment method
@@ -131,7 +131,7 @@ export default Ember.Controller.extend({
     setNewOnlineCustomer() {
       this.set('customer', this.store.createRecord('online-customer'));
       this.set('paymentMethod', PAYMENT_METHODS.ONLINE);
-      this.set('estimatedTime', 20);
+      this.set('estimatedTime', 15);
     },
 
     /**
