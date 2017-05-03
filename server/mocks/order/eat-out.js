@@ -38,13 +38,13 @@ module.exports = function(app) {
     });
   });
 
-//  ordersRouter.put('/:id', function(req, res) {
-//    res.send({
-//      'orders': {
-//        id: req.params.id
-//      }
-//    });
-//  });
+  ordersRouter.put('/:id', function(req, res) {
+    res.send({
+      'orders': {
+        id: req.params.id
+      }
+    });
+  });
 
 //  ordersRouter.delete('/:id', function(req, res) {
 //    res.status(204).end();

@@ -61,28 +61,32 @@
     </div>
   </div>
   <div class="row gutter-bottom">
-    <div class="col-xs-3 text-right">
-      <p>Cash</p>
-      <p>Card</p>
-      <p>Online</p>
-      <p>Not Paid</p>
-      <p>Total</p>
+    <div class="col-xs-3 text-right">Cash</div>
+    <div class="col-xs-3"><strong>{{format-currency totalCash}}</strong></div>
+  </div>
+  <div class="row gutter-bottom">
+    <div class="col-xs-3 text-right">Card</div>
+    <div class="col-xs-3"><strong>{{format-currency totalCard}}</strong></div>
+  </div>
+  <div class="row gutter-bottom">
+    <div class="col-xs-3 text-right">Online</div>
+    <div class="col-xs-3"><strong>{{format-currency totalOnline}}</strong></div>
+  </div>
+  {{#if totalNotPaid}}
+    <div class="row gutter-bottom">
+      <div class="col-xs-3 text-right">Not Paid</div>
+      <div class="col-xs-3"><strong>{{format-currency totalNotPaid}}</strong></div>
     </div>
-    <div class="col-xs-3">
-      <strong>
-        <p>{{format-currency totalCash}}</p>
-        <p>{{format-currency totalCard}}</p>
-        <p>{{format-currency totalOnline}}</p>
-        <p>{{format-currency totalNotPaid}}</p>
-        <p>{{format-currency totalAll}}</p>
-      </strong>
-    </div>
-    <!--
+  {{/if}}
+  <div class="row gutter-bottom">
+    <div class="col-xs-3 text-right">Total</div>
+    <div class="col-xs-3"><strong>{{format-currency totalAll}}</strong></div>
+  </div>
+  <!--
     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
       {{#btn/btn-default class="btn-primary" action="printOrderSummary"}}
         Print summary
       {{/btn/btn-default}}
     </div>
     -->
-  </div>
 </div>
