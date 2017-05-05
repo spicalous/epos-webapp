@@ -18,8 +18,8 @@ test('Displays correct number of categories and menu items', function(assert) {
 
   visit('/order/edit/create');
   andThen(() => {
-    assert.equal(find(MENU_ITEMS).length, 162);
-    assert.equal(find(CATEGORY_BUTTONS).length, 17);
+    assert.equal(find(MENU_ITEMS).length, 307);
+    assert.equal(find(CATEGORY_BUTTONS).length, 18);
   });
 });
 
@@ -28,7 +28,7 @@ test('Selecting a category', function(assert) {
 
   visit('/order/edit/create');
   click(CATEGORY_BUTTONS + ':first');
-  andThen(() => assert.equal(find(MENU_ITEMS).length, 18));
+  andThen(() => assert.equal(find(MENU_ITEMS).length, 25));
 });
 
 test('Adding an item', function(assert) {
@@ -39,9 +39,9 @@ test('Adding an item', function(assert) {
   andThen(() => {
     assert.equal(find(ORDER_ITEMS).length, 1);
     assert.ok(find(ORDER_DETAILS).text().includes('ITEMS: 1'));
-    assert.ok(find(ORDER_DETAILS).text().includes('TOTAL: 2.95'));
+    assert.ok(find(ORDER_DETAILS).text().includes('TOTAL: 38.00'));
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('ITEMS: 1'));
-    assert.ok(find(ORDER_MODAL_DETAILS).text().includes('TOTAL: 2.95'));
+    assert.ok(find(ORDER_MODAL_DETAILS).text().includes('TOTAL: 38.00'));
   });
 });
 
@@ -62,22 +62,20 @@ test('Removing an item', function(assert) {
 });
 
 test('Adding two order items increments to 2', function(assert) {
-  assert.expect(5);
+  assert.expect(3);
 
   visit('/order/edit/create');
   click(MENU_ITEMS + ':first-child');
   click(MENU_ITEMS + ':first-child');
   andThen(() => {
-    assert.ok(find(ORDER_ITEMS + ':first-child').text().includes('2'));
+    assert.ok(find(ORDER_ITEMS + ':first-child').text().includes('2 x'));
     assert.ok(find(ORDER_DETAILS).text().includes('ITEMS: 2'));
-    assert.ok(find(ORDER_DETAILS).text().includes('TOTAL: 5.90'));
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('ITEMS: 2'));
-    assert.ok(find(ORDER_MODAL_DETAILS).text().includes('TOTAL: 5.90'));
   });
 });
 
 test('Decrementing an order item with quantity of 2 decrements to 1', function(assert) {
-  assert.expect(5);
+  assert.expect(3);
 
   visit('/order/edit/create');
   click(MENU_ITEMS + ':first-child');
@@ -85,11 +83,9 @@ test('Decrementing an order item with quantity of 2 decrements to 1', function(a
   click(ORDER_ITEMS + ' .order-item__top');
   click(ORDER_ITEMS + ' .order-item__decrement');
   andThen(() => {
-    assert.ok(find(ORDER_ITEMS + ':first-child').text().includes('1'));
+    assert.ok(find(ORDER_ITEMS + ':first-child').text().includes('1 x'));
     assert.ok(find(ORDER_DETAILS).text().includes('ITEMS: 1'));
-    assert.ok(find(ORDER_DETAILS).text().includes('TOTAL: 2.95'));
     assert.ok(find(ORDER_MODAL_DETAILS).text().includes('ITEMS: 1'));
-    assert.ok(find(ORDER_MODAL_DETAILS).text().includes('TOTAL: 2.95'));
   });
 });
 

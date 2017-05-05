@@ -10,4 +10,8 @@ export default Ember.Component.extend({
 
   helpCol: 'col-sm-offset-2 col-sm-9',
 
+  didInsertElement() {
+    this.$('input').focus();
+  }
+
 });

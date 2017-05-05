@@ -13,7 +13,7 @@ test('sets the correct paymentType and estimatedTime for online customers', func
   Ember.run(() => controller.send('setNewOnlineCustomer'));
 
   assert.strictEqual(controller.get('paymentMethod'), 'ONLINE');
-  assert.strictEqual(controller.get('estimatedTime'), 20);
+  assert.strictEqual(controller.get('estimatedTime'), 15);
 });
 
 test('sets the correct estimatedTime for takeaway customers', function(assert) {
