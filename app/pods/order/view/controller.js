@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
 
   orderTypeFilter: 'All',
 
-  orderTypes: ['All', 'Delivery', 'Takeaway'],
+  orderTypes: ['All', 'Delivery', 'Takeaway', 'Online'],
 
   paymentTypeFilter: 'All',
 
@@ -32,6 +32,8 @@ export default Ember.Controller.extend({
       return this.get('deliveryOrders');
     } else if (orderTypeFilter === 'Takeaway') {
       return this.get('takeawayOrders');
+    } else if (orderTypeFilter === 'Online') {
+      return this.get('onlineOrders');
     } else {
       return this.get('model').toArray();
     }
@@ -47,7 +49,7 @@ export default Ember.Controller.extend({
     } else if (paymentTypeFilter === 'Card') {
       return this.get('cardOrders');
     } else if (paymentTypeFilter === 'Online') {
-      return this.get('onlineOrders');
+      return this.get('onlinePaymentOrders');
     } else {
       return this.get('model').toArray();
     }
@@ -57,15 +59,16 @@ export default Ember.Controller.extend({
 
   deliveryOrders: filterByCustomerType('delivery-customer'),
   takeawayOrders: filterByCustomerType('takeaway-customer'),
+  onlineOrders: filterByCustomerType('online-customer'),
 
   cashOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CASH'),
   cardOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CARD'),
-  onlineOrders: Ember.computed.filterBy('model', 'paymentMethod', 'ONLINE'),
+  onlinePaymentOrders: Ember.computed.filterBy('model', 'paymentMethod', 'ONLINE'),
   notPaidOrders: Ember.computed.filterBy('model', 'paymentMethod', null),
 
   totalCash: calculateTotalFor('cashOrders'),
   totalCard: calculateTotalFor('cardOrders'),
-  totalOnline: calculateTotalFor('onlineOrders'),
+  totalOnline: calculateTotalFor('onlinePaymentOrders'),
   totalNotPaid: calculateTotalFor('notPaidOrders'),
   totalAll: calculateTotalFor('model'),
 
