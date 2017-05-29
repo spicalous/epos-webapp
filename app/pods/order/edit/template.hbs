@@ -5,7 +5,7 @@
         {{outlet "top-container"}}
       </div>
       <div class="row order-edit__categories">
-        {{#each model.categories as |category|}}
+        {{#each sortedCategories as |category|}}
           <div class="col-xs-4 col-sm-3 col-md-2 no-padding" {{action "selectCategory" category}}>
             {{category-item category=category selected=selectedCategory}}
           </div>

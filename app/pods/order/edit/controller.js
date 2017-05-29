@@ -38,6 +38,12 @@ export default Ember.Controller.extend({
    */
   sortedMenu: Ember.computed.sort('menuItems', (x, y) => x.get('id') - y.get('id')),
 
+  /**
+   * @type {Category[]}
+   * categories sorted by ascending id
+   */
+  sortedCategories: Ember.computed.sort('model.categories', (x, y) => x.get('id') - y.get('id')),
+
   actions: {
 
     selectCategory(category) {
