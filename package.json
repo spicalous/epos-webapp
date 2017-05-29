@@ -13,10 +13,12 @@
     "build": "node_modules/ember-cli/bin/ember build",
     "start": "node_modules/ember-cli/bin/ember server",
     "test": "node_modules/ember-cli/bin/ember test",
-    "dev": "node_modules/ember-cli/bin/ember server --proxy http://localhost:8080"
+    "dev": "node_modules/ember-cli/bin/ember server --proxy http://localhost:8080",
+    "postinstall": "bower install"
   },
   "devDependencies": {
     "body-parser": "1.16.1",
+    "bower": "^1.8.0",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^2.4.1",
     "ember-cli": "2.11.1",
