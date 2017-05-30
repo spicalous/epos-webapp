@@ -170,11 +170,6 @@ export default Ember.Controller.extend({
      * Removes the currently selected customer
      */
     removeCustomer() {
-      let customer = this.get('customer');
-
-      if (customer && customer.get('id') === null && !customer.get('isDeleted')) {
-        customer.destroyRecord();
-      }
       this.set('customer', null);
       this.set('paymentMethod', null);
       this.set('estimatedTime', 45);
