@@ -32,7 +32,7 @@ export default Ember.Component.extend({
       return;
     }
     let selectedEditCategoryId = this.get('selectedEditCategory').get('id');
-    return this.get('editOptions').filterBy('editCategory', parseInt(selectedEditCategoryId));
+    return this.get('editOptions').filterBy('editCategoryId', parseInt(selectedEditCategoryId));
   }),
 
   actions: {

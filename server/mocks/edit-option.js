@@ -79,10 +79,10 @@ module.exports = function(app) {
     return result;
   }
 
-  function create(id, editCategory, name, price) {
+  function create(id, editCategoryId, name, price) {
     return {
       "id": id,
-      "editCategory": editCategory,
+      "editCategoryId": editCategoryId,
       "name": name,
       "price": price
     };

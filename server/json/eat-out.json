@@ -98,7 +98,7 @@
         "id": 4, "menuItem": { "id":17, "menuId": "17", "name": "Mix Starter (2pp)","description": "", "price": 1350, "categories":[ 0 ], "editCategories":[ 0, 1 ]}, "quantity": 1, "editOptions":[ ]
       },
       {
-        "id": 5, "menuItem": {"id": 35, "menuId": "31", "name":"Chicken Red Curry", "description": "", "price": 795,"categories":[ 3 ], "editCategories":[ 0, 1 ]}, "quantity": 1, "editOptions":[ { "id": 2, "editCategory": 0, "name": "ADD BEEF", "price": 150 }, { "id": 9, "editCategory": 1, "name": "VERY HOT", "price": 0 } ]
+        "id": 5, "menuItem": {"id": 35, "menuId": "31", "name":"Chicken Red Curry", "description": "", "price": 795,"categories":[ 3 ], "editCategories":[ 0, 1 ]}, "quantity": 1, "editOptions":[ { "id": 2, "editCategoryId": 0, "name": "ADD BEEF", "price": 150 }, { "id": 9, "editCategoryId": 1, "name": "VERY HOT", "price": 0 } ]
       },
       {
         "id": 6, "menuItem": {"id": 93, "menuId": "76", "name":"Pad Thai", "description": "", "price": 795,"categories":[ 11 ], "editCategories":[ 0, 1 ]}, "quantity": 1, "editOptions":[ ]
