@@ -1,57 +1,60 @@
-<div class="row">
-  <div class="col-xs-12 text-center">
-    <h3>Order</h3>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12 col-sm-6 gutter-top">
-    {{#link-to "order.edit.create" tagName="button" type="button" classNames="btn btn-main btn-block"}}
-      NEW
-    {{/link-to}}
-  </div>
-  <div class="col-xs-12 col-sm-6 gutter-top">
-    {{#link-to "order.view" tagName="button" type="button" classNames="btn btn-main btn-block"}}
-      RECENT ORDERS
-    {{/link-to}}
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12 text-center">
-    <h3>Management</h3>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12 col-sm-4 gutter-top">
-    {{#link-to "delivery-customer" tagName="button" type="button" classNames="btn btn-main btn-block"}}
-      CUSTOMERS
-    {{/link-to}}
-  </div>
-  <div class="col-xs-12 col-sm-4 gutter-top">
-    {{#link-to "road" tagName="button" type="button" classNames="btn btn-main btn-block"}}
-      ROADS
-    {{/link-to}}
-  </div>
-  <div class="col-xs-12 col-sm-4 gutter-top">
-    {{#link-to "postcode" tagName="button" type="button" classNames="btn btn-main btn-block"}}
-      POSTCODES
-    {{/link-to}}
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12 text-center">
-    <h3>Settings</h3>
-  </div>
-</div>
-<div class="row">
-  {{#each model as |setting|}}
-    <div class="col-xs-12 col-sm-6 col-md-4">
-      {{app-setting setting=setting onSaveError=(action "onSaveError")}}
+<div class="row application_index">
+  <div class="col">
+    <div class="row mt-3">
+      <div class="col text-center">
+        <h2>Order</h2>
+      </div>
     </div>
-  {{/each}}
-</div>
+    <div class="row">
+      <div class="col-12 col-sm-6 mb-1">
+        {{#link-to "order.edit.create" tagName="button" type="button" classNames="btn btn-lg btn-block btn-outline-main"}}
+          NEW
+        {{/link-to}}
+      </div>
+      <div class="col-12 col-sm-6 mb-1">
+        {{#link-to "order.view" tagName="button" type="button" classNames="btn btn-lg btn-block btn-outline-main"}}
+          RECENT ORDERS
+        {{/link-to}}
+      </div>
+    </div>
 
-<div class="text-muted" style="position:absolute;bottom:5px;left:10px;">
+    <div class="row mt-3">
+      <div class="col text-center">
+        <h2>Management</h2>
+      </div>
+    </div>
+    <div class="row button-row">
+      <div class="col-12 col-sm-4 mb-1">
+        {{#link-to "delivery-customer" tagName="button" type="button"classNames="btn btn-lg btn-block btn-outline-main"}}
+          CUSTOMERS
+        {{/link-to}}
+      </div>
+      <div class="col-12 col-sm-4 mb-1">
+        {{#link-to "road" tagName="button" type="button" classNames="btn btn-lg btn-block btn-outline-main"}}
+          ROADS
+        {{/link-to}}
+      </div>
+      <div class="col-12 col-sm-4 mb-1">
+        {{#link-to "postcode" tagName="button" type="button" classNames="btn btn-lg btn-block btn-outline-main"}}
+          POSTCODES
+        {{/link-to}}
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col text-center">
+        <h2>Settings</h2>
+      </div>
+    </div>
+    <div class="row">
+      {{#each model as |setting|}}
+        <div class="col-12 col-sm-6 col-md-4">
+          {{app-setting setting=setting onSaveError=(action "onSaveError")}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+<div class="text-muted" style="position:fixed;bottom:5px;left:10px;">
   {{name}} - {{version}}
 </div>

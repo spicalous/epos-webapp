@@ -1,0 +1,8 @@
+
+.btn-main {
+  @include button-variant($white, $brand-colour, $brand-colour);
+}
+
+.btn-outline-main {
+  @include button-outline-variant($brand-colour);
+}
