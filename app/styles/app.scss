@@ -20,7 +20,7 @@
 // Components
 //@import "node_modules/bootstrap/scss/transitions";
 //@import "node_modules/bootstrap/scss/dropdown";
-//@import "node_modules/bootstrap/scss/button-group";
+@import "node_modules/bootstrap/scss/button-group";
 //@import "node_modules/bootstrap/scss/input-group";
 //@import "node_modules/bootstrap/scss/custom-forms";
 //@import "node_modules/bootstrap/scss/nav";
@@ -51,7 +51,6 @@
 @import "variables/colours";
 @import "components/buttons";
 
-//@import "components/app-setting";
 //@import "components/edit-item-modal";
 //@import "components/restaurant-table";
 //@import "components/order-item-list-item";

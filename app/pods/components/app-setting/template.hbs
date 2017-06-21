@@ -1,11 +1,18 @@
 <div class="row">
-  <div class="col-xs-6 text-center app-setting__name">
-    <strong>{{setting.name}}</strong>
+  <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center">
+    {{setting.name}}
   </div>
-  <div class="col-xs-6">
-    <label class="toggle" {{action "toggleSetting"}}>
-      {{input type="checkbox" checked=setting.value}}
-      <span></span>
-    </label>
+  <div class="col-12 col-sm-6 text-center">
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-lg btn-outline-main mb-0 {{settingOneClass}}" {{action "setSetting" 1}}>
+        {{input type="radio" autocomplete="off"}}1
+      </label>
+      <label class="btn btn-lg btn-outline-main mb-0 {{settingTwoClass}}" {{action "setSetting" 2}}>
+        {{input type="radio" autocomplete="off"}}2
+      </label>
+      <label class="btn btn-lg btn-outline-main mb-0 {{settingThreeClass}}" {{action "setSetting" 3}}>
+        {{input type="radio" autocomplete="off"}}3
+      </label>
+    </div>
   </div>
 </div>

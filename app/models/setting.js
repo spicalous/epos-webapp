@@ -3,5 +3,5 @@ import attr from 'ember-data/attr';
 
 export default Model.extend({
   name: attr('string'),
-  value: attr('boolean')
+  value: attr('number')
 });

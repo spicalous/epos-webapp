@@ -48,7 +48,7 @@
     </div>
     <div class="row">
       {{#each model as |setting|}}
-        <div class="col-12 col-sm-6 col-md-4">
+        <div class="col-12">
           {{app-setting setting=setting onSaveError=(action "onSaveError")}}
         </div>
       {{/each}}
