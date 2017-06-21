@@ -1,0 +1,29 @@
+.order_edit {
+  height: 100%;
+
+  &_left {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &_categories {
+      flex-shrink: 0;
+    }
+
+    &_bottom {
+      flex-shrink: 1;
+      flex-basis: 100%;
+
+      &_menu {
+        overflow-y: auto;
+        padding-top: $grid-gutter-width-base / 2;
+        padding-bottom: $grid-gutter-width-base / 2;
+      }
+
+      &_numpad {
+        align-self: flex-end;
+      }
+    }
+
+  }
+}

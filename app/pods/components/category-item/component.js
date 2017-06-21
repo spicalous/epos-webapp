@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
   attributeBindings: ['type'],
 
-  classNames: ['btn', 'btn-default', 'btn-block'],
+  classNames: ['btn', 'btn-secondary', 'btn-block'],
 
   classNameBindings: ['is-selected'],
 

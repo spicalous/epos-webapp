@@ -1,7 +1,7 @@
 // Core variables and mixins
+@import "variables/bootstrap-overrides";
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/mixins";
-@import "variables/bootstrap-overrides";
 
 // Reset and dependencies
 @import "node_modules/bootstrap/scss/normalize";
@@ -33,7 +33,7 @@
 //@import "node_modules/bootstrap/scss/alert";
 //@import "node_modules/bootstrap/scss/progress";
 //@import "node_modules/bootstrap/scss/media";
-//@import "node_modules/bootstrap/scss/list-group";
+@import "node_modules/bootstrap/scss/list-group";
 //@import "node_modules/bootstrap/scss/responsive-embed";
 //@import "node_modules/bootstrap/scss/close";
 
@@ -50,13 +50,5 @@
 
 @import "variables/colours";
 @import "components/buttons";
-
-//@import "components/edit-item-modal";
-//@import "components/restaurant-table";
-//@import "components/order-item-list-item";
-
-// Styles
-//@import "overrides";
-//@import "talaythai";
-//@import "order/edit";
-//@import "order/view";
+@import "order/edit";
+@import "application";

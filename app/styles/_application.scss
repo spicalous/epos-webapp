@@ -1,0 +1,6 @@
+html,
+body,
+body > .ember-view,
+body > .ember-view > .container-fluid {
+    height: 100%;
+}
