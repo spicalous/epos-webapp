@@ -1,5 +1,4 @@
 import Ember from 'ember';
-const MAX_MOBILE_WIDTH = 767;
 
 export default Ember.Route.extend({
 
