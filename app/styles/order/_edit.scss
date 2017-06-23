@@ -26,4 +26,12 @@
 
     }
   }
+
+  &_right {
+
+    &_customer {
+      padding-top: $grid-gutter-width-base / 2;
+      padding-bottom: $grid-gutter-width-base / 2;
+    }
+  }
 }
