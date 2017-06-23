@@ -1,5 +1,5 @@
 <div class="row order_edit">
-  <div class="col-12 col-sm-11 order_edit_left">
+  <div class="col-12 col-sm-7 col-md-8 order_edit_left">
     <div class="row order_edit_left_categories">
       {{#each sortedCategories as |category|}}
         <div class="col-4 col-sm-3 col-md-2 px-0" {{action "selectCategory" category}}>
@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div class="hidden-xs-down col-sm-1">
-    {{!outlet}}
+  <div class="hidden-xs-down col-sm-5 col-md-4 order_edit_right">
+    {{outlet}}
   </div>
 </div>
