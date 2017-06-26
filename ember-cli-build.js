@@ -1,6 +1,7 @@
 /*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var path = require("path");
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -21,6 +22,9 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('vendor/polyfill.js', { prepend: true });
+
+  app.import(path.join(__dirname, 'node_modules/bootstrap/js/dist/dropdown.js'));
+  app.import(path.join(__dirname, 'node_modules/bootstrap/js/dist/util.js'));
 
   return app.toTree();
 };
