@@ -4,6 +4,20 @@ export default Ember.Route.extend({
 
   actions: {
 
+    showToast(message) {
+      this.disconnectOutlet({
+        outlet: 'toast',
+        parentView: 'application'
+      });
+      Ember.run.next(this, () => {
+        this.render('toast', {
+          into: 'application',
+          outlet: 'toast',
+          model: { message: message }
+        });
+      });
+    },
+
     showMessage(name, model) {
       this.render(name, {
         into: 'application',

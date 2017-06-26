@@ -25,16 +25,6 @@ a, a:focus, a:hover, a:active, a:visited {
     color: transparent !important;
 }
 
-@-webkit-keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
 @color-primary-0: #811919;	/* Main Primary color */
 @color-primary-1: #D46E6E;
 @color-primary-2: #A93B3B;
@@ -127,22 +117,4 @@ a, a:focus, a:hover, a:active, a:visited {
 .overlay-inner {
   display: table-cell;
   vertical-align: middle;
-}
-
-.toast {
-  pointer-events: none;
-  width: 100%;
-  position: absolute;
-  bottom: 40px;
-  z-index: @zindex-toast;
-  -webkit-animation: fadeIn 0.2s ease;
-  animation: fadeIn 0.2s ease;
-}
-
-.toast-text {
-  display: inline-block;
-  color: #FFF;
-  background-color: #333;
-  padding: 1px 15px;
-  border-radius: 10px;
 }

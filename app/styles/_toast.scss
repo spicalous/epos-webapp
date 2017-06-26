@@ -1,0 +1,17 @@
+.toast {
+  pointer-events: none;
+  width: 100%;
+  position: absolute;
+  bottom: 40px;
+  z-index: $toast-zindex;
+  -webkit-animation: fade 3s ease forwards;
+  animation: fade 3s linear ease forwards;
+}
+
+.toast-text {
+  display: inline-block;
+  color: $toast-colour;
+  background-color: $toast-background-colour;
+  padding: 1px 15px;
+  border-radius: 10px;
+}

@@ -53,9 +53,7 @@ export default Ember.Controller.extend({
     addMenuItem(menuItem) {
       this.get('orderService').add(menuItem);
       this.set('numpadValue', '');
-      this.send('showMessage', 'toast', {
-        body: 'Added ' + menuItem.get('name')
-      });
+      this.send('showToast', 'Added ' + menuItem.get('name'));
     },
 
     onNumpadValueChange(value) {
