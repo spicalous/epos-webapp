@@ -15,9 +15,7 @@
 <div class="row order_edit_right_order_items">
   <div class="col">
     {{#each orderService.items as |item|}}
-      {{order-item-list-item item=item
-                             onEditItem=onEditItem
-                             onDecrementItem=onDecrementItem}}
+      {{order-item item=item onEditItem=onEditItem onDecrementItem=onDecrementItem}}
     {{/each}}
   </div>
 </div>
