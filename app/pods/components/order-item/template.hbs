@@ -33,7 +33,18 @@
 
 {{#if editing}}
   {{#bootstrap-modal title=item.menuItem.name onDismissed=(action "toggleEdit") onConfirm=(action "toggleEdit")}}
-    TEST!
+    <div class="btn-group" style="width: 100%">
+      {{#each item.menuItem.editCategories as |editCategory|}}
+        <button type="button" style="width: 33.33%" class="btn btn-secondary" {{action "setSelectedEditCategory" editCategory}}>{{editCategory.name}}</button>
+      {{/each}}
+    </div>
+    <div>
+      {{#each filteredEditOptions as |editOption|}}
+        <div>
+          {{editOption.name}}
+        </div>
+      {{/each}}
+    </div>
   {{/bootstrap-modal}}
 {{/if}}
 

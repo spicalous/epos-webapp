@@ -15,7 +15,7 @@
 <div class="row order_edit_right_order_items">
   <div class="col">
     {{#each orderService.items as |item|}}
-      {{order-item item=item onDecrement=(action "decrementItem")}}
+      {{order-item item=item editOptions=menu.editOptions onDecrement=(action "decrementItem")}}
     {{/each}}
   </div>
 </div>
