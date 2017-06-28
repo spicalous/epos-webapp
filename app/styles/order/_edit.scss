@@ -31,16 +31,14 @@
     display: flex;
     flex-direction: column;
 
-    &_customer {
-      flex-shrink: 0;
-    }
-
     &_order_items {
       margin-bottom: auto;
       flex-shrink: 1;
       overflow-y: auto;
     }
 
+    &_customer,
+    &_order_info,
     &_actions {
       flex-shrink: 0;
     }
@@ -51,5 +49,8 @@
       padding-bottom: $grid-gutter-width-base / 2;
     }
 
+    &_order_info {
+      padding-top: $grid-gutter-width-base / 2;
+    }
   }
 }

@@ -19,6 +19,16 @@
     {{/each}}
   </div>
 </div>
+{{#if orderService.size}}
+  <div class="row order_edit_right_order_info text-center">
+    <div class="col">
+      {{orderService.size}} items
+    </div>
+    <div class="col">
+      £{{format-currency orderService.total}}
+    </div>
+  </div>
+{{/if}}
 <div class="row order_edit_right_actions">
   <div class="col">
     <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{cannotCancelOrder}} {{action "confirmCancelOrder"}}>Cancel</button>
