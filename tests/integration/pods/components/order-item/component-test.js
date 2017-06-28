@@ -3,7 +3,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 
-moduleForComponent('order-item-list-item', 'Integration | Component | order item list item', {
+moduleForComponent('order-item', 'Integration | Component | order item', {
   integration: true
 });
 
@@ -18,7 +18,7 @@ test('displays the item with menu id', function(assert) {
     })
   }));
 
-  this.render(hbs`{{order-item-list-item item=item}}`);
+  this.render(hbs`{{order-item item=item}}`);
 
   assert.equal(this.$('.order-item__quantity-x-id').text().trim(), '2 x 3');
   assert.equal(this.$('.order-item__name').text().trim(), 'Menu item name');
@@ -35,7 +35,7 @@ test('does not display menu id if it doesnt exist', function(assert) {
     })
   }));
 
-  this.render(hbs`{{order-item-list-item item=item}}`);
+  this.render(hbs`{{order-item item=item}}`);
 
   assert.equal(this.$('.order-item__quantity-x-id').text().trim(), '2 x');
   assert.equal(this.$('.order-item__name').text().trim(), 'Menu item name');
@@ -58,7 +58,7 @@ test('displays edit options', function(assert) {
     ])
   }));
 
-  this.render(hbs`{{order-item-list-item item=item}}`);
+  this.render(hbs`{{order-item item=item}}`);
 
   assert.equal(this.$('.order-item__quantity-x-id').text().trim(), '2 x');
   assert.equal(this.$('.order-item__name').text().trim(), 'Menu item name');
@@ -69,7 +69,7 @@ test('displays edit options', function(assert) {
 
 test('toggles expanded to true when clicked', function(assert) {
 
-  this.render(hbs`{{order-item-list-item}}`);
+  this.render(hbs`{{order-item}}`);
   this.$('.order-item__top').click();
 
   assert.equal(this.$('.order-item__bottom').length, 1);
@@ -78,7 +78,7 @@ test('toggles expanded to true when clicked', function(assert) {
 
 test('toggles expanded to false when clicked', function(assert) {
 
-  this.render(hbs`{{order-item-list-item}}`);
+  this.render(hbs`{{order-item}}`);
   this.$('.order-item__top').click();
   this.$('.order-item__top').click();
 

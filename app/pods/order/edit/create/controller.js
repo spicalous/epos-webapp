@@ -217,14 +217,6 @@ export default Ember.Controller.extend({
     },
 
     /**
-     * Sets the current order item to edit
-     * @param {OrderItem} orderItem - the order item to edit
-     */
-    editItem(orderItem) {
-      this.set('itemToEdit', orderItem);
-    },
-
-    /**
      * Decrements the quantity of the order item via the order service
      * @param {OrderItem} orderItem - the order item to edit
      */
