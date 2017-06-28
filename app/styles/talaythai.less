@@ -74,17 +74,6 @@ a, a:focus, a:hover, a:active, a:visited {
   height: 100%;
 }
 
-.confirm-dialog {
-  .fixed-fullscreen;
-  z-index: @zindex-confirm-dialog;
-}
-
-.confirm-dialog-backdrop {
-  .fixed-fullscreen;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: @zindex-confirm-dialog-backdrop;
-}
-
 .customer-browser {
   .fixed-fullscreen;
   background: rgba(255, 255, 255, 1);
@@ -103,18 +92,4 @@ a, a:focus, a:hover, a:active, a:visited {
   .dropdown-menu {
     width: 100%;
   }
-}
-
-.overlay {
-  .fixed-fullscreen;
-  background: rgba(255, 255, 255, 0.9);
-  display: table;
-  z-index: @zindex-overlay;
-  -webkit-animation: fadeIn 0.2s ease;
-  animation: fadeIn 0.2s ease;
-}
-
-.overlay-inner {
-  display: table-cell;
-  vertical-align: middle;
 }

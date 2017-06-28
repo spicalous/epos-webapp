@@ -9,10 +9,9 @@ export default Ember.Controller.extend({
       this.send('dismissMessage', 'confirm', confirmCallback);
     },
 
-    onCancel() {
-      let cancelCallback = this.get('model.cancel');
-      this.send('dismissMessage', 'confirm', cancelCallback);
+    removeConfirmOutlet() {
+      this.send('dismissMessage', 'confirm');
     }
-  }
 
+  }
 });

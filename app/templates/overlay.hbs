@@ -1,13 +1,9 @@
-<div class="overlay" {{action "dismissMessage" "overlay" model.callback}}>
-  <div class="overlay-inner">
-    <div class="text-center">
-      <h2>
-        {{model.header}}
-      </h2>
-      {{model.body}}
-      <div class="text-muted">
-        <small>Tap anywhere to dismiss</small>
-      </div>
+<div class="d-flex justify-content-center align-items-center overlay" {{action "dismissMessage" "overlay" model.callback}}>
+  <div class="text-center">
+    <h2>{{model.header}}</h2>
+    {{model.body}}
+    <div class="text-muted">
+      <small>Tap anywhere to dismiss</small>
     </div>
   </div>
 </div>

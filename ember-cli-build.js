@@ -24,6 +24,7 @@ module.exports = function(defaults) {
   app.import('vendor/polyfill.js', { prepend: true });
 
   app.import(path.join(__dirname, 'node_modules/bootstrap/js/dist/dropdown.js'));
+  app.import(path.join(__dirname, 'node_modules/bootstrap/js/dist/modal.js'));
   app.import(path.join(__dirname, 'node_modules/bootstrap/js/dist/util.js'));
 
   return app.toTree();

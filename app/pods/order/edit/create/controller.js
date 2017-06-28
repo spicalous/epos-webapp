@@ -268,7 +268,6 @@ export default Ember.Controller.extend({
           }
         });
 
-
       }, (response) => {
         this.send('dismissMessage', 'loader');
         this.send('showMessage', 'overlay', {
@@ -278,11 +277,17 @@ export default Ember.Controller.extend({
       });
     },
 
+    confirmCancelOrder() {
+      this.send('showMessage', 'confirm', {
+        title: "Cancel order",
+        message: "Are you sure you want to cancel?",
+        confirm: () => this.send('cancelOrder')
+      });
+    },
+
     cancelOrder() {
       this.send('reset');
-      this.send('showMessage', 'overlay', {
-        header: 'Order Cancelled'
-      });
+      this.send('showMessage', 'overlay', { header: 'Order Cancelled' });
     },
 
     reset() {
