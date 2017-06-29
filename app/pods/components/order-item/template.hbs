@@ -38,10 +38,17 @@
         <button type="button" style="width: 33.33%" class="btn btn-secondary" {{action "setSelectedEditCategory" editCategory}}>{{editCategory.name}}</button>
       {{/each}}
     </div>
-    <div>
+    <div class="order-item_edit-options">
       {{#each filteredEditOptions as |editOption|}}
-        <div>
-          {{editOption.name}}
+        <div class="form-check">
+          <label class="form-check-label" style="width: 100%">
+            {{input type="checkbox" class="form-check-input" checked=false}}
+            {{#if editOption.price}}
+              {{editOption.name}} ({{format-currency editOption.price}})
+            {{else}}
+              {{editOption.name}}
+            {{/if}}
+          </label>
         </div>
       {{/each}}
     </div>

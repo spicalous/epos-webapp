@@ -4,4 +4,13 @@
     width: 100%;
     padding-top: $grid-gutter-width-base / 2;
   }
+
+  &_edit-options {
+    padding-top: $grid-gutter-width-base;
+    padding-left: $grid-gutter-width-base;
+
+    > .form-check {
+      padding-top: $grid-gutter-width-base / 2;
+    }
+  }
 }
