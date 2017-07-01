@@ -21,5 +21,5 @@ Ember.TextField.reopen({
 
 export default App;
 
-//TODO Make edit option checkboxes tappable full height
 //TODO active state on category and edit category
+//TODO linewrapping on menu and order items

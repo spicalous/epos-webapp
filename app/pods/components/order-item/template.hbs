@@ -1,22 +1,21 @@
-{{#if item.menuItem.menuId}}
-  <strong>{{item.quantity}} x {{item.menuItem.menuId}}</strong>&nbsp;{{item.menuItem.name}}
-{{else}}
-  <strong>{{item.quantity}} x</strong>&nbsp;{{item.menuItem.name}}
-{{/if}}
-
-<!--
-
-  {{#each item.editOptions as |option|}}
-    <div class="order-item__edit-option text-muted">
-      {{#if option.price}}
-    {{option.name}} ({{format-currency option.price}})
-      {{else}}
-    {{option.name}}
+<div>
+  {{#if item.menuItem.menuId}}
+    <strong>{{item.quantity}} x {{item.menuItem.menuId}}</strong>&nbsp;{{item.menuItem.name}}
+  {{else}}
+    <strong>{{item.quantity}} x</strong>&nbsp;{{item.menuItem.name}}
   {{/if}}
+</div>
+<div>
+  {{#each item.editOptions as |option|}}
+    <div class="text-muted">
+      {{#if option.price}}
+        {{option.name}} ({{format-currency option.price}})
+      {{else}}
+        {{option.name}}
+      {{/if}}
     </div>
   {{/each}}
-
--->
+</div>
 
 {{#if expanded}}
   <div class="order-item_expanded-content d-flex justify-content-between align-items-center">
