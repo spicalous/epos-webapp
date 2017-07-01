@@ -1,21 +1,18 @@
-<div>
-  {{#if item.menuItem.menuId}}
-    <strong>{{item.quantity}} x {{item.menuItem.menuId}}</strong>&nbsp;{{item.menuItem.name}}
-  {{else}}
-    <strong>{{item.quantity}} x</strong>&nbsp;{{item.menuItem.name}}
-  {{/if}}
-</div>
-<div>
-  {{#each item.editOptions as |option|}}
-    <div class="text-muted">
-      {{#if option.price}}
-        {{option.name}} ({{format-currency option.price}})
-      {{else}}
-        {{option.name}}
-      {{/if}}
-    </div>
-  {{/each}}
-</div>
+{{#if item.menuItem.menuId}}
+  <strong>{{item.quantity}} x {{item.menuItem.menuId}}</strong>&nbsp;{{item.menuItem.name}}
+{{else}}
+  <strong>{{item.quantity}} x</strong>&nbsp;{{item.menuItem.name}}
+{{/if}}
+
+{{#each item.editOptions as |option|}}
+  <div class="order-item_edit-option text-muted">
+    {{#if option.price}}
+      {{option.name}} ({{format-currency option.price}})
+    {{else}}
+      {{option.name}}
+    {{/if}}
+  </div>
+{{/each}}
 
 {{#if expanded}}
   <div class="order-item_expanded-content d-flex justify-content-between align-items-center">
@@ -37,11 +34,11 @@
         <button type="button" style="width: 33.33%" class="btn btn-secondary" {{action "setSelectedEditCategory" editCategory}}>{{editCategory.name}}</button>
       {{/each}}
     </div>
-    <div class="order-item_edit-options">
+    <div class="order-item_edit-option-toggles">
       {{#each filteredEditOptions as |editOption|}}
         <div class="form-check">
           <label class="form-check-label" style="width: 100%">
-            {{input type="checkbox" class="form-check-input" checked=false}}
+            <input type="checkbox" class="form-check-input" checked={{contains item.editOptions editOption}} onchange={{action "toggleEditOption" editOption}}>
             {{#if editOption.price}}
               {{editOption.name}} ({{format-currency editOption.price}})
             {{else}}

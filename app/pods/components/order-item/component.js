@@ -44,6 +44,16 @@ export default Ember.Component.extend({
 
     setSelectedEditCategory(editCategory) {
       this.set('selectedEditCategoryId', editCategory.get('id'));
+    },
+
+    toggleEditOption(option) {
+      let editOptions = this.get('item.editOptions');
+
+      if (editOptions.indexOf(option) === -1) {
+        editOptions.pushObject(option);
+      } else {
+        editOptions.removeObject(option);
+      }
     }
 
   }
