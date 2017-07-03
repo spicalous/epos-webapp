@@ -16,9 +16,9 @@
 
 {{#if expanded}}
   <div class="order-item_expanded-content d-flex justify-content-between align-items-center">
-    <button type="button" class="btn btn-outline-success" {{action "increment" bubbles=false}}>+</button>
-    £{{format-currency item.total}}
     <button type="button" class="btn btn-outline-danger" {{action "decrement" bubbles=false}}>-</button>
+    £{{format-currency item.total}}
+    <button type="button" class="btn btn-outline-success" {{action "increment" bubbles=false}}>+</button>
   </div>
   {{#if item.menuItem.editCategories}}
     <div class="order-item_expanded-content">
