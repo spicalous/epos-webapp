@@ -3,7 +3,7 @@ import { RECEIPT_TYPE } from '../../../models/receipt-type';
 
 export default Ember.Component.extend({
 
-  tagName: 'div',
+  tagName: 'li',
 
   classNames: ['list-group-item'],
 

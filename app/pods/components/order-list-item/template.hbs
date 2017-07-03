@@ -1,94 +1,49 @@
-<div class="row">
-  <div class="col-xs-11">
-    <div class="row">
-      <div class="col-xs-12">
-        {{component (concat "order-" customerType) customer=order.customer}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        £{{format-currency order.total}}
-        <button type="button" class="btn btn-default btn-expandable {{if showPaymentSelector 'expanded'}}" {{action "showPaymentSelector"}}>
-          {{#if showPaymentSelector}}
-            {{#if updatingPaymentMethod}}
-              {{loading-spinner}}
-            {{else}}
-              <button type="button" class="btn btn-default" {{action "updatePayment" null bubbles=false}}>
-                NOT PAID
-              </button>
-              <button type="button" class="btn btn-default" {{action "updatePayment" "CASH" bubbles=false}}>
-                CASH
-              </button>
-              <button type="button" class="btn btn-default" {{action "updatePayment" "CARD" bubbles=false}}>
-                CARD
-              </button>
-              <button type="button" class="btn btn-default" {{action "updatePayment" "ONLINE" bubbles=false}}>
-                ONLINE
-              </button>
-              <button type="button" class="btn btn-default" {{action "hidePaymentSelector" bubbles=false}}>
-                CANCEL
-              </button>
-            {{/if}}
-          {{else}}
-            {{format-payment-method order.paymentMethod}}
-          {{/if}}
-        </button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        Ordered at {{format-date-time order.dateTime}}
-      </div>
-    </div>
+<div class="d-flex w-100 justify-content-between">
+  <div>
+    {{component (concat "order-" customerType) customer=order.customer}}
+    <span>£{{format-currency order.total}} {{format-payment-method order.paymentMethod}}</span>
   </div>
-
-  <div class="col-xs-1">
-    <div class="btn-group pull-right">
-      {{#btn/btn-default class="btn-default btn-order-actions dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-        <span class="glyphicon glyphicon-option-vertical"></span>
-      {{/btn/btn-default}}
-      <ul class="dropdown-menu dropdown-menu-right">
-        <li><a {{action "printOrderAsEatIn"}}>Print small copy</a></li>
-        <li><a {{action "printOrderAsDelivery"}}>Print large copy</a></li>
-        <li role="separator" class="divider"></li>
-        <li><a {{action "editOrder"}}>Edit order</a></li>
-      </ul>
-    </div>
-  </div>
+  <small>{{format-date-time order.dateTime}}</small>
 </div>
-
-{{#liquid-if showOrderItems class="toDown-toUp"}}
-  {{#if order.notes}}
-    <div class="row gutter-top-bottom">
-      <div class="col-xs-12">
-        {{order.notes}}
-      </div>
-    </div>
-  {{/if}}
-  <div class="row gutter-top-bottom">
-    <div class="col-xs-12">
-      <ul class="list-group">
-        {{#each order.orderItems as |orderItem|}}
-          <li class="list-group-item">
-            {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
+<div class="w-100">
+  {{#if showOrderItems}}
+    {{#if order.notes}}
+      <div>{{order.notes}}</div>
+    {{/if}}
+    <ul class="list-group">
+      {{#each order.orderItems as |orderItem|}}
+        <li class="list-group-item">
+          <div>
+            <div>
+              {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
+            </div>
             {{#each orderItem.editOptions as |editOption|}}
               <div>{{editOption.name}}</div>
             {{/each}}
-          </li>
-        {{/each}}
-      </ul>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+  <div class="row">
+    <div class="col-sm col-12">
+      <button type="button" class="btn btn-block btn-secondary mt-2" {{action "toggleShowOrderItems"}}>
+        {{#if showOrderItems}}
+          Hide items
+        {{else}}
+          Show items
+        {{/if}}
+      </button>
     </div>
-  </div>
-{{/liquid-if}}
-
-<div class="row gutter-top-bottom">
-  <div class="col-xs-12">
-    {{#btn/btn-default class="btn-default btn-lg btn-block" action="toggleShowOrderItems"}}
-      {{#if showOrderItems}}
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      {{else}}
-        <span class="glyphicon glyphicon-chevron-down"></span>
-      {{/if}}
-    {{/btn/btn-default}}
+    <div class="col-sm col-6">
+      <button type="button" class="btn btn-block btn-secondary mt-2" {{action "toggleShowOrderItems"}}>
+        Edit order
+      </button>
+    </div>
+    <div class="col-sm col-6">
+      <button type="button" class="btn btn-block btn-secondary mt-2" {{action "toggleShowOrderItems"}}>
+        Print order
+      </button>
+    </div>
   </div>
 </div>

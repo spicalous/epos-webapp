@@ -1,58 +1,50 @@
-<div class="order-view">
-  <div class="row">
-    <div class="col-xs-12 col-sm-offset-1 col-sm-4 col-md-offset-1 col-md-6">
-      <h2>Orders</h2>
-    </div>
-    <div class="col-xs-6 col-sm-3 col-md-2">
-      <div class="dropdown filter-dropdown">
-        {{#btn/btn-default class="btn-default btn-filter btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-          <span>
-            Order: {{orderTypeFilter}}
-          </span>
-          <span class="caret"></span>
-        {{/btn/btn-default}}
-        <ul class="dropdown-menu dropdown-menu-right">
-          {{#each orderTypes as |orderType|}}
-            <li><a {{action "setOrderTypeFilter" orderType}}>{{orderType}}</a></li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-3 col-md-2">
-      <div class="dropdown filter-dropdown">
-        {{#btn/btn-default class="btn-default btn-filter btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-          <span>
-            Payment: {{paymentTypeFilter}}
-          </span>
-          <span class="caret"></span>
-        {{/btn/btn-default}}
-        <ul class="dropdown-menu dropdown-menu-right">
-          {{#each paymentTypes as |paymentType|}}
-            <li><a {{action "setPaymentTypeFilter" paymentType}}>{{paymentType}}</a></li>
-          {{/each}}
-        </ul>
+<div class="row pt-2">
+  <div class="col-12 text-center">
+    <h1>Orders</h1>
+  </div>
+  <div class="col">
+    <div class="dropdown">
+      <button type="button" class="btn btn-block btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Order: {{orderTypeFilter}}
+      </button>
+      <div class="dropdown-menu w-100">
+        {{#each orderTypes as |orderType|}}
+          <a class="dropdown-item" {{action "setOrderTypeFilter" orderType}}>{{orderType}}</a>
+        {{/each}}
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-      {{#unless ordersSortedByTimestamp}}
-        <div class="text-center no-orders">
-          <span>No orders to display</span>
-        </div>
-      {{else}}
-        <ul class="list-group">
-          {{#each ordersSortedByTimestamp as |order|}}
-            {{#if order.id}}
-              {{order-list-item order=order
-                  onEditOrder=(action "editOrder")
-                  onPrintOrder=(action "printOrder") }}
-            {{/if}}
-          {{/each}}
-        </ul>
-      {{/unless}}
+  <div class="col">
+    <div class="dropdown">
+      <button type="button" class="btn btn-block btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Payment: {{paymentTypeFilter}}
+      </button>
+      <div class="dropdown-menu w-100">
+        {{#each paymentTypes as |paymentType|}}
+          <a class="dropdown-item" {{action "setPaymentTypeFilter" paymentType}}>{{paymentType}}</a>
+        {{/each}}
+      </div>
     </div>
   </div>
+</div>
+<div class="row pt-2">
+  <div class="col">
+    {{#unless ordersSortedByTimestamp}}
+      <div class="text-center">
+        No orders to display
+      </div>
+    {{else}}
+      <ul class="list-group">
+        {{#each ordersSortedByTimestamp as |order|}}
+          {{#if order.id}}
+            {{order-list-item order=order}}
+          {{/if}}
+        {{/each}}
+      </ul>
+    {{/unless}}
+  </div>
+</div>
+<!--
   <div class="row">
     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
       <div class="page-header">
@@ -88,5 +80,4 @@
         Print summary
       {{/btn/btn-default}}
     </div>
-    -->
-</div>
+-->
