@@ -1,5 +1,19 @@
 <div class="row order_edit">
   <div class="col-12 col-sm-7 col-md-8 order_edit_left">
+    <div class="row hidden-sm-up order_edit_left_actions">
+      <div class="col">
+        <div class="dropdown">
+          <button type="button" class="btn btn-lg btn-block btn-main" data-toggle="dropdown" aria-expanded="false">
+            New customer
+          </button>
+          <div class="dropdown-menu w-100">
+            <button type="button" class="dropdown-item py-2">Takeaway</button>
+            <button type="button" class="dropdown-item py-2">Delivery</button>
+            <button type="button" class="dropdown-item py-2">Online</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row order_edit_left_categories">
       {{#each sortedCategories as |category|}}
         <div class="col-4 col-sm-3 col-md-2 px-0" {{action "selectCategory" category}}>
@@ -70,7 +84,9 @@
     {{/if}}
     <div class="row order_edit_right_actions">
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action "confirmCancelOrder"}}>Cancel</button>
+        <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action
+            "confirmCancelOrder"}}>Cancel
+        </button>
       </div>
       <div class="col">
         <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}}>Submit</button>
