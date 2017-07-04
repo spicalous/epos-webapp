@@ -11,38 +11,48 @@ export default Ember.Controller.extend({
   selectedCategory: null,
 
   /**
-   * used for filtering the menu
-   * @type {string}
+   * Used for filtering the menu
+   * @type {String}
    */
   numpadValue: '',
 
-  filterMenu: Ember.observer('model.menu', 'selectedCategory', 'numpadValue', function() {
-    const categoryFilter = this.get('selectedCategory');
-    const menuIdFilter = this.get('numpadValue');
+  /**
+   * An array of menu items filtered by category and number entered by the numpad
+   * @type {MenuItem[]}
+   */
+  menuItems: Ember.computed('model.menu', 'selectedCategory', 'numpadValue', function() {
+    const selectedCategory = this.get('selectedCategory');
+    const numpadValue = this.get('numpadValue');
     let menuItems = this.get('model.menu');
 
-    if (categoryFilter) {
+    if (selectedCategory) {
       menuItems = menuItems.filter((item) =>
-        item.get('categories').any((category) => categoryFilter === category));
+        item.get('categories').any((category) => selectedCategory === category));
     }
-    if (menuIdFilter) {
-      menuItems = menuItems.filter((item) => item.get('menuId').startsWith(menuIdFilter));
+    if (numpadValue) {
+      menuItems = menuItems.filter((item) => item.get('menuId').startsWith(numpadValue));
     }
 
-    this.set('menuItems', menuItems);
+    return menuItems;
   }),
 
   /**
+   * Menu items sorted by ascending id
    * @type {MenuItem[]}
-   * menu items sorted by ascending id
    */
   sortedMenu: Ember.computed.sort('menuItems', (x, y) => x.get('id') - y.get('id')),
 
   /**
+   * Categories sorted by ascending id
    * @type {Category[]}
-   * categories sorted by ascending id
    */
   sortedCategories: Ember.computed.sort('model.categories', (x, y) => x.get('id') - y.get('id')),
+
+  emptyCustomer: Ember.computed.empty('customer'),
+
+  emptyOrder: Ember.computed.empty('orderService.items'),
+
+  emptyCustomerAndOrder: Ember.computed.and('emptyCustomer', 'emptyOrder'),
 
   actions: {
 
@@ -56,11 +66,33 @@ export default Ember.Controller.extend({
       this.send('showToast', 'Added ' + menuItem.get('name'));
     },
 
+    decrementOrderItem(orderItem) {
+      this.get('orderService').decrement(orderItem);
+    },
+
     onNumpadValueChange(value) {
       this.set('numpadValue', value);
     },
 
+    confirmCancelOrder() {
+      this.send('showMessage', 'confirm', {
+        title: "Cancel order",
+        message: "Are you sure you want to cancel?",
+        confirm: () => this.send('cancelOrder')
+      });
+    },
+
+    cancelOrder() {
+      this.send('reset');
+      this.send('showMessage', 'overlay', { header: 'Order Cancelled' });
+    },
+
     reset() {
+//      this.send('removeCustomer');
+      this.get('orderService').clear();
+      this.set('notes', null);
+      this.set('paymentMethod', null);
+      this.set('estimatedTime', 45);
       this.set('numpadValue', '');
       this.set('selectedCategory', null);
     }
