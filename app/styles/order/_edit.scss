@@ -62,3 +62,31 @@
     }
   }
 }
+
+.order-modal {
+  @extend .container-fluid;
+  background-color: $white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+
+  &_top {
+    flex-shrink: 0;
+    padding-top: $grid-gutter-width-base / 2;
+    padding-bottom: $grid-gutter-width-base / 2;
+  }
+
+  &_items {
+    flex-grow: 1;
+  }
+
+  &_actions {
+    flex-shrink: 0;
+    padding-top: $grid-gutter-width-base / 2;
+    padding-bottom: $grid-gutter-width-base / 2;
+  }
+}

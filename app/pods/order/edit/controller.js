@@ -74,6 +74,14 @@ export default Ember.Controller.extend({
       this.set('numpadValue', value);
     },
 
+    showCustomerSelect() {
+      console.log("WTF DO I DO!");
+    },
+
+    toggleOrderModal() {
+      this.toggleProperty('showOrderModal');
+    },
+
     confirmCancelOrder() {
       this.send('showMessage', 'confirm', {
         title: "Cancel order",
@@ -87,8 +95,13 @@ export default Ember.Controller.extend({
       this.send('showMessage', 'overlay', { header: 'Order Cancelled' });
     },
 
+    submitOrder() {
+
+    },
+
     reset() {
 //      this.send('removeCustomer');
+      this.set('showOrderModal', false);
       this.get('orderService').clear();
       this.set('notes', null);
       this.set('paymentMethod', null);

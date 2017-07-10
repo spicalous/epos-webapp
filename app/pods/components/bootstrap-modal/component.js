@@ -11,6 +11,10 @@ export default Ember.Component.extend({
     modal.on('hidden.bs.modal', this.get('onDismissed'));
   },
 
+  onDismissed() {
+    // empty function by default
+  },
+
   actions: {
 
     /*
