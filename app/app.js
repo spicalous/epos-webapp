@@ -23,3 +23,5 @@ export default App;
 
 //TODO active state on category and edit category
 //TODO linewrapping on menu and order items
+//TODO rollback edit items on cancel
+//TODO count for order summary
