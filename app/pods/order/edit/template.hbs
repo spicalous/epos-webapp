@@ -6,11 +6,6 @@
           New customer
         </button>
       </div>
-      <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-main" disabled={{emptyOrder}} {{action "toggleOrderModal"}}>
-          Order
-        </button>
-      </div>
     </div>
     <div class="row order_edit_left_categories">
       {{#each sortedCategories as |category|}}
@@ -85,6 +80,12 @@
     </div>
   </div>
 </div>
+
+{{#unless emptyOrder}}
+  <button type="button" class="btn btn-order hidden-sm-up" disabled={{emptyOrder}} {{action "toggleOrderModal"}}>
+    {{orderService.size}}
+  </button>
+{{/unless}}
 
 {{#if showOrderModal}}
   <div class="order-modal">

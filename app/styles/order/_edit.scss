@@ -63,6 +63,19 @@
   }
 }
 
+.btn-order {
+  @extend .btn-warning;
+  color: $black;
+  box-shadow: 5px 5px 25px -10px $black;
+
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  bottom: $grid-gutter-width-base;
+  right: $grid-gutter-width-base;
+}
+
 .order-modal {
   @extend .container-fluid;
   background-color: $white;
