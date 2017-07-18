@@ -2,10 +2,16 @@
   <div class="col-12 col-sm-7 col-md-8 order_edit_left">
     <div class="row hidden-sm-up order_edit_left_actions">
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-main" {{action "showCustomerSelect"}}>
-          New customer
-        </button>
+        {{inline-customer-input customer=customer
+                                onSelectTakeaway=(action "setNewTakeawayCustomer")
+                                onSelectDelivery=(action "toggleCustomerSelect")
+                                onSelectOnline=(action "setNewOnlineCustomer")}}
       </div>
+      {{#if customer}}
+        <button type="button" class="close" {{action "removeCustomer"}}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      {{/if}}
     </div>
     <div class="row order_edit_left_categories">
       {{#each sortedCategories as |category|}}
@@ -44,10 +50,16 @@
   <div class="hidden-xs-down col-sm-5 col-md-4 order_edit_right">
     <div class="row order_edit_right_customer">
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-main" {{action "showCustomerSelect"}}>
-          New customer
-        </button>
+        {{inline-customer-input customer=customer
+                                onSelectTakeaway=(action "setNewTakeawayCustomer")
+                                onSelectDelivery=(action "toggleCustomerSelect")
+                                onSelectOnline=(action "setNewOnlineCustomer")}}
       </div>
+      {{#if customer}}
+        <button type="button" class="close" {{action "removeCustomer"}}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      {{/if}}
     </div>
     <div class="row order_edit_right_order_items">
       <div class="col">
@@ -124,4 +136,8 @@
       </div>
     </div>
   </div>
+{{/if}}
+
+{{#if showCustomerSelect}}
+  {{customer-select customer=customer}}
 {{/if}}

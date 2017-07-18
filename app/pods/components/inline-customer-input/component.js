@@ -2,10 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  classNames: ['inline-customer-input'],
-
-  canRemove: true,
-
   /**
    *  customer.constructor.modelName (store.createRecord)
    *  customer.content.constructor.modelName (store.findRecord)
@@ -26,14 +22,6 @@ export default Ember.Component.extend({
 
     onSelectOnline() {
       this.get('onSelectOnline')();
-    },
-
-    onSelectEatIn() {
-      this.get('onSelectEatIn')();
-    },
-
-    onRemoveCustomer() {
-      this.get('onRemoveCustomer')();
     }
 
   }

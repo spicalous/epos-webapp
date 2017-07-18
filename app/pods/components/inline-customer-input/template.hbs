@@ -1,32 +1,16 @@
 {{#if customer}}
-
-  {{#if canRemove}}
-    {{#btn/btn-default class="btn-danger btn-sm btn-block" action="onRemoveCustomer"}}
-      REMOVE CUSTOMER
-    {{/btn/btn-default}}
-  {{/if}}
-
-  <div class="gutter-top-bottom">
-    {{component (concat 'inline-customer-input/selected/' customerType) customer=customer}}
-  </div>
-
+  {{component (concat 'inline-customer-input/selected/' customerType) customer=customer}}
 {{else}}
-
   <div class="dropdown">
-    {{#btn/btn-default class="btn-danger btn-lg btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-      SELECT CUSTOMER
-    {{/btn/btn-default}}
-    <ul class="dropdown-menu">
-      <li><a class="lead"{{action "onSelectTakeaway"}}>Take away</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a class="lead"{{action "onSelectDelivery"}}>Delivery</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a class="lead"{{action "onSelectOnline"}}>Online</a></li>
-      <!--
-      <li role="separator" class="divider"></li>
-      <li><a class="lead"{{action "onSelectEatIn"}}>Eat in</a></li>
-      -->
-    </ul>
+    <button type="button" class="btn btn-lg btn-block btn-main dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      New customer
+    </button>
+    <div class="dropdown-menu w-100 full-tap-dropdown">
+      <a class="dropdown-item"{{action "onSelectTakeaway"}}>Take away</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item"{{action "onSelectDelivery"}}>Delivery</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item"{{action "onSelectOnline"}}>Online</a>
+    </div>
   </div>
-
 {{/if}}

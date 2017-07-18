@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { PAYMENT_METHODS } from '../../../models/payment-method';
 
 export default Ember.Controller.extend({
 
@@ -74,8 +75,25 @@ export default Ember.Controller.extend({
       this.set('numpadValue', value);
     },
 
-    showCustomerSelect() {
-      console.log("WTF DO I DO!");
+    setNewTakeawayCustomer() {
+      this.set('customer', this.store.createRecord('takeaway-customer'));
+      this.set('estimatedTime', 30);
+    },
+
+    setNewOnlineCustomer() {
+      this.set('customer', this.store.createRecord('online-customer'));
+      this.set('paymentMethod', PAYMENT_METHODS.ONLINE);
+      this.set('estimatedTime', 15);
+    },
+
+    removeCustomer() {
+      this.set('customer', null);
+      this.set('paymentMethod', null);
+      this.set('estimatedTime', 45);
+    },
+
+    toggleCustomerSelect() {
+      this.toggleProperty('showCustomerSelect');
     },
 
     toggleOrderModal() {

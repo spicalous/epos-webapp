@@ -7,30 +7,6 @@ html {
   user-select: none;
 }
 
-//Allows touch events to be fired on touch devices
-a, a:focus, a:hover, a:active, a:visited {
-  cursor: pointer;
-  color: black;
-  outline: none;
-  text-decoration: none;
-}
-
-.scroll-y {
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-}
-
-.glyphicon-none:before {
-    content: "\2122";
-    color: transparent !important;
-}
-
-@color-primary-0: #811919;	/* Main Primary color */
-@color-primary-1: #D46E6E;
-@color-primary-2: #A93B3B;
-@color-primary-3: #590303;
-@color-primary-4: #340000;
-
 @zindex-toast: @zindex-navbar-fixed + 1;
 @zindex-table-browser: @zindex-toast + 1;
 @zindex-customer-browser: @zindex-table-browser + 1;
@@ -45,27 +21,6 @@ a, a:focus, a:hover, a:active, a:visited {
   padding-right: 0 !important;
 }
 
-.gutter {
-
-  &-top {
-    padding-top: @grid-gutter-width;
-  }
-
-  &-bottom {
-    padding-bottom: @grid-gutter-width;
-  }
-
-  &-top-bottom {
-    padding-top: @grid-gutter-width;
-    padding-bottom: @grid-gutter-width;
-  }
-}
-
-.top-bottom-border {
-  border-top:    1px solid @page-header-border-color;
-  border-bottom: 1px solid @page-header-border-color;
-}
-
 .fixed-fullscreen() {
   position: fixed;
   left: 0px;
@@ -78,18 +33,4 @@ a, a:focus, a:hover, a:active, a:visited {
   .fixed-fullscreen;
   background: rgba(255, 255, 255, 1);
   z-index: @zindex-customer-browser;
-}
-
-.table-browser {
-  .fixed-fullscreen;
-  .scroll-y;
-  background: rgba(255, 255, 255, 1);
-  z-index: @zindex-table-browser;
-}
-
-.inline-customer-input {
-
-  .dropdown-menu {
-    width: 100%;
-  }
 }

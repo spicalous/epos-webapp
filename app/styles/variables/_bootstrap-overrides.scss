@@ -1,1 +1,16 @@
 $grid-gutter-width-base: 16px;
+
+.dropdown-menu.full-tap-dropdown {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .dropdown-item {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .dropdown-divider {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
