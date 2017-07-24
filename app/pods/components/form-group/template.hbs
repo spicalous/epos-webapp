@@ -1,10 +1,8 @@
-<div class="form-group {{class}}">
-  {{yield}}
-  {{#if hasDanger}}
-    {{#if helpText}}
-      <small class="form-text form-control-feedback">
-        {{helpText}}
-      </small>
-    {{/if}}
+{{yield}}
+{{#if hasDanger}}
+  {{#if helpText}}
+    <small class="form-text form-control-feedback">
+      {{helpText}}
+    </small>
   {{/if}}
-</div>
+{{/if}}
