@@ -7,3 +7,13 @@ body > .ember-view > .container-fluid {
 
 $toast-zindex:   100;
 $overlay-zindex: 101;
+
+.full-screen-modal {
+  @extend .container-fluid;
+  background-color: $white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
