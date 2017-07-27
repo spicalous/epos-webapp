@@ -1,6 +1,6 @@
 <div class="row order_edit">
   <div class="col-12 col-sm-7 col-md-8 order_edit_left">
-    <div class="row hidden-sm-up order_edit_left_actions">
+    <div class="row hidden-sm-up order_edit_left_customer">
       <div class="col">
         {{inline-customer-input customer=customer
                                 onSelectTakeaway=(action "setNewTakeawayCustomer")
@@ -8,7 +8,7 @@
                                 onSelectOnline=(action "setNewOnlineCustomer")}}
       </div>
       {{#if customer}}
-        <button type="button" class="close" {{action "removeCustomer"}}>
+        <button type="button" class="close pl-1 pr-3" {{action "removeCustomer"}}>
           <span aria-hidden="true">&times;</span>
         </button>
       {{/if}}
@@ -56,7 +56,7 @@
                                 onSelectOnline=(action "setNewOnlineCustomer")}}
       </div>
       {{#if customer}}
-        <button type="button" class="close" {{action "removeCustomer"}}>
+        <button type="button" class="close pl-1 pr-3" {{action "removeCustomer"}}>
           <span aria-hidden="true">&times;</span>
         </button>
       {{/if}}
