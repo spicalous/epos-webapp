@@ -1,0 +1,63 @@
+<div class="customer-select full-screen-modal">
+  <form class="customer-select_form">
+    {{#form-group class="row mb-1"}}
+      <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Tel</label>
+      <div class="col-12 col-sm-8">
+        {{input type="tel" class="form-control" placeholder="Telephone" value=customer.telephone}}
+      </div>
+    {{/form-group}}
+    {{#form-group class="row mb-1"}}
+      <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">House no.</label>
+      <div class="col-12 col-sm-8">
+        {{input type="text" class="form-control" placeholder="House no." value=customer.addressOne}}
+      </div>
+    {{/form-group}}
+    {{#form-group class="row mb-1"}}
+      <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Road</label>
+      <div class="col-12 col-sm-8">
+        {{input type="text" class="form-control" placeholder="Road" value=customer.addressTwo}}
+      </div>
+    {{/form-group}}
+    {{#form-group class="row mb-1"}}
+      <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Postcode</label>
+      <div class="col-12 col-sm-8">
+        {{input type="text" class="form-control" placeholder="Postcode" value=customer.postcode}}
+      </div>
+    {{/form-group}}
+  </form>
+  <div class="row customer-select_actions">
+    {{#if canSaveCustomer}}
+      <div class="col-6 offset-sm-1 col-sm-5">
+        <button type="button" class="btn btn-secondary btn-lg btn-block" {{action "cancel"}}>
+          Cancel
+        </button>
+      </div>
+      <div class="col-6 col-sm-5">
+        <button type="button" class="btn btn-primary btn-lg btn-block" {{action "saveAndSelectCustomer"}}>
+          Save
+        </button>
+      </div>
+    {{else}}
+      <div class="col-12 offset-sm-6 col-sm-5">
+        <button type="button" class="btn btn-secondary btn-lg btn-block" {{action "cancel"}}>
+          Cancel
+        </button>
+      </div>
+    {{/if}}
+  </div>
+  <div class="row customer-select_results">
+    <div class="col-12 offset-sm-1 col-sm-10 customer-select_results-list-container">
+      <ul class="list-group">
+        {{#each deliveryCustomerResults as |customer|}}
+          <button type="button" class="list-group-item list-group-item-action" {{action "selectDeliveryCustomer" customer}}>
+            <div>
+              {{customer.address}}<br>
+              {{customer.postcode}}<br>
+              {{customer.telephone}}
+            </div>
+          </button>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>

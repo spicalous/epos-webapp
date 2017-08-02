@@ -1,0 +1,24 @@
+.customer-select {
+  display: flex;
+  flex-direction: column;
+
+  &_form {
+    flex-shrink: 0;
+    padding-top: $grid-gutter-width-base / 2;
+  }
+
+  &_actions {
+    flex-shrink: 0;
+    padding-top: $grid-gutter-width-base / 2;
+  }
+
+  &_results {
+    flex-grow: 1;
+    padding-top: $grid-gutter-width-base / 2;
+    padding-bottom: $grid-gutter-width-base / 2;
+
+    &-list-container {
+      overflow-y: auto;
+    }
+  }
+}

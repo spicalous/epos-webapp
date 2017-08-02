@@ -139,5 +139,7 @@
 {{/if}}
 
 {{#if showCustomerSelect}}
-  {{customer-select customer=customer}}
+  {{customer-select customer=customer
+                    selectDeliveryCustomer=(action "selectDeliveryCustomer")
+                    cancel=(action "toggleCustomerSelect")}}
 {{/if}}

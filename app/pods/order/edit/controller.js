@@ -86,6 +86,11 @@ export default Ember.Controller.extend({
       this.set('estimatedTime', 15);
     },
 
+    selectDeliveryCustomer(customer) {
+      this.set('customer', customer);
+      this.toggleProperty('showCustomerSelect');
+    },
+
     removeCustomer() {
       this.set('customer', null);
       this.set('paymentMethod', null);
@@ -93,6 +98,11 @@ export default Ember.Controller.extend({
     },
 
     toggleCustomerSelect() {
+      if (this.get('showCustomerSelect')) {
+        this.set('customer', null);
+      } else {
+        this.set('customer', this.store.createRecord('delivery-customer'));
+      }
       this.toggleProperty('showCustomerSelect');
     },
 
@@ -118,7 +128,7 @@ export default Ember.Controller.extend({
     },
 
     reset() {
-//      this.send('removeCustomer');
+      this.send('removeCustomer');
       this.set('showOrderModal', false);
       this.get('orderService').clear();
       this.set('notes', null);
