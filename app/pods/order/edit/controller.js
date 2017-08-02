@@ -49,6 +49,17 @@ export default Ember.Controller.extend({
    */
   sortedCategories: Ember.computed.sort('model.categories', (x, y) => x.get('id') - y.get('id')),
 
+  /**
+   * Only applies to delivery and takeaway customers
+   * @type {Boolean}
+   */
+  validCustomer: Ember.computed('customer', 'customer.invalidTelephone', 'customer.invalidAddress', 'customer.invalidPostcode', function() {
+    let customer = this.get('customer');
+
+    return customer && !customer.get('invalidTelephone') &&
+        !customer.get('invalidAddress') && !customer.get('invalidPostcode');
+  }),
+
   emptyCustomer: Ember.computed.empty('customer'),
 
   emptyOrder: Ember.computed.empty('orderService.items'),
@@ -89,6 +100,24 @@ export default Ember.Controller.extend({
     selectDeliveryCustomer(customer) {
       this.set('customer', customer);
       this.toggleProperty('showCustomerSelect');
+    },
+
+    saveAndSelectDeliveryCustomer() {
+      let customer = this.get('customer');
+
+      this.send('showMessage', 'loader', { message: 'Saving customer..' });
+
+      customer.save().then(() => {
+        this.send('dismissMessage', 'loader');
+        this.set('showCustomerSelect', false);
+        this.send('showToast', 'Customer saved successfully');
+      }).catch((response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
+          header: 'Failed to save :(',
+          body: response.errors[0].message
+        });
+      });
     },
 
     removeCustomer() {

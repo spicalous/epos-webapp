@@ -7,9 +7,12 @@
     padding-top: $grid-gutter-width-base / 2;
   }
 
+  &_alert {
+    flex-shrink: 0;
+  }
+
   &_actions {
     flex-shrink: 0;
-    padding-top: $grid-gutter-width-base / 2;
   }
 
   &_results {

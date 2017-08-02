@@ -24,6 +24,12 @@ export default Ember.Component.extend({
     }
   },
 
+  canSaveCustomer: Ember.computed('validCustomer', 'emptySearchResults', 'debouncedSearch', function() {
+    return this.get('validCustomer') && this.get('emptySearchResults') && !this.get('debouncedSearch');
+  }),
+
+  emptySearchResults: Ember.computed.empty('deliveryCustomerResults'),
+
   queryDeliveryCustomer(customer) {
     let query = this.get('store').query('delivery-customer', customer);
 
@@ -64,8 +70,12 @@ export default Ember.Component.extend({
 
   actions: {
 
-    selectDeliveryCustomer(customer) {
-      this.get('selectDeliveryCustomer')(customer);
+    save() {
+      this.get('saveCustomer')();
+    },
+
+    selectCustomer(customer) {
+      this.get('selectCustomer')(customer);
     },
 
     cancel() {

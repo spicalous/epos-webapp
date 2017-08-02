@@ -50,7 +50,7 @@ module.exports = function(app) {
 
   deliveryCustomerRouter.post('/', function(req, res) {
     success ?
-      res.status(201).send({ 'delivery-customer': { id: req.params.id } }) :
+      res.status(201).send({ 'delivery-customer': { id: customers.length } }) :
       res.status(400).send(app.genericError("400", "There was a problem saving the customer to the database"));
   });
 
