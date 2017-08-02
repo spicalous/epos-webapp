@@ -47,17 +47,29 @@
   </div>
   <div class="row customer-select_results">
     <div class="col-12 offset-sm-1 col-sm-10 customer-select_results-list-container">
-      <ul class="list-group">
-        {{#each deliveryCustomerResults as |customer|}}
-          <button type="button" class="list-group-item list-group-item-action" {{action "selectDeliveryCustomer" customer}}>
-            <div>
-              {{customer.address}}<br>
-              {{customer.postcode}}<br>
-              {{customer.telephone}}
+      {{#if debouncedSearch}}
+        {{loading-spinner text="Searching customers..."}}
+      {{else}}
+        {{#if deliveryCustomerResults}}
+          <ul class="list-group">
+          {{#each deliveryCustomerResults as |customer|}}
+            <button type="button" class="list-group-item list-group-item-action" {{action "selectDeliveryCustomer" customer}}>
+              <div>
+                {{customer.address}}<br>
+                {{customer.postcode}}<br>
+                {{customer.telephone}}
+              </div>
+            </button>
+          {{/each}}
+        </ul>
+        {{else}}
+          {{#if validQuery}}
+            <div class="text-center">
+              <div class="text-muted">No customers found</div>
             </div>
-          </button>
-        {{/each}}
-      </ul>
+          {{/if}}
+        {{/if}}
+      {{/if}}
     </div>
   </div>
 </div>

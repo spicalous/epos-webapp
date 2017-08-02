@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   _handleCustomerSearchResults(query, customers) {
     if (query && query === this.get('latestQuery')) {
       this.set('deliveryCustomerResults', customers);
+      this.set('debouncedSearch', null);
     } else {
       console.warn('Promise does not belong to the latest request');
     }
@@ -17,6 +18,10 @@ export default Ember.Component.extend({
         header: 'Error searching for customers :(',
         body: response.errors[0].message
     });
+
+    if (query && query === this.get('latestQuery')) {
+      this.set('debouncedSearch', null);
+    }
   },
 
   queryDeliveryCustomer(customer) {
@@ -27,6 +32,13 @@ export default Ember.Component.extend({
 
     this.set('latestQuery', query);
   },
+
+  validQuery: Ember.computed('customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
+    return (this.get('customer.telephone') && this.get('customer.telephone').length > 2) ||
+           (this.get('customer.addressOne') && this.get('customer.addressOne').length > 2) ||
+           (this.get('customer.addressTwo') && this.get('customer.addressTwo').length > 2) ||
+           (this.get('customer.postcode') && this.get('customer.postcode').length > 2);
+  }),
 
   customerSearch: Ember.observer('customer', 'customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
     let telephone = this.get('customer.telephone') ? this.get('customer.telephone').trim() : '';
@@ -46,7 +58,7 @@ export default Ember.Component.extend({
           addressTwo: addressTwo,
           postcode: postcode
         }),
-        1500));
+        500));
     }
   }),
 
