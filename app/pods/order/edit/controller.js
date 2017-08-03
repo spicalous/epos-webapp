@@ -50,6 +50,34 @@ export default Ember.Controller.extend({
   sortedCategories: Ember.computed.sort('model.categories', (x, y) => x.get('id') - y.get('id')),
 
   /**
+   * @type {String[]}
+   */
+  paymentMethods: Object.values(PAYMENT_METHODS),
+
+  /**
+   * @type {Number[]}
+   */
+  estimatedTimes: [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 75],
+
+  /**
+   * Customer payment method
+   * @type {null|String}
+   */
+  paymentMethod: null,
+
+  /**
+   * Time in minutes for delivery estimate
+   * @type {Number}
+   */
+  estimatedTime: 45,
+
+  /**
+   * notes regarding the order
+   @ @type {null|String}
+   */
+  notes: null,
+
+  /**
    * Only applies to delivery and takeaway customers
    * @type {Boolean}
    */
