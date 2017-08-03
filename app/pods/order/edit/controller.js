@@ -233,6 +233,11 @@ export default Ember.Controller.extend({
       });
     },
 
+    back() {
+      this.send('reset');
+      this.transitionToRoute('index');
+    },
+
     reset() {
       this.send('removeCustomer');
       this.set('showOrderModal', false);

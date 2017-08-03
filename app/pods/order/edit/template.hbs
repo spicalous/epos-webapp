@@ -82,9 +82,15 @@
     {{/if}}
     <div class="row order_edit_right_actions">
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action "confirmCancelOrder"}}>
-          Cancel
-        </button>
+        {{#if emptyCustomerAndOrder}}
+          <button type="button" class="btn btn-lg btn-block btn-secondary" {{action "back"}}>
+            Back
+          </button>
+        {{else}}
+          <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action "confirmCancelOrder"}}>
+            Cancel
+          </button>
+        {{/if}}
       </div>
       <div class="col">
         <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}} {{action "toggleConfirmOrder"}}>
@@ -124,9 +130,15 @@
     {{/if}}
     <div class="row order-modal_actions">
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action "confirmCancelOrder"}}>
-          Cancel
-        </button>
+        {{#if emptyCustomerAndOrder}}
+          <button type="button" class="btn btn-lg btn-block btn-secondary" {{action "back"}}>
+            Back
+          </button>
+        {{else}}
+          <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action "confirmCancelOrder"}}>
+            Cancel
+          </button>
+        {{/if}}
       </div>
       <div class="col">
         <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}} {{action "toggleConfirmOrder"}}>
