@@ -82,12 +82,14 @@
     {{/if}}
     <div class="row order_edit_right_actions">
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action
-            "confirmCancelOrder"}}>Cancel
+        <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action "confirmCancelOrder"}}>
+          Cancel
         </button>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}}>Submit</button>
+        <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}} {{action "toggleConfirmOrder"}}>
+          Submit
+        </button>
       </div>
     </div>
   </div>
@@ -122,12 +124,14 @@
     {{/if}}
     <div class="row order-modal_actions">
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action
-            "confirmCancelOrder"}}>Cancel
+        <button type="button" class="btn btn-lg btn-block btn-danger" disabled={{emptyCustomerAndOrder}} {{action "confirmCancelOrder"}}>
+          Cancel
         </button>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}}>Submit</button>
+        <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}} {{action "toggleConfirmOrder"}}>
+          Submit
+        </button>
       </div>
     </div>
     <div class="row order-modal_actions">
@@ -144,4 +148,67 @@
                     selectCustomer=(action "selectDeliveryCustomer")
                     saveCustomer=(action "saveAndSelectDeliveryCustomer")
                     cancel=(action "toggleCustomerSelect")}}
+{{/if}}
+
+{{#if showConfirmOrder}}
+  <div class="confirm-order-modal full-screen-modal">
+    <div class="row confirm-order-modal_header">
+      <div class="col text-center lead">
+        Confirm order
+      </div>
+    </div>
+    <div class="row confirm-order-modal_order-list">
+      <div class="col offset-sm-1 col-sm-10">
+        <ul class="list-group">
+          {{#each orderService.items as |item|}}
+            {{order-item item=item editOptions=model.editOptions onDecrement=(action "decrementOrderItem")}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    {{#if orderService.size}}
+      <div class="row confirm-order-modal_info text-center">
+        <div class="col">
+          {{orderService.size}} item{{#unless (is-equal 1 orderService.size)}}s{{/unless}}
+        </div>
+        <div class="col">
+          £{{format-currency orderService.total}}
+        </div>
+      </div>
+    {{/if}}
+    <div class="row confirm-order-modal_select">
+      <div class="col-6 offset-sm-1 col-sm-5">
+        <div>
+          Estimated time ({{format-time computedEstimate}})
+        </div>
+        {{select-component content=estimatedTimes selectedValue=estimatedTime action=(action (mut estimatedTime))}}
+      </div>
+      <div class="col-6 col-sm-5">
+        <div>
+          Payment method
+        </div>
+        {{select-component content=paymentMethods selectedValue=paymentMethod action=(action (mut paymentMethod))}}
+      </div>
+    </div>
+    <div class="row confirm-order-modal_notes">
+      <div class="col-12 offset-sm-1 col-sm-10">
+        <div>
+          Notes
+        </div>
+        {{textarea class="form-control" rows="2" value=notes}}
+      </div>
+    </div>
+    <div class="row confirm-order-modal_actions">
+      <div class="col-6 offset-sm-1 col-sm-5">
+        <button type="button" class="btn btn-secondary btn-lg btn-block" {{action "toggleConfirmOrder"}}>
+          Cancel
+        </button>
+      </div>
+      <div class="col-6 col-sm-5">
+        <button type="button" class="btn btn-success btn-lg btn-block" disabled={{invalidOrder}} {{action "submitOrder"}}>
+          Confirm order
+        </button>
+      </div>
+    </div>
+  </div>
 {{/if}}

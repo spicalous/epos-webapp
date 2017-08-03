@@ -66,6 +66,21 @@ export default Ember.Controller.extend({
 
   emptyCustomerAndOrder: Ember.computed.and('emptyCustomer', 'emptyOrder'),
 
+  invalidOrder: Ember.computed('emptyOrder', 'validCustomer', function() {
+    return this.get('emptyOrder') || !this.get('validCustomer');
+  }),
+
+  createEatOutOrder() {
+    return this.store.createRecord('order/eatOut', {
+      dateTime: new Date(),
+      orderItems: this.get('orderService.items'),
+      paymentMethod: this.get('paymentMethod'),
+      notes: this.get('notes'),
+      customer: this.get('customer'),
+      estimatedTime: this.get('estimatedTime'),
+    });
+  },
+
   actions: {
 
     selectCategory(category) {
@@ -147,13 +162,47 @@ export default Ember.Controller.extend({
       });
     },
 
+    toggleConfirmOrder() {
+      this.toggleProperty('showConfirmOrder');
+    },
+
     cancelOrder() {
       this.send('reset');
       this.send('showMessage', 'overlay', { header: 'Order Cancelled' });
     },
 
     submitOrder() {
+      let order = this.createEatOutOrder();
 
+      this.send('showMessage', 'loader', { message: 'Sending order..' });
+
+      order.save().then(() => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
+          header: 'Confirmed ^.^',
+          body: 'Order submitted successfully',
+          callback: () => {
+
+            // TODO: replace with proper solution ID:1829 (use this to search other todos)
+            // ### START
+            // remove original records from the store that were not replaced by
+            // side loaded response see https://github.com/emberjs/data/issues/1829
+            this.store.peekAll('order-item').filterBy('isNew').invoke('unloadRecord');
+            this.store.peekAll('takeaway-customer').filterBy('isNew').invoke('unloadRecord');
+            // ### END
+
+            this.send('toggleConfirmOrder');
+            this.send('reset');
+          }
+        });
+
+      }, (response) => {
+        this.send('dismissMessage', 'loader');
+        this.send('showMessage', 'overlay', {
+          header: 'Failed :(',
+          body: response.errors[0].message
+        });
+      });
     },
 
     reset() {
