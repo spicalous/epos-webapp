@@ -26,23 +26,23 @@
     </ul>
   {{/if}}
   <div class="row">
-    <div class="col-12">
-      <button type="button" class="btn btn-block btn-secondary mt-2" {{action "toggleShowOrderItems"}}>
-        {{#if showOrderItems}}
-          Hide items
-        {{else}}
-          Show items
-        {{/if}}
-      </button>
-    </div>
     <div class="col-6">
-      <button type="button" class="btn btn-block btn-secondary mt-2" {{action "toggleShowOrderItems"}}>
+      <button type="button" class="btn btn-block btn-secondary mt-2" {{action "editOrder" order.id}}>
         Edit order
       </button>
     </div>
     <div class="col-6">
       <button type="button" class="btn btn-block btn-secondary mt-2" {{action "toggleShowOrderItems"}}>
         Print order
+      </button>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-block btn-link mt-2" {{action "toggleShowOrderItems"}}>
+        {{#if showOrderItems}}
+          Hide items
+        {{else}}
+          Show items
+        {{/if}}
       </button>
     </div>
   </div>
