@@ -98,7 +98,7 @@ export default Ember.Controller.extend({
     return this.get('emptyOrder') || !this.get('validCustomer');
   }),
 
-  createEatOutOrder() {
+  _createEatOutOrder() {
     return this.store.createRecord('order/eatOut', {
       dateTime: new Date(),
       orderItems: this.get('orderService.items'),
@@ -106,6 +106,35 @@ export default Ember.Controller.extend({
       notes: this.get('notes'),
       customer: this.get('customer'),
       estimatedTime: this.get('estimatedTime'),
+    });
+  },
+
+  _handleSuccessfulSubmit() {
+    this.send('dismissMessage', 'loader');
+    this.send('showMessage', 'overlay', {
+      header: 'Confirmed ^.^',
+      body: 'Order submitted successfully',
+      callback: () => {
+
+        // TODO: replace with proper solution ID:1829 (use this to search other todos)
+        // ### START
+        // remove original records from the store that were not replaced by
+        // side loaded response see https://github.com/emberjs/data/issues/1829
+        this.store.peekAll('order-item').filterBy('isNew').invoke('unloadRecord');
+        this.store.peekAll('takeaway-customer').filterBy('isNew').invoke('unloadRecord');
+        // ### END
+
+        this.send('toggleConfirmOrder');
+        this.send('reset');
+      }
+    });
+  },
+
+  _handleFailedSubmit(response) {
+    this.send('dismissMessage', 'loader');
+    this.send('showMessage', 'overlay', {
+      header: 'Failed :(',
+      body: response.errors[0].message
     });
   },
 
@@ -200,37 +229,10 @@ export default Ember.Controller.extend({
     },
 
     submitOrder() {
-      let order = this.createEatOutOrder();
+      let order = this._createEatOutOrder();
 
       this.send('showMessage', 'loader', { message: 'Sending order..' });
-
-      order.save().then(() => {
-        this.send('dismissMessage', 'loader');
-        this.send('showMessage', 'overlay', {
-          header: 'Confirmed ^.^',
-          body: 'Order submitted successfully',
-          callback: () => {
-
-            // TODO: replace with proper solution ID:1829 (use this to search other todos)
-            // ### START
-            // remove original records from the store that were not replaced by
-            // side loaded response see https://github.com/emberjs/data/issues/1829
-            this.store.peekAll('order-item').filterBy('isNew').invoke('unloadRecord');
-            this.store.peekAll('takeaway-customer').filterBy('isNew').invoke('unloadRecord');
-            // ### END
-
-            this.send('toggleConfirmOrder');
-            this.send('reset');
-          }
-        });
-
-      }, (response) => {
-        this.send('dismissMessage', 'loader');
-        this.send('showMessage', 'overlay', {
-          header: 'Failed :(',
-          body: response.errors[0].message
-        });
-      });
+      order.save().then(this._handleSuccessfulSubmit.bind(this), this._handleFailedSubmit.bind(this));
     },
 
     back() {
