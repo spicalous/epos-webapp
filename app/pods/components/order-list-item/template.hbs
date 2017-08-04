@@ -32,9 +32,16 @@
       </button>
     </div>
     <div class="col-6">
-      <button type="button" class="btn btn-block btn-secondary mt-2" {{action "toggleShowOrderItems"}}>
-        Print order
-      </button>
+      <div class="dropdown">
+        <button type="button" class="btn btn-block btn-secondary dropdown-toggle mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Print order
+        </button>
+        <div class="dropdown-menu w-100 full-tap-dropdown">
+          <a class="dropdown-item"{{action "printOrderAsEatIn"}}>Print small</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item"{{action "printOrderAsDelivery"}}>Print big</a>
+        </div>
+      </div>
     </div>
     <div class="col">
       <button type="button" class="btn btn-block btn-link mt-2" {{action "toggleShowOrderItems"}}>
