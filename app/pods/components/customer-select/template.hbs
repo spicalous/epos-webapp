@@ -60,12 +60,12 @@
   {{#unless canSaveCustomer}}
     <div class="row customer-select_alert">
       <div class="col-12 offset-sm-1 col-sm-10">
-        {{#alert-box alertType=(if validCustomer "info" "danger")}}
+        <div class="alert alert-{{if validCustomer "info" "danger"}}">
           {{if customer.invalidTelephone customer.invalidTelephoneReason}}
           {{if customer.invalidAddress customer.invalidAddressReason}}
           {{if customer.invalidPostcode customer.invalidPostcodeReason}}
           <strong>Must be unique to save customer</strong>
-        {{/alert-box}}
+        </div>
       </div>
     </div>
   {{/unless}}
@@ -96,16 +96,16 @@
       {{else}}
         {{#if deliveryCustomerResults}}
           <ul class="list-group">
-          {{#each deliveryCustomerResults as |customer|}}
-            <button type="button" class="list-group-item list-group-item-action" {{action "selectCustomer" customer}}>
-              <div>
-                {{customer.address}}<br>
-                {{customer.postcode}}<br>
-                {{customer.telephone}}
-              </div>
-            </button>
-          {{/each}}
-        </ul>
+            {{#each deliveryCustomerResults as |customer|}}
+              <button type="button" class="list-group-item list-group-item-action" {{action "selectCustomer" customer}}>
+                <div>
+                  {{customer.address}}<br>
+                  {{customer.postcode}}<br>
+                  {{customer.telephone}}
+                </div>
+              </button>
+            {{/each}}
+          </ul>
         {{else}}
           {{#if validQuery}}
             <div class="text-center">

@@ -45,11 +45,7 @@
     </div>
     <div class="col">
       <button type="button" class="btn btn-block btn-link mt-2" {{action "toggleShowOrderItems"}}>
-        {{#if showOrderItems}}
-          Hide items
-        {{else}}
-          Show items
-        {{/if}}
+        {{if showOrderItems "Hide items" "Show items"}}
       </button>
     </div>
   </div>
