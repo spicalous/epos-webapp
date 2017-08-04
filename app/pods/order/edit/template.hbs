@@ -81,7 +81,7 @@
       </div>
     {{/if}}
     <div class="row order_edit_right_actions">
-      <div class="col">
+      <div class="col-6">
         {{#if emptyCustomerAndOrder}}
           <button type="button" class="btn btn-lg btn-block btn-secondary" {{action "back"}}>
             Back
@@ -92,7 +92,7 @@
           </button>
         {{/if}}
       </div>
-      <div class="col">
+      <div class="col-6">
         <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}} {{action "toggleConfirmOrder"}}>
           Submit
         </button>
@@ -129,7 +129,7 @@
       </div>
     {{/if}}
     <div class="row order-modal_actions">
-      <div class="col">
+      <div class="col-6">
         {{#if emptyCustomerAndOrder}}
           <button type="button" class="btn btn-lg btn-block btn-secondary" {{action "back"}}>
             Back
@@ -140,14 +140,14 @@
           </button>
         {{/if}}
       </div>
-      <div class="col">
+      <div class="col-6">
         <button type="button" class="btn btn-lg btn-block btn-success" disabled={{invalidOrder}} {{action "toggleConfirmOrder"}}>
           Submit
         </button>
       </div>
     </div>
     <div class="row order-modal_actions">
-      <div class="col">
+      <div class="col-12">
         <button type="button" class="btn btn-lg btn-block btn-secondary" {{action "toggleOrderModal"}}>Close</button>
       </div>
     </div>
