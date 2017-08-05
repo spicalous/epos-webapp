@@ -3,15 +3,15 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   settingOneClass: Ember.computed('setting.value', function() {
-    return this.get('setting.value') === 1 ? 'active' : '';
+    return this.get('setting.value') === 0 ? 'active' : '';
   }),
 
   settingTwoClass: Ember.computed('setting.value', function() {
-    return this.get('setting.value') === 2 ? 'active' : '';
+    return this.get('setting.value') === 1 ? 'active' : '';
   }),
 
   settingThreeClass: Ember.computed('setting.value', function() {
-    return this.get('setting.value') === 3 ? 'active' : '';
+    return this.get('setting.value') === 2 ? 'active' : '';
   }),
 
   actions: {
