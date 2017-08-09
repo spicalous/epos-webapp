@@ -5,7 +5,7 @@
 {{/if}}
 
 {{#each item.editOptions as |option|}}
-  <div class="order-item_edit-option text-muted">
+  <div class="order-item_edit-option w-100 text-muted">
     {{#if option.price}}
       {{option.name}} ({{format-currency option.price}})
     {{else}}
