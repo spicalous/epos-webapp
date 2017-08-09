@@ -1,28 +1,3 @@
-<div id="road-search">
-  <div class="row gutter-top-bottom">
-    <div class="col-xs-12">
-      {{input class="form-control" placeholder="Search for roads..." value=search}}
-    </div>
-  </div>
-  <div class="row gutter-bottom">
-    <div class="col-xs-12">
-      {{#btn/btn-default class="btn-primary btn-lg btn-block" action="searchRoads" disabled=emptySearch}}
-        Search Roads
-      {{/btn/btn-default}}
-    </div>
-  </div>
-</div>
 <div class="row">
-  <div id="road-search-list" class="scroll-y col-xs-12 col-sm-6">
-    <div class="gutter-top-bottom">
-      <ul class="list-group">
-        {{#each searchResults as |road|}}
-          {{road-item road=road action="transitionToRoad"}}
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-  <div id="road-edit" class="col-xs-12 col-sm-6 gutter-top-bottom">
-    {{outlet}}
-  </div>
+
 </div>
