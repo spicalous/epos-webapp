@@ -7,9 +7,10 @@
       <button type="button" class="btn btn-block btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Order: {{orderTypeFilter}}
       </button>
-      <div class="dropdown-menu w-100">
+      <div class="dropdown-menu w-100 full-tap-dropdown">
         {{#each orderTypes as |orderType|}}
           <a class="dropdown-item" {{action "setOrderTypeFilter" orderType}}>{{orderType}}</a>
+          <div class="dropdown-divider"></div>
         {{/each}}
       </div>
     </div>
@@ -19,9 +20,10 @@
       <button type="button" class="btn btn-block btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Payment: {{paymentTypeFilter}}
       </button>
-      <div class="dropdown-menu w-100">
+      <div class="dropdown-menu w-100 full-tap-dropdown">
         {{#each paymentTypes as |paymentType|}}
           <a class="dropdown-item" {{action "setPaymentTypeFilter" paymentType}}>{{paymentType}}</a>
+          <div class="dropdown-divider"></div>
         {{/each}}
       </div>
     </div>
