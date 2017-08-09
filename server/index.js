@@ -76,7 +76,7 @@ module.exports = function(app) {
   app.testHelper = {}
   generateCustomers(100, app.testHelper);
 
-//  mocks.forEach(function(route) { route(app); });
-//  proxies.forEach(function(route) { route(app); });
+  mocks.forEach(function(route) { route(app); });
+  proxies.forEach(function(route) { route(app); });
 
 };
