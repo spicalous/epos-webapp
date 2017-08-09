@@ -64,19 +64,19 @@
     <div class="row order_edit_right_order_items">
       <div class="col">
         <ul class="list-group">
-          {{#each orderService.items as |item|}}
+          {{#each items as |item|}}
             {{order-item item=item editOptions=model.editOptions onDecrement=(action "decrementOrderItem")}}
           {{/each}}
         </ul>
       </div>
     </div>
-    {{#if orderService.size}}
+    {{#if size}}
       <div class="row order_edit_right_order_info text-center">
         <div class="col">
-          {{orderService.size}} item{{#unless (is-equal 1 orderService.size)}}s{{/unless}}
+          {{size}} item{{#unless (is-equal 1 size)}}s{{/unless}}
         </div>
         <div class="col">
-          £{{format-currency orderService.total}}
+          £{{format-currency total}}
         </div>
       </div>
     {{/if}}
@@ -103,7 +103,7 @@
 
 {{#unless emptyOrder}}
   <button type="button" class="btn btn-order hidden-sm-up" disabled={{emptyOrder}} {{action "toggleOrderModal"}}>
-    {{orderService.size}}
+    {{size}}
   </button>
 {{/unless}}
 
@@ -112,19 +112,19 @@
     <div class="row order-modal_items">
       <div class="col">
         <ul class="list-group">
-          {{#each orderService.items as |item|}}
+          {{#each items as |item|}}
             {{order-item item=item editOptions=model.editOptions onDecrement=(action "decrementOrderItem")}}
           {{/each}}
         </ul>
       </div>
     </div>
-    {{#if orderService.size}}
+    {{#if size}}
       <div class="row text-center">
         <div class="col">
-          {{orderService.size}} item{{#unless (is-equal 1 orderService.size)}}s{{/unless}}
+          {{size}} item{{#unless (is-equal 1 size)}}s{{/unless}}
         </div>
         <div class="col">
-          £{{format-currency orderService.total}}
+          £{{format-currency total}}
         </div>
       </div>
     {{/if}}
@@ -172,19 +172,19 @@
     <div class="row confirm-order-modal_order-list">
       <div class="col offset-sm-1 col-sm-10">
         <ul class="list-group">
-          {{#each orderService.items as |item|}}
+          {{#each items as |item|}}
             {{order-item item=item editOptions=model.editOptions onDecrement=(action "decrementOrderItem")}}
           {{/each}}
         </ul>
       </div>
     </div>
-    {{#if orderService.size}}
+    {{#if size}}
       <div class="row confirm-order-modal_info text-center">
         <div class="col">
-          {{orderService.size}} item{{#unless (is-equal 1 orderService.size)}}s{{/unless}}
+          {{size}} item{{#unless (is-equal 1 size)}}s{{/unless}}
         </div>
         <div class="col">
-          £{{format-currency orderService.total}}
+          £{{format-currency total}}
         </div>
       </div>
     {{/if}}

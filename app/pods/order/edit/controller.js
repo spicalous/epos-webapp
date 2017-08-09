@@ -3,8 +3,6 @@ import { PAYMENT_METHODS } from '../../../models/payment-method';
 
 export default Ember.Controller.extend({
 
-  orderService: Ember.inject.service('order'),
-
   /**
    * @type {Category}
    * @see {@link models/category}
@@ -73,9 +71,22 @@ export default Ember.Controller.extend({
 
   /**
    * notes regarding the order
-   @ @type {null|String}
+   * @type {null|String}
    */
   notes: null,
+
+  /**
+   * @type {OrderItem[]}
+   */
+  items: Ember.A(),
+
+  total: Ember.computed('items.@each.quantity', 'items.@each.total', function() {
+    return this.get('items').reduce((prev, item) => prev + item.get('total'), 0);
+  }),
+
+  size: Ember.computed('items.@each.quantity', function() {
+    return this.get('items').reduce((prev, item) => prev + item.get('quantity'), 0);
+  }),
 
   /**
    * Only applies to delivery and takeaway customers
@@ -90,7 +101,7 @@ export default Ember.Controller.extend({
 
   emptyCustomer: Ember.computed.empty('customer'),
 
-  emptyOrder: Ember.computed.empty('orderService.items'),
+  emptyOrder: Ember.computed.empty('items'),
 
   emptyCustomerAndOrder: Ember.computed.and('emptyCustomer', 'emptyOrder'),
 
@@ -98,15 +109,19 @@ export default Ember.Controller.extend({
     return this.get('emptyOrder') || !this.get('validCustomer');
   }),
 
-  _createEatOutOrder() {
-    return this.store.createRecord('order/eatOut', {
+  _prepareOrder() {
+    let order = this.get('store').createRecord('order/eatOut');
+
+    order.setProperties({
       dateTime: new Date(),
-      orderItems: this.get('orderService.items'),
+      orderItems: this.get('items'),
       paymentMethod: this.get('paymentMethod'),
       notes: this.get('notes'),
       customer: this.get('customer'),
-      estimatedTime: this.get('estimatedTime'),
+      estimatedTime: this.get('estimatedTime')
     });
+
+    return order;
   },
 
   _handleSuccessfulSubmit() {
@@ -126,6 +141,9 @@ export default Ember.Controller.extend({
 
         this.send('toggleConfirmOrder');
         this.send('reset');
+        if (this.get('onSubmitOrder')) {
+          this.get('onSubmitOrder').call(this);
+        }
       }
     });
   },
@@ -145,13 +163,34 @@ export default Ember.Controller.extend({
     },
 
     addMenuItem(menuItem) {
-      this.get('orderService').add(menuItem);
+      let items = this.get('items');
+
+      let orderItem = items.any(function(item) {
+        if (item.isMenuItem(menuItem) && item.hasNoEditOptions()) {
+          return item;
+        }
+      });
+
+      if (orderItem) {
+        orderItem.incrementProperty('quantity');
+      } else {
+        items.pushObject(this.get('store').createRecord('order-item', {
+          quantity: 1,
+          menuItem: menuItem
+        }));
+      }
+
       this.set('numpadValue', '');
       this.send('showToast', 'Added ' + menuItem.get('name'));
     },
 
     decrementOrderItem(orderItem) {
-      this.get('orderService').decrement(orderItem);
+      if (1 < orderItem.get('quantity')) {
+        orderItem.decrementProperty('quantity');
+      } else {
+        orderItem.deleteRecord();
+        this.get('items').removeObject(orderItem);
+      }
     },
 
     onNumpadValueChange(value) {
@@ -225,11 +264,14 @@ export default Ember.Controller.extend({
 
     cancelOrder() {
       this.send('reset');
-      this.send('showMessage', 'overlay', { header: 'Order Cancelled' });
+      this.send('showMessage', 'overlay', {
+        header: 'Order Cancelled',
+        callback: this.get('onCancelOrder') ? this.get('onCancelOrder').bind(this) : () => {}
+      });
     },
 
     submitOrder() {
-      let order = this._createEatOutOrder();
+      let order = this._prepareOrder.call(this);
 
       this.send('showMessage', 'loader', { message: 'Sending order..' });
       order.save().then(this._handleSuccessfulSubmit.bind(this), this._handleFailedSubmit.bind(this));
@@ -243,8 +285,9 @@ export default Ember.Controller.extend({
     reset() {
       this.send('removeCustomer');
       this.set('showOrderModal', false);
-      this.get('orderService').clear();
       this.set('notes', null);
+      this.set('items', Ember.A([]));
+      this.set('deletedItems', Ember.A([]));
       this.set('paymentMethod', null);
       this.set('estimatedTime', 45);
       this.set('numpadValue', '');

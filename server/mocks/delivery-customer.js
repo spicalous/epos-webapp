@@ -42,10 +42,22 @@ module.exports = function(app) {
   var customers = app.testHelper.customers;
   var success = true;
 
+  var test = false;
+
   deliveryCustomerRouter.get('/', function(req, res) {
-    success ?
-      res.send({ 'deliveryCustomers': searchCustomer(req) }) :
-      res.status(502).send(app.genericError("502", "Error searching for customer"));
+
+    if (test) {
+      setTimeout(function() {
+        success ?
+          res.send({ 'deliveryCustomers': searchCustomer(req) }) :
+          res.status(502).send(app.genericError("502", "Error searching for customer"));
+      }, 3000);
+    } else {
+              success ?
+                res.send({ 'deliveryCustomers': searchCustomer(req) }) :
+                res.status(502).send(app.genericError("502", "Error searching for customer"));
+    }
+    test = !test
   });
 
   deliveryCustomerRouter.post('/', function(req, res) {
