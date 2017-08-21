@@ -72,6 +72,22 @@ export default Ember.Controller.extend({
   totalNotPaid: calculateTotalFor('notPaidOrders'),
   totalAll: calculateTotalFor('model'),
 
+  numberOfCashOrders: Ember.computed('cashOrders.length', function() {
+    return this.get('cashOrders.length');
+  }),
+  numberOfCardOrders: Ember.computed('cardOrders.length', function() {
+    return this.get('cardOrders.length');
+  }),
+  numberOfOnlineOrders: Ember.computed('onlinePaymentOrders.length', function() {
+    return this.get('onlinePaymentOrders.length');
+  }),
+  numberOfNotPaidOrders: Ember.computed('notPaidOrders.length', function() {
+    return this.get('notPaidOrders.length');
+  }),
+  numberOfTotalOrders: Ember.computed('model.length', function() {
+    return this.get('model.length');
+  }),
+
   _getNamespace() {
     let namespace = this.store.adapterFor('application').get('namespace');
     return '/' + [namespace, 'printer'].join('/');

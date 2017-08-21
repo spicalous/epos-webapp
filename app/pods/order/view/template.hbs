@@ -48,35 +48,65 @@
     {{/unless}}
   </div>
 </div>
-<!--
+<div class="row pt-2">
+  <div class="col-12 text-center">
+    <h2>Totals</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 text-right">
+    Cash
+  </div>
+  <div class="col-1">
+    {{numberOfCashOrders}}
+  </div>
+  <div class="col-4">
+    <strong>{{format-currency totalCash}}</strong>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 text-right">
+    Card
+  </div>
+  <div class="col-1">
+    {{numberOfCardOrders}}
+  </div>
+  <div class="col-4">
+    <strong>{{format-currency totalCard}}</strong>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 text-right">
+    Online
+  </div>
+  <div class="col-1">
+    {{numberOfOnlineOrders}}
+  </div>
+  <div class="col-4">
+    <strong>{{format-currency totalOnline}}</strong>
+  </div>
+</div>
+{{#if totalNotPaid}}
   <div class="row">
-    <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <div class="page-header">
-        <h2>Totals</h2>
-      </div>
+    <div class="col-4 text-right">
+      Not paid
+    </div>
+    <div class="col-1">
+      {{numberOfNotPaidOrders}}
+    </div>
+    <div class="col-4">
+      <strong>{{format-currency totalNotPaid}}</strong>
     </div>
   </div>
-  <div class="row gutter-bottom">
-    <div class="col-xs-3 text-right">Cash</div>
-    <div class="col-xs-3"><strong>{{format-currency totalCash}}</strong></div>
+{{/if}}
+<div class="row">
+  <div class="col-4 text-right">
+    Total
   </div>
-  <div class="row gutter-bottom">
-    <div class="col-xs-3 text-right">Card</div>
-    <div class="col-xs-3"><strong>{{format-currency totalCard}}</strong></div>
+  <div class="col-1">
+    {{numberOfTotalOrders}}
   </div>
-  <div class="row gutter-bottom">
-    <div class="col-xs-3 text-right">Online</div>
-    <div class="col-xs-3"><strong>{{format-currency totalOnline}}</strong></div>
+  <div class="col-4">
+    <strong>{{format-currency totalAll}}</strong>
   </div>
-  {{#if totalNotPaid}}
-    <div class="row gutter-bottom">
-      <div class="col-xs-3 text-right">Not Paid</div>
-      <div class="col-xs-3"><strong>{{format-currency totalNotPaid}}</strong></div>
-    </div>
-  {{/if}}
-  <div class="row gutter-bottom">
-    <div class="col-xs-3 text-right">Total</div>
-    <div class="col-xs-3"><strong>{{format-currency totalAll}}</strong></div>
-  </div>
-  <!--
--->
+</div>
