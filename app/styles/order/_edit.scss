@@ -19,6 +19,7 @@
     &_bottom {
       flex-shrink: 1;
       flex-basis: 100%;
+      flex-wrap: nowrap;
 
       &_menu {
         overflow-y: auto;
@@ -31,7 +32,6 @@
         padding-top: $grid-gutter-width-base / 2;
         padding-bottom: $grid-gutter-width-base / 2;
       }
-
     }
   }
 
