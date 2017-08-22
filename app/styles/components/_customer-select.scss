@@ -18,6 +18,7 @@
   &_results {
     flex-grow: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding-top: $grid-gutter-width-base / 2;
     padding-bottom: $grid-gutter-width-base / 2;
   }

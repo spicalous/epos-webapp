@@ -23,6 +23,7 @@
 
       &_menu {
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         padding-top: $grid-gutter-width-base / 2;
         padding-bottom: $grid-gutter-width-base / 2;
       }
@@ -45,6 +46,7 @@
       margin-bottom: auto;
       flex-shrink: 1;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     &_customer,
@@ -83,8 +85,10 @@
   flex-direction: column;
 
   &_items {
-    padding-top: $grid-gutter-width-base / 2;
     flex-grow: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: $grid-gutter-width-base / 2;
   }
 
   &_actions {
@@ -110,6 +114,7 @@
   &_order-list {
     flex-grow: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding-top: $grid-gutter-width-base / 2;
     padding-bottom: $grid-gutter-width-base / 2;
   }
