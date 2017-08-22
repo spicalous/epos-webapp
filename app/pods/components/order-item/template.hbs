@@ -28,26 +28,28 @@
 {{/if}}
 
 {{#if editing}}
-  {{#bootstrap-modal title=item.menuItem.name onDismissed=(action "toggleEdit") onConfirm=(action "toggleEdit")}}
-    <div class="btn-group" style="width: 100%">
-      {{#each item.menuItem.editCategories as |editCategory|}}
-        <button type="button" style="width: 33.33%" class="btn btn-secondary" {{action "setSelectedEditCategory" editCategory}}>{{editCategory.name}}</button>
-      {{/each}}
-    </div>
-    <div class="order-item_edit-option-toggles">
-      {{#each filteredEditOptions as |editOption|}}
-        <div class="form-check">
-          <label class="form-check-label" style="width: 100%">
-            <input type="checkbox" class="form-check-input" checked={{contains item.editOptions editOption}} onchange={{action "toggleEditOption" editOption}}>
-            {{#if editOption.price}}
-              {{editOption.name}} ({{format-currency editOption.price}})
-            {{else}}
-              {{editOption.name}}
-            {{/if}}
-          </label>
-        </div>
-      {{/each}}
-    </div>
-  {{/bootstrap-modal}}
+  {{#ember-wormhole to="modal-wormhole"}}
+    {{#bootstrap-modal title=item.menuItem.name onDismissed=(action "toggleEdit") onConfirm=(action "toggleEdit")}}
+      <div class="btn-group" style="width: 100%">
+        {{#each item.menuItem.editCategories as |editCategory|}}
+          <button type="button" style="width: 33.33%" class="btn btn-secondary" {{action "setSelectedEditCategory" editCategory}}>{{editCategory.name}}</button>
+        {{/each}}
+      </div>
+      <div class="order-item_edit-option-toggles">
+        {{#each filteredEditOptions as |editOption|}}
+          <div class="form-check">
+            <label class="form-check-label" style="width: 100%">
+              <input type="checkbox" class="form-check-input" checked={{contains item.editOptions editOption}} onchange={{action "toggleEditOption" editOption}}>
+              {{#if editOption.price}}
+                {{editOption.name}} ({{format-currency editOption.price}})
+              {{else}}
+                {{editOption.name}}
+              {{/if}}
+            </label>
+          </div>
+        {{/each}}
+      </div>
+    {{/bootstrap-modal}}
+  {{/ember-wormhole}}
 {{/if}}
 
