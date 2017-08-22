@@ -21,7 +21,6 @@ Ember.TextField.reopen({
 
 export default App;
 
-//TODO active state on category and edit category
-//TODO linewrapping on menu and order items
-//TODO rollback edit items on cancel
-//TODO count for order summary
+// TODO active state on edit item model edit category
+// TODO linewrapping on menu and order items
+// TODO tooltip for disabled cancel button
