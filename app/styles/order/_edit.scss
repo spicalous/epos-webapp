@@ -38,6 +38,8 @@
   &_right {
     display: flex;
     flex-direction: column;
+    max-height: 100%;
+    flex-wrap: nowrap;
 
     &_order_items {
       margin-bottom: auto;
