@@ -101,11 +101,9 @@
   </div>
 </div>
 
-{{#unless emptyOrder}}
-  <button type="button" class="btn btn-order hidden-sm-up" disabled={{emptyOrder}} {{action "toggleOrderModal"}}>
-    {{size}}
-  </button>
-{{/unless}}
+<button type="button" class="btn btn-order hidden-sm-up" {{action "toggleOrderModal"}}>
+  {{size}} item{{#unless (is-equal 1 size)}}s{{/unless}}
+</button>
 
 {{#if showOrderModal}}
   <div class="order-modal full-screen-modal">
