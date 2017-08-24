@@ -1,18 +1,15 @@
-.customer-select {
+.delivery-customer-index {
+  height: 100%;
   display: flex;
   flex-direction: column;
+
+  &_title {
+    flex-shrink: 0;
+  }
 
   .delivery-customer-search {
     flex-shrink: 0;
     padding-top: $grid-gutter-width-base / 2;
-  }
-
-  &_alert {
-    flex-shrink: 0;
-  }
-
-  &_actions {
-    flex-shrink: 0;
   }
 
   &_results {

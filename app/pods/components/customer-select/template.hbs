@@ -1,62 +1,7 @@
 <div class="customer-select full-screen-modal">
-  <form class="customer-select_form">
-    {{#form-group class="row mb-1" hasDanger=customer.invalidTelephone}}
-      <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Tel</label>
-      <div class="col-12 col-sm-8">
-        {{input type="tel" class="form-control" placeholder="Telephone" value=customer.telephone}}
-      </div>
-    {{/form-group}}
-    {{#form-group class="row mb-1" hasDanger=customer.invalidAddress}}
-      <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">House no.</label>
-      <div class="col-12 col-sm-8">
-        {{input type="text" class="form-control" placeholder="House no." value=customer.addressOne}}
-      </div>
-    {{/form-group}}
-    {{#form-group class="row mb-1" hasDanger=customer.invalidAddress}}
-      <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Road</label>
-      <div class="col-12 col-sm-8">
-        <div class="dropdown">
-          {{input type="text" id="roadSuggestionDropdownTrigger" class="form-control" placeholder="Road" value=customer.addressTwo auto-complete="off" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-          <div class="dropdown-menu w-100 full-tap-dropdown">
-            {{#each roadSuggestions as |road index|}}
-              <a class="dropdown-item" {{action "setAddressTwo" road.name}}>{{road.name}}</a>
-              {{#unless (is-equal index (minus roadSuggestions.length 1))}}
-                <div class="dropdown-divider"></div>
-              {{/unless}}
-            {{else}}
-              {{#if roadSuggestionError}}
-                <a class="dropdown-item">Error while searching</a>
-              {{else}}
-                <a class="dropdown-item">No suggestions</a>
-              {{/if}}
-            {{/each}}
-          </div>
-        </div>
-      </div>
-    {{/form-group}}
-    {{#form-group class="row mb-1" hasDanger=customer.invalidPostcode}}
-      <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Postcode</label>
-      <div class="col-12 col-sm-8">
-        <div class="dropdown">
-          {{input type="text" id="postcodeSuggestionDropdownTrigger" class="form-control" placeholder="Postcode" value=customer.postcode auto-complete="off" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-          <div class="dropdown-menu w-100 full-tap-dropdown">
-            {{#each postcodeSuggestions as |postcode index|}}
-              <a class="dropdown-item" {{action "setPostcode" postcode.postcode}}>{{postcode.postcode}}</a>
-              {{#unless (is-equal index (minus postcodeSuggestions.length 1))}}
-                <div class="dropdown-divider"></div>
-              {{/unless}}
-            {{else}}
-              {{#if postcodeSuggestionError}}
-                <a class="dropdown-item">Error while searching</a>
-              {{else}}
-                <a class="dropdown-item">No suggestions</a>
-              {{/if}}
-            {{/each}}
-          </div>
-        </div>
-      </div>
-    {{/form-group}}
-  </form>
+  {{delivery-customer-search customer=customer
+                             onSearchStatusChange=(action "updateSearchInProgress")
+                             onSearch=(action "setDeliveryCustomerResults")}}
   {{#unless canSaveCustomer}}
     <div class="row customer-select_alert">
       <div class="col-12 offset-sm-1 col-sm-10">
@@ -91,7 +36,7 @@
   </div>
   <div class="row customer-select_results">
     <div class="col-12 offset-sm-1 col-sm-10">
-      {{#if debouncedSearch}}
+      {{#if searchInProgress}}
         {{loading-spinner text="Searching customers..."}}
       {{else}}
         {{#if deliveryCustomerResults}}
