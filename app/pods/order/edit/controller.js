@@ -48,6 +48,12 @@ export default Ember.Controller.extend({
   sortedCategories: Ember.computed.sort('model.categories', (x, y) => x.get('id') - y.get('id')),
 
   /**
+   * Whether we should focus the order id field when order customer is selected
+   * @type {Boolean}
+   */
+  focusOrderIdField: true,
+
+  /**
    * @type {String[]}
    */
   paymentMethods: Object.values(PAYMENT_METHODS),

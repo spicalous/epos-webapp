@@ -3,6 +3,12 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   /**
+   * Whether sub components should focus an input on insertion
+   * @type {Boolean}
+   */
+  focus: false,
+
+  /**
    *  customer.constructor.modelName (store.createRecord)
    *  customer.content.constructor.modelName (store.findRecord)
    */

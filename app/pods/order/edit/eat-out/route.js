@@ -15,6 +15,7 @@ export default Ember.Route.extend({
     editController.set('paymentMethod', model.get('paymentMethod'));
     editController.set('notes', model.get('notes'));
     editController.set('estimatedTime', model.get('estimatedTime'));
+    editController.set('focusOrderIdField', false);
 
     editController._prepareOrder = function() {
 

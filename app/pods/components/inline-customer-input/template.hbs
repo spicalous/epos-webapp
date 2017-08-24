@@ -1,5 +1,5 @@
 {{#if customer}}
-  {{component (concat 'inline-customer-input/selected/' customerType) customer=customer}}
+  {{component (concat 'inline-customer-input/selected/' customerType) customer=customer focus=focus}}
 {{else}}
   <div class="dropdown">
     <button type="button" class="btn btn-lg btn-block btn-main dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -3,6 +3,7 @@
     <div class="row hidden-sm-up order-edit_left_customer">
       <div class="col">
         {{inline-customer-input customer=customer
+                                focus=focusOrderIdField
                                 onSelectTakeaway=(action "setNewTakeawayCustomer")
                                 onSelectDelivery=(action "toggleCustomerSelect")
                                 onSelectOnline=(action "setNewOnlineCustomer")}}
@@ -51,6 +52,7 @@
     <div class="row order-edit_right_customer">
       <div class="col">
         {{inline-customer-input customer=customer
+                                focus=focusOrderIdField
                                 onSelectTakeaway=(action "setNewTakeawayCustomer")
                                 onSelectDelivery=(action "toggleCustomerSelect")
                                 onSelectOnline=(action "setNewOnlineCustomer")}}
