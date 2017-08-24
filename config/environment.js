@@ -1,11 +1,13 @@
-/* jshint node: true */
+/* eslint-env node */
+'use strict';
+
 const package = require('../package.json');
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     modulePrefix: 'epos-webapp',
     podModulePrefix: 'epos-webapp/pods',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
