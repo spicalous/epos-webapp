@@ -144,7 +144,7 @@ export default Ember.Component.extend({
       this.set('deliveryCustomerResults', customers);
       this.set('debouncedSearch', null);
     } else {
-      console.warn('Promise does not belong to the latest request');
+      console.warn('Promise does not belong to the latest request'); // eslint-disable-line no-console
     }
   },
 
