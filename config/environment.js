@@ -1,7 +1,7 @@
 /* eslint-env node */
 'use strict';
 
-const package = require('../package.json');
+const packageJSON = require('../package.json');
 
 module.exports = function(environment) {
   let ENV = {
@@ -23,7 +23,7 @@ module.exports = function(environment) {
 
     APP: {
       name: 'EPOS Webapp',
-      version: package.version
+      version: packageJSON.version
     }
   };
 
