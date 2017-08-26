@@ -76,6 +76,14 @@ export default Ember.Controller.extend({
   estimatedTime: 45,
 
   /**
+   * Computes the estimated time for delivery
+   * @type {Date}
+   */
+  computedEstimate: Ember.computed('estimatedTime', function() {
+    return new Date(Date.now() + (this.get('estimatedTime') * 1000 * 60));
+  }),
+
+  /**
    * notes regarding the order
    * @type {null|String}
    */
