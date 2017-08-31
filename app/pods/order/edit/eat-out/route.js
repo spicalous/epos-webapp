@@ -34,8 +34,10 @@ export default Ember.Route.extend({
     editController.onSubmitOrder = function() {
       this.transitionToRoute('order.view');
     };
+
     editController.onCancelOrder = function() {
       this.transitionToRoute('order.view');
+      model.get('orderItems').invoke('rollbackAttributes');
     };
   }
 
