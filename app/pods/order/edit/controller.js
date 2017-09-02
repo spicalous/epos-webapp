@@ -124,18 +124,7 @@ export default Ember.Controller.extend({
   }),
 
   _prepareOrder() {
-    let order = this.get('store').createRecord('order/eatOut');
-
-    order.setProperties({
-      dateTime: new Date(),
-      orderItems: this.get('items'),
-      paymentMethod: this.get('paymentMethod'),
-      notes: this.get('notes'),
-      customer: this.get('customer'),
-      estimatedTime: this.get('estimatedTime')
-    });
-
-    return order;
+    // overridden
   },
 
   _handleSuccessfulSubmit() {
