@@ -290,7 +290,6 @@ export default Ember.Controller.extend({
       this.set('showOrderModal', false);
       this.set('notes', null);
       this.set('items', Ember.A([]));
-      this.set('deletedItems', Ember.A([]));
       this.set('paymentMethod', null);
       this.set('estimatedTime', 45);
       this.set('numpadValue', '');

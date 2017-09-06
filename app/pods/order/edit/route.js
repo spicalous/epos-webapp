@@ -14,6 +14,8 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
 
+    controller.set('focusOrderIdField', true);
+
     controller._prepareOrder = function() {
       let order = this.get('store').createRecord('order/eatOut');
 
