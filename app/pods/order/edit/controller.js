@@ -128,20 +128,20 @@ export default Ember.Controller.extend({
   },
 
   _handleSuccessfulSubmit() {
+
+    // TODO: replace with proper solution ID:1829 (use this to search other todos)
+    // ### START
+    // remove original records from the store that were not replaced by
+    // side loaded response see https://github.com/emberjs/data/issues/1829
+    this.store.peekAll('order-item').filterBy('isNew').invoke('unloadRecord');
+    this.store.peekAll('takeaway-customer').filterBy('isNew').invoke('unloadRecord');
+    // ### END
+
     this.send('dismissMessage', 'loader');
     this.send('showMessage', 'overlay', {
       header: 'Confirmed ^.^',
       body: 'Order submitted successfully',
       callback: () => {
-
-        // TODO: replace with proper solution ID:1829 (use this to search other todos)
-        // ### START
-        // remove original records from the store that were not replaced by
-        // side loaded response see https://github.com/emberjs/data/issues/1829
-        this.store.peekAll('order-item').filterBy('isNew').invoke('unloadRecord');
-        this.store.peekAll('takeaway-customer').filterBy('isNew').invoke('unloadRecord');
-        // ### END
-
         this.send('toggleConfirmOrder');
         this.send('reset');
         if (this.get('onSubmitOrder')) {
