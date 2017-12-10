@@ -20,10 +20,11 @@ test('displays the item with menu id', function(assert) {
   }));
 
   this.render(hbs`{{order-item item=item}}`);
+  this.$('.order-item').click();
 
-  assert.equal(this.$('.order-item__quantity-x-id').text().trim(), '2 x 3');
-  assert.equal(this.$('.order-item__name').text().trim(), 'Menu item name');
-  assert.equal(this.$('.order-item__total').text().trim(), '12.34');
+  assert.equal(this.$('.order-item strong').text().trim(), '2 x 3');
+  assert.ok(this.$('.order-item').text().trim().includes('Menu item name'));
+  assert.ok(this.$('.order-item_expanded-content').text().trim().includes('12.34'));
 });
 
 
@@ -37,10 +38,11 @@ test('does not display menu id if it doesnt exist', function(assert) {
   }));
 
   this.render(hbs`{{order-item item=item}}`);
+  this.$('.order-item').click();
 
-  assert.equal(this.$('.order-item__quantity-x-id').text().trim(), '2 x');
-  assert.equal(this.$('.order-item__name').text().trim(), 'Menu item name');
-  assert.equal(this.$('.order-item__total').text().trim(), '12.34');
+  assert.equal(this.$('.order-item strong').text().trim(), '2 x');
+  assert.ok(this.$('.order-item').text().trim().includes('Menu item name'));
+  assert.ok(this.$('.order-item_expanded-content').text().trim().includes('12.34'));
 });
 
 
@@ -60,30 +62,31 @@ test('displays edit options', function(assert) {
   }));
 
   this.render(hbs`{{order-item item=item}}`);
+  this.$('.order-item').click();
 
-  assert.equal(this.$('.order-item__quantity-x-id').text().trim(), '2 x');
-  assert.equal(this.$('.order-item__name').text().trim(), 'Menu item name');
-  assert.equal(this.$('.order-item__total').text().trim(), '12.34');
-  assert.equal(this.$('.order-item__edit-option').text().trim(), 'Edit option name (23.45)');
+  assert.equal(this.$('.order-item strong').text().trim(), '2 x');
+  assert.ok(this.$('.order-item').text().trim().includes('Menu item name'));
+  assert.ok(this.$('.order-item_expanded-content').text().trim().includes('12.34'));
+  assert.equal(this.$('.order-item_edit-option').text().trim(), 'Edit option name (23.45)');
 });
 
 
 test('toggles expanded to true when clicked', function(assert) {
 
   this.render(hbs`{{order-item}}`);
-  this.$('.order-item__top').click();
+  this.$('.order-item').click();
 
-  assert.equal(this.$('.order-item__bottom').length, 1);
+  assert.equal(this.$('.order-item_expanded-content').length, 1);
 });
 
 
 test('toggles expanded to false when clicked', function(assert) {
 
   this.render(hbs`{{order-item}}`);
-  this.$('.order-item__top').click();
-  this.$('.order-item__top').click();
+  this.$('.order-item').click();
+  this.$('.order-item').click();
 
   return wait().then(() => {
-    assert.equal(this.$('.order-item__bottom').length, 0);
+    assert.equal(this.$('.order-item_expanded-content').length, 0);
   });
 });

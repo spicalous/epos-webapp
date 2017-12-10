@@ -9,7 +9,7 @@ test('displays select customer when no customer is selected', function(assert) {
 
   this.render(hbs`{{inline-customer-input}}`);
 
-  assert.equal(this.$('button').text().trim(), 'SELECT CUSTOMER');
+  assert.equal(this.$('button').text().trim(), 'New customer');
 });
 
 //test('displays remove customer when customer is selected', function(assert) {

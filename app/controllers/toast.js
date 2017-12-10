@@ -4,8 +4,10 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
 
+  DEBOUNCE_MS: 3000,
+
   messageObserver: observer('model.message', function() {
-    debounce(this, 'dismissToast', 3000);
+    debounce(this, 'dismissToast', this.DEBOUNCE_MS);
   }),
 
   dismissToast() {

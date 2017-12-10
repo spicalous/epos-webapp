@@ -22,6 +22,6 @@ test('it adds selected class if the category is selected', function(assert) {
   this.render(hbs`{{category-item category=category selected=selectedCategory}}`);
   this.set('selectedCategory', category);
 
-  assert.equal(this.$('button.is-selected').length, 1);
+  assert.equal(this.$('button.btn-main').length, 1);
 });
 

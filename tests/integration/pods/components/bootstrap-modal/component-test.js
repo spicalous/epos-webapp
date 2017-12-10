@@ -7,12 +7,25 @@ moduleForComponent('bootstrap-modal', 'Integration | Component | bootstrap modal
 
 test('it renders', function(assert) {
 
+  let doneOne = assert.async();
+  let doneTwo = assert.async();
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{bootstrap-modal}}`);
+  this.set('title', 'modal title');
+  this.set('message', 'modal message');
 
-  assert.equal(this.$().text().trim(), '');
+  this.render(hbs`{{bootstrap-modal title=title message=message}}`);
+
+  $('.modal').on('shown.bs.modal', (e) => {
+    assert.equal(this.$('.modal-title').text().trim(), 'modal title');
+    assert.equal(this.$('.modal-body').text().trim(), 'modal message');
+    this.$('button.close').click();
+    doneOne();
+  });
+});
+
+test('it renders template block', function(assert) {
 
   // Template block usage:
   this.render(hbs`
@@ -21,5 +34,10 @@ test('it renders', function(assert) {
     {{/bootstrap-modal}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  $('.modal').on('shown.bs.modal', (e) => {
+    assert.equal(this.$().text().trim(), 'template block text');
+    this.$('button.close').click();
+    doneTwo();
+  });
+
 });

@@ -10,7 +10,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{app-setting setting=setting}}`);
 
-  assert.equal(this.$().text().trim(), 'Setting Name');
+  assert.ok(this.$('div div:eq(1)').text().trim(), 'Setting Name');
 });
 
 // TODO when I convert to ember-mocha

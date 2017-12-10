@@ -7,19 +7,9 @@ moduleForComponent('delivery-customer-search', 'Integration | Component | delive
 
 test('it renders', function(assert) {
 
+  assert.expect(0);
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
   this.render(hbs`{{delivery-customer-search}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#delivery-customer-search}}
-      template block text
-    {{/delivery-customer-search}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

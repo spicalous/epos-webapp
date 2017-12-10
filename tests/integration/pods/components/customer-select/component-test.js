@@ -7,19 +7,15 @@ moduleForComponent('customer-select', 'Integration | Component | customer select
 
 test('it renders', function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
+  assert.expect(0);
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{customer-select}}`);
+  this.set('customer', {
+    telephone: '12345678901',
+    addressOne: 'addressOne',
+    addressTwo: 'addressTwo',
+    postcode: 'postcode'
+  });
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#customer-select}}
-      template block text
-    {{/customer-select}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  this.render(hbs`{{customer-select customer=customer}}`);
 });
