@@ -1,16 +1,18 @@
-import Ember from 'ember';
+import { empty } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   searchInProgress: false,
 
-  canSaveCustomer: Ember.computed('validCustomer', 'emptySearchResults', 'searchInProgress', function() {
+  canSaveCustomer: computed('validCustomer', 'emptySearchResults', 'searchInProgress', function() {
     return this.get('validCustomer') && this.get('emptySearchResults') && !this.get('searchInProgress');
   }),
 
-  emptySearchResults: Ember.computed.empty('deliveryCustomerResults'),
+  emptySearchResults: empty('deliveryCustomerResults'),
 
-  validQuery: Ember.computed('customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
+  validQuery: computed('customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
     let { telephone, addressOne, addressTwo, postcode } = this.get('customer');
 
     return (telephone && telephone.length > 2) || (addressOne && addressOne.length > 2) ||

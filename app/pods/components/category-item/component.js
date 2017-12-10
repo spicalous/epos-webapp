@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { observer } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   tagName: 'button',
 
@@ -12,7 +13,7 @@ export default Ember.Component.extend({
 
   classNameBindings: ['is-selected:btn-main:btn-secondary'],
 
-  selectedObserver: Ember.observer('selected', function() {
+  selectedObserver: observer('selected', function() {
     this.set('is-selected', this.get('selected') === this.get('category'));
   })
 

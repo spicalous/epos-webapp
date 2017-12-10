@@ -1,16 +1,17 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
-  settingOneClass: Ember.computed('setting.value', function() {
+  settingOneClass: computed('setting.value', function() {
     return this.get('setting.value') === 0 ? 'active' : '';
   }),
 
-  settingTwoClass: Ember.computed('setting.value', function() {
+  settingTwoClass: computed('setting.value', function() {
     return this.get('setting.value') === 1 ? 'active' : '';
   }),
 
-  settingThreeClass: Ember.computed('setting.value', function() {
+  settingThreeClass: computed('setting.value', function() {
     return this.get('setting.value') === 2 ? 'active' : '';
   }),
 

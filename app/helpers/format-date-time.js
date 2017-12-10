@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 import { formatTime } from './format-time';
 
 export function formatDateTime(params/*, hash*/) {
@@ -12,4 +12,4 @@ export function formatDateTime(params/*, hash*/) {
 
 }
 
-export default Ember.Helper.helper(formatDateTime);
+export default helper(formatDateTime);

@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import { debounce } from '@ember/runloop';
+import { observer } from '@ember/object';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
-  messageObserver: Ember.observer('model.message', function() {
-    Ember.run.debounce(this, 'dismissToast', 3000);
+  messageObserver: observer('model.message', function() {
+    debounce(this, 'dismissToast', 3000);
   }),
 
   dismissToast() {

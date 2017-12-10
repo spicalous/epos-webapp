@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
+export default Route.extend({
 
   model(params) {
     return this.store.findRecord('order/eat-out', params['eat-out_id']);

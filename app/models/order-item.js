@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
@@ -8,11 +8,11 @@ export default Model.extend({
   menuItem: belongsTo('menu-item'),
   editOptions: hasMany('edit-option'),
 
-  total: Ember.computed('quantity', 'menuItem', 'editOptions.[]', function() {
+  total: computed('quantity', 'menuItem', 'editOptions.[]', function() {
     return this.get('quantity') * (this.get('menuItem.price') + this.get('editOptionTotal'));
   }),
 
-  editOptionTotal: Ember.computed('editOptions.[]', function() {
+  editOptionTotal: computed('editOptions.[]', function() {
     return this.get('editOptions').reduce(function(prev, item) {
       return prev + item.get('price');
     }, 0);

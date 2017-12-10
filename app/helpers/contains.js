@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
 export function contains(params/*, hash*/) {
   let array = params[0] || [];
@@ -6,4 +6,4 @@ export function contains(params/*, hash*/) {
   return -1 < array.indexOf(item);
 }
 
-export default Ember.Helper.helper(contains);
+export default helper(contains);

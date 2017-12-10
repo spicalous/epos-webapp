@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import EmberObject from '@ember/object';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
@@ -9,10 +10,10 @@ moduleForComponent('order-item', 'Integration | Component | order item', {
 
 
 test('displays the item with menu id', function(assert) {
-  this.set('item', Ember.Object.create({
+  this.set('item', EmberObject.create({
     total: 1234,
     quantity: 2,
-    menuItem: Ember.Object.create({
+    menuItem: EmberObject.create({
       menuId: 3,
       name: 'Menu item name'
     })
@@ -27,10 +28,10 @@ test('displays the item with menu id', function(assert) {
 
 
 test('does not display menu id if it doesnt exist', function(assert) {
-  this.set('item', Ember.Object.create({
+  this.set('item', EmberObject.create({
     total: 1234,
     quantity: 2,
-    menuItem: Ember.Object.create({
+    menuItem: EmberObject.create({
       name: 'Menu item name'
     })
   }));
@@ -44,14 +45,14 @@ test('does not display menu id if it doesnt exist', function(assert) {
 
 
 test('displays edit options', function(assert) {
-  this.set('item', Ember.Object.create({
+  this.set('item', EmberObject.create({
     total: 1234,
     quantity: 2,
-    menuItem: Ember.Object.create({
+    menuItem: EmberObject.create({
       name: 'Menu item name'
     }),
-    editOptions: Ember.A([
-      Ember.Object.create({
+    editOptions: A([
+      EmberObject.create({
         name: 'Edit option name',
         price: 2345
       })

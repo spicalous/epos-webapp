@@ -1,15 +1,15 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 
 export default Model.extend({
   telephone: attr('string', { defaultValue: '' }),
 
-  invalidTelephone: Ember.computed('invalidTelephoneReason', function() {
+  invalidTelephone: computed('invalidTelephoneReason', function() {
     return !!this.get('invalidTelephoneReason');
   }),
 
-  invalidTelephoneReason: Ember.computed('telephone', function() {
+  invalidTelephoneReason: computed('telephone', function() {
     let telephone = this.get('telephone');
 
     if (!telephone || !telephone.trim()) {

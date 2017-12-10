@@ -1,13 +1,16 @@
-import Ember from 'ember';
+import { cancel, debounce } from '@ember/runloop';
+import { observer } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
 const ROAD_DROPDOWN_TRIGGER = '#roadSuggestionDropdownTrigger';
 const POSTCODE_DROPDOWN_TRIGGER = '#postcodeSuggestionDropdownTrigger';
 const ROAD_DEBOUNCE_ID_PROP_NAME = '__roadSuggestionDebounceId';
 const POSTCODE_DEBOUNCE_ID_PROP_NAME = '__postcodeSuggestionDebounceId';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
-  store: Ember.inject.service(),
+  store: service(),
 
   classNames: ['delivery-customer-search'],
 
@@ -27,7 +30,7 @@ export default Ember.Component.extend({
    */
   dontSuggest: false,
 
-  roadSuggestionSearch: Ember.observer('customer', 'customer.addressTwo', function() {
+  roadSuggestionSearch: observer('customer', 'customer.addressTwo', function() {
     const trigger = this.$(ROAD_DROPDOWN_TRIGGER);
     let addressTwo = this.get('customer.addressTwo') ? this.get('customer.addressTwo').trim() : '';
 
@@ -43,7 +46,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  postcodeSuggestionSearch: Ember.observer('customer', 'customer.postcode', function() {
+  postcodeSuggestionSearch: observer('customer', 'customer.postcode', function() {
     const trigger = this.$(POSTCODE_DROPDOWN_TRIGGER);
     let postcode = this.get('customer.postcode') ? this.get('customer.postcode').trim() : '';
 
@@ -66,9 +69,9 @@ export default Ember.Component.extend({
    * @param {object} query                 - query params
    */
   suggestionSearch(trigger, debounceIdPropName, model, query) {
-    Ember.run.cancel(this.get(debounceIdPropName));
+    cancel(this.get(debounceIdPropName));
 
-    this.set(debounceIdPropName, Ember.run.debounce(this, () => {
+    this.set(debounceIdPropName, debounce(this, () => {
 
       this.get('store').query(model, query).then((roads) => {
         this.set(debounceIdPropName, '');
@@ -85,18 +88,18 @@ export default Ember.Component.extend({
     }, 200));
   },
 
-  customerSearch: Ember.observer('customer', 'customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
+  customerSearch: observer('customer', 'customer.telephone', 'customer.addressOne', 'customer.addressTwo', 'customer.postcode', function() {
     let telephone = this.get('customer.telephone') ? this.get('customer.telephone').trim() : '';
     let addressOne = this.get('customer.addressOne') ? this.get('customer.addressOne').trim() : '';
     let addressTwo = this.get('customer.addressTwo') ? this.get('customer.addressTwo').trim() : '';
     let postcode = this.get('customer.postcode') ? this.get('customer.postcode').trim() : '';
 
-    Ember.run.cancel(this.get('debouncedSearch'));
+    cancel(this.get('debouncedSearch'));
 
     if (telephone.length > 2 || addressOne.length > 2 || addressTwo.length > 2 || postcode.length > 2) {
 
       this.get('onSearchStatusChange')(true);
-      this.set('debouncedSearch', Ember.run.debounce(this,
+      this.set('debouncedSearch', debounce(this,
         this.queryDeliveryCustomer.bind(this, {
           telephone: telephone,
           addressOne: addressOne,

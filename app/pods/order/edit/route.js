@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import { hash } from 'rsvp';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
+export default Route.extend({
 
   model() {
-    return Ember.RSVP.hash({
+    return hash({
       menu: this.store.findAll('menu-item'),
       categories: this.store.findAll('category'),
       editCategories: this.store.findAll('edit-category'),

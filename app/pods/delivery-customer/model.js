@@ -1,5 +1,5 @@
+import { computed } from '@ember/object';
 import Customer from 'epos-webapp/models/customer';
-import Ember from 'ember';
 import attr from 'ember-data/attr';
 
 export default Customer.extend({
@@ -7,7 +7,7 @@ export default Customer.extend({
   addressTwo: attr('string', { defaultValue: '' }),
   postcode: attr('string', { defaultValue: '' }),
 
-  address: Ember.computed('addressOne', 'addressTwo', function() {
+  address: computed('addressOne', 'addressTwo', function() {
     let addressOne = this.get('addressOne') ? this.get('addressOne').trim() : '';
     let addressTwo = this.get('addressTwo') ? this.get('addressTwo').trim() : '';
 
@@ -16,15 +16,15 @@ export default Customer.extend({
         addressTwo;
   }),
 
-  invalidAddress: Ember.computed('invalidAddressReason', function() {
+  invalidAddress: computed('invalidAddressReason', function() {
     return !!this.get('invalidAddressReason');
   }),
 
-  invalidPostcode: Ember.computed('invalidPostcodeReason', function() {
+  invalidPostcode: computed('invalidPostcodeReason', function() {
     return !!this.get('invalidPostcodeReason');
   }),
 
-  invalidAddressReason: Ember.computed('addressOne', 'addressTwo', function() {
+  invalidAddressReason: computed('addressOne', 'addressTwo', function() {
     let addressOne = this.get('addressOne');
     let addressTwo = this.get('addressTwo');
 
@@ -37,7 +37,7 @@ export default Customer.extend({
     return '';
   }),
 
-  invalidPostcodeReason: Ember.computed('postcode', function() {
+  invalidPostcodeReason: computed('postcode', function() {
     let postcode = this.get('postcode');
 
     if (postcode && postcode.length > 10) {

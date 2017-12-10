@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { next } from '@ember/runloop';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
+export default Route.extend({
 
   actions: {
 
@@ -9,7 +10,7 @@ export default Ember.Route.extend({
         outlet: 'toast',
         parentView: 'application'
       });
-      Ember.run.next(this, () => {
+      next(this, () => {
         this.render('toast', {
           into: 'application',
           outlet: 'toast',

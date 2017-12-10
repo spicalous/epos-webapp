@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   /**
    * Whether sub components should focus an input on insertion
@@ -12,7 +13,7 @@ export default Ember.Component.extend({
    *  customer.constructor.modelName (store.createRecord)
    *  customer.content.constructor.modelName (store.findRecord)
    */
-  customerType: Ember.computed('customer', function() {
+  customerType: computed('customer', function() {
     return this.get('customer.constructor.modelName') || this.get('customer.content.constructor.modelName');
   }),
 

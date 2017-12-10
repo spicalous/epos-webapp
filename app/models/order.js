@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
@@ -13,7 +13,7 @@ export default Model.extend({
   /**
    * used to calculated the total of the order
    */
-  total: Ember.computed('orderItems.@each.quantity', 'orderItems.@each.total', function() {
+  total: computed('orderItems.@each.quantity', 'orderItems.@each.total', function() {
     return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('total'), 0);
   })
 

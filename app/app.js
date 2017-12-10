@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import Application from '@ember/application';
+import TextField from '@ember/component'
 import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 
-const App = Ember.Application.extend({
+const App = Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver
@@ -11,7 +12,7 @@ const App = Ember.Application.extend({
 
 loadInitializers(App, config.modulePrefix);
 
-Ember.TextField.reopen({
+TextField.reopen({
   attributeBindings: ['data-toggle', 'aria-haspopup', 'aria-expanded']
 });
 

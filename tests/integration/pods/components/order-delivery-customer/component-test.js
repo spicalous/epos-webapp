@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -12,7 +12,7 @@ moduleForComponent('order-delivery-customer', 'Integration | Component | order d
 
 test('it renders', function(assert) {
 
-  Ember.run(() => {
+  run(() => {
     this.set('delivery-customer',
       this.store.createRecord('delivery-customer', {
         telephone: '12345678901',

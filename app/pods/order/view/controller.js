@@ -1,17 +1,20 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
+import { filter, intersect, sort, filterBy } from '@ember/object/computed';
 import { RECEIPT_TYPE } from '../../../models/receipt-type';
 
-const filterByCustomerType = (customerType) => Ember.computed.filter('model', function(order) {
+const filterByCustomerType = (customerType) => filter('model', function(order) {
   let modelName = order.get('customer.constructor.modelName') || order.get('customer.content.constructor.modelName');
   return modelName === customerType;
 });
 
-const calculateTotalFor = (paymentTypeOrders) => Ember.computed(paymentTypeOrders, function() {
+const calculateTotalFor = (paymentTypeOrders) => computed(paymentTypeOrders, function() {
   let orders = this.get(paymentTypeOrders);
   return orders.reduce((prev, order) => prev + order.get('total'), 0);
 });
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   sortByTime: ['dateTime:desc'],
 
@@ -23,9 +26,9 @@ export default Ember.Controller.extend({
 
   paymentTypes: ['All', 'Not paid', 'Cash', 'Card', 'Online'],
 
-  filteredOrders: Ember.computed.intersect('filteredByOrderType', 'filteredByPaymentType'),
+  filteredOrders: intersect('filteredByOrderType', 'filteredByPaymentType'),
 
-  filteredByOrderType: Ember.computed('orderTypeFilter', 'model.[]', function() {
+  filteredByOrderType: computed('orderTypeFilter', 'model.[]', function() {
     let orderTypeFilter = this.get('orderTypeFilter');
 
     if (orderTypeFilter === 'Delivery') {
@@ -39,7 +42,7 @@ export default Ember.Controller.extend({
     }
   }),
 
-  filteredByPaymentType: Ember.computed('paymentTypeFilter', 'model.@each.paymentMethod', function() {
+  filteredByPaymentType: computed('paymentTypeFilter', 'model.@each.paymentMethod', function() {
     let paymentTypeFilter = this.get('paymentTypeFilter');
 
     if (paymentTypeFilter === 'Not paid') {
@@ -55,16 +58,16 @@ export default Ember.Controller.extend({
     }
   }),
 
-  ordersSortedByTimestamp: Ember.computed.sort('filteredOrders', 'sortByTime'),
+  ordersSortedByTimestamp: sort('filteredOrders', 'sortByTime'),
 
   deliveryOrders: filterByCustomerType('delivery-customer'),
   takeawayOrders: filterByCustomerType('takeaway-customer'),
   onlineOrders: filterByCustomerType('online-customer'),
 
-  cashOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CASH'),
-  cardOrders: Ember.computed.filterBy('model', 'paymentMethod', 'CARD'),
-  onlinePaymentOrders: Ember.computed.filterBy('model', 'paymentMethod', 'ONLINE'),
-  notPaidOrders: Ember.computed.filterBy('model', 'paymentMethod', null),
+  cashOrders: filterBy('model', 'paymentMethod', 'CASH'),
+  cardOrders: filterBy('model', 'paymentMethod', 'CARD'),
+  onlinePaymentOrders: filterBy('model', 'paymentMethod', 'ONLINE'),
+  notPaidOrders: filterBy('model', 'paymentMethod', null),
 
   totalCash: calculateTotalFor('cashOrders'),
   totalCard: calculateTotalFor('cardOrders'),
@@ -72,19 +75,19 @@ export default Ember.Controller.extend({
   totalNotPaid: calculateTotalFor('notPaidOrders'),
   totalAll: calculateTotalFor('model'),
 
-  numberOfCashOrders: Ember.computed('cashOrders.length', function() {
+  numberOfCashOrders: computed('cashOrders.length', function() {
     return this.get('cashOrders.length');
   }),
-  numberOfCardOrders: Ember.computed('cardOrders.length', function() {
+  numberOfCardOrders: computed('cardOrders.length', function() {
     return this.get('cardOrders.length');
   }),
-  numberOfOnlineOrders: Ember.computed('onlinePaymentOrders.length', function() {
+  numberOfOnlineOrders: computed('onlinePaymentOrders.length', function() {
     return this.get('onlinePaymentOrders.length');
   }),
-  numberOfNotPaidOrders: Ember.computed('notPaidOrders.length', function() {
+  numberOfNotPaidOrders: computed('notPaidOrders.length', function() {
     return this.get('notPaidOrders.length');
   }),
-  numberOfTotalOrders: Ember.computed('model.length', function() {
+  numberOfTotalOrders: computed('model.length', function() {
     return this.get('model.length');
   }),
 
@@ -96,7 +99,7 @@ export default Ember.Controller.extend({
   _getRequest(url, loadingMessage, successMessage, errorMessage) {
     this.send('showMessage', 'loader', { message: loadingMessage });
 
-    Ember.$.get(url)
+    $.get(url)
       .then(() => {
         this.send('dismissMessage', 'loader');
         this.send('showMessage', 'overlay', { header: successMessage });

@@ -1,7 +1,10 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import { sort, empty, and } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 import { PAYMENT_METHODS } from '../../../models/payment-method';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   /**
    * @type {Category}
@@ -19,7 +22,7 @@ export default Ember.Controller.extend({
    * An array of menu items filtered by category and number entered by the numpad
    * @type {MenuItem[]}
    */
-  menuItems: Ember.computed('model.menu', 'selectedCategory', 'numpadValue', function() {
+  menuItems: computed('model.menu', 'selectedCategory', 'numpadValue', function() {
     const selectedCategory = this.get('selectedCategory');
     const numpadValue = this.get('numpadValue');
     let menuItems = this.get('model.menu');
@@ -39,13 +42,13 @@ export default Ember.Controller.extend({
    * Menu items sorted by ascending id
    * @type {MenuItem[]}
    */
-  sortedMenu: Ember.computed.sort('menuItems', (x, y) => x.get('id') - y.get('id')),
+  sortedMenu: sort('menuItems', (x, y) => x.get('id') - y.get('id')),
 
   /**
    * Categories sorted by ascending id
    * @type {Category[]}
    */
-  sortedCategories: Ember.computed.sort('model.categories', (x, y) => x.get('id') - y.get('id')),
+  sortedCategories: sort('model.categories', (x, y) => x.get('id') - y.get('id')),
 
   /**
    * Whether we should focus the order id field when order customer is selected
@@ -79,7 +82,7 @@ export default Ember.Controller.extend({
    * Computes the estimated time for delivery
    * @type {Date}
    */
-  computedEstimate: Ember.computed('estimatedTime', function() {
+  computedEstimate: computed('estimatedTime', function() {
     return new Date(Date.now() + (this.get('estimatedTime') * 1000 * 60));
   }),
 
@@ -92,13 +95,13 @@ export default Ember.Controller.extend({
   /**
    * @type {OrderItem[]}
    */
-  items: Ember.A(),
+  items: A(),
 
-  total: Ember.computed('items.@each.quantity', 'items.@each.total', function() {
+  total: computed('items.@each.quantity', 'items.@each.total', function() {
     return this.get('items').reduce((prev, item) => prev + item.get('total'), 0);
   }),
 
-  size: Ember.computed('items.@each.quantity', function() {
+  size: computed('items.@each.quantity', function() {
     return this.get('items').reduce((prev, item) => prev + item.get('quantity'), 0);
   }),
 
@@ -106,20 +109,20 @@ export default Ember.Controller.extend({
    * Only applies to delivery and takeaway customers
    * @type {Boolean}
    */
-  validCustomer: Ember.computed('customer', 'customer.invalidTelephone', 'customer.invalidAddress', 'customer.invalidPostcode', function() {
+  validCustomer: computed('customer', 'customer.invalidTelephone', 'customer.invalidAddress', 'customer.invalidPostcode', function() {
     let customer = this.get('customer');
 
     return customer && !customer.get('invalidTelephone') &&
         !customer.get('invalidAddress') && !customer.get('invalidPostcode');
   }),
 
-  emptyCustomer: Ember.computed.empty('customer'),
+  emptyCustomer: empty('customer'),
 
-  emptyOrder: Ember.computed.empty('items'),
+  emptyOrder: empty('items'),
 
-  emptyCustomerAndOrder: Ember.computed.and('emptyCustomer', 'emptyOrder'),
+  emptyCustomerAndOrder: and('emptyCustomer', 'emptyOrder'),
 
-  invalidOrder: Ember.computed('emptyOrder', 'validCustomer', function() {
+  invalidOrder: computed('emptyOrder', 'validCustomer', function() {
     return this.get('emptyOrder') || !this.get('validCustomer');
   }),
 
@@ -289,7 +292,7 @@ export default Ember.Controller.extend({
       this.send('removeCustomer');
       this.set('showOrderModal', false);
       this.set('notes', null);
-      this.set('items', Ember.A([]));
+      this.set('items', A([]));
       this.set('paymentMethod', null);
       this.set('estimatedTime', 45);
       this.set('numpadValue', '');

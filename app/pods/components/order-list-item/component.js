@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import { RECEIPT_TYPE } from '../../../models/receipt-type';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   tagName: 'li',
 
@@ -17,11 +18,11 @@ export default Ember.Component.extend({
    *  customer.constructor.modelName (store.createRecord)
    *  customer.content.constructor.modelName (store.findRecord)
    */
-  customerType: Ember.computed('order.customer', function() {
+  customerType: computed('order.customer', function() {
     return this.get('order.customer.constructor.modelName') || this.get('order.customer.content.constructor.modelName');
   }),
 
-  orderType: Ember.computed('order', function() {
+  orderType: computed('order', function() {
     return this.get('order.constructor.modelName');
   }),
 

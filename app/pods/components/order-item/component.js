@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   tagName: 'li',
 
@@ -12,7 +13,7 @@ export default Ember.Component.extend({
 
   selectedEditCategoryId: null,
 
-  filteredEditOptions: Ember.computed('selectedEditCategoryId', function() {
+  filteredEditOptions: computed('selectedEditCategoryId', function() {
     let selectedEditCategoryId = this.get('selectedEditCategoryId');
     return this.get('editOptions').filterBy('editCategoryId', parseInt(selectedEditCategoryId));
   }),

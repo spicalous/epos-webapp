@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
-  validQuery: Ember.computed('model.telephone', 'model.addressOne', 'model.addressTwo', 'model.postcode', function() {
+  validQuery: computed('model.telephone', 'model.addressOne', 'model.addressTwo', 'model.postcode', function() {
     let { telephone, addressOne, addressTwo, postcode } = this.get('model');
 
     return (telephone && telephone.length > 2) || (addressOne && addressOne.length > 2) ||

@@ -1,24 +1,25 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import { A } from '@ember/array';
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:order/view', 'Unit | Controller | order/view', {
   needs: ['adapter:application']
 });
 
-let mockOrderTypes = Ember.A([
-  Ember.Object.create({
+let mockOrderTypes = A([
+  EmberObject.create({
     customer: { constructor: { modelName: 'delivery-customer'} },
     paymentMethod: null
   }),
-  Ember.Object.create({
+  EmberObject.create({
     customer: { constructor: { modelName: 'delivery-customer'} },
     paymentMethod: 'CASH'
   }),
-  Ember.Object.create({
+  EmberObject.create({
     customer: { constructor: { modelName: 'takeaway-customer'} },
     paymentMethod: 'CARD'
   }),
-  Ember.Object.create({
+  EmberObject.create({
     customer: { constructor: { modelName: 'takeaway-customer'} },
     paymentMethod: 'ONLINE'
   })

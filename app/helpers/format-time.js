@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
 export function formatTime(params/*, hash*/) {
   if (!params[0]) {
@@ -13,4 +13,4 @@ export function formatTime(params/*, hash*/) {
   return (hours < 10 ? "0" + hours : hours) + ":" + (mins < 10 ? "0" + mins : mins);
 }
 
-export default Ember.Helper.helper(formatTime);
+export default helper(formatTime);

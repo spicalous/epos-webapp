@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   /*
    * We bind onDismiss to the modal being hidden so that we can perform any actions when dismissing the modal

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -12,7 +12,7 @@ moduleForComponent('order-list-item', 'Integration | Component | order list item
 
 test('it renders takeaway customer', function(assert) {
 
-  Ember.run(() => {
+  run(() => {
     this.set('order', this.store.createRecord('order', {
       customer: this.store.createRecord('takeaway-customer')
     }));
@@ -25,7 +25,7 @@ test('it renders takeaway customer', function(assert) {
 
 test('it renders delivery customer', function(assert) {
 
-  Ember.run(() => {
+  run(() => {
     this.set('order', this.store.createRecord('order', {
       customer: this.store.createRecord('delivery-customer', {
         telephone: '12345678901',
