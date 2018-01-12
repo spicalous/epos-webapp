@@ -14,45 +14,23 @@
   {{#form-group class="row mb-1" hasDanger=customer.invalidAddress}}
     <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Road</label>
     <div class="col-12 col-sm-8">
-      <div class="dropdown">
-        {{input type="text" id="roadSuggestionDropdownTrigger" class="form-control" placeholder="Road" value=customer.addressTwo autocomplete="off" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-        <div class="dropdown-menu w-100 full-tap-dropdown">
-          {{#each roadSuggestions as |road index|}}
-            <a class="dropdown-item" {{action "setAddressTwo" road.name}}>{{road.name}}</a>
-            {{#unless (is-equal index (minus roadSuggestions.length 1))}}
-              <div class="dropdown-divider"></div>
-            {{/unless}}
-          {{else}}
-            {{#if roadSuggestionError}}
-              <a class="dropdown-item">Error while searching</a>
-            {{else}}
-              <a class="dropdown-item">No suggestions</a>
-            {{/if}}
-          {{/each}}
-        </div>
-      </div>
+      {{suggestable-input placeholder="Road"
+                          value=customer.addressTwo
+                          suggestions=roadSuggestions
+                          suggestionError=roadSuggestionError
+                          onValueChange=(action "roadSuggestionSearch")
+                          minLengthToTriggerValueChange=2}}
     </div>
   {{/form-group}}
   {{#form-group class="row mb-1" hasDanger=customer.invalidPostcode}}
     <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Postcode</label>
     <div class="col-12 col-sm-8">
-      <div class="dropdown">
-        {{input type="text" id="postcodeSuggestionDropdownTrigger" class="form-control" placeholder="Postcode" value=customer.postcode autocomplete="off" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"}}
-        <div class="dropdown-menu w-100 full-tap-dropdown">
-          {{#each postcodeSuggestions as |postcode index|}}
-            <a class="dropdown-item" {{action "setPostcode" postcode.postcode}}>{{postcode.postcode}}</a>
-            {{#unless (is-equal index (minus postcodeSuggestions.length 1))}}
-              <div class="dropdown-divider"></div>
-            {{/unless}}
-          {{else}}
-            {{#if postcodeSuggestionError}}
-              <a class="dropdown-item">Error while searching</a>
-            {{else}}
-              <a class="dropdown-item">No suggestions</a>
-            {{/if}}
-          {{/each}}
-        </div>
-      </div>
+      {{suggestable-input placeholder="Postcode"
+                          value=customer.postcode
+                          suggestions=postcodeSuggestions
+                          suggestionError=postcodeSuggestionError
+                          onValueChange=(action "postcodeSuggestionSearch")
+                          minLengthToTriggerValueChange=2}}
     </div>
   {{/form-group}}
 </form>

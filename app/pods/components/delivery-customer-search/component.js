@@ -3,8 +3,6 @@ import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 
-const ROAD_DROPDOWN_TRIGGER = '#roadSuggestionDropdownTrigger';
-const POSTCODE_DROPDOWN_TRIGGER = '#postcodeSuggestionDropdownTrigger';
 const ROAD_DEBOUNCE_ID_PROP_NAME = '__roadSuggestionDebounceId';
 const POSTCODE_DEBOUNCE_ID_PROP_NAME = '__postcodeSuggestionDebounceId';
 
@@ -14,75 +12,25 @@ export default Component.extend({
 
   classNames: ['delivery-customer-search'],
 
-  didInsertElement() {
-    this.$(ROAD_DROPDOWN_TRIGGER).on('click tap', (event) => event.stopImmediatePropagation());
-    this.$(POSTCODE_DROPDOWN_TRIGGER).on('click tap', (event) => event.stopImmediatePropagation());
-  },
-
-  willDestroyElement() {
-    this.$(ROAD_DROPDOWN_TRIGGER).off();
-    this.$(POSTCODE_DROPDOWN_TRIGGER).off();
-  },
-
   /**
-   * in the case where the user sets a property, causing an observer to fire and thus requesting a suggestion search. We
-   * need a flag to prevent the search
+   * @param {string} debounceIdPropName   id for tracking debounce
+   * @param {string} model                name for the model to search for
+   * @param {Object} query                key value pair of field and value to query
+   * @param {Function mapResults          handler for mapping the search results
    */
-  dontSuggest: false,
-
-  roadSuggestionSearch: observer('customer', 'customer.addressTwo', function() {
-    const trigger = this.$(ROAD_DROPDOWN_TRIGGER);
-    let addressTwo = this.get('customer.addressTwo') ? this.get('customer.addressTwo').trim() : '';
-
-    if (this.get('dontSuggest')) {
-      this.set('dontSuggest', false);
-      return;
-    }
-
-    if (addressTwo && addressTwo.length > 1) {
-      this.suggestionSearch(trigger, ROAD_DEBOUNCE_ID_PROP_NAME, 'road', { road: addressTwo }, 'dontSuggestRoad');
-    } else {
-      this._hideDropdown(trigger);
-    }
-  }),
-
-  postcodeSuggestionSearch: observer('customer', 'customer.postcode', function() {
-    const trigger = this.$(POSTCODE_DROPDOWN_TRIGGER);
-    let postcode = this.get('customer.postcode') ? this.get('customer.postcode').trim() : '';
-
-    if (this.get('dontSuggest')) {
-      this.set('dontSuggest', false);
-      return;
-    }
-
-    if (postcode && postcode.length > 1) {
-      this.suggestionSearch(trigger, POSTCODE_DEBOUNCE_ID_PROP_NAME, 'postcode', { postcode: postcode });
-    } else {
-      this._hideDropdown(trigger);
-    }
-  }),
-
-  /**
-   * @param {HTMLElement} trigger          - element for triggering show/hide of the bootstrap dropdown
-   * @param {string} debounceIdPropName    - id for debounce handling
-   * @param {string} model                 - model name for query
-   * @param {object} query                 - query params
-   */
-  suggestionSearch(trigger, debounceIdPropName, model, query) {
+  suggestionSearch(debounceIdPropName, model, query, mapResults) {
     cancel(this.get(debounceIdPropName));
 
     this.set(debounceIdPropName, debounce(this, () => {
 
-      this.get('store').query(model, query).then((roads) => {
+      this.get('store').query(model, query).then((suggestions) => {
         this.set(debounceIdPropName, '');
-        this.set(model + 'Suggestions', roads);
+        this.set(model + 'Suggestions', mapResults(suggestions));
         this.set(model + 'SuggestionError', false);
-        this._showDropdown(trigger);
       }).catch(() => {
         this.set(debounceIdPropName, '');
         this.set(model + 'Suggestions', []);
         this.set(model + 'SuggestionError', true);
-        this._showDropdown(trigger);
       });
 
     }, 200));
@@ -99,14 +47,12 @@ export default Component.extend({
     if (telephone.length > 2 || addressOne.length > 2 || addressTwo.length > 2 || postcode.length > 2) {
 
       this.get('onSearchStatusChange')(true);
-      this.set('debouncedSearch', debounce(this,
-        this.queryDeliveryCustomer.bind(this, {
+      this.set('debouncedSearch', debounce(this, 'queryDeliveryCustomer', {
           telephone: telephone,
           addressOne: addressOne,
           addressTwo: addressTwo,
           postcode: postcode
-        }),
-        500));
+        }, 500));
     }
   }),
 
@@ -140,30 +86,22 @@ export default Component.extend({
     }
   },
 
-  _showDropdown(trigger) {
-    if (!trigger.parent().hasClass('show')) {
-      trigger.dropdown('toggle');
-    }
-  },
-
-  _hideDropdown(trigger) {
-    if (trigger.parent().hasClass('show')) {
-      trigger.dropdown('toggle');
-    }
-  },
-
   actions: {
 
-    setAddressTwo(addressTwo) {
-      this._hideDropdown(this.$(ROAD_DROPDOWN_TRIGGER));
-      this.set('dontSuggest', true);
-      this.set('customer.addressTwo', addressTwo);
+    roadSuggestionSearch(road) {
+      this.suggestionSearch(
+        ROAD_DEBOUNCE_ID_PROP_NAME,
+        'road',
+        { road: road },
+        (results) => results.map((result) => result.get('name')));
     },
 
-    setPostcode(postcode) {
-      this._hideDropdown(this.$(POSTCODE_DROPDOWN_TRIGGER));
-      this.set('dontSuggest', true);
-      this.set('customer.postcode', postcode);
+    postcodeSuggestionSearch(postcode) {
+      this.suggestionSearch(
+        POSTCODE_DEBOUNCE_ID_PROP_NAME,
+        'postcode',
+        { postcode: postcode },
+        (results) => results.map((result) => result.get('postcode')));
     }
 
   }
