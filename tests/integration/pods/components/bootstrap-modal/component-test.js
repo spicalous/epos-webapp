@@ -36,7 +36,7 @@ test('it renders template block', function(assert) {
   `);
 
   $('.modal').on('shown.bs.modal', () => {
-    assert.equal(this.$().text().trim(), 'template block text');
+    assert.equal(this.$('.modal-body').text().trim(), 'template block text');
     this.$('button.close').click();
     done();
   });

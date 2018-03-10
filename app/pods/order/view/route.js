@@ -31,12 +31,7 @@ export default Route.extend({
       const scrollPosition = this.get('currentScrollPosition');
 
       if (scrollPosition) {
-
-        function adjustScrollPosition() {
-          $(window).scrollTop(scrollPosition);
-        }
-
-        scheduleOnce('afterRender', this, adjustScrollPosition);
+        scheduleOnce('afterRender', this, () => $(window).scrollTop(scrollPosition));
       }
     }
 

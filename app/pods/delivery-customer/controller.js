@@ -20,7 +20,7 @@ export default Controller.extend({
       this.set('deliveryCustomerResults', deliveryCustomers);
     },
 
-    editCustomer(deliveryCustomer) {
+    editCustomer() {
 
     }
 

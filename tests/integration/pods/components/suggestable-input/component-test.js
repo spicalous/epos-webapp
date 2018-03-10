@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{suggestable-input}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#suggestable-input}}
-      template block text
-    {{/suggestable-input}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('.input').text().trim(), '');
 });

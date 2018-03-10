@@ -7,6 +7,7 @@ moduleFor('route:order/view', 'Unit | Route | order/view', {
 
 test('saves scroll position when transitioning to order.edit.eat-out', function(assert) {
   let route = this.subject();
+
   route._getScrollPosition = () => 42;
 
   route.send('willTransition', { targetName: "order.edit.eat-out" });
