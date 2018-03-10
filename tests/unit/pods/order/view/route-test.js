@@ -5,7 +5,19 @@ moduleFor('route:order/view', 'Unit | Route | order/view', {
   // needs: ['controller:foo']
 });
 
-test('it exists', function(assert) {
+test('saves scroll position when transitioning to order.edit.eat-out', function(assert) {
   let route = this.subject();
-  assert.ok(route);
+  route._getScrollPosition = () => 42;
+
+  route.send('willTransition', { targetName: "order.edit.eat-out" });
+
+  assert.equal(route.get('currentScrollPosition'), 42);
+});
+
+test('does not save scroll position when not transitioning to order.edit.eat-out', function(assert) {
+  let route = this.subject();
+
+  route.send('willTransition', { targetName: "poop" });
+
+  assert.equal(route.get('currentScrollPosition'), 0);
 });
