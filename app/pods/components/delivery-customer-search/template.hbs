@@ -1,18 +1,18 @@
 <form>
   {{#form-group class="row mb-1" hasDanger=customer.invalidTelephone}}
-    <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Tel</label>
+    <label class="offset-sm-1 col-sm-2 col-form-label d-none d-sm-block">Tel</label>
     <div class="col-12 col-sm-8">
       {{input type="tel" class="form-control" placeholder="Telephone" value=customer.telephone}}
     </div>
   {{/form-group}}
   {{#form-group class="row mb-1" hasDanger=customer.invalidAddress}}
-    <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">House no.</label>
+    <label class="offset-sm-1 col-sm-2 col-form-label d-none d-sm-block">House no.</label>
     <div class="col-12 col-sm-8">
       {{input type="text" class="form-control" placeholder="House no." value=customer.addressOne}}
     </div>
   {{/form-group}}
   {{#form-group class="row mb-1" hasDanger=customer.invalidAddress}}
-    <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Road</label>
+    <label class="offset-sm-1 col-sm-2 col-form-label d-none d-sm-block">Road</label>
     <div class="col-12 col-sm-8">
       {{suggestable-input placeholder="Road"
                           value=customer.addressTwo
@@ -23,7 +23,7 @@
     </div>
   {{/form-group}}
   {{#form-group class="row mb-1" hasDanger=customer.invalidPostcode}}
-    <label class="offset-sm-1 col-sm-2 col-form-label hidden-xs-down">Postcode</label>
+    <label class="offset-sm-1 col-sm-2 col-form-label d-none d-sm-block">Postcode</label>
     <div class="col-12 col-sm-8">
       {{suggestable-input placeholder="Postcode"
                           value=customer.postcode

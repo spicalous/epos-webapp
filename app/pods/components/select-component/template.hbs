@@ -1,7 +1,5 @@
-<select class="custom-select w-100" {{action 'change' on='change'}}>
+<select class="custom-select" {{action 'change' on='change'}}>
   {{#each content key="@index" as |item|}}
-    <option value="{{item}}" selected={{is-equal item selectedValue}}>
-      {{item}}
-    </option>
+    <option value="{{item}}" selected={{is-equal item selectedValue}}>{{item}}</option>
   {{/each}}
 </select>

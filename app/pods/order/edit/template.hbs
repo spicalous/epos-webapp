@@ -1,6 +1,7 @@
 <div class="row order-edit">
   <div class="col-12 col-sm-7 col-md-8 order-edit_left">
-    <div class="row hidden-sm-up order-edit_left_customer">
+    <!-- hidden sm and up -->
+    <div class="row d-sm-none order-edit_left_customer">
       <div class="col">
         {{inline-customer-input customer=customer
                                 focus=focusOrderIdField
@@ -34,7 +35,7 @@
           {{/each}}
         </ul>
       </div>
-      <div class="hidden-xs-down col-sm-5 col-md-4 order-edit_left_bottom_numpad">
+      <div class="d-none d-sm-block col-sm-5 col-md-4 order-edit_left_bottom_numpad">
         <div class="row">
           <div class="col-12 h2 text-center">
             <span>{{numpadValue}}</span>
@@ -48,7 +49,8 @@
       </div>
     </div>
   </div>
-  <div class="hidden-xs-down col-sm-5 col-md-4 order-edit_right">
+  <!-- hidden only on xs -->
+  <div class="d-none d-sm-flex col-sm-5 col-md-4 order-edit_right">
     <div class="row order-edit_right_customer">
       <div class="col">
         {{inline-customer-input customer=customer
@@ -85,7 +87,7 @@
     <div class="row order-edit_right_actions">
       <div class="col-6">
         {{#if emptyCustomerAndOrder}}
-          <button type="button" class="btn btn-lg btn-block btn-secondary" {{action "back"}}>
+          <button type="button" class="btn btn-lg btn-block btn-main-secondary" {{action "back"}}>
             Back
           </button>
         {{else}}
@@ -103,7 +105,8 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-order hidden-sm-up" {{action "toggleOrderModal"}}>
+<!-- hidden sm and up -->
+<button type="button" class="btn btn-order d-sm-none" {{action "toggleOrderModal"}}>
   {{size}} item{{#unless (is-equal 1 size)}}s{{/unless}}
 </button>
 
@@ -131,7 +134,7 @@
     <div class="row order-modal_actions">
       <div class="col-6">
         {{#if emptyCustomerAndOrder}}
-          <button type="button" class="btn btn-lg btn-block btn-secondary" {{action "back"}}>
+          <button type="button" class="btn btn-lg btn-block btn-main-secondary" {{action "back"}}>
             Back
           </button>
         {{else}}
@@ -148,7 +151,7 @@
     </div>
     <div class="row order-modal_actions">
       <div class="col-12">
-        <button type="button" class="btn btn-lg btn-block btn-secondary" {{action "toggleOrderModal"}}>Close</button>
+        <button type="button" class="btn btn-lg btn-block btn-main-secondary" {{action "toggleOrderModal"}}>Close</button>
       </div>
     </div>
   </div>
@@ -212,8 +215,8 @@
     </div>
     <div class="row confirm-order-modal_actions">
       <div class="col-6 offset-sm-1 col-sm-5">
-        <button type="button" class="btn btn-secondary btn-lg btn-block" {{action "toggleConfirmOrder"}}>
-          Cancel
+        <button type="button" class="btn btn-main-secondary btn-lg btn-block" {{action "toggleConfirmOrder"}}>
+          Back
         </button>
       </div>
       <div class="col-6 col-sm-5">

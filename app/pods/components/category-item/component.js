@@ -11,7 +11,7 @@ export default Component.extend({
 
   classNames: ['btn', 'btn-block', 'px-0'],
 
-  classNameBindings: ['is-selected:btn-main:btn-secondary'],
+  classNameBindings: ['is-selected:btn-main:btn-main-secondary'],
 
   selectedObserver: observer('selected', function() {
     this.set('is-selected', this.get('selected') === this.get('category'));

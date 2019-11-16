@@ -8,8 +8,8 @@
 
     &_customer {
       flex-shrink: 0;
-      padding-top: $grid-gutter-width-base / 2;
-      padding-bottom: $grid-gutter-width-base / 2;
+      padding-top: $grid-gutter-width / 2;
+      padding-bottom: $grid-gutter-width / 2;
     }
 
     &_categories {
@@ -17,21 +17,22 @@
     }
 
     &_bottom {
+      min-height: 0px;
       flex-shrink: 1;
       flex-basis: 100%;
-      flex-wrap: nowrap;
 
       &_menu {
+        height: 100%;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        padding-top: $grid-gutter-width-base / 2;
-        padding-bottom: $grid-gutter-width-base / 2;
+        padding-top: $grid-gutter-width / 2;
+        padding-bottom: $grid-gutter-width / 2;
       }
 
       &_numpad {
         align-self: flex-end;
-        padding-top: $grid-gutter-width-base / 2;
-        padding-bottom: $grid-gutter-width-base / 2;
+        padding-top: $grid-gutter-width / 2;
+        padding-bottom: $grid-gutter-width / 2;
       }
     }
   }
@@ -57,12 +58,12 @@
 
     &_customer,
     &_actions {
-      padding-top: $grid-gutter-width-base / 2;
-      padding-bottom: $grid-gutter-width-base / 2;
+      padding-top: $grid-gutter-width / 2;
+      padding-bottom: $grid-gutter-width / 2;
     }
 
     &_order_info {
-      padding-top: $grid-gutter-width-base / 2;
+      padding-top: $grid-gutter-width / 2;
     }
   }
 }
@@ -74,8 +75,9 @@
   box-shadow: 0px 1px 5px -1px $black;
 
   position: fixed;
-  bottom: $grid-gutter-width-base;
-  right: $grid-gutter-width-base;
+  bottom: $grid-gutter-width;
+  right: $grid-gutter-width;
+  z-index: 2; // Just higher than list group item action
 }
 
 .order-modal {
@@ -86,15 +88,15 @@
     flex-grow: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding-top: $grid-gutter-width-base / 2;
+    padding-top: $grid-gutter-width / 2;
   }
 
   &_actions {
     flex-shrink: 0;
-    padding-top: $grid-gutter-width-base / 2;
+    padding-top: $grid-gutter-width / 2;
 
     &:last-child {
-      padding-bottom: $grid-gutter-width-base / 2;
+      padding-bottom: $grid-gutter-width / 2;
     }
   }
 }
@@ -105,39 +107,39 @@
 
   &_header {
     flex-shrink: 0;
-    padding-top: $grid-gutter-width-base / 2;
-    padding-bottom: $grid-gutter-width-base / 2;
+    padding-top: $grid-gutter-width / 2;
+    padding-bottom: $grid-gutter-width / 2;
   }
 
   &_order-list {
     flex-grow: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding-top: $grid-gutter-width-base / 2;
-    padding-bottom: $grid-gutter-width-base / 2;
+    padding-top: $grid-gutter-width / 2;
+    padding-bottom: $grid-gutter-width / 2;
   }
 
   &_info {
     flex-shrink: 0;
-    padding-top: $grid-gutter-width-base / 2;
-    padding-bottom: $grid-gutter-width-base / 2;
+    padding-top: $grid-gutter-width / 2;
+    padding-bottom: $grid-gutter-width / 2;
   }
 
   &_select {
     flex-shrink: 0;
-    padding-top: $grid-gutter-width-base / 2;
-    padding-bottom: $grid-gutter-width-base / 2;
+    padding-top: $grid-gutter-width / 2;
+    padding-bottom: $grid-gutter-width / 2;
   }
 
   &_notes {
     flex-shrink: 0;
-    padding-top: $grid-gutter-width-base / 2;
-    padding-bottom: $grid-gutter-width-base / 2;
+    padding-top: $grid-gutter-width / 2;
+    padding-bottom: $grid-gutter-width / 2;
   }
 
   &_actions {
     flex-shrink: 0;
-    padding-top: $grid-gutter-width-base / 2;
-    padding-bottom: $grid-gutter-width-base / 2;
+    padding-top: $grid-gutter-width / 2;
+    padding-bottom: $grid-gutter-width / 2;
   }
 }

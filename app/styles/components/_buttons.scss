@@ -1,8 +1,12 @@
 
 .btn-main {
-  @include button-variant($white, $brand-colour, $brand-colour);
+  @include button-variant($brand-colour, $brand-colour);
 }
 
 .btn-outline-main {
   @include button-outline-variant($brand-colour);
+}
+
+.btn-main-secondary {
+  @include button-variant($white, $border-color);
 }
