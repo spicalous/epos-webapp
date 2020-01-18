@@ -4,7 +4,9 @@
 
 {{outlet "confirm"}}
 
-{{outlet "toast"}}
+<div class="toast-container d-flex justify-content-center align-items-center">
+  {{toast-component message=toastMessage}}
+</div>
 
 <div id="modal-wormhole">
 </div>
