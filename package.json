@@ -1,6 +1,6 @@
 {
   "name": "epos-webapp",
-  "version": "0.78.0",
+  "version": "0.79.0",
   "private": true,
   "description": "A front end solution for an EPOS webapp",
   "license": "MIT",
