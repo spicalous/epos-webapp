@@ -1,0 +1,7 @@
+{
+  "name": "Talay Thai EPOS",
+  "short_name": "TalayThaiEPOS",
+  "display": "fullscreen",
+  "scope": "/",
+  "start_url": "/"
+}
