@@ -9,7 +9,7 @@ module.exports = function(environment) {
     podModulePrefix: 'epos-webapp/pods',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
