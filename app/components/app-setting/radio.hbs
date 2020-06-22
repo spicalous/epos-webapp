@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center">
+    {{@name}}
+  </div>
+  <div class="col-12 col-sm-6 text-center">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      {{#each @values as |value|}}
+        <label class="btn btn-lg btn-outline-main {{if (eq @value value) "active"}}">
+          <Input @type="radio" autocomplete="off" {{on "click" (fn @updateSetting @setting value)}} />{{value}}
+        </label>
+      {{/each}}
+    </div>
+  </div>
+</div>

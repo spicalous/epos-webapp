@@ -1,0 +1,13 @@
+<div class="modal fade" tabindex="-1" role="dialog" {{did-insert this.showModal}} {{ref this "modalElement"}}>
+  <div class="modal-dialog modal-dialog-scrollable {{@size}}">
+    <div class="modal-content" {{on-modal-click-outside this.dismiss}}>
+      <div class="modal-header">
+        <h5 class="modal-title">{{@title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" {{on "click" this.dismiss}}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {{yield (component "modal/base/body") (component "modal/base/footer") this.dismiss this.confirm}}
+    </div>
+  </div>
+</div>

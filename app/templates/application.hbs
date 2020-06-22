@@ -1,16 +1,38 @@
-{{outlet "loader"}}
+{{#if this.ui.toastModels}}
+  <div class="app-toasts pb-1 d-flex flex-column align-items-center">
+    {{#each this.ui.toastModels as |toastModel|}}
+      <Toast @model={{toastModel}} @removeFromDOM={{this.ui.removeToast}}/>
+    {{/each}}
+  </div>
+{{/if}}
 
-{{outlet "overlay"}}
+{{#if this.ui.appLoaderShown}}
+  <div class="app-loader d-flex justify-content-center align-items-center">
+    <LoadingSpinner @text={{this.ui.model.message}}/>
+  </div>
+{{/if}}
 
-{{outlet "confirm"}}
+{{#if this.ui.appOverlayShown}}
+  <div role="button" {{on "click" (fn this.ui.dismissAppOverlay)}} class="app-overlay d-flex justify-content-center align-items-center">
+    <div class="text-center">
+      <h2>{{this.ui.model.title}}</h2>
+      {{this.this.ui.model.message}}
+      <div class="text-muted">
+        <small>Tap anywhere to dismiss</small>
+      </div>
+    </div>
+  </div>
+{{/if}}
 
-<div class="toast-container d-flex justify-content-center align-items-center">
-  {{toast-component message=toastMessage}}
-</div>
+{{#if this.ui.confirmShown}}
+  <EmberWormhole @to={{this.ui.appModalContainerId}}>
+    <Modal::Confirm @title={{this.ui.model.title}}
+                    @body={{this.ui.model.message}}
+                    @onDismiss={{this.ui.onDismissConfirm}}
+                    @onConfirm={{this.ui.onConfirmConfirm}}/>
+  </EmberWormhole>
+{{/if}}
 
-<div id="modal-wormhole">
-</div>
+<div id="{{this.ui.appModalContainerId}}"></div>
 
-<div class="container-fluid">
-  {{outlet}}
-</div>
+{{outlet}}

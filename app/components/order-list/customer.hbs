@@ -1,0 +1,13 @@
+<div class="d-flex">
+  <div class="flex-even">
+    <span class="icon-32 {{this.customerIconClass}}"></span>
+  </div>
+  <div class="flex-fill flex-column text-center">
+    {{#each this.customerInfoArray as |customerInfo|}}
+      <div>{{customerInfo}}</div>
+    {{/each}}
+  </div>
+  <div class="flex-even d-flex justify-content-end">
+    {{yield}}
+  </div>
+</div>

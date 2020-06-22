@@ -1,0 +1,46 @@
+<div class="list-group-item list-group-item-action" {{on "click" this.toggleExpanded}} {{!-- template-lint-disable no-invalid-interactive --}}>
+  <div class="d-flex justify-content-between">
+    <span>
+      {{#if @item.menuItem.menuId}}
+        <strong>{{@item.quantity}} x {{@item.menuItem.menuId}}</strong> {{@item.menuItem.name}}
+      {{else}}
+        <strong>{{@item.quantity}} x</strong> {{@item.menuItem.name}}
+      {{/if}}
+    </span>
+    <span>£{{format-currency @item.total}}</span>
+  </div>
+
+  {{#each @item.editOptions as |option|}}
+    <div class="text-muted">
+      {{#if option.price}}
+        {{option.name}} ({{format-currency option.price}})
+      {{else}}
+        {{option.name}}
+      {{/if}}
+    </div>
+  {{/each}}
+
+  {{#if this.expanded}}
+    <div class="d-flex justify-content-between mt-2">
+      <button type="button" class="btn btn-lg btn-outline-danger font-weight-bold btn-order-item-inc-dec" {{on "click" this.decrement}}>
+        -
+      </button>
+      {{#if @item.menuItem.editCategories}}
+        <button type="button" class="btn btn-lg btn-outline-warning" {{on "click" this.edit}}>
+          Edit
+        </button>
+      {{/if}}
+      <button type="button" class="btn btn-lg btn-outline-success font-weight-bold btn-order-item-inc-dec" {{on "click" this.increment}}>
+        +
+      </button>
+    </div>
+  {{/if}}
+</div>
+
+{{#if this.editing}}
+  <EmberWormhole @to={{this.ui.appModalContainerId}}>
+    <Modal::EditOrderItemDialog @item={{@item}}
+                                @editOptions={{@editOptions}}
+                                @onDismiss={{this.stopEditing}}/>
+  </EmberWormhole>
+{{/if}}

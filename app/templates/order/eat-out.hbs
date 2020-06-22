@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <OrderPad @categories={{this.model.categories}}
+            @menuItems={{this.model.menuItems}}
+            @editOptions={{this.model.editOptions}}
+            @order={{this.model.order}}
+            @isNewOrder={{false}}
+            @onCancelOrder={{this.unloadStoreAndTransition}}
+            @onOrderSubmitted={{this.transitionToOrders}}/>
+</div>

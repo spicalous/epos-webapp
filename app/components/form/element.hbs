@@ -1,0 +1,21 @@
+<Input ...attributes
+       @type={{@type}}
+       @class="form-control"
+       @placeholder={{@placeholder}}
+       @value={{@value}}
+       @required={{@required}}
+       @pattern={{@pattern}}
+       @disabled={{@disabled}}
+  {{on "change" @onChange}}
+  {{on "input" @onInput}}
+  {{on-click-outside this.onClickOutside}}
+  {{on "click" this.onClickInside}}/>
+{{#if this.showSuggestions}}
+  <div class="dropdown-menu d-block">
+    {{#each @suggestions as |suggestion|}}
+      <button type="button" class="btn-lg rounded-0 dropdown-item" {{on "click" (fn @onSuggestionSelected suggestion)}}>
+        {{suggestion}}
+      </button>
+    {{/each}}
+  </div>
+{{/if}}

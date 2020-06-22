@@ -1,19 +1,16 @@
-/* eslint-env node */
 'use strict';
-
 const packageJSON = require('../package.json');
 
 module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'epos-webapp',
-    podModulePrefix: 'epos-webapp/pods',
     environment,
     rootURL: '/',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
+        // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
@@ -44,10 +41,11 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
-
+    // here you can enable a production-specific feature
   }
 
   return ENV;

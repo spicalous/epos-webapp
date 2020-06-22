@@ -1,36 +1,28 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+/*.iml
+/.idea/
+
 # compiled output
-/dist
-/tmp
+/dist/
+/tmp/
 
 # dependencies
-/node_modules
-/bower_components
+/bower_components/
+/node_modules/
 
 # misc
+/.env*
+/.pnp*
 /.sass-cache
 /connect.lock
-/coverage/*
+/coverage/
 /libpeerconnection.log
-npm-debug.log*
-yarn-error.log
-testem.log
-
-### Intellij ###
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-
-### Intellij Patch ###
-# In case this becomes a multi module project we can comment the ignored files below
-# https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
-# https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-
-*.iml
-.idea/*.xml
-.idea/shelf/*
+/npm-debug.log*
+/testem.log
+/yarn-error.log
 
 # ember-try
-.node_modules.ember-try/
-bower.json.ember-try
-package.json.ember-try
+/.node_modules.ember-try/
+/bower.json.ember-try
+/package.json.ember-try

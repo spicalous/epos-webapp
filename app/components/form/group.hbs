@@ -1,0 +1,10 @@
+<div class="form-group{{if this.shouldApplyWasValidatedCss " was-validated"}}" ...attributes>
+  {{yield (hash element=(component "form/element"
+          onChange=this.onElementChanged
+          onInput=this.onElementInput))}}
+  {{#if @invalidFeedback}}
+    <div class="invalid-feedback">
+      <small>{{@invalidFeedback}}</small>
+    </div>
+  {{/if}}
+</div>

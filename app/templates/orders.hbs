@@ -1,0 +1,82 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="d-flex flex-even">
+    <LinkTo @route="index" @tagName="button" type="button" @class="btn btn-outline-light">
+      Back
+    </LinkTo>
+  </div>
+  <span class="navbar-brand d-flex flex-even justify-content-center">Orders</span>
+  <div class="dropdown d-flex flex-even justify-content-end">
+    <button class="btn btn-outline-light dropdown-toggle" type="button" id="order-summary-btn" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      Summary
+    </button>
+    <div class="dropdown-menu dropdown-menu-right px-3 text-nowrap" aria-labelledby="order-summary-btn">
+      <div class="d-flex">
+        <div class="d-flex flex-column mr-3">
+          <div>Cash</div>
+          <div>Card</div>
+          <div>Online</div>
+          {{#if this.notPaidOrders}}
+            <div>Not paid</div>
+          {{/if}}
+          <div>Total</div>
+        </div>
+        <div class="d-flex flex-column align-items-end mr-3">
+          <div>{{this.cashOrders.length}}</div>
+          <div>{{this.cardOrders.length}}</div>
+          <div>{{this.onlinePaymentOrders.length}}</div>
+          {{#if this.notPaidOrders}}
+            <div>{{this.notPaidOrders.length}}</div>
+          {{/if}}
+          <div>{{this.model.length}}</div>
+        </div>
+        <div class="d-flex flex-column align-items-end">
+          <div>{{format-currency this.totalCash}}</div>
+          <div>{{format-currency this.totalCard}}</div>
+          <div>{{format-currency this.totalOnlinePayment}}</div>
+          {{#if this.notPaidOrders}}
+            <div>{{format-currency this.totalNotPaid}}</div>
+          {{/if}}
+          <div>{{format-currency this.totalAll}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col-12 col-sm-6 text-center" test-id="order-type-filters">
+      {{#each this.orderTypes as |orderType|}}
+        {{#let (contains this.orderTypesToShow orderType) as |isActive|}}
+          <button type="button" class="btn mb-3 {{if isActive "btn-primary" "btn-main-secondary"}}"
+            {{on "click" (fn this.toggleOrderTypeFilter orderType)}}>
+            {{orderType}}
+          </button>
+        {{/let}}
+      {{/each}}
+    </div>
+    <div class="col-12 col-sm-6 text-center" test-id="payment-type-filters">
+      {{#each this.paymentTypes as |paymentType|}}
+        {{#let (contains this.paymentTypesToShow paymentType) as |isActive|}}
+          <button type="button" class="btn mb-3 {{if isActive "btn-primary" "btn-main-secondary"}}"
+            {{on "click" (fn this.togglePaymentTypeFilter paymentType)}}>
+            {{paymentType}}
+          </button>
+        {{/let}}
+      {{/each}}
+    </div>
+  </div>
+  {{#if this.ordersByTimestamp}}
+    <div class="row">
+      <div class="col">
+        {{#each this.ordersByTimestamp as |order|}}
+          <OrderList::Item @order={{order}} @onPrintOrder={{this.printOrder}}/>
+        {{/each}}
+      </div>
+    </div>
+  {{else}}
+    <div class="mt-5 text-center text-muted">
+      No orders to display
+    </div>
+  {{/if}}
+</div>

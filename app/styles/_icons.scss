@@ -1,0 +1,32 @@
+.icon {
+
+  &-24 {
+    width: 24px;
+    height: 24px;
+  }
+
+  &-32 {
+    width: 32px;
+    height: 32px;
+  }
+
+  &-delete-white {
+    content: url('/assets/icons/delete-white.svg');
+  }
+
+  &-customer {
+
+    &-delivery {
+      content: url('/assets/icons/customer-delivery.svg');
+    }
+
+    &-take-away {
+      content: url('/assets/icons/customer-take-away.svg');
+    }
+
+    &-online {
+      content: url('/assets/icons/customer-online.svg');
+    }
+
+  }
+}

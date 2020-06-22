@@ -1,29 +1,28 @@
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
-import { belongsTo, hasMany } from 'ember-data/relationships';
 
-export default Model.extend({
-  quantity: attr('number'),
-  menuItem: belongsTo('menu-item'),
-  editOptions: hasMany('edit-option'),
+export default class OrderItemModel extends Model {
+  @attr('number') quantity;
+  @belongsTo('menu-item') menuItem;
+  @hasMany('edit-option') editOptions;
 
-  total: computed('quantity', 'menuItem', 'editOptions.[]', function() {
-    return this.get('quantity') * (this.get('menuItem.price') + this.get('editOptionTotal'));
-  }),
-
-  editOptionTotal: computed('editOptions.[]', function() {
-    return this.get('editOptions').reduce(function(prev, item) {
+  @computed('editOptions.[]')
+  get editOptionTotal() {
+    return this.editOptions.reduce(function(prev, item) {
       return prev + item.get('price');
     }, 0);
-  }),
-
-  isMenuItem(menuItem) {
-    return this.get('menuItem').get('id') === menuItem.get('id');
-  },
-
-  hasNoEditOptions() {
-    return this.get('editOptions').get('length') === 0;
   }
 
-});
+  @computed('quantity', 'menuItem', 'editOptions.[]')
+  get total() {
+    return this.quantity * (this.menuItem.get('price') + this.editOptionTotal);
+  }
+
+  isMenuItem(menuItem) {
+    return this.menuItem.get('id') === menuItem.get('id');
+  }
+
+  hasNoEditOptions() {
+    return this.editOptions.length === 0;
+  }
+}

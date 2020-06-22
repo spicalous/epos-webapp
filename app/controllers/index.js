@@ -1,19 +1,20 @@
 import Controller from '@ember/controller';
-import config from '../config/environment';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
-export default Controller.extend({
-  name: config.APP.name,
-  version: config.APP.version,
+export default class IndexController extends Controller {
 
-  actions: {
+  @service
+  ui;
 
-    onSaveError(callback) {
-      this.send('showMessage', 'overlay', {
-        header: 'Failed to save the setting :(',
-        body: '',
-        callback: callback,
-      });
-    }
-
+  @action
+  saveSetting(setting, newValue) {
+    setting.set('value', newValue);
+    setting.save().catch(error => {
+      console.error('Failed to save setting', error);
+      setting.rollbackAttributes();
+      this.ui.showAppOverlay('Failed to save setting :(');
+    });
   }
-});
+
+}

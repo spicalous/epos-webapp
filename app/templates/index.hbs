@@ -1,44 +1,50 @@
-<div class="row">
-  <div class="col text-center">
-    <h2 class="mt-3">Orders</h2>
-  </div>
-</div>
-<div class="row">
-  <div class="col-12 col-sm-6 mb-1">
-    {{#link-to "order.edit" tagName="button" type="button" classNames="btn btn-lg btn-block btn-outline-main"}}
-      New
-    {{/link-to}}
-  </div>
-  <div class="col-12 col-sm-6 mb-1">
-    {{#link-to "order.view" tagName="button" type="button" classNames="btn btn-lg btn-block btn-outline-main"}}
-      Recent
-    {{/link-to}}
-  </div>
-</div>
-<div class="row">
-  <div class="col text-center">
-    <h2 class="mt-3">Management</h2>
-  </div>
-</div>
-<div class="row">
-  <div class="col-12 col-sm-4 mb-1">
-    {{#link-to "delivery-customer" tagName="button" type="button"classNames="btn btn-lg btn-block btn-outline-main"}}
-      Delivery customers
-    {{/link-to}}
-  </div>
-</div>
-<div class="row">
-  <div class="col text-center">
-    <h2 class="mt-3">Settings</h2>
-  </div>
-</div>
-<div class="row">
-  {{#each model as |setting|}}
-    <div class="col-12">
-      {{app-setting setting=setting onSaveError=(action "onSaveError")}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col text-center">
+      <h2 class="mt-3">Orders</h2>
     </div>
-  {{/each}}
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6 mb-1">
+      <LinkTo @route="order.new" @tagName="button" type="button" @class="btn btn-lg btn-block btn-outline-main">
+        New
+      </LinkTo>
+    </div>
+    <div class="col-12 col-sm-6 mb-1">
+      <LinkTo @route="orders" @tagName="button" type="button" @class="btn btn-lg btn-block btn-outline-main">
+        Recent
+      </LinkTo>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <h2 class="mt-3">Management</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-4 mb-1">
+      <LinkTo @route="delivery-customer" @tagName="button" type="button" @class="btn btn-lg btn-block btn-outline-main">
+        Delivery customers
+      </LinkTo>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <h2 class="mt-3">Settings</h2>
+    </div>
+  </div>
+  <div class="row" test-id="settings">
+    {{#each @model as |setting|}}
+      <div class="col-12">
+        <AppSetting::Radio @setting={{setting}}
+                           @name={{setting.name}}
+                           @value={{setting.value}}
+                           @values={{array 0 1 2}}
+                           @updateSetting={{this.saveSetting}} />
+      </div>
+    {{/each}}
+  </div>
 </div>
-<div class="text-muted" style="position:fixed;bottom:5px;left:10px;">
-  {{name}} - {{version}}
+<div id="app-version" class="text-muted">
+  {{this.name}} - {{this.version}}
 </div>

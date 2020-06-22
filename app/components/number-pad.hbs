@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-12 h2 text-center">
+    <span test-id="numpad-value">{{@value}}</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "1")}}>1
+    </button>
+  </div>
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "2")}}>2
+    </button>
+  </div>
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "3")}}>3
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "4")}}>4
+    </button>
+  </div>
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "5")}}>5
+    </button>
+  </div>
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "6")}}>6
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "7")}}>7
+    </button>
+  </div>
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "8")}}>8
+    </button>
+  </div>
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "9")}}>9
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" this.onBackspace}}>&lt;
+    </button>
+  </div>
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" (fn this.onClick "0")}}>0
+    </button>
+  </div>
+  <div class="col-4 px-0">
+    <button type="button" class="btn btn-main-secondary btn-lg btn-block rounded-0" {{on "click" this.onClear}}>X</button>
+  </div>
+</div>

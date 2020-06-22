@@ -1,8 +1,0 @@
-<form onsubmit="return false">
-  {{#form-group class="mb-1" hasDanger=customer.invalidTelephone helpText=customer.invalidTelephoneReason}}
-    {{input type="tel" class="form-control form-control-danger" placeholder="Telephone" value=customer.telephone}}
-  {{/form-group}}
-  {{#form-group class="mb-0"}}
-    {{input type="text" class="form-control" placeholder="Name" value=customer.name}}
-  {{/form-group}}
-</form>

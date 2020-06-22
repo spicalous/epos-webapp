@@ -1,0 +1,9 @@
+<form novalidate>
+  <div class="form-row">
+    <div class="col">
+      <Form::Group class="mb-0" as |fg|>
+        <fg.element @placeholder="Order id" @value={{@customer.orderId}} @disabled={{@disabled}} {{did-insert this.focusInput}}/>
+      </Form::Group>
+    </div>
+  </div>
+</form>

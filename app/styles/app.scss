@@ -1,5 +1,4 @@
-// Core variables and mixins
-@import "variables/bootstrap-overrides";
+$grid-gutter-width: 16px;
 
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
@@ -39,15 +38,60 @@
 @import "node_modules/bootstrap/scss/utilities";
 @import "node_modules/bootstrap/scss/print";
 
+$toast-zindex:   100;
+$overlay-zindex: 101;
 
+html, body, body > div.container-fluid {
+  height: 100%;
+}
 
+#app-version {
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+}
+
+@import "icons";
+@import "util";
 @import "variables/animations";
 @import "variables/colours";
-@import "application";
-@import "overlay";
-@import "toast";
 @import "components/buttons";
-@import "components/customer-select";
 @import "components/order-item";
-@import "delivery-customer/index";
-@import "order/edit";
+@import "components/order-pad";
+
+.app-toasts,
+.app-loader,
+.app-overlay,
+.delivery-select {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.app-toasts {
+  z-index: $toast-zindex;
+
+  pointer-events: none;
+  .toast {
+    pointer-events: auto;
+  }
+
+  // This is so newer toasts appear at the top
+  flex-direction: column-reverse !important;
+  .toast:last-child {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.app-loader,
+.app-overlay {
+  background: rgba(255, 255, 255, 0.9);
+  animation: fade-in 0.2s ease;
+  z-index: $overlay-zindex;
+}
+
+.delivery-select {
+  background-color: $white;
+}

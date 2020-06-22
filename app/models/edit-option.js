@@ -1,8 +1,7 @@
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
+import Model, { attr } from '@ember-data/model';
 
-export default Model.extend({
-  editCategoryId: attr('number'),
-  name: attr('string'),
-  price: attr('number')
-});
+export default class EditOptionModel extends Model {
+  @attr('number') editCategoryId;
+  @attr('string') name;
+  @attr('number') price;
+}
