@@ -1,10 +1,9 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
-export default Controller.extend({
-  actions: {
-    setToastMessage(message) {
-      this.set('toastMessage', null);
-      this.set('toastMessage', message);
-    }
-  }
-});
+export default class ApplicationController extends Controller {
+
+  @service
+  ui;
+
+}

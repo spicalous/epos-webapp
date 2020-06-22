@@ -1,0 +1,20 @@
+export default [
+  { id: 1, name: 'Starters' },
+  { id: 2, name: 'Soups' },
+  { id: 3, name: 'Salads' },
+  { id: 4, name: 'Curries' },
+  { id: 5, name: 'Chicken' },
+  { id: 6, name: 'Pork' },
+  { id: 7, name: 'Beef' },
+  { id: 8, name: 'Duck' },
+  { id: 9, name: 'Fish' },
+  { id: 10, name: 'Seafood' },
+  { id: 11, name: 'Vegetarian' },
+  { id: 12, name: 'Noodles' },
+  { id: 13, name: 'Rice' },
+  { id: 14, name: 'Chef\' specials' },
+  { id: 15, name: 'Desserts' },
+  { id: 16, name: 'Soft drinks' },
+  { id: 17, name: 'Alcohol' },
+  { id: 18, name: 'Delivery' }
+];

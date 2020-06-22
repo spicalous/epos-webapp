@@ -1,30 +1,15 @@
-import RESTSerializer from 'ember-data/serializers/rest';
-import EmbeddedRecordsMixin from 'ember-data/serializers/embedded-records-mixin';
+import JSONAPISerializer from '@ember-data/serializer/json-api';
+import { EmbeddedRecordsMixin } from '@ember-data/serializer/rest';
 
-export default RESTSerializer.extend(EmbeddedRecordsMixin, {
-
-  attrs: {
-
+export default class OrderEatOutSerializer extends JSONAPISerializer.extend(EmbeddedRecordsMixin) {
+  attrs = {
     orderItems: {
-      embedded: 'always'
+      serialize: 'records',
+      deserialize: 'ids'
     },
-
     customer: {
-      embedded: 'always'
+      serialize: 'records',
+      deserialize: 'ids'
     }
-  },
-
-  serialize(snapshot, options) {
-    var json = this._super(snapshot, options);
-
-    if (json.customer) {
-      if (json.customerType) {
-        json.customer.type = json.customerType.dasherize();
-        delete json.customerType;
-      }
-    }
-
-    return json;
   }
-
-});
+}

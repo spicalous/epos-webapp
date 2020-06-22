@@ -1,5 +1,5 @@
-import DS from 'ember-data';
+import JSONAPIAdapter from '@ember-data/adapter/json-api';
 
-export default DS.RESTAdapter.extend({
-  namespace: 'EPOSDataService/api'
-});
+export default class ApplicationAdapter extends JSONAPIAdapter {
+  namespace = 'EPOSDataService/api';
+}

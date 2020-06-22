@@ -1,11 +1,12 @@
-/* eslint-env node */
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
-    // Add options here
+    'ember-fetch': {
+      preferNative: true
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -21,9 +22,15 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import('vendor/polyfill.js', { prepend: true });
-  // bundle contains popper.js
-  app.import('node_modules/bootstrap/dist/js/bootstrap.bundle.js');
-
+  // Only required for bootstrap components, hence we don't need the ember/jquery integration
+  app.import({
+    development: 'node_modules/jquery/dist/jquery.slim.js',
+    production: 'node_modules/jquery/dist/jquery.slim.min.js'
+  });
+  // bundle of js for each components, and Popper.js
+  app.import({
+    development: 'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
+    production: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+  });
   return app.toTree();
 };

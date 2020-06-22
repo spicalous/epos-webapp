@@ -1,0 +1,204 @@
+<div class="row order-pad">
+  <div class="col-12 col-sm-7 col-md-8 order-pad_left">
+    <div class="row flex-shrink-0 my-2 d-sm-none">
+      <div class="col">
+        <CustomerSelect @customer={{@order.customer}}
+                        @isEditable={{@isNewOrder}}
+                        @onTakeAwaySelected={{this.setNewTakeAwayCustomer}}
+                        @onDeliverySelected={{this.showDeliveryCustomerSelect}}
+                        @onOnlineSelected={{this.setNewOnlineCustomer}}
+                        @onRemoveCustomer={{this.removeCustomer}}/>
+      </div>
+    </div>
+    <div class="row flex-shrink-0">
+      {{#each this.sortedCategories as |category|}}
+        <div class="col-4 col-sm-3 col-md-2 px-0">
+          <button type="button"
+                  class="category-button btn btn-block rounded-0 {{if (eq category.id this.selectedCategoryId)
+                                                                      "btn-main"
+                                                                      "btn-main-secondary"}}"
+            {{on "click" (fn this.setSelectedCategory category.id)}}>
+            {{category.name}}
+          </button>
+        </div>
+      {{/each}}
+    </div>
+    <div class="row order-pad_left_bottom">
+      <div class="col-12 col-sm-7 col-md-8 order-pad_left_bottom_menu">
+        <div class="list-group">
+          {{#each this.sortedMenuItems as |menuItem|}}
+            <button type="button" class="list-group-item list-group-item-action" {{on "click"
+                                                                                      (fn this.addMenuItemToOrder menuItem)}}>
+              {{#if menuItem.menuId}}
+                <strong>{{menuItem.menuId}}</strong>&nbsp;
+              {{/if}}
+              {{menuItem.name}}
+            </button>
+          {{/each}}
+        </div>
+      </div>
+      <div class="d-none d-sm-block col-sm-5 col-md-4 order-pad_left_bottom_numpad">
+        <NumberPad @onChange={{this.onNumpadValueChange}} @value={{this.numpadValue}}/>
+      </div>
+    </div>
+    <div class="row flex-shrink-0 my-2 d-sm-none">
+      <div class="col">
+        <button type="button" class="btn btn-lg btn-block btn-warning d-flex justify-content-between" {{on "click" this.onShowOrder}}>
+          <span>
+            {{this.orderItemQuantitySum}} {{#if (eq 1 this.orderItemQuantitySum)}}item{{else}}items{{/if}}
+          </span>
+          <span>
+            View order
+          </span>
+          <span>
+            £{{format-currency this.orderTotal}}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="d-none d-sm-flex col-sm-5 col-md-4 order-pad_right {{if this.showOrder "show-order"}}">
+    <div class="row order-pad_right_customer mt-2">
+      <div class="col">
+        <CustomerSelect @customer={{@order.customer}}
+                        @isEditable={{@isNewOrder}}
+                        @onTakeAwaySelected={{this.setNewTakeAwayCustomer}}
+                        @onDeliverySelected={{this.showDeliveryCustomerSelect}}
+                        @onOnlineSelected={{this.setNewOnlineCustomer}}
+                        @onRemoveCustomer={{this.removeCustomer}}/>
+      </div>
+    </div>
+    <div class="row order-pad_right_items mt-2">
+      <div class="col">
+        <div class="list-group">
+          {{#each @order.orderItems as |item|}}
+            <OrderItem @item={{item}} @editOptions={{@editOptions}} @onDecrement={{this.decrementOrderItem}}/>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="row order-pad_right_info pt-2 text-center d-none d-sm-flex">
+      <div class="col">
+        {{this.orderItemQuantitySum}} {{#if (eq 1 this.orderItemQuantitySum)}}item{{else}}items{{/if}}
+      </div>
+      <div class="col">
+        £{{format-currency this.orderTotal}}
+      </div>
+    </div>
+    <div class="row order-pad_right_actions my-2">
+      {{#if this.emptyOrderPad}}
+        <div class="col">
+          <LinkTo @route="index" @tagName="button" type="button" @class="btn btn-lg btn-block btn-main-secondary">
+            Back
+          </LinkTo>
+        </div>
+      {{else}}
+        <div class="col">
+          <button type="button" class="btn btn-lg btn-block btn-danger" {{on "click" this.confirmCancelOrder}}>
+            Cancel
+          </button>
+        </div>
+        <div class="col">
+          {{#if this.invalidOrder}}
+            <button type="button" class="btn btn-lg btn-block btn-secondary" disabled={{this.invalidOrder}}>
+              Submit
+            </button>
+          {{else}}
+            <button type="button" class="btn btn-lg btn-block btn-success" {{on "click" this.toggleConfirmOrder}}>
+              Submit
+            </button>
+          {{/if}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="row mb-2 d-sm-none">
+      <div class="col">
+        <button type="button" class="btn btn-lg btn-block btn-warning d-flex justify-content-between" {{on "click" this.onHideOrder}}>
+          <span>
+            {{this.orderItemQuantitySum}} {{#if (eq 1 this.orderItemQuantitySum)}}item{{else}}items{{/if}}
+          </span>
+          <span>
+            Hide
+          </span>
+          <span>
+            £{{format-currency this.orderTotal}}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if this.showDeliverySelect}}
+  <CustomerSelect::DeliverySelect @onCancel={{this.cancelDeliveryCustomerSelect}}
+                                  @onSave={{this.saveNewDeliveryCustomer}}
+                                  @onDeliveryCustomerSelected={{this.setDeliveryCustomer}}/>
+{{/if}}
+
+{{#if this.showOrderConfirmModal}}
+  <EmberWormhole @to={{this.ui.appModalContainerId}}>
+    <Modal::Base::Dialog @title="Confirm order"
+                         @size="modal-xl"
+                         @onDismiss={{this.toggleConfirmOrder}}
+                         @onConfirm={{this.submitOrder}} as |Body Footer onDismiss onConfirm|>
+      <Body class="pb-0 pt-2 px-0">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col">
+            <div class="list-group">
+              {{#each @order.orderItems as |item|}}
+                <OrderItem @item={{item}} @editOptions={{@editOptions}} @onDecrement={{this.decrementOrderItem}}/>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+      </Body>
+      <Footer>
+        <div class="container-fluid">
+          <div class="row mb-2 text-center">
+            <div class="col">
+              {{this.orderItemQuantitySum}} {{#if (eq 1 this.orderItemQuantitySum)}}item{{else}}items{{/if}}
+            </div>
+            <div class="col">
+              £{{format-currency this.orderTotal}}
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-6">
+              <div>Estimated time ({{format-time this.estimatedTime}})</div>
+            </div>
+            <div class="col-6">
+              <div>Payment method</div>
+            </div>
+          </div>
+          <div class="row mb-2 text-center">
+            <div class="col-6">
+              <Form::Select @options={{this.estimatedTimes}}
+                            @selectedValue={{@order.estimatedTime}}
+                            @onChange={{this.onEstimatedTimeSelect}}/>
+            </div>
+            <div class="col-6">
+              <Form::Select @options={{this.paymentMethods}}
+                            @selectedValue={{@order.paymentMethod}}
+                            @onChange={{this.onPaymentMethodSelect}}/>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col">
+              <div>Notes</div>
+              <Textarea @class="form-control" rows="2" @value={{@order.notes}}/>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-main-secondary" {{on "click" onDismiss}}>
+          Cancel
+        </button>
+        <button type="button" class="btn btn-success" {{on "click" onConfirm}}>
+          Confirm
+        </button>
+      </Footer>
+    </Modal::Base::Dialog>
+  </EmberWormhole>
+{{/if}}

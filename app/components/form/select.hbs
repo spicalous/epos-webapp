@@ -1,0 +1,9 @@
+<select class="custom-select custom-select-lg" {{on "change" @onChange}}>
+  {{#each @options as |optionValue|}}
+    {{#if (eq optionValue @selectedValue)}}
+      <option value="{{optionValue}}" selected>{{optionValue}}</option>
+    {{else}}
+      <option value="{{optionValue}}" >{{optionValue}}</option>
+    {{/if}}
+  {{/each}}
+</select>

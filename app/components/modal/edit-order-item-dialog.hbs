@@ -1,0 +1,67 @@
+<Modal::Base::Dialog @title={{@item.menuItem.name}}
+                     @size="modal-xl"
+                     @onDismiss={{@onDismiss}} as |Body Footer onDismiss|>
+  <Body>
+  <div class="container-fluid d-lg-none">
+    <div class="row">
+      <div class="btn-group btn-group-lg col mb-3" role="group">
+        {{#each @item.menuItem.editCategories as |editCategory|}}
+          <button type="button"
+                  class="btn flex-even {{if (eq this.selectedEditCategoryId editCategory.id)
+                                            "btn-primary"
+                                            "btn-main-secondary"}}"
+            {{on "click" (fn this.setSelectedEditCategory editCategory.id)}}>
+            {{editCategory.name}}
+          </button>
+        {{/each}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="btn-group-vertical col" role="group">
+        {{#each this.editOptionsForSelectedEditCategoryId as |editOption|}}
+          <button type="button"
+                  class="d-flex justify-content-between btn {{if (contains @item.editOptions editOption)
+                                                                 "btn-success"
+                                                                 "btn-main-secondary"}}"
+            {{on "click" (fn this.toggleEditOption editOption)}}>
+            <span>{{editOption.name}}</span>
+            <span>{{#if editOption.price}}£{{format-currency editOption.price}}{{/if}}</span>
+          </button>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid d-none d-lg-block">
+    <div class="row">
+      {{#each this.editOptionsGroupedByEditCategory as |editCategoryEditOptions|}}
+        <div class="col text-center">
+          <h5><strong>{{editCategoryEditOptions.editCategory.name}}</strong></h5>
+        </div>
+      {{/each}}
+    </div>
+    <div class="row">
+      {{#each this.editOptionsGroupedByEditCategory as |editCategoryEditOptions|}}
+        <div class="col">
+          <div class="btn-group-vertical w-100" role="group">
+            {{#each editCategoryEditOptions.editOptions as |editOption|}}
+              <button type="button"
+                      class="d-flex justify-content-between btn {{if (contains @item.editOptions editOption)
+                                                                     "btn-success"
+                                                                     "btn-main-secondary"}}"
+                {{on "click" (fn this.toggleEditOption editOption)}}>
+                <span>{{editOption.name}}</span>
+                <span>{{#if editOption.price}}£{{format-currency editOption.price}}{{/if}}</span>
+              </button>
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  </Body>
+  <Footer>
+    <button type="button" class="btn btn-main-secondary"   {{on "click" onDismiss}}>
+      Close
+    </button>
+  </Footer>
+</Modal::Base::Dialog>

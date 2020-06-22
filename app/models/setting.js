@@ -1,7 +1,6 @@
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
+import Model, { attr } from '@ember-data/model';
 
-export default Model.extend({
-  name: attr('string'),
-  value: attr('number')
-});
+export default class SettingModel extends Model {
+  @attr('string') name;
+  @attr('number') value;
+}

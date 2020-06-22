@@ -1,9 +1,7 @@
-import Order from '../order';
-import attr from 'ember-data/attr';
-import { belongsTo } from 'ember-data/relationships';
+import OrderModel from './../order';
+import { attr, belongsTo } from '@ember-data/model';
 
-export default Order.extend({
-  estimatedTime: attr('number', { defaultValue: 45 }),
-
-  customer: belongsTo('customer', { polymorphic: true })
-});
+export default class OrderEatOutModel extends OrderModel {
+  @attr('number', { defaultValue: 45 }) estimatedTime;
+  @belongsTo('customer', { async: false, polymorphic: true }) customer;
+}

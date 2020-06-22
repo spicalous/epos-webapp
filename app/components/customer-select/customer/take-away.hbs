@@ -1,0 +1,16 @@
+<form novalidate>
+  <div class="form-row">
+    <div class="col">
+      <Form::Group class="mb-1" @validateOnDirty={{true}} @invalidFeedback={{this.invalidTakeAwayTelephoneReason}} as |fg|>
+        <fg.element @placeholder="Telephone" @value={{@customer.telephone}} @pattern="[0-9]{11}" @disabled={{@disabled}}/>
+      </Form::Group>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <Form::Group class="mb-0" as |fg|>
+        <fg.element @placeholder="Name" @value={{@customer.name}} @disabled={{@disabled}}/>
+      </Form::Group>
+    </div>
+  </div>
+</form>

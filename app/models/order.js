@@ -1,20 +1,15 @@
+import Model, { attr, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
-import { hasMany } from 'ember-data/relationships';
 
-export default Model.extend({
-  dateTime: attr('date'),
-  paymentMethod: attr('string', { defaultValue: null }),
-  notes: attr('string'),
+export default class OrderModel extends Model {
+  @attr('date') dateTime;
+  @attr('string', { defaultValue: null }) paymentMethod;
+  @attr('string', { defaultValue: '' }) notes;
+  @hasMany('order-item') orderItems;
 
-  orderItems: hasMany('order-item'),
+  @computed('orderItems.{@each.quantity,@each.total}')
+  get total() {
+    return this.orderItems.reduce((prev, orderItem) => prev + orderItem.total, 0);
+  }
 
-  /**
-   * used to calculated the total of the order
-   */
-  total: computed('orderItems.@each.quantity', 'orderItems.@each.total', function() {
-    return this.get('orderItems').reduce((prev, orderItem) => prev + orderItem.get('total'), 0);
-  })
-
-});
+}

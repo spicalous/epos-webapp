@@ -1,0 +1,30 @@
+{{#if @customer}}
+  <div class="d-flex align-items-center">
+    <div class="flex-fill">
+      {{component (concat 'customer-select/' (get-model-name @customer)) customer=@customer disabled=this.isNotEditable}}
+    </div>
+    {{#if this.showRemoveButton}}
+      <button type="button" class="btn btn-danger ml-2 p-2"{{on "click" @onRemoveCustomer}}>
+        <span class="align-middle icon-24 icon-delete-white"></span>
+      </button>
+    {{/if}}
+  </div>
+{{else}}
+  <div class="dropdown">
+    <button type="button" class="btn btn-lg btn-block btn-main dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      New customer
+    </button>
+    <div class="dropdown-menu w-100">
+      <button type="button" class="dropdown-item btn-lg rounded-0" {{on "click" @onTakeAwaySelected}}>
+        Take away
+      </button>
+      <button type="button" class="dropdown-item btn-lg rounded-0" {{on "click" @onDeliverySelected}}>
+        Delivery
+      </button>
+      <button type="button" class="dropdown-item btn-lg rounded-0" {{on "click" @onOnlineSelected}}>
+        Online
+      </button>
+    </div>
+  </div>
+{{/if}}
