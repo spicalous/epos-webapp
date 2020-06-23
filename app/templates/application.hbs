@@ -1,5 +1,5 @@
 {{#if this.ui.toastModels}}
-  <div class="app-toasts pb-1 d-flex flex-column align-items-center">
+  <div class="app-toasts pb-4 d-flex flex-column align-items-center">
     {{#each this.ui.toastModels as |toastModel|}}
       <Toast @model={{toastModel}} @removeFromDOM={{this.ui.removeToast}}/>
     {{/each}}

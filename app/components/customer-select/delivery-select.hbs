@@ -1,5 +1,5 @@
 <div class="delivery-select container-fluid">
-  <form novalidate>
+  <form novalidate class="flex-shrink-0">
     <Form::Group class="row mt-2 mb-1" as |fg|>
       <label class="col-sm-2 col-form-label d-none d-sm-block">Telephone</label>
       <div class="col-12 col-sm-10">
@@ -36,7 +36,7 @@
     </Form::Group>
   </form>
   {{#if this.invalidCustomerReason}}
-    <div class="row">
+    <div class="row flex-shrink-0">
       <div class="col-12 offset-sm-2 col-sm-10">
         <div class="alert alert-danger" role="alert">
           {{this.invalidCustomerReason}}
@@ -44,7 +44,7 @@
       </div>
     </div>
   {{/if}}
-  <div class="row">
+  <div class="row flex-shrink-0">
     {{#if this.canSave}}
       <div class="col offset-sm-2 col-sm-5">
         <button type="button" class="btn btn-main-secondary btn-lg btn-block" {{on "click" @onCancel}}>
@@ -68,7 +68,7 @@
       </div>
     {{/if}}
   </div>
-  <div class="row mt-3">
+  <div class="delivery-select_list row mt-3 mb-2">
     <div class="col">
       {{#if this.searching}}
         <LoadingSpinner @text="Searching customers..."/>
