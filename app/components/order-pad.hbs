@@ -48,7 +48,7 @@
             {{this.orderItemQuantitySum}} {{#if (eq 1 this.orderItemQuantitySum)}}item{{else}}items{{/if}}
           </span>
           <span>
-            View order
+            Show order
           </span>
           <span>
             £{{format-currency this.orderTotal}}
@@ -73,6 +73,16 @@
         <div class="list-group">
           {{#each @order.orderItems as |item|}}
             <OrderItem @item={{item}} @editOptions={{@editOptions}} @onDecrement={{this.decrementOrderItem}}/>
+          {{else}}
+            <div class="d-sm-none text-center">
+              <div class="my-3 text-muted">
+                Empty order<br>
+                add items from the menu
+              </div>
+              <button type="button" class="btn btn-lg btn-warning" {{on "click" this.onHideOrder}}>
+                Show menu
+              </button>
+            </div>
           {{/each}}
         </div>
       </div>
@@ -118,7 +128,7 @@
             {{this.orderItemQuantitySum}} {{#if (eq 1 this.orderItemQuantitySum)}}item{{else}}items{{/if}}
           </span>
           <span>
-            Hide
+            Show menu
           </span>
           <span>
             £{{format-currency this.orderTotal}}
