@@ -549,6 +549,45 @@ module('Integration | Component | order-pad', function(hooks) {
     assert.strictEqual(this.get('order.paymentMethod'), 'CASH');
   });
 
+  test('NOT PAID is displayed by default', async function(assert) {
+    this.set('order', this.owner.lookup('service:store').createRecord('order/eat-out'));
+
+    await render(hbs`<div id="app-modal-container"></div>
+                     <OrderPad @categories={{this.categories}}
+                               @menuItems={{this.menuItems}}
+                               @order={{this.order}}/>`);
+
+    await click('.order-pad_left_bottom_menu .list-group-item');
+    await click('.order-pad_right_customer .dropdown > button');
+    await click('.order-pad_right_customer .dropdown > .dropdown-menu > button:nth-child(1)');
+    await click('.order-pad_right_actions .btn-success');
+
+    assert.strictEqual(this.get('order.paymentMethod'), null);
+    assert.strictEqual(this.element.querySelector('.modal .col-6:nth-child(2) option[selected]').textContent, 'NOT PAID');
+  });
+
+  test('selecting NOT PAID paymentMethod sets null value on order', async function(assert) {
+    this.set('order', this.owner.lookup('service:store').createRecord('order/eat-out'));
+
+    await render(hbs`<div id="app-modal-container"></div>
+                     <OrderPad @categories={{this.categories}}
+                               @menuItems={{this.menuItems}}
+                               @order={{this.order}}/>`);
+
+    await click('.order-pad_left_bottom_menu .list-group-item');
+    await click('.order-pad_right_customer .dropdown > button');
+    await click('.order-pad_right_customer .dropdown > .dropdown-menu > button:nth-child(3)');
+    await click('.order-pad_right_actions .btn-success');
+
+    await fillIn('.modal div:nth-child(2) select', 'CASH');
+    assert.strictEqual(this.get('order.paymentMethod'), 'CASH');
+    assert.strictEqual(this.element.querySelector('.modal .col-6:nth-child(2) option[selected]').textContent, 'CASH');
+
+    await fillIn('.modal div:nth-child(2) select', 'NOT PAID');
+    assert.strictEqual(this.get('order.paymentMethod'), null);
+    assert.strictEqual(this.element.querySelector('.modal .col-6:nth-child(2) option[selected]').textContent, 'NOT PAID');
+  });
+
   test('setting order notes', async function(assert) {
     this.set('order', this.owner.lookup('service:store').createRecord('order/eat-out'));
 

@@ -10,7 +10,7 @@ import { validate as validateTakeaway } from './../models/customer/take-away';
 import { cancel, debounce } from '@ember/runloop';
 
 const PAYMENT_METHODS = {
-  NONE: null,
+  'NOT PAID': null,
   CASH: 'CASH',
   CARD: 'CARD',
   ONLINE: 'ONLINE'
@@ -45,7 +45,7 @@ export default class OrderPadComponent extends Component {
   @tracked showOrder = false;
   @tracked showOrderConfirmModal = false;
 
-  paymentMethods = Object.values(PAYMENT_METHODS);
+  paymentMethods = Object.keys(PAYMENT_METHODS);
   estimatedTimes = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 75];
 
   constructor() {
@@ -90,6 +90,11 @@ export default class OrderPadComponent extends Component {
   @computed('args.order.total')
   get orderTotal() {
     return this.args.order.get('total');
+  }
+
+  @computed('args.order.paymentMethod')
+  get selectedPaymentMethod() {
+    return this.args.order.get('paymentMethod') || 'NOT PAID';
   }
 
   @empty('args.order.customer') noCustomer;
@@ -228,7 +233,7 @@ export default class OrderPadComponent extends Component {
 
   @action
   onPaymentMethodSelect(event) {
-    this.args.order.set('paymentMethod', event.target.value);
+    this.args.order.set('paymentMethod', PAYMENT_METHODS[event.target.value]);
   }
 
   @action

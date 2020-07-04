@@ -180,7 +180,7 @@
             </div>
             <div class="col-6">
               <Form::Select @options={{this.paymentMethods}}
-                            @selectedValue={{@order.paymentMethod}}
+                            @selectedValue={{this.selectedPaymentMethod}}
                             @onChange={{this.onPaymentMethodSelect}}/>
             </div>
           </div>
