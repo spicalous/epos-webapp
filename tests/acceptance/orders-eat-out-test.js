@@ -4,7 +4,7 @@ import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { Response } from 'ember-cli-mirage';
 
-module('Acceptance | orders', function(hooks) {
+module('Acceptance | orders/eat-out', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -13,14 +13,14 @@ module('Acceptance | orders', function(hooks) {
   });
 
   test('pressing back routes to index', async function(assert) {
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('.btn-outline-light');
     assert.strictEqual(currentURL(), '/');
   });
 
   test('coming back to orders restores scroll position', async function(assert) {
     this.server.loadFixtures();
-    await visit('/orders');
+    await visit('/orders/eat-out');
 
     assert.ok(-5 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 5);
     this.element.querySelector('.card:nth-child(6)').scrollIntoView();
@@ -34,7 +34,7 @@ module('Acceptance | orders', function(hooks) {
   });
 
   test('show "No orders to display" when no orders', async function(assert) {
-    await visit('/orders');
+    await visit('/orders/eat-out');
 
     assert.strictEqual(
       this.element.querySelector('.container-fluid > div:last-child').textContent.trim(),
@@ -44,14 +44,14 @@ module('Acceptance | orders', function(hooks) {
 
   test('renders orders in card list', async function(assert) {
     this.server.loadFixtures();
-    await visit('/orders');
+    await visit('/orders/eat-out');
 
     assert.strictEqual(this.element.querySelectorAll('.card').length, 8, 'correct number of orders displayed');
   });
 
   test('order summary', async function(assert) {
     this.server.loadFixtures();
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('button#order-summary-btn');
 
     assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(1)').textContent, '2', 'cash order count');
@@ -68,7 +68,7 @@ module('Acceptance | orders', function(hooks) {
 
   test('order summary is updated when order is edited', async function(assert) {
     this.server.loadFixtures();
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('button#order-summary-btn');
 
     assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(1)').textContent, '2', 'cash order count');
@@ -102,7 +102,7 @@ module('Acceptance | orders', function(hooks) {
 
   test('all filters selected by default', async function(assert) {
     this.server.loadFixtures();
-    await visit('/orders');
+    await visit('/orders/eat-out');
 
     assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-primary').length, 4, 'order filters selected');
     assert.strictEqual(this.element.querySelectorAll('[test-id="order-type-filters"] button.btn-primary').length, 3, 'payment filters selected');
@@ -110,7 +110,7 @@ module('Acceptance | orders', function(hooks) {
 
   test('filters by order type', async function(assert) {
     this.server.loadFixtures();
-    await visit('/orders');
+    await visit('/orders/eat-out');
 
     await click('[test-id="order-type-filters"] button');
 
@@ -121,7 +121,7 @@ module('Acceptance | orders', function(hooks) {
 
   test('filters by payment type', async function(assert) {
     this.server.loadFixtures();
-    await visit('/orders');
+    await visit('/orders/eat-out');
 
     await click('[test-id="payment-type-filters"] button');
 
@@ -138,7 +138,7 @@ module('Acceptance | orders', function(hooks) {
       assert.strictEqual(request.params.orderId, '8');
     });
 
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('.card .dropdown .dropdown-toggle');
     await click('.card .dropdown .dropdown-menu button');
 
@@ -154,7 +154,7 @@ module('Acceptance | orders', function(hooks) {
       assert.strictEqual(request.params.orderId, '8');
     });
 
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('.card .dropdown .dropdown-toggle');
     await click('.card .dropdown .dropdown-menu button:nth-child(2)');
 
@@ -168,7 +168,7 @@ module('Acceptance | orders', function(hooks) {
       return new Response(500, {}, { errors: [{ detail: 'Error message for print failure' }]});
     });
 
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('.card .dropdown .dropdown-toggle');
     await click('.card .dropdown .dropdown-menu button:nth-child(2)');
 

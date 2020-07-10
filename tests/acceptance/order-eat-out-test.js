@@ -19,8 +19,8 @@ module('Acceptance | order/eat-out', function(hooks) {
     assert.strictEqual(element.querySelector('.order-pad_right_info div:nth-child(2)').textContent.trim(), expectedTotalText);
   }
 
-  test('navigating from orders', async function(assert) {
-    await visit('/orders');
+  test('navigating from orders/eat-out', async function(assert) {
+    await visit('/orders/eat-out');
 
     await click('.card button');
 
@@ -57,7 +57,7 @@ module('Acceptance | order/eat-out', function(hooks) {
   });
 
   test('confirming cancel dialog does not save changes and transitions back to orders route', async function(assert) {
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('.card [test-id="order-list-details-btn"]');
 
     // assert initial state
@@ -88,8 +88,8 @@ module('Acceptance | order/eat-out', function(hooks) {
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 2);
   });
 
-  test('confirming order transitions to and reflects updates on /orders ', async function(assert) {
-    await visit('/orders');
+  test('confirming order transitions to and reflects updates on /orders/eat-out ', async function(assert) {
+    await visit('/orders/eat-out');
     await click('.card [test-id="order-list-details-btn"]');
 
     // assert initial state
@@ -126,7 +126,7 @@ module('Acceptance | order/eat-out', function(hooks) {
       return new Response(500, {}, { errors: [{ detail: 'Error message for PATCH order/eatOuts' }]});
     });
 
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('.card button');
     await click('.order-pad_left_bottom_menu .list-group-item');
     await click('.order-pad_right_actions .btn-success');

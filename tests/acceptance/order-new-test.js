@@ -199,14 +199,14 @@ module('Acceptance | order/new', function(hooks) {
     assert.ok(this.element.querySelector('.modal'));
   });
 
-  test('unloads order items from the store to prevent duplicate order items after submitting and navigating to /orders', async function(assert) {
+  test('unloads order items from the store to prevent duplicate order items after submitting and navigating to /orders/eat-out', async function(assert) {
     await visit('/order/new');
     await click('.order-pad_left_bottom_menu .list-group-item');
     await selectCustomer(CUSTOMER_TAKEAWAY_DROPDOWN);
     await click('.order-pad_right_actions .btn-success');
     await click('.modal .btn-success');
     await click('.app-overlay');
-    await visit('/orders');
+    await visit('/orders/eat-out');
     await click('.card [test-id="order-list-details-btn"]');
 
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 1);

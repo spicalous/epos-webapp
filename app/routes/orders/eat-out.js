@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import Ember from 'ember';
 
-export default class OrdersRoute extends Route {
+export default class OrdersEatOutRoute extends Route {
 
   model() {
     return this.store.findAll('order/eat-out', {

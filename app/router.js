@@ -7,10 +7,12 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
-  this.route('orders');
   this.route('order', function() {
     this.route('new');
     this.route('eat-out', { path: '/eat-out/:eat_out_id' });
+  });
+  this.route('orders', function() {
+    this.route('eat-out');
   });
   this.route('delivery-customer');
 });
