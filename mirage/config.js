@@ -1,5 +1,7 @@
 import { Collection } from 'ember-cli-mirage';
 
+let tableIdCounter = 1;
+
 export default function() {
   this.namespace = 'EPOSDataService/api';
   this.get('/settings');
@@ -8,6 +10,12 @@ export default function() {
   this.get('/edit-categories');
   this.get('/edit-options');
   this.get('/menu-items');
+  this.get('/order/eat-ins', 'order/eatIns');
+  this.post('/order/eat-ins', function(schema) {
+    let attrs = this.normalizedRequestAttrs('order/eat-in');
+    attrs.tableId = 'ABC' + tableIdCounter++;
+    return schema['order/eatIns'].create(attrs);
+  });
   this.get('/order/eat-outs', 'order/eatOuts');
   this.get('/order/eat-outs/:id', 'order/eatOuts');
   this.post('/order/eat-outs', function(schema, request) {

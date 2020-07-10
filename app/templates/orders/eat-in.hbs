@@ -1,0 +1,63 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="flex-even">
+    <LinkTo @route="index" @tagName="button" type="button" @class="btn btn-outline-light">
+      Back
+    </LinkTo>
+  </div>
+  <span class="navbar-brand d-flex flex-even justify-content-center">Eat in</span>
+  <div class="flex-even d-flex justify-content-end">
+    <button class="btn btn-outline-light" type="button" {{on "click" this.toggleCreateModal}}>
+      Create
+    </button>
+  </div>
+</nav>
+<div class="container-fluid">
+  {{#if this.ordersByTimestamp}}
+    <div class="row mt-3">
+      <div class="col">
+        {{#each this.ordersByTimestamp as |order|}}
+          <div class="card mb-3">
+            <div class="card-body">
+              id: {{order.tableId}} name: {{order.tableName}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{else}}
+    <div class="mt-5 text-center text-muted">
+      No orders to display
+    </div>
+  {{/if}}
+</div>
+
+{{#if this.showOrderConfirmModal}}
+  <EmberWormhole @to={{this.ui.appModalContainerId}}>
+    <Modal::Base::Dialog @title="Create table"
+                         @onDismiss={{this.toggleCreateModal}}
+                         @onConfirm={{this.createOrder}} as |Body Footer onDismiss onConfirm|>
+      <Body>
+      <form novalidate>
+        <Form::Group class="mb-1" @validateOnDirty={{true}} @invalidFeedback="Table name must not be empty" as |fg|>
+          <label>Table name</label>
+          <fg.element @value={{this.newTableName}} @pattern=".+"/>
+        </Form::Group>
+      </form>
+      </Body>
+      <Footer>
+        <button type="button" class="btn btn-main-secondary" {{on "click" onDismiss}}>
+          Cancel
+        </button>
+        {{#if this.validTableName}}
+          <button type="button" class="btn btn-success" {{on "click" onConfirm}}>
+            Create
+          </button>
+        {{else}}
+          <button type="button" class="btn btn-secondary" disabled>
+            Create
+          </button>
+        {{/if}}
+      </Footer>
+    </Modal::Base::Dialog>
+  </EmberWormhole>
+{{/if}}

@@ -16,8 +16,8 @@ export default class IndexController extends Controller {
     setting.set('value', newValue);
     setting.save().catch(error => {
       console.error('Failed to save setting', error);
-      setting.rollbackAttributes();
       this.ui.showAppOverlay('Failed to save setting :(');
+      setting.rollbackAttributes();
     });
   }
 

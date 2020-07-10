@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('eat-out', { path: '/eat-out/:eat_out_id' });
   });
   this.route('orders', function() {
+    this.route('eat-in');
     this.route('eat-out');
   });
   this.route('delivery-customer');
