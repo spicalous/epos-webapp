@@ -7,3 +7,25 @@
   <span class="navbar-brand d-flex flex-even justify-content-center">Delivery customers</span>
   <span class="flex-even"></span>
 </nav>
+<div class="container">
+  <CustomerDeliverySearch @onCustomerSearchError={{this.ui.showAppOverlay}} as |cds|>
+    <div class="row">
+      <div class="col">
+        {{#if cds.searching}}
+          <LoadingSpinner @text="Searching customers..."/>
+        {{else}}
+          {{#each cds.deliveryCustomerSearchResults as |customer|}}
+            <div class="card mb-3">
+              <div class="card-body">
+                {{customer.telephone}}<br>
+                {{#if customer.addressOne}}{{customer.addressOne}}<br>{{/if}}
+                {{#if customer.road}}{{customer.road}}<br>{{/if}}
+                {{customer.postcode}}
+              </div>
+            </div>
+          {{/each}}
+        {{/if}}
+      </div>
+    </div>
+  </CustomerDeliverySearch>
+</div>

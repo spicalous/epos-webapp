@@ -1,92 +1,58 @@
 <div class="delivery-select container-fluid">
-  <form novalidate class="flex-shrink-0">
-    <Form::Group class="row mt-2 mb-1" as |fg|>
-      <label class="col-sm-2 col-form-label d-none d-sm-block">Telephone</label>
-      <div class="col-12 col-sm-10">
-        <fg.element @placeholder="Telephone" @value={{this.telephone}} @onInput={{fn this.onTelephoneInput}}/>
-      </div>
-    </Form::Group>
-    <Form::Group class="row mb-1" as |fg|>
-      <label class="col-sm-2 col-form-label d-none d-sm-block">House no.</label>
-      <div class="col-12 col-sm-10">
-        <fg.element @placeholder="House no." @value={{this.addressOne}} @onInput={{fn this.onAddressOneInput}}/>
-      </div>
-    </Form::Group>
-    <Form::Group class="row mb-1" as |fg|>
-      <label class="col-sm-2 col-form-label d-none d-sm-block">Road</label>
-      <div class="col-12 col-sm-10">
-        <fg.element autocomplete="off"
-                    @placeholder="Road"
-                    @value={{this.road}}
-                    @onInput={{fn this.onRoadInput}}
-                    @suggestions={{this.roadSearchResults}}
-                    @onSuggestionSelected={{this.setRoadFromSuggestion}}/>
-      </div>
-    </Form::Group>
-    <Form::Group class="row" as |fg|>
-      <label class="col-sm-2 col-form-label d-none d-sm-block">Postcode</label>
-      <div class="col-12 col-sm-10">
-        <fg.element autocomplete="off"
-                    @placeholder="Postcode"
-                    @value={{this.postcode}}
-                    @onInput={{fn this.onPostcodeInput}}
-                    @suggestions={{this.postcodeSearchResults}}
-                    @onSuggestionSelected={{this.setPostcodeFromSuggestion}}/>
-      </div>
-    </Form::Group>
-  </form>
-  {{#if this.invalidCustomerReason}}
-    <div class="row flex-shrink-0">
-      <div class="col-12 offset-sm-2 col-sm-10">
-        <div class="alert alert-danger" role="alert">
-          {{this.invalidCustomerReason}}
+  <CustomerDeliverySearch @onChange={{this.onCustomerChange}} @onCustomerSearchError={{this.ui.showAppOverlay}} as |cds|>
+    {{#if this.invalidCustomerReason}}
+      <div class="row flex-shrink-0">
+        <div class="col-12 offset-sm-2 col-sm-10">
+          <div class="alert alert-danger" role="alert">
+            {{this.invalidCustomerReason}}
+          </div>
         </div>
       </div>
-    </div>
-  {{/if}}
-  <div class="row flex-shrink-0">
-    {{#if this.canSave}}
-      <div class="col offset-sm-2 col-sm-5">
-        <button type="button" class="btn btn-main-secondary btn-lg btn-block" {{on "click" @onCancel}}>
-          Cancel
-        </button>
-      </div>
-      <div class="col col-sm-5">
-        <button type="button" class="btn btn-primary btn-lg btn-block" {{on "click" (fn @onSave (hash
-            telephone=this.telephone
-            addressOne=this.addressOne
-            road=this.road
-            postcode=this.postcode))}}>
-          Save
-        </button>
-      </div>
-    {{else}}
-      <div class="col offset-sm-7 col-sm-5">
-        <button type="button" class="btn btn-main-secondary btn-lg btn-block" {{on "click" @onCancel}}>
-          Cancel
-        </button>
-      </div>
     {{/if}}
-  </div>
-  <div class="delivery-select_list row mt-3 mb-2">
-    <div class="col">
-      {{#if this.searching}}
-        <LoadingSpinner @text="Searching customers..."/>
+    <div class="row flex-shrink-0">
+      {{#if (and this.validCustomer (not cds.searching) (not cds.deliveryCustomerSearchResults))}}
+        <div class="col offset-sm-2 col-sm-5">
+          <button type="button" class="btn btn-main-secondary btn-lg btn-block" {{on "click" @onCancel}}>
+            Cancel
+          </button>
+        </div>
+        <div class="col col-sm-5">
+          <button type="button" class="btn btn-primary btn-lg btn-block" {{on "click" (fn @onSave (hash
+              telephone=cds.telephone
+              addressOne=cds.addressOne
+              road=cds.road
+              postcode=cds.postcode))}}>
+            Save
+          </button>
+        </div>
       {{else}}
-        {{#if this.deliveryCustomerSearchResults}}
-          <div class="list-group">
-            {{#each this.deliveryCustomerSearchResults as |customer|}}
-              <button type="button" class="list-group-item list-group-item-action" {{on "click"
-                                                                                        (fn @onDeliveryCustomerSelected customer)}}>
-                {{customer.telephone}}<br>
-                {{#if customer.addressOne}}{{customer.addressOne}}<br>{{/if}}
-                {{#if customer.road}}{{customer.road}}<br>{{/if}}
-                {{customer.postcode}}
-              </button>
-            {{/each}}
-          </div>
-        {{/if}}
+        <div class="col offset-sm-7 col-sm-5">
+          <button type="button" class="btn btn-main-secondary btn-lg btn-block" {{on "click" @onCancel}}>
+            Cancel
+          </button>
+        </div>
       {{/if}}
     </div>
-  </div>
+    <div class="delivery-select_list row mt-3 mb-2">
+      <div class="col">
+        {{#if cds.searching}}
+          <LoadingSpinner @text="Searching customers..."/>
+        {{else}}
+          {{#if cds.deliveryCustomerSearchResults}}
+            <div class="list-group">
+              {{#each cds.deliveryCustomerSearchResults as |customer|}}
+                <button type="button" class="list-group-item list-group-item-action" {{on "click"
+                                                                                          (fn @onDeliveryCustomerSelected customer)}}>
+                  {{customer.telephone}}<br>
+                  {{#if customer.addressOne}}{{customer.addressOne}}<br>{{/if}}
+                  {{#if customer.road}}{{customer.road}}<br>{{/if}}
+                  {{customer.postcode}}
+                </button>
+              {{/each}}
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </CustomerDeliverySearch>
 </div>

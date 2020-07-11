@@ -1,6 +1,7 @@
 .delivery-select {
   display: flex;
   flex-direction: column;
+  background-color: $white;
 
   &_list {
     flex-shrink: 1;
