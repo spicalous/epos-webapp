@@ -7,8 +7,8 @@ export default class ModalEditOrderItemDialogComponent extends Component {
   @tracked
   selectedEditCategoryId;
 
-  constructor(owner, args) {
-    super(owner, args);
+  constructor() {
+    super(...arguments);
     this.selectedEditCategoryId = this.args.item.get('menuItem.editCategories.firstObject.id');
   }
 
