@@ -104,9 +104,12 @@
         </div>
       {{else}}
         <div class="col">
-          <button type="button" class="btn btn-lg btn-block btn-danger" {{on "click" this.confirmCancelOrder}}>
+          <ButtonWithConfirm class="btn-lg btn-block btn-danger"
+                             @confirmTitle="Cancel order"
+                             @confirmMessage="Are you sure you want to cancel?"
+                             @onConfirm={{this.cancelOrder}}>
             Cancel
-          </button>
+          </ButtonWithConfirm>
         </div>
         <div class="col">
           {{#if this.invalidOrder}}

@@ -237,14 +237,6 @@ export default class OrderPadComponent extends Component {
   }
 
   @action
-  confirmCancelOrder() {
-    this.ui.showConfirm(
-      'Cancel order',
-      'Are you sure you want to cancel?',
-      () => this.cancelOrder());
-  }
-
-  @action
   cancelOrder() {
     this.selectedCategoryId = null;
     this.numpadValue = '';

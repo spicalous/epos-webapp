@@ -83,6 +83,7 @@ export default function() {
       && customer.postcode.startsWith(postcode.toUpperCase()));
   });
   this.post('/customer/deliveries', 'customer/deliveries');
+  this.del('/customer/deliveries/:id', 'customer/deliveries');
   this.get('roads', (schema, request) => {
     let { name } = request.queryParams;
     let collection = new Collection('road');

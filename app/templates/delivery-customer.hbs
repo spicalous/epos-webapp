@@ -17,10 +17,18 @@
           {{#each cds.deliveryCustomerSearchResults as |customer|}}
             <div class="card mb-3">
               <div class="card-body">
-                {{customer.telephone}}<br>
-                {{#if customer.addressOne}}{{customer.addressOne}}<br>{{/if}}
-                {{#if customer.road}}{{customer.road}}<br>{{/if}}
-                {{customer.postcode}}
+                <p>
+                  {{customer.telephone}}<br>
+                  {{#if customer.addressOne}}{{customer.addressOne}}<br>{{/if}}
+                  {{#if customer.road}}{{customer.road}}<br>{{/if}}
+                  {{customer.postcode}}
+                </p>
+                <ButtonWithConfirm class="btn-danger"
+                                   @confirmTitle="Delete customer"
+                                   @confirmMessage="Are you sure you want to delete this customer?"
+                                   @onConfirm={{fn this.deleteCustomer customer}}>
+                  Delete
+                </ButtonWithConfirm>
               </div>
             </div>
           {{/each}}
