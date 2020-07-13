@@ -3,10 +3,7 @@ import { action } from '@ember/object';
 import { cancel, later } from '@ember/runloop';
 import Ember from 'ember';
 
-const TOAST_TRANSITION_DURATION_MS = 150; // value from css
-const TOAST_DELAY_MS = 500;
-
-export const TIME_TO_WAIT_UNTIL_REMOVAL_MS = (TOAST_TRANSITION_DURATION_MS * 2) + TOAST_DELAY_MS + 1;
+export const TOAST_TRANSITION_DURATION_MS = 150; // value from css
 
 export default class ToastComponent extends Component {
 
@@ -19,7 +16,7 @@ export default class ToastComponent extends Component {
 
       element.classList.remove('showing');
       element.classList.add('show');
-      this._onHideTimer = later(this, this.hide, Ember.testing ? 1 : TOAST_DELAY_MS);
+      this._onHideTimer = later(this, this.hide, Ember.testing ? 1 : this.args.model.durationMillis);
 
     }, Ember.testing ? 1 : TOAST_TRANSITION_DURATION_MS);
   }

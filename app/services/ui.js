@@ -3,8 +3,10 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { A } from '@ember/array';
 import { cancel, later } from '@ember/runloop';
-import { TIME_TO_WAIT_UNTIL_REMOVAL_MS } from './../components/toast';
+import { TOAST_TRANSITION_DURATION_MS } from './../components/toast';
 import Ember from 'ember';
+
+const TOAST_DEFAULT_DURATION_MS = 500;
 
 export default class UiService extends Service {
 
@@ -17,12 +19,13 @@ export default class UiService extends Service {
   toastModels = A([]);
 
   @action
-  showToast(message) {
-    let toastModel = { message };
+  showToast(message, durationMillis) {
+    durationMillis = durationMillis || TOAST_DEFAULT_DURATION_MS;
+    let toastModel = { message, durationMillis };
 
     toastModel.timer = later(this, function() {
       this.toastModels.removeObject(toastModel);
-    }, Ember.testing ? 5 : TIME_TO_WAIT_UNTIL_REMOVAL_MS);
+    }, Ember.testing ? 5 : (2 * TOAST_TRANSITION_DURATION_MS) + durationMillis + 1);
 
     this.toastModels.pushObject(toastModel);
   }
