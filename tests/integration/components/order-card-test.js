@@ -6,7 +6,7 @@ import { setupMirage } from 'ember-cli-mirage/test-support';
 
 const OPTIONS = { include: 'orderItems.menuItem,orderItems.editOptions,customer' };
 
-module('Integration | Component | order-list/item', function(hooks) {
+module('Integration | Component | order-card', function(hooks) {
   setupRenderingTest(hooks);
   setupMirage(hooks);
 
@@ -46,48 +46,53 @@ module('Integration | Component | order-list/item', function(hooks) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
     this.set('printOrder', function() {});
 
-    await render(hbs`<OrderList::Item @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
     assert.strictEqual(this.element.querySelector('.card-body > div small').textContent, '2016/03/09 - 12:34');
   });
 
   test('customer data', async function(assert) {
-    let delivery = this.owner.lookup('service:store').createRecord('customer/delivery', {
-      telephone: 'telephone',
-      addressOne: 'address one',
-      road: 'road',
-      postcode: 'postcode'
-    });
-    let takeAway = this.owner.lookup('service:store').createRecord('customer/take-away', {
-      telephone: 'telephone',
-      name: 'name'
-    });
-    let online = this.owner.lookup('service:store').createRecord('customer/online', {
-      orderId: 'orderId'
-    });
-
+    let store = this.owner.lookup('service:store');
+    let customerRootQuerySelector = '.card-body > div > div:nth-child(2)';
     this.set('printOrder', function() {});
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
     this.set('order.customer', null);
 
-    await render(hbs`<OrderList::Item @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+
     assert.ok(this.element.querySelector('.card-body > div .icon-customer-unknown'));
+    assert.strictEqual(this.element.querySelector('.card-body > div > div:nth-child(2)').textContent.trim(), 'Unknown customer type');
 
-    this.set('order.customer', delivery);
+    this.set('order.customer',
+      store.createRecord('customer/delivery', { telephone: 'telephone', addressOne: 'address one', road: 'road', postcode: 'postcode' }));
     assert.ok(this.element.querySelector('.card-body > div .icon-customer-delivery'));
+    assert.strictEqual(this.element.querySelector(customerRootQuerySelector + ' > div:nth-child(1)').textContent.trim(), 'address one road');
+    assert.strictEqual(this.element.querySelector(customerRootQuerySelector + ' > div:nth-child(2)').textContent.trim(), 'postcode');
+    assert.strictEqual(this.element.querySelector(customerRootQuerySelector + ' > div:nth-child(3)').textContent.trim(), 'telephone');
 
-    this.set('order.customer', takeAway);
+    this.set('order.customer', store.createRecord('customer/take-away', {}));
     assert.ok(this.element.querySelector('.card-body > div .icon-customer-take-away'));
+    assert.strictEqual(this.element.querySelector(customerRootQuerySelector).textContent.trim(), 'TAKE AWAY');
 
-    this.set('order.customer', online);
+    this.set('order.customer', store.createRecord('customer/take-away', { telephone: 'telephone', name: 'name' }));
+    assert.ok(this.element.querySelector('.card-body > div .icon-customer-take-away'));
+    assert.strictEqual(this.element.querySelector(customerRootQuerySelector + ' > div:nth-child(1)').textContent.trim(), 'name');
+    assert.strictEqual(this.element.querySelector(customerRootQuerySelector + ' > div:nth-child(2)').textContent.trim(), 'telephone');
+
+    this.set('order.customer', store.createRecord('customer/online', {}));
     assert.ok(this.element.querySelector('.card-body > div .icon-customer-online'));
+    assert.strictEqual(this.element.querySelector(customerRootQuerySelector).textContent.trim(), 'ONLINE ORDER');
+
+    this.set('order.customer', store.createRecord('customer/online', { orderId: 'orderId' }));
+    assert.ok(this.element.querySelector('.card-body > div .icon-customer-online'));
+    assert.strictEqual(this.element.querySelector(customerRootQuerySelector).textContent.trim(), 'orderId');
   });
 
   test('formats null payment type', async function(assert) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
     this.set('printOrder', function() {});
 
-    await render(hbs`<OrderList::Item @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
     assert.strictEqual(this.element.querySelector('.card-body > [test-id="order-list-item-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
   });
@@ -96,7 +101,7 @@ module('Integration | Component | order-list/item', function(hooks) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 2, OPTIONS));
     this.set('printOrder', function() {});
 
-    await render(hbs`<OrderList::Item @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
     assert.strictEqual(this.element.querySelector('.card-body > [test-id="order-list-item-payment-info"]').textContent.trim(), 'CASH £26.85');
   });
@@ -105,7 +110,7 @@ module('Integration | Component | order-list/item', function(hooks) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
     this.set('printOrder', function() {});
 
-    await render(hbs`<OrderList::Item @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
     await click('button.btn-block');
 
@@ -128,7 +133,7 @@ module('Integration | Component | order-list/item', function(hooks) {
       assert.strictEqual(receiptType, 'EAT_IN');
     });
 
-    await render(hbs`<OrderList::Item @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
     await click('button.btn-block');
     await click('button.dropdown-toggle');
@@ -144,7 +149,7 @@ module('Integration | Component | order-list/item', function(hooks) {
       assert.strictEqual(receiptType, 'DELIVERY');
     });
 
-    await render(hbs`<OrderList::Item @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
     await click('button.btn-block');
     await click('button.dropdown-toggle');

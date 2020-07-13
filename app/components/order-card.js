@@ -1,5 +1,7 @@
 import Component from '@glimmer/component';
-import { getModelName } from './../../helpers/get-model-name';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
+import { getModelName } from './../helpers/get-model-name';
 
 const DEFAULT_DISPLAY_INFO_TAKE_AWAY = 'TAKE AWAY';
 const DEFAULT_DISPLAY_INFO_ONLINE = 'ONLINE ORDER';
@@ -14,10 +16,13 @@ const ICON_CLASS_LOOKUP = {
   'customer/online': 'icon-customer-online'
 };
 
-export default class OrderListCustomerComponent extends Component {
+export default class OrderCardComponent extends Component {
+
+  @tracked
+  showOrderItems = false;
 
   get customerModelName() {
-    return getModelName([this.args.customer]);
+    return getModelName([this.args.order.get('customer')]);
   }
 
   get customerIconClass() {
@@ -28,7 +33,14 @@ export default class OrderListCustomerComponent extends Component {
     let getInfoFn = LOOKUP[this.customerModelName];
 
     return getInfoFn
-      ? getInfoFn(this.args.customer)
+      ? getInfoFn(this.args.order.get('customer'))
       : ['Unknown customer type'];
   }
+
+  @action
+  toggleShowOrderItems() {
+    this.showOrderItems = !this.showOrderItems;
+  }
+
+
 }

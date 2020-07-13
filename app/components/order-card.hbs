@@ -1,8 +1,18 @@
 <div class="card mb-3">
   <div class="card-body">
-    <OrderList::Customer @customer={{@order.customer}}>
-      <small>{{format-date-time @order.dateTime}}</small>
-    </OrderList::Customer>
+    <div class="d-flex">
+      <div class="flex-even">
+        <span class="icon-32 {{this.customerIconClass}}"></span>
+      </div>
+      <div class="flex-fill flex-column text-center">
+        {{#each this.customerInfoArray as |customerInfo|}}
+          <div>{{customerInfo}}</div>
+        {{/each}}
+      </div>
+      <div class="flex-even d-flex justify-content-end">
+        <small>{{format-date-time @order.dateTime}}</small>
+      </div>
+    </div>
     <div class="text-center mb-3" test-id="order-list-item-payment-info">
       {{format-payment-method @order.paymentMethod}} £{{format-currency @order.total}}
     </div>
