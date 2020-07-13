@@ -28,6 +28,8 @@
   <EmberWormhole @to={{this.ui.appModalContainerId}}>
     <Modal::Confirm @title={{this.ui.model.title}}
                     @body={{this.ui.model.message}}
+                    @btnClass={{this.ui.model.btnClass}}
+                    @btnText={{this.ui.model.btnText}}
                     @onDismiss={{this.ui.onDismissConfirm}}
                     @onConfirm={{this.ui.onConfirmConfirm}}/>
   </EmberWormhole>

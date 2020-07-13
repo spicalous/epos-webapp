@@ -8,6 +8,11 @@ export default class ButtonWithConfirmComponent extends Component {
 
   @action
   confirm() {
-    this.ui.showConfirm(this.args.confirmTitle, this.args.confirmMessage, () => this.args.onConfirm());
+    this.ui.showConfirm(
+      this.args.confirmTitle,
+      this.args.confirmMessage,
+      () => this.args.onConfirm(),
+      this.args.confirmBtnClass,
+      this.args.confirmBtnText);
   }
 }

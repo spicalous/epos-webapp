@@ -37,7 +37,7 @@ module('Acceptance | delivery-customer', function(hooks) {
     await fillIn('input[placeholder="Telephone"]', '020');
 
     await click('.btn-danger');
-    await click('.modal .btn-primary');
+    await click('.modal .btn-danger');
 
     assert.strictEqual(this.element.querySelector('.app-overlay h2').textContent.trim(), 'Failed to delete customer :(');
     assert.ok(this.element.querySelector('.app-overlay').textContent.trim().includes('Cannot delete delivery customer. Customer is reference by order id=1'));
@@ -54,7 +54,7 @@ module('Acceptance | delivery-customer', function(hooks) {
     await fillIn('input[placeholder="Telephone"]', '020');
 
     await click('.btn-danger');
-    await click('.modal .btn-primary');
+    await click('.modal .btn-danger');
 
     assert.strictEqual(this.element.querySelector('.app-overlay h2').textContent.trim(), 'Failed to delete customer :(');
     assert.ok(this.element.querySelector('.app-overlay').textContent.trim().includes('Delivery customer id=1 does not exist'));
@@ -69,7 +69,7 @@ module('Acceptance | delivery-customer', function(hooks) {
     assert.strictEqual(this.element.querySelectorAll('.card').length, 3);
 
     await click('.btn-danger');
-    await click('.modal .btn-primary');
+    await click('.modal .btn-danger');
 
     assert.strictEqual(this.element.querySelectorAll('.card').length, 2);
   });

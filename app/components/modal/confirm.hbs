@@ -6,8 +6,8 @@
     <button type="button" class="btn btn-main-secondary" {{on "click" onDismiss}}>
       Cancel
     </button>
-    <button type="button" class="btn btn-primary" {{on "click" onConfirm}}>
-      Confirm
+    <button type="button" class="btn {{if @btnClass @btnClass "btn-primary"}}" {{on "click" onConfirm}}>
+      {{if @btnText @btnText "Confirm"}}
     </button>
   </Footer>
 </Modal::Base::Dialog>

@@ -46,4 +46,17 @@ module('Integration | Component | modal/confirm', function(hooks) {
     assert.expect(1);
   });
 
+  test('supports optional overriding of button class and text', async function(assert) {
+    this.set('onConfirm', () => assert.ok('onConfirm callback run'));
+
+    await render(hbs`<Modal::Confirm @title="confirm title"
+                                     @body="confirm body"
+                                     @btnClass="a-btn-class"
+                                     @btnText="Button text"
+                                     @onConfirm={{this.onConfirm}}/>`);
+
+    assert.strictEqual(this.element.querySelector('.modal-footer button:nth-child(2)').textContent.trim(), 'Button text');
+    assert.ok(this.element.querySelector('.modal-footer button:nth-child(2)').classList.contains('a-btn-class'));
+  });
+
 });

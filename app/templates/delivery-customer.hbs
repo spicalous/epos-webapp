@@ -26,6 +26,8 @@
                 <ButtonWithConfirm class="btn-danger"
                                    @confirmTitle="Delete customer"
                                    @confirmMessage="Are you sure you want to delete this customer?"
+                                   @confirmBtnClass="btn-danger"
+                                   @confirmBtnText="Delete"
                                    @onConfirm={{fn this.deleteCustomer customer}}>
                   Delete
                 </ButtonWithConfirm>

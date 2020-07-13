@@ -6,10 +6,12 @@ import Service from '@ember/service';
 
 class UIStub extends Service {
 
-  showConfirm(title, message, callback) {
+  showConfirm(title, message, callback, btnClass, btnText) {
     this.title = title;
     this.message = message;
     this.callback = callback;
+    this.btnClass = btnClass;
+    this.btnText = btnText;
   }
 
 }
@@ -46,6 +48,28 @@ module('Integration | Component | button-with-confirm', function(hooks) {
     const uiService = this.owner.lookup('service:ui');
     assert.equal(uiService.title, 'A title');
     assert.equal(uiService.message, 'A message');
+    uiService.callback();
+    assert.verifySteps(['confirm callback']);
+  });
+
+  test('allows optional confirm button class and text', async function(assert) {
+    this.set('confirmCallback', () => { assert.step('confirm callback'); });
+
+    await render(hbs`<ButtonWithConfirm @confirmTitle="A title"
+                                        @confirmMessage="A message"
+                                        @confirmBtnClass="btn-danger"
+                                        @confirmBtnText="Delete"
+                                        @onConfirm={{this.confirmCallback}}>
+                       Button Text
+                     </ButtonWithConfirm>`);
+
+    await click('button');
+
+    const uiService = this.owner.lookup('service:ui');
+    assert.equal(uiService.title, 'A title');
+    assert.equal(uiService.message, 'A message');
+    assert.equal(uiService.btnClass, 'btn-danger');
+    assert.equal(uiService.btnText, 'Delete');
     uiService.callback();
     assert.verifySteps(['confirm callback']);
   });

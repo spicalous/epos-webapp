@@ -64,9 +64,9 @@ export default class UiService extends Service {
   }
 
   @action
-  showConfirm(title, message, onConfirm) {
+  showConfirm(title, message, onConfirm, btnClass, btnText) {
     this.confirmShown = true;
-    this.model = { title, message, onConfirm };
+    this.model = { title, message, onConfirm, btnClass, btnText };
   }
 
   @action
