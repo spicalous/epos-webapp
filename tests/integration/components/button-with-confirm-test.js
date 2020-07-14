@@ -2,19 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import Service from '@ember/service';
-
-class UIStub extends Service {
-
-  showConfirm(title, message, callback, btnClass, btnText) {
-    this.title = title;
-    this.message = message;
-    this.callback = callback;
-    this.btnClass = btnClass;
-    this.btnText = btnText;
-  }
-
-}
+import { UIStub } from './../../util';
 
 module('Integration | Component | button-with-confirm', function(hooks) {
   setupRenderingTest(hooks);
@@ -66,10 +54,10 @@ module('Integration | Component | button-with-confirm', function(hooks) {
     await click('button');
 
     const uiService = this.owner.lookup('service:ui');
-    assert.equal(uiService.title, 'A title');
-    assert.equal(uiService.message, 'A message');
-    assert.equal(uiService.btnClass, 'btn-danger');
-    assert.equal(uiService.btnText, 'Delete');
+    assert.strictEqual(uiService.title, 'A title');
+    assert.strictEqual(uiService.message, 'A message');
+    assert.strictEqual(uiService.btnClass, 'btn-danger');
+    assert.strictEqual(uiService.btnText, 'Delete');
     uiService.callback();
     assert.verifySteps(['confirm callback']);
   });
