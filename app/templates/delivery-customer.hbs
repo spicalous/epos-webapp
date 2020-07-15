@@ -8,17 +8,19 @@
   <span class="flex-even"></span>
 </nav>
 <div class="container">
-  <CustomerDeliverySearch @onCustomerSearchError={{this.ui.showAppOverlay}} as |cds|>
+  <Customer::DeliverySearch @onCustomerSearchError={{this.ui.showAppOverlay}} as |cds|>
     <div class="row">
       <div class="col">
         {{#if cds.searching}}
           <LoadingSpinner @text="Searching customers..."/>
         {{else}}
           {{#each cds.deliveryCustomerSearchResults as |customer|}}
-            <Customer::DeliveryCard @customer={{customer}} @onDelete={{this.deleteCustomer}}/>
+            <Customer::DeliveryCard @customer={{customer}}
+                                    @onEdit={{this.editCustomer}}
+                                    @onDelete={{this.deleteCustomer}}/>
           {{/each}}
         {{/if}}
       </div>
     </div>
-  </CustomerDeliverySearch>
+  </Customer::DeliverySearch>
 </div>

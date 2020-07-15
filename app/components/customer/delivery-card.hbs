@@ -1,20 +1,58 @@
 <div class="card mb-3">
   <div class="card-body">
-    <p class="text-center">
-      {{@customer.telephone}}<br>
-      {{#if @customer.addressOne}}{{@customer.addressOne}}<br>{{/if}}
-      {{#if @customer.road}}{{@customer.road}}<br>{{/if}}
-      {{@customer.postcode}}
-    </p>
-    <div class="d-flex justify-content-between">
-      <ButtonWithConfirm class="btn-danger"
-                         @confirmTitle="Delete customer"
-                         @confirmMessage="Are you sure you want to delete this customer?"
-                         @confirmBtnClass="btn-danger"
-                         @confirmBtnText="Delete"
-                         @onConfirm={{fn @onDelete @customer}}>
-        Delete
-      </ButtonWithConfirm>
-    </div>
+    {{#if this.editing}}
+      <Customer::DeliveryInput @telephone={{@customer.telephone}}
+                               @addressOne={{@customer.addressOne}}
+                               @road={{@customer.road}}
+                               @postcode={{@customer.postcode}}
+                               @onChange={{this.onChange}} />
+    {{#if this.invalidReason}}
+      <div class="row flex-shrink-0">
+        <div class="col-12 offset-sm-2 col-sm-10">
+          <div class="alert alert-danger" role="alert">
+            {{this.invalidReason}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-main-secondary mr-3" {{on "click" this.cancelEditing}}>
+          Cancel
+        </button>
+        {{#if this.canSave}}
+          <ButtonWithConfirm class="btn-primary"
+                             @confirmTitle="Confirm edit customer"
+                             @confirmMessage="Save changes?"
+                             @confirmBtnText="Save"
+                             @onConfirm={{fn this.onEdit}}>
+            Save
+          </ButtonWithConfirm>
+        {{else}}
+          <button type="button" class="btn btn-secondary" disabled>
+            Save
+          </button>
+        {{/if}}
+      </div>
+    {{else}}
+      <p class="text-center">
+        {{@customer.telephone}}<br>
+        {{#if @customer.addressOne}}{{@customer.addressOne}}<br>{{/if}}
+        {{#if @customer.road}}{{@customer.road}}<br>{{/if}}
+        {{@customer.postcode}}
+      </p>
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-main-secondary" {{on "click" this.startEditing}}>
+          Edit
+        </button>
+        <ButtonWithConfirm class="btn-danger"
+                           @confirmTitle="Delete customer"
+                           @confirmMessage="Are you sure you want to delete this customer?"
+                           @confirmBtnClass="btn-danger"
+                           @confirmBtnText="Delete"
+                           @onConfirm={{fn @onDelete @customer}}>
+          Delete
+        </ButtonWithConfirm>
+      </div>
+    {{/if}}
   </div>
 </div>

@@ -1,0 +1,9 @@
+<Customer::DeliveryInput @onChange={{this.onChange}} as |customerDeliveryInput|>
+  {{yield (hash
+              telephone=customerDeliveryInput.telephone
+              addressOne=customerDeliveryInput.addressOne
+              road=customerDeliveryInput.road
+              postcode=customerDeliveryInput.postcode
+              deliveryCustomerSearchResults=this.deliveryCustomerSearchResults
+              searching=this.searching)}}
+</Customer::DeliveryInput>

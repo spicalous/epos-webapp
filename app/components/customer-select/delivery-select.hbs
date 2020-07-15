@@ -1,5 +1,5 @@
 <div class="delivery-select container-fluid">
-  <CustomerDeliverySearch @onChange={{this.onCustomerChange}} @onCustomerSearchError={{this.ui.showAppOverlay}} as |cds|>
+  <Customer::DeliverySearch @onChange={{this.onCustomerChange}} @onCustomerSearchError={{this.ui.showAppOverlay}} as |cds|>
     {{#if this.invalidCustomerReason}}
       <div class="row flex-shrink-0">
         <div class="col-12 offset-sm-2 col-sm-10">
@@ -54,5 +54,5 @@
         {{/if}}
       </div>
     </div>
-  </CustomerDeliverySearch>
+  </Customer::DeliverySearch>
 </div>
