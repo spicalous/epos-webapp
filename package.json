@@ -1,6 +1,6 @@
 {
   "name": "epos-webapp",
-  "version": "0.89.0",
+  "version": "0.90.0",
   "private": true,
   "description": "EPOS webapp built with ember.js",
   "repository": "",
