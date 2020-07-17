@@ -2,6 +2,8 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { getModelName } from './../helpers/get-model-name';
+import { PAYMENT_METHODS } from './../models/payment-method';
+import { inject as service } from '@ember/service';
 
 const DEFAULT_DISPLAY_INFO_TAKE_AWAY = 'TAKE AWAY';
 const DEFAULT_DISPLAY_INFO_ONLINE = 'ONLINE ORDER';
@@ -18,8 +20,11 @@ const ICON_CLASS_LOOKUP = {
 
 export default class OrderCardComponent extends Component {
 
-  @tracked
-  showOrderItems = false;
+  paymentMethods = PAYMENT_METHODS;
+
+  @service ui;
+
+  @tracked showOrderItems = false;
 
   get customerModelName() {
     return getModelName([this.args.order.get('customer')]);
@@ -42,5 +47,18 @@ export default class OrderCardComponent extends Component {
     this.showOrderItems = !this.showOrderItems;
   }
 
+  @action
+  updatePaymentMethod(paymentMethod) {
+    if (this.args.order.get('paymentMethod') !== paymentMethod) {
+      this.args.order.set('paymentMethod', paymentMethod);
+      this.args.order.save()
+        .then(() => this.ui.showToast('Updated payment method', 3000))
+        .catch((error) => {
+          console.error('Failed to update payment method', error);
+          this.args.order.rollbackAttributes();
+          this.ui.showToast('Failed to update payment method');
+        });
+    }
+  }
 
 }

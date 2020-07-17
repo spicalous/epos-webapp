@@ -22,7 +22,7 @@ module('Acceptance | order/eat-out', function(hooks) {
   test('navigating from orders/eat-out', async function(assert) {
     await visit('/orders/eat-out');
 
-    await click('.card button');
+    await click('[test-id="order-card-edit"]');
 
     assert.strictEqual(currentURL(), '/order/eat-out/8');
     assert.ok(this.element.querySelector('.order-pad'));
@@ -61,11 +61,11 @@ module('Acceptance | order/eat-out', function(hooks) {
     await click('.card [test-id="order-list-details-btn"]');
 
     // assert initial state
-    assert.strictEqual(this.element.querySelector('[test-id="order-list-item-payment-info"]').textContent.trim(), 'ONLINE £14.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 2);
 
     // edit
-    await click('.card button');
+    await click('.card .row button');
     // initial state
     assert.strictEqual(this.element.querySelectorAll('.order-pad_right_items .list-group-item').length, 2);
     assertOrderInfo(assert, this.element, '5 items', '£14.95');
@@ -84,7 +84,7 @@ module('Acceptance | order/eat-out', function(hooks) {
     await click('.modal-footer .btn-primary');
 
     await click('.card [test-id="order-list-details-btn"]');
-    assert.strictEqual(this.element.querySelector('[test-id="order-list-item-payment-info"]').textContent.trim(), 'ONLINE £14.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 2);
   });
 
@@ -93,11 +93,11 @@ module('Acceptance | order/eat-out', function(hooks) {
     await click('.card [test-id="order-list-details-btn"]');
 
     // assert initial state
-    assert.strictEqual(this.element.querySelector('[test-id="order-list-item-payment-info"]').textContent.trim(), 'ONLINE £14.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 2);
 
     // edit
-    await click('.card button');
+    await click('[test-id="order-card-edit"]');
     // initial state
     assert.strictEqual(this.element.querySelectorAll('.order-pad_right_items .list-group-item').length, 2);
     assertOrderInfo(assert, this.element, '5 items', '£14.95');
@@ -117,7 +117,7 @@ module('Acceptance | order/eat-out', function(hooks) {
     await click('.app-overlay');
 
     await click('.card [test-id="order-list-details-btn"]');
-    assert.strictEqual(this.element.querySelector('[test-id="order-list-item-payment-info"]').textContent.trim(), 'ONLINE £57.70');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £57.70');
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 3);
   });
 
@@ -127,7 +127,7 @@ module('Acceptance | order/eat-out', function(hooks) {
     });
 
     await visit('/orders/eat-out');
-    await click('.card button');
+    await click('[test-id="order-card-edit"]');
     await click('.order-pad_left_bottom_menu .list-group-item');
     await click('.order-pad_right_actions .btn-success');
     await click('.modal .btn-success');

@@ -3,6 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupMirage } from 'ember-cli-mirage/test-support';
+import { UIStub } from './../../util';
 
 const OPTIONS = { include: 'orderItems.menuItem,orderItems.editOptions,customer' };
 
@@ -11,6 +12,7 @@ module('Integration | Component | order-card', function(hooks) {
   setupMirage(hooks);
 
   hooks.beforeEach(async function() {
+    this.owner.register('service:ui', UIStub);
     this.server.db.emptyData();
     let mockCustomer = this.server.create('customer/take-away', { telephone: '', name: 'take-away name' });
     let addBeef = this.server.create('edit-option', mockEditOption('ADD BEEF', 150));
@@ -94,7 +96,7 @@ module('Integration | Component | order-card', function(hooks) {
 
     await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
-    assert.strictEqual(this.element.querySelector('.card-body > [test-id="order-list-item-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
   });
 
   test('formats non null payment type', async function(assert) {
@@ -103,7 +105,7 @@ module('Integration | Component | order-card', function(hooks) {
 
     await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
-    assert.strictEqual(this.element.querySelector('.card-body > [test-id="order-list-item-payment-info"]').textContent.trim(), 'CASH £26.85');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CASH £26.85');
   });
 
   test('showing order details', async function(assert) {
@@ -135,9 +137,8 @@ module('Integration | Component | order-card', function(hooks) {
 
     await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
-    await click('button.btn-block');
-    await click('button.dropdown-toggle');
-    await click('.dropdown-menu button:nth-child(1)');
+    await click('.row button.dropdown-toggle');
+    await click('.row .dropdown-menu button:nth-child(1)');
     assert.expect(3);
   });
 
@@ -151,10 +152,43 @@ module('Integration | Component | order-card', function(hooks) {
 
     await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
 
-    await click('button.btn-block');
-    await click('button.dropdown-toggle');
-    await click('.dropdown-menu button:nth-child(2)');
+    await click('.row button.dropdown-toggle');
+    await click('.row .dropdown-menu button:nth-child(2)');
     assert.expect(3);
+  });
+
+  test('updating payment info failure', async function(assert) {
+    this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
+    this.set('printOrder', function() {});
+    this.server.patch('/order/eat-outs/:id', 500);
+
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
+
+    await click('[test-id="order-card-payment-info"]');
+    await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(2)');
+
+    const uiService = this.owner.lookup('service:ui');
+    assert.strictEqual(uiService.message, 'Failed to update payment method');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
+  });
+
+  test('updating payment info', async function(assert) {
+    this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
+    this.set('printOrder', function() {});
+    this.server.patch('/order/eat-outs/:id', 'order/eatOuts');
+
+    await render(hbs`<OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
+
+    await click('[test-id="order-card-payment-info"]');
+    await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(2)');
+
+    const uiService = this.owner.lookup('service:ui');
+    assert.strictEqual(uiService.message, 'Updated payment method');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CASH £26.85');
   });
 
   function mockOrderItem(quantity, menuItem, editOptions) {

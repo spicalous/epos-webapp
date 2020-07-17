@@ -24,13 +24,13 @@ module('Acceptance | orders/eat-out', function(hooks) {
 
     assert.ok(-5 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 5);
     this.element.querySelector('.card:nth-child(6)').scrollIntoView();
-    assert.ok(426 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 436);
+    assert.ok(480 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 490);
 
-    await click('.card:nth-child(6) button');
+    await click('.card:nth-child(6) [test-id="order-card-edit"]');
     await click('.order-pad_right_actions .btn-danger');
     await click('.modal-footer .btn-primary');
 
-    assert.ok(426 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 436);
+    assert.ok(480 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 490);
   });
 
   test('show "No orders to display" when no orders', async function(assert) {
@@ -82,7 +82,7 @@ module('Acceptance | orders/eat-out', function(hooks) {
     assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(4)').textContent, '58.00', 'not paid total');
     assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(5)').textContent, '261.50', 'total order total');
 
-    await click('.card button');
+    await click('.card [test-id="order-card-edit"]');
     await click('.order-pad_left_bottom_menu .list-group-item');
     await click('.order-pad_right_actions .btn-success');
     await click('.modal-footer .btn-success');
@@ -139,8 +139,8 @@ module('Acceptance | orders/eat-out', function(hooks) {
     });
 
     await visit('/orders/eat-out');
-    await click('.card .dropdown .dropdown-toggle');
-    await click('.card .dropdown .dropdown-menu button');
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-menu button');
 
     assert.ok(this.element.querySelector('.app-overlay').textContent.trim().startsWith('Order printed successfully'));
     assert.expect(4);
@@ -155,8 +155,8 @@ module('Acceptance | orders/eat-out', function(hooks) {
     });
 
     await visit('/orders/eat-out');
-    await click('.card .dropdown .dropdown-toggle');
-    await click('.card .dropdown .dropdown-menu button:nth-child(2)');
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-menu button:nth-child(2)');
 
     assert.ok(this.element.querySelector('.app-overlay').textContent.trim().startsWith('Order printed successfully'));
     assert.expect(4);
@@ -169,10 +169,37 @@ module('Acceptance | orders/eat-out', function(hooks) {
     });
 
     await visit('/orders/eat-out');
-    await click('.card .dropdown .dropdown-toggle');
-    await click('.card .dropdown .dropdown-menu button:nth-child(2)');
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-menu button:nth-child(2)');
 
     assert.strictEqual(this.element.querySelector('.app-overlay h2').textContent.trim(), 'Order failed to print');
     assert.ok(this.element.querySelector('.app-overlay').textContent.trim().includes('Error message for print failure'));
+  });
+
+  test('updating payment method', async function(assert) {
+    this.server.loadFixtures();
+
+    await visit('/orders/eat-out');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
+
+    await click('[test-id="order-card-payment-info"]');
+    await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(1)');
+
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £14.95');
+  });
+
+  test('updating payment method failure', async function(assert) {
+    this.server.loadFixtures();
+    this.server.patch('/order/eat-outs/:id', () => {
+      return new Response(500, {}, { errors: [{ detail: 'Update payment method failure reason' }]});
+    });
+
+    await visit('/orders/eat-out');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
+
+    await click('[test-id="order-card-payment-info"]');
+    await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(1)');
+
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
   });
 });

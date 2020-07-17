@@ -7,14 +7,8 @@ import { getModelName } from './../helpers/get-model-name';
 import { validate as validateDelivery } from './../models/customer/delivery';
 import { validate as validateOnline } from './../models/customer/online';
 import { validate as validateTakeaway } from './../models/customer/take-away';
+import { PAYMENT_METHODS } from './../models/payment-method';
 import { cancel, debounce } from '@ember/runloop';
-
-const PAYMENT_METHODS = {
-  'NOT PAID': null,
-  CASH: 'CASH',
-  CARD: 'CARD',
-  ONLINE: 'ONLINE'
-};
 
 const VALIDATE_CUSTOMER_FN_MAP = {
   'customer/delivery': function(customer) {

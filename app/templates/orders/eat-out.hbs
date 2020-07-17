@@ -16,27 +16,21 @@
           <div>Cash</div>
           <div>Card</div>
           <div>Online</div>
-          {{#if this.notPaidOrders}}
-            <div>Not paid</div>
-          {{/if}}
+          <div>Not paid</div>
           <div>Total</div>
         </div>
         <div class="d-flex flex-column align-items-end mr-3">
           <div>{{this.cashOrders.length}}</div>
           <div>{{this.cardOrders.length}}</div>
           <div>{{this.onlinePaymentOrders.length}}</div>
-          {{#if this.notPaidOrders}}
-            <div>{{this.notPaidOrders.length}}</div>
-          {{/if}}
+          <div>{{this.notPaidOrders.length}}</div>
           <div>{{this.model.length}}</div>
         </div>
         <div class="d-flex flex-column align-items-end">
           <div>{{format-currency this.totalCash}}</div>
           <div>{{format-currency this.totalCard}}</div>
           <div>{{format-currency this.totalOnlinePayment}}</div>
-          {{#if this.notPaidOrders}}
-            <div>{{format-currency this.totalNotPaid}}</div>
-          {{/if}}
+          <div>{{format-currency this.totalNotPaid}}</div>
           <div>{{format-currency this.totalAll}}</div>
         </div>
       </div>

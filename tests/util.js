@@ -6,6 +6,10 @@ export function splitByNewline(textContent) {
 
 export class UIStub extends Service {
 
+  showToast(message) {
+    this.message = message;
+  }
+
   showConfirm(title, message, callback, btnClass, btnText) {
     this.title = title;
     this.message = message;
