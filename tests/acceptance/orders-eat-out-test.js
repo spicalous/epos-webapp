@@ -54,16 +54,15 @@ module('Acceptance | orders/eat-out', function(hooks) {
     await visit('/orders/eat-out');
     await click('button#order-summary-btn');
 
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(1)').textContent, '2', 'cash order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(2)').textContent, '2', 'card order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(3)').textContent, '2', 'online order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(4)').textContent, '2', 'not paid order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(5)').textContent, '8', 'total order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(1)').textContent, '57.45', 'cash order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(2)').textContent, '61.15', 'card order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(3)').textContent, '84.90', 'online order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(4)').textContent, '58.00', 'not paid total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(5)').textContent, '261.50', 'total order total');
+    assertOrderSummary(assert, this.element,
+      ['2', '57.45'],
+      ['2', '61.15'],
+      ['2', '84.90'],
+      ['2', '58.00'],
+      ['3', '70.50'],
+      ['3', '106.10'],
+      ['2', '84.90'],
+      ['8', '261.50']);
   });
 
   test('order summary is updated when order is edited', async function(assert) {
@@ -71,16 +70,15 @@ module('Acceptance | orders/eat-out', function(hooks) {
     await visit('/orders/eat-out');
     await click('button#order-summary-btn');
 
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(1)').textContent, '2', 'cash order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(2)').textContent, '2', 'card order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(3)').textContent, '2', 'online order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(4)').textContent, '2', 'not paid order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(5)').textContent, '8', 'total order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(1)').textContent, '57.45', 'cash order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(2)').textContent, '61.15', 'card order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(3)').textContent, '84.90', 'online order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(4)').textContent, '58.00', 'not paid total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(5)').textContent, '261.50', 'total order total');
+    assertOrderSummary(assert, this.element,
+      ['2', '57.45'],
+      ['2', '61.15'],
+      ['2', '84.90'],
+      ['2', '58.00'],
+      ['3', '70.50'],
+      ['3', '106.10'],
+      ['2', '84.90'],
+      ['8', '261.50']);
 
     await click('.card [test-id="order-card-edit"]');
     await click('.order-pad_left_bottom_menu .list-group-item');
@@ -88,16 +86,15 @@ module('Acceptance | orders/eat-out', function(hooks) {
     await click('.modal-footer .btn-success');
     await click('.app-overlay');
 
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(1)').textContent, '2', 'cash order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(2)').textContent, '2', 'card order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(3)').textContent, '2', 'online order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(4)').textContent, '2', 'not paid order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(5)').textContent, '8', 'total order count');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(1)').textContent, '57.45', 'cash order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(2)').textContent, '61.15', 'card order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(3)').textContent, '126.90', 'online order total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(4)').textContent, '58.00', 'not paid total');
-    assert.strictEqual(this.element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(5)').textContent, '303.50', 'total order total');
+    assertOrderSummary(assert, this.element,
+      ['2', '57.45'],
+      ['2', '61.15'],
+      ['2', '126.90'],
+      ['2', '58.00'],
+      ['3', '70.50'],
+      ['3', '106.10'],
+      ['2', '126.90'],
+      ['8', '303.50']);
   });
 
   test('all filters selected by default', async function(assert) {
@@ -202,4 +199,23 @@ module('Acceptance | orders/eat-out', function(hooks) {
 
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
   });
+
+  function assertOrderSummary(assert, element, cash, card, onlinePayment, notPaid, takeAway, delivery, onlineCustomer, all) {
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(1)').textContent, cash[0], 'cash order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(1)').textContent, cash[1], 'cash order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(2)').textContent, card[0], 'card order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(2)').textContent, card[1], 'card order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(3)').textContent, onlinePayment[0], 'online order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(3)').textContent, onlinePayment[1], 'online order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(4)').textContent, notPaid[0], 'not paid order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(4)').textContent, notPaid[1], 'not paid total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(6)').textContent, takeAway[0], 'customer take away order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(6)').textContent, takeAway[1], 'customer take away order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(7)').textContent, delivery[0], 'customer delivery order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(7)').textContent, delivery[1], 'customer delivery order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(8)').textContent, onlineCustomer[0], 'customer online order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(8)').textContent, onlineCustomer[1], 'customer online order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(10)').textContent, all[0], 'total order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(10)').textContent, all[1], 'total order total');
+  }
 });

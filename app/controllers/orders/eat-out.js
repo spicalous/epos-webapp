@@ -85,6 +85,21 @@ export default class OrdersEatOutController extends Controller {
     return this.notPaidOrders.reduce((prev, order) => prev + order.total, 0);
   }
 
+  @computed('takeawayOrders.@each.total')
+  get totalCustomerTakeawayOrders() {
+    return this.takeawayOrders.reduce((prev, order) => prev + order.total, 0);
+  }
+
+  @computed('deliveryOrders.@each.total')
+  get totalCustomerDeliveryOrders() {
+    return this.deliveryOrders.reduce((prev, order) => prev + order.total, 0);
+  }
+
+  @computed('onlineOrders.@each.total')
+  get totalCustomerOnlineOrders() {
+    return this.onlineOrders.reduce((prev, order) => prev + order.total, 0);
+  }
+
   @computed('model.@each.total')
   get totalAll() {
     return this.model.reduce((prev, order) => prev + order.total, 0);
