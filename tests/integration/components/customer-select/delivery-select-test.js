@@ -3,7 +3,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, render, waitFor, waitUntil } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { Response } from 'ember-cli-mirage';
 import { splitByNewline } from './../../../util';
 
 module('Integration | Component | customer-select/delivery-select', function(hooks) {
@@ -51,9 +50,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('app overlay shown when searching for delivery customer fails', async function(assert) {
-    this.server.get('/customer/deliveries', () => {
-      return new Response(500, {}, { errors: [{ detail: 'A failure reason' }]});
-    });
+    this.server.get('/customer/deliveries', () => ({ errors: [{ detail: 'A failure reason' }]}), 500);
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -98,9 +95,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
 
   test('road suggestion error does not display suggestions', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    this.server.get('/roads', () => {
-      return new Response(500, {}, { errors: [{ detail: 'A failure reason' }]});
-    });
+    this.server.get('/roads', () => ({ errors: [{ detail: 'A failure reason' }] }), 500);
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -113,9 +108,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
 
   test('postcode suggestion error does not display suggestions', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    this.server.get('/postcodes', () => {
-      return new Response(500, {}, { errors: [{ detail: 'A failure reason' }]});
-    });
+    this.server.get('/postcodes', () => ({ errors: [{ detail: 'A failure reason' }]}), 500);
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}

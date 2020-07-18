@@ -87,9 +87,7 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
 
   test('road suggestion error does not display suggestions', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    this.server.get('/roads', () => {
-      return new Response(500, {}, { errors: [{ detail: 'A failure reason' }]});
-    });
+    this.server.get('/roads', () => ({ errors: [{ detail: 'A failure reason' }]}), 500);
 
     await render(hbs`<Customer::DeliveryInput />`);
 
@@ -100,9 +98,7 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
 
   test('postcode suggestion error does not display suggestions', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    this.server.get('/postcodes', () => {
-      return new Response(500, {}, { errors: [{ detail: 'A failure reason' }]});
-    });
+    this.server.get('/postcodes', () => ({ errors: [{ detail: 'A failure reason' }]}), 500);
 
     await render(hbs`<Customer::DeliveryInput />`);
 

@@ -3,7 +3,6 @@ import { click, currentURL, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { splitByNewline } from './../util';
-import { Response } from 'ember-cli-mirage';
 
 module('Acceptance | order/eat-out', function(hooks) {
   setupApplicationTest(hooks);
@@ -122,9 +121,9 @@ module('Acceptance | order/eat-out', function(hooks) {
   });
 
   test('submitting order error shows overlay', async function(assert) {
-    this.server.patch('/order/eat-outs/:id', () => {
-      return new Response(500, {}, { errors: [{ detail: 'Error message for PATCH order/eatOuts' }]});
-    });
+    this.server.patch('/order/eat-outs/:id', () => ({
+      errors: [{ detail: 'Error message for PATCH order/eatOuts' }]
+    }), 500);
 
     await visit('/orders/eat-out');
     await click('[test-id="order-card-edit"]');

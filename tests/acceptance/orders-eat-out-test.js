@@ -2,7 +2,6 @@ import { module, test } from 'qunit';
 import { currentURL, visit, click } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { Response } from 'ember-cli-mirage';
 
 module('Acceptance | orders/eat-out', function(hooks) {
   setupApplicationTest(hooks);
@@ -161,9 +160,9 @@ module('Acceptance | orders/eat-out', function(hooks) {
 
   test('failing print shows error message', async function(assert) {
     this.server.loadFixtures();
-    this.server.get('/printer/order/:orderType/:receiptType/:orderId', () => {
-      return new Response(500, {}, { errors: [{ detail: 'Error message for print failure' }]});
-    });
+    this.server.get('/printer/order/:orderType/:receiptType/:orderId', () => ({
+      errors: [{ detail: 'Error message for print failure' }]
+    }), 500);
 
     await visit('/orders/eat-out');
     await click('.card .row .dropdown .dropdown-toggle');
@@ -187,9 +186,9 @@ module('Acceptance | orders/eat-out', function(hooks) {
 
   test('updating payment method failure', async function(assert) {
     this.server.loadFixtures();
-    this.server.patch('/order/eat-outs/:id', () => {
-      return new Response(500, {}, { errors: [{ detail: 'Update payment method failure reason' }]});
-    });
+    this.server.patch('/order/eat-outs/:id', () => ({
+      errors: [{ detail: 'Update payment method failure reason' }]
+    }), 500);
 
     await visit('/orders/eat-out');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');

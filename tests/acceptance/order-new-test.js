@@ -2,7 +2,6 @@ import { module, test } from 'qunit';
 import { currentURL, visit, click, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { Response } from 'ember-cli-mirage';
 import { splitByNewline } from './../util';
 
 const CUSTOMER_TAKEAWAY_DROPDOWN = '.order-pad_right_customer .dropdown > .dropdown-menu > button:nth-child(1)';
@@ -75,9 +74,9 @@ module('Acceptance | order/new', function(hooks) {
   });
 
   test('saving new delivery customer fails', async function(assert) {
-    this.server.post('/customer/deliveries', () => {
-      return new Response(500, {}, { errors: [{ detail: 'Error message for customer delivery save failure' }]});
-    });
+    this.server.post('/customer/deliveries', () => ({
+      errors: [{ detail: 'Error message for customer delivery save failure' }]
+    }), 500);
 
     await visit('/order/new');
     await selectCustomer(CUSTOMER_DELIVERY_DROPDOWN);
@@ -160,9 +159,9 @@ module('Acceptance | order/new', function(hooks) {
   });
 
   test('submitting order error shows overlay', async function(assert) {
-    this.server.post('/order/eat-outs', () => {
-      return new Response(500, {}, { errors: [{ detail: 'Error message for POST order/eatOuts' }]});
-    });
+    this.server.post('/order/eat-outs', () => ({
+      errors: [{ detail: 'Error message for POST order/eatOuts' }]
+    }), 500);
 
     await visit('/order/new');
     await click('.order-pad_left_bottom_menu .list-group-item');
@@ -180,9 +179,9 @@ module('Acceptance | order/new', function(hooks) {
   });
 
   test('modal displayed after dismissing overlay from submit error and resubmitting', async function(assert) {
-    this.server.post('/order/eat-outs', () => {
-      return new Response(500, {}, { errors: [{ detail: 'Error message for POST order/eatOuts' }]});
-    });
+    this.server.post('/order/eat-outs', () => ({
+      errors: [{ detail: 'Error message for POST order/eatOuts' }]
+    }), 500);
 
     await visit('/order/new');
     await click('.order-pad_left_bottom_menu .list-group-item');

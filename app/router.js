@@ -15,5 +15,6 @@ Router.map(function() {
     this.route('eat-in');
     this.route('eat-out');
   });
-  this.route('delivery-customer');
+  this.route('delivery-customer-tags');
+  this.route('delivery-customers');
 });

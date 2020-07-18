@@ -111,4 +111,5 @@ export default function() {
       });
     return collection;
   });
+  this.get('delivery-customer-tags');
 }

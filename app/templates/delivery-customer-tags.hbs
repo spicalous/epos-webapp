@@ -1,0 +1,22 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="flex-even">
+    <LinkTo @route="delivery-customers" @tagName="button" type="button" @class="btn btn-outline-light">
+      Back
+    </LinkTo>
+  </div>
+  <span class="navbar-brand d-flex flex-even justify-content-center">Delivery customer tags</span>
+  <span class="flex-even"></span>
+</nav>
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col col-sm-10">
+      <ul class="list-group">
+        {{#each @model as |tag|}}
+          <li class="list-group-item">
+            <Customer::DeliveryTag @tag={{tag}} />
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>

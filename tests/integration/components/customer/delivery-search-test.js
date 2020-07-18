@@ -52,9 +52,7 @@ module('Integration | Component | customer/delivery-search', function(hooks) {
   });
 
   test('error callback executed when searching for delivery customer fails', async function(assert) {
-    this.server.get('/customer/deliveries', () => {
-      return new Response(500, {}, { errors: [{ detail: 'A failure reason' }]});
-    });
+    this.server.get('/customer/deliveries', () => ({ errors: [{ detail: 'A failure reason' }]}), 500);
     this.set('onError', () => { assert.step('error callback'); });
     await render(hbs`<Customer::DeliverySearch @onCustomerSearchError={{this.onError}} as |cds| />`);
 

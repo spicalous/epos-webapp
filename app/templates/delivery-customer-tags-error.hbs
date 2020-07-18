@@ -1,0 +1,21 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="flex-even">
+    <LinkTo @route="delivery-customers" @tagName="button" type="button" @class="btn btn-outline-light">
+      Back
+    </LinkTo>
+  </div>
+  <span class="navbar-brand d-flex flex-even justify-content-center">Delivery customer tags</span>
+  <span class="flex-even"></span>
+</nav>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-12 mt-5">
+      Failed to load delivery customer tags
+    </div>
+    <div class="col-12 mt-3">
+      <LinkTo @route="delivery-customer-tags" @tagName="button" type="button" @class="btn btn-primary">
+        Retry
+      </LinkTo>
+    </div>
+  </div>
+</div>

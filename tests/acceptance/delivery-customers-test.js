@@ -2,10 +2,9 @@ import { module, test } from 'qunit';
 import { currentURL, fillIn, visit, click } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { Response } from 'ember-cli-mirage';
 import { splitByNewline } from './../util';
 
-module('Acceptance | delivery-customer', function(hooks) {
+module('Acceptance | delivery-customers', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -14,15 +13,21 @@ module('Acceptance | delivery-customer', function(hooks) {
   });
 
   test('pressing back routes to index', async function(assert) {
-    await visit('/delivery-customer');
+    await visit('/delivery-customers');
     await click('nav .btn-outline-light');
     assert.strictEqual(currentURL(), '/');
+  });
+
+  test('navigate to edit delivery customer tags', async function(assert) {
+    await visit('/delivery-customers');
+    await click('nav .flex-even:nth-child(3) .btn-outline-light');
+    assert.strictEqual(currentURL(), '/delivery-customer-tags');
   });
 
   test('searching for customers', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
 
-    await visit('/delivery-customer');
+    await visit('/delivery-customers');
     await fillIn('input[placeholder="Telephone"]', '020');
 
     assert.strictEqual(this.element.querySelectorAll('.card').length, 3);
@@ -30,11 +35,11 @@ module('Acceptance | delivery-customer', function(hooks) {
 
   test('deleting customer conflict error', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    this.server.del('/customer/deliveries/:id', () => {
-      return new Response(409, {}, {'errors':[{'status':'409','title':'Conflict','detail':'Cannot delete delivery customer. Customer is reference by order id=1'}]});
-    });
+    this.server.del('/customer/deliveries/:id', () => ({
+      'errors':[{'status':'409','title':'Conflict','detail':'Cannot delete delivery customer. Customer is reference by order id=1'}]
+    }), 409);
 
-    await visit('/delivery-customer');
+    await visit('/delivery-customers');
     await fillIn('input[placeholder="Telephone"]', '020');
 
     await click('.btn-danger');
@@ -47,11 +52,11 @@ module('Acceptance | delivery-customer', function(hooks) {
 
   test('deleting customer not found error', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    this.server.del('/customer/deliveries/:id', () => {
-      return new Response(404, {}, {'errors':[{'status':'404','title':'Not Found','detail':'Delivery customer id=1 does not exist'}]});
-    });
+    this.server.del('/customer/deliveries/:id', () => ({
+      'errors':[{'status':'404','title':'Not Found','detail':'Delivery customer id=1 does not exist'}]
+    }), 404);
 
-    await visit('/delivery-customer');
+    await visit('/delivery-customers');
     await fillIn('input[placeholder="Telephone"]', '020');
 
     await click('.btn-danger');
@@ -64,7 +69,7 @@ module('Acceptance | delivery-customer', function(hooks) {
 
   test('deleting customer', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    await visit('/delivery-customer');
+    await visit('/delivery-customers');
     await fillIn('input[placeholder="Telephone"]', '020');
 
     assert.strictEqual(this.element.querySelectorAll('.card').length, 3);
@@ -77,11 +82,11 @@ module('Acceptance | delivery-customer', function(hooks) {
 
   test('editing customer error show overlay', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    this.server.patch('/customer/deliveries/:id', () => {
-      return new Response(500, {}, {'errors':[{'status':'500','title':'Error Title','detail':'Error editing customer'}]});
-    });
+    this.server.patch('/customer/deliveries/:id', () => ({
+      'errors':[{'status':'500','title':'Error Title','detail':'Error editing customer'}]
+    }), 500);
 
-    await visit('/delivery-customer');
+    await visit('/delivery-customers');
     await fillIn('input[placeholder="Telephone"]', '020');
 
     await click('.btn-main-secondary');
@@ -95,7 +100,7 @@ module('Acceptance | delivery-customer', function(hooks) {
 
   test('editing customer', async function(assert) {
     this.server.loadFixtures('customer/deliveries');
-    await visit('/delivery-customer');
+    await visit('/delivery-customers');
     await fillIn('input[placeholder="Telephone"]', '020');
 
     let initial = splitByNewline(this.element.querySelector('.card-body p').textContent);

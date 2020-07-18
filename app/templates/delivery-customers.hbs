@@ -4,8 +4,12 @@
       Back
     </LinkTo>
   </div>
-  <span class="navbar-brand d-flex flex-even justify-content-center">Delivery customers</span>
-  <span class="flex-even"></span>
+  <span class="navbar-brand flex-even d-flex justify-content-center">Delivery customers</span>
+  <div class="flex-even d-flex justify-content-end">
+    <LinkTo @route="delivery-customer-tags" @tagName="button" type="button" @class="btn btn-outline-light">
+      Edit tags
+    </LinkTo>
+  </div>
 </nav>
 <div class="container">
   <Customer::DeliverySearch @onCustomerSearchError={{this.ui.showAppOverlay}} as |cds|>

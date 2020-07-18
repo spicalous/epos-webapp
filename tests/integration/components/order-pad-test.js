@@ -3,7 +3,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, render, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { Response } from 'ember-cli-mirage';
 import { splitByNewline } from './../../util';
 
 module('Integration | Component | order-pad', function(hooks) {
@@ -124,9 +123,9 @@ module('Integration | Component | order-pad', function(hooks) {
 
   test('saving new delivery customer fails', async function(assert) {
     this.set('order', this.owner.lookup('service:store').createRecord('order/eat-out'));
-    this.server.post('/customer/deliveries', () => {
-      return new Response(500, {}, { errors: [{ detail: 'Error message for customer delivery save failure' }]});
-    });
+    this.server.post('/customer/deliveries', () => ({
+      errors: [{ detail: 'Error message for customer delivery save failure' }]
+    }), 500);
 
     await render(hbs`<OrderPad @categories={{this.categories}}
                                @menuItems={{this.menuItems}}
