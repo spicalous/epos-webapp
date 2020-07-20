@@ -1,0 +1,28 @@
+<form novalidate>
+  <div class="form-row mb-3">
+    <div class="col">
+      <Form::Group class="mb-1" @validateOnDirty={{true}} @invalidFeedback={{this.invalidFeedBack}} as |fg|>
+        <fg.element @placeholder="Tag name" @value={{@name}} @pattern={{this.pattern}}/>
+      </Form::Group>
+    </div>
+    <div class="col-auto">
+      <div class="dropdown">
+        <button type="button" class="btn btn-main-secondary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+          <Customer::DeliveryTag class="text-capitalize" @tag={{hash name=@colour colour=@colour}} />
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          {{#each this.colours as |colour|}}
+            <button type="button" class="dropdown-item text-capitalize" {{on "click" (fn @onColour colour)}}>
+              <Customer::DeliveryTag @tag={{hash name=colour colour=colour}} />
+            </button>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="col-auto">
+      {{yield}}
+    </div>
+  </div>
+</form>

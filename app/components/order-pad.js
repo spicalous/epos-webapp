@@ -51,6 +51,7 @@ export default class OrderPadComponent extends Component {
   willDestroy() {
     cancel(this._resizeTimer);
     window.removeEventListener('resize', this.boundOnWindowResize);
+    super.willDestroy(...arguments);
   }
 
   _onWindowResize() {

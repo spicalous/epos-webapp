@@ -8,15 +8,35 @@
   <span class="flex-even"></span>
 </nav>
 <div class="container">
-  <div class="row justify-content-center mt-3">
-    <div class="col col-sm-10">
-      <ul class="list-group">
-        {{#each @model as |tag|}}
-          <li class="list-group-item">
-            <Customer::DeliveryTag @tag={{tag}} />
-          </li>
-        {{/each}}
-      </ul>
+  <div class="row mt-3">
+    <div class="col">
+      <Customer::DeliveryTagInput @name={{this.newTagName}}
+                                  @colour={{this.newTagColour}}
+                                  @onColour={{this.setNewTagColour}}>
+        {{#if this.canCreate}}
+          <button type="button" class="btn btn-primary" {{on "click" this.createDeliveryCustomerTag}}>
+            Create
+          </button>
+        {{else}}
+          <button type="button" class="btn btn-secondary" disabled>
+            Create
+          </button>
+        {{/if}}
+      </Customer::DeliveryTagInput>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col text-center">
+      <h3>Tags</h3>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      {{#each @model as |tag|}}
+        <Customer::DeliveryTagCard @tag={{tag}}
+                                   @onSave={{this.saveDeliveryCustomerTag}}
+                                   @onDelete={{this.deleteDeliveryCustomerTag}}/>
+      {{/each}}
     </div>
   </div>
 </div>

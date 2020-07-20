@@ -1,16 +1,6 @@
-{{#let
-    (if (eq @tag.colour "blue")
-        "badge-primary"
-        (if (eq @tag.colour "grey")
-            "badge-secondary"
-            (if (eq @tag.colour "green")
-                "badge-success"
-                (if (eq @tag.colour "red")
-                    "badge-danger"
-                    (if (eq @tag.colour "yellow")
-                        "badge-warning"
-                        (if (eq @tag.colour "teal")
-                            "badge-info"
-                            "badge-dark")))))) as |badgeClass|}}
-  <span class="badge {{badgeClass}}">{{@tag.name}}</span>
-{{/let}}
+<span class="badge {{this.badgeClass}}" ...attributes>
+  {{@tag.name}}
+  {{#if @onDelete}}
+    <span class="p-2"{{on "click" (fn @onDelete @tag)}} {{!-- template-lint-disable no-invalid-interactive --}}>&times;</span>
+  {{/if}}
+</span>

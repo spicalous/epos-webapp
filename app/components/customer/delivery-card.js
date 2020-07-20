@@ -46,8 +46,8 @@ export default class CustomerDeliveryCardComponent extends Component {
   }
 
   willDestroy() {
-    super.willDestroy(...arguments);
     this.args.customer.rollbackAttributes();
+    super.willDestroy(...arguments);
   }
 
 }

@@ -36,5 +36,6 @@ export default class ToastComponent extends Component {
     cancel(this._onShowCompleteTimer);
     cancel(this._onHideTimer);
     cancel(this._removeTimer);
+    super.willDestroy(...arguments);
   }
 }
