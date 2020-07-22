@@ -21,8 +21,10 @@
         </div>
       </div>
     </div>
-    <div class="col-auto">
-      {{yield}}
-    </div>
+    {{#if (has-block)}}
+      <div class="col-auto">
+        {{yield}}
+      </div>
+    {{/if}}
   </div>
 </form>
