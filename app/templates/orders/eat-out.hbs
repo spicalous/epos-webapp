@@ -34,7 +34,7 @@
           <div class="mr-3">{{this.deliveryOrders.length}}</div>
           <div class="mr-3">{{this.onlineOrders.length}}</div>
           <hr class="w-100">
-          <div class="mr-3">{{this.model.length}}</div>
+          <div class="mr-3">{{this.model.orders.length}}</div>
         </div>
         <div class="d-flex flex-column align-items-end">
           <div>{{format-currency this.totalCash}}</div>
@@ -79,7 +79,7 @@
     <div class="row">
       <div class="col">
         {{#each this.ordersByTimestamp as |order|}}
-          <OrderCard @order={{order}} @onPrintOrder={{this.printOrder}}/>
+          <OrderCard @order={{order}} @onPrintOrder={{this.printOrder}} @deliveryCustomerTags={{this.model.deliveryCustomerTags}}/>
         {{/each}}
       </div>
     </div>

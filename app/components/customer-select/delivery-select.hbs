@@ -46,7 +46,10 @@
                   {{customer.telephone}}<br>
                   {{#if customer.addressOne}}{{customer.addressOne}}<br>{{/if}}
                   {{#if customer.road}}{{customer.road}}<br>{{/if}}
-                  {{customer.postcode}}
+                  {{customer.postcode}}<br>
+                  {{#each customer.deliveryCustomerTags as |tag|}}
+                    <Customer::DeliveryTag @tag={{tag}} />
+                  {{/each}}
                 </button>
               {{/each}}
             </div>

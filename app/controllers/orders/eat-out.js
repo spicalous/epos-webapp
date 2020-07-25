@@ -44,25 +44,25 @@ export default class OrdersEatOutController extends Controller {
   @tracked
   paymentTypesToShow = [PAYMENT_TYPE.NOT_PAID, PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
 
-  @filter('model', filterByCustomerType('customer/delivery'))
+  @filter('model.orders', filterByCustomerType('customer/delivery'))
   deliveryOrders;
 
-  @filter('model', filterByCustomerType('customer/take-away'))
+  @filter('model.orders', filterByCustomerType('customer/take-away'))
   takeawayOrders;
 
-  @filter('model', filterByCustomerType('customer/online'))
+  @filter('model.orders', filterByCustomerType('customer/online'))
   onlineOrders;
 
-  @filterBy('model', 'paymentMethod', 'CASH')
+  @filterBy('model.orders', 'paymentMethod', 'CASH')
   cashOrders;
 
-  @filterBy('model', 'paymentMethod', 'CARD')
+  @filterBy('model.orders', 'paymentMethod', 'CARD')
   cardOrders;
 
-  @filterBy('model', 'paymentMethod', 'ONLINE')
+  @filterBy('model.orders', 'paymentMethod', 'ONLINE')
   onlinePaymentOrders;
 
-  @filterBy('model', 'paymentMethod', null)
+  @filterBy('model.orders', 'paymentMethod', null)
   notPaidOrders;
 
   @computed('cashOrders.@each.total')
@@ -100,12 +100,12 @@ export default class OrdersEatOutController extends Controller {
     return this.onlineOrders.reduce((prev, order) => prev + order.total, 0);
   }
 
-  @computed('model.@each.total')
+  @computed('model.orders.@each.total')
   get totalAll() {
-    return this.model.reduce((prev, order) => prev + order.total, 0);
+    return this.model.orders.reduce((prev, order) => prev + order.total, 0);
   }
 
-  @computed('orderTypesToShow.[]', 'model.[]')
+  @computed('orderTypesToShow.[]', 'model.orders.[]')
   get filteredByOrderType() {
     let result = [];
     this.orderTypesToShow.forEach(orderType => {
@@ -122,7 +122,7 @@ export default class OrdersEatOutController extends Controller {
     return result;
   }
 
-  @computed('paymentTypesToShow.[]', 'model.@each.paymentMethod')
+  @computed('paymentTypesToShow.[]', 'model.orders.@each.paymentMethod')
   get filteredByPaymentType() {
     let result = [];
     this.paymentTypesToShow.forEach(paymentType => {

@@ -12,6 +12,10 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
   hooks.beforeEach(function() {
     this.server.db.emptyData();
     this.set('emptyFn', function() {});
+    this.loadCustomersAndTagsFixtures = () => {
+      this.server.loadFixtures('customer/deliveries');
+      this.server.loadFixtures('delivery-customer-tags');
+    };
   });
 
   test('it renders', async function(assert) {
@@ -60,7 +64,7 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
   });
 
   test('road suggestions', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<Customer::DeliveryInput />`);
 
@@ -72,21 +76,22 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
   });
 
   test('postcode suggestions', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<Customer::DeliveryInput />`);
 
     await fillIn('input[placeholder="Postcode"]', 'AB');
 
     let suggestions = splitByNewline(this.element.querySelector('.dropdown-menu').textContent);
-    assert.strictEqual(suggestions.length, 3);
+    assert.strictEqual(suggestions.length, 4);
     assert.strictEqual(suggestions[0], 'AB1 2CD');
     assert.strictEqual(suggestions[1], 'AB2 2CD');
     assert.strictEqual(suggestions[2], 'AB3 3CD');
+    assert.strictEqual(suggestions[3], 'AB4 4CD');
   });
 
   test('road suggestion error does not display suggestions', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.server.get('/roads', () => ({ errors: [{ detail: 'A failure reason' }]}), 500);
 
     await render(hbs`<Customer::DeliveryInput />`);
@@ -97,7 +102,7 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
   });
 
   test('postcode suggestion error does not display suggestions', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.server.get('/postcodes', () => ({ errors: [{ detail: 'A failure reason' }]}), 500);
 
     await render(hbs`<Customer::DeliveryInput />`);
@@ -108,7 +113,7 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
   });
 
   test('selecting road suggestion calls change callback', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.set('onChange', (telephone, addressOne, road, postcode) => { assert.step(`${telephone} ${addressOne} ${road} ${postcode}`); });
 
     await render(hbs`<Customer::DeliveryInput @onChange={{this.onChange}} as |cds| />`);
@@ -120,7 +125,7 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
   });
 
   test('selecting postcode suggestion searches customer', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.set('onChange', (telephone, addressOne, road, postcode) => { assert.step(`${telephone} ${addressOne} ${road} ${postcode}`); });
 
     await render(hbs`<Customer::DeliveryInput @onChange={{this.onChange}} as |cds| />`);

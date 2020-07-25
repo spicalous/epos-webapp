@@ -20,7 +20,7 @@ module('Acceptance | delivery-customer-tags', function(hooks) {
   test('displays all tags', async function(assert) {
     this.server.loadFixtures('deliveryCustomerTags');
     await visit('/delivery-customer-tags');
-    assert.strictEqual(this.element.querySelectorAll('.card').length, 1);
+    assert.strictEqual(this.element.querySelectorAll('.card').length, 2);
   });
 
   test('displays error and allows retry if server error', async function(assert) {
@@ -77,7 +77,7 @@ module('Acceptance | delivery-customer-tags', function(hooks) {
     await click('.card .dropdown-item:nth-child(3)');
     await click('.card .btn-primary');
 
-    assert.strictEqual(this.element.querySelectorAll('.card').length, 1);
+    assert.strictEqual(this.element.querySelectorAll('.card').length, 2);
     assert.strictEqual(this.element.querySelector('.card span').textContent.trim(), 'New tag name');
     assert.ok(this.element.querySelector('.card span.badge-success'));
   });
@@ -93,7 +93,7 @@ module('Acceptance | delivery-customer-tags', function(hooks) {
 
     assert.strictEqual(this.element.querySelector('.app-overlay h2').textContent.trim(), 'Failed to save delivery customer tag :(');
     assert.ok(this.element.querySelector('.app-overlay').textContent.trim().includes('Error message for tag edit'));
-    assert.strictEqual(this.element.querySelectorAll('.card').length, 1);
+    assert.strictEqual(this.element.querySelectorAll('.card').length, 2);
   });
 
   test('deleting delivery-customer-tag', async function(assert) {
@@ -104,7 +104,7 @@ module('Acceptance | delivery-customer-tags', function(hooks) {
     await click('.card .btn-danger');
     await click('.modal .btn-danger');
 
-    assert.strictEqual(this.element.querySelectorAll('.card').length, 0);
+    assert.strictEqual(this.element.querySelectorAll('.card').length, 1);
   });
 
   test('deleting delivery-customer-tag error shows app overlay', async function(assert) {
@@ -118,6 +118,6 @@ module('Acceptance | delivery-customer-tags', function(hooks) {
 
     assert.strictEqual(this.element.querySelector('.app-overlay h2').textContent.trim(), 'Failed to delete delivery customer tag :(');
     assert.ok(this.element.querySelector('.app-overlay').textContent.trim().includes('Error message for tag delete'));
-    assert.strictEqual(this.element.querySelectorAll('.card').length, 1);
+    assert.strictEqual(this.element.querySelectorAll('.card').length, 2);
   });
 });

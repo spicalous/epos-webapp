@@ -11,6 +11,10 @@ module('Integration | Component | customer/delivery-search', function(hooks) {
   hooks.beforeEach(function() {
     this.server.db.emptyData();
     this.set('emptyFn', function() {});
+    this.loadCustomersAndTagsFixtures = () => {
+      this.server.loadFixtures('customer/deliveries');
+      this.server.loadFixtures('delivery-customer-tags');
+    };
   });
 
   test('it renders', async function(assert) {
@@ -19,7 +23,7 @@ module('Integration | Component | customer/delivery-search', function(hooks) {
   });
 
   test('searching for delivery customer', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<Customer::DeliverySearch as |cds|>
                        {{#if cds.searching}}
@@ -62,7 +66,7 @@ module('Integration | Component | customer/delivery-search', function(hooks) {
   });
 
   test('selecting road suggestion searches customer and calls change callback', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.set('onChange', (telephone, addressOne, road, postcode) => { assert.step(`${telephone} ${addressOne} ${road} ${postcode}`); });
 
     await render(hbs`<Customer::DeliverySearch @onChange={{this.onChange}} as |cds|>
@@ -79,7 +83,7 @@ module('Integration | Component | customer/delivery-search', function(hooks) {
   });
 
   test('selecting postcode suggestion searches customer and calls change callback', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.set('onChange', (telephone, addressOne, road, postcode) => { assert.step(`${telephone} ${addressOne} ${road} ${postcode}`); });
 
     await render(hbs`<Customer::DeliverySearch @onChange={{this.onChange}} as |cds|>

@@ -8,7 +8,7 @@ export default class DeliveryCustomersController extends Controller {
 
   @action
   editCustomer(customer, onSuccessCallback) {
-    customer.save(customer)
+    customer.save()
       .then(() => {
         this.ui.showToast('Saved delivery customer record', 3900);
         onSuccessCallback();

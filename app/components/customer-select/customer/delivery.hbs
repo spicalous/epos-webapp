@@ -1,5 +1,8 @@
 <div class="text-center">
   {{@customer.telephone}}<br>
   {{@customer.address}}<br>
-  {{@customer.postcode}}
+  {{@customer.postcode}}<br>
+  {{#each @customer.deliveryCustomerTags as |tag|}}
+    <Customer::DeliveryTag @tag={{tag}} />
+  {{/each}}
 </div>

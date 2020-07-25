@@ -23,7 +23,7 @@ module('Acceptance | order/eat-out', function(hooks) {
 
     await click('[test-id="order-card-edit"]');
 
-    assert.strictEqual(currentURL(), '/order/eat-out/8');
+    assert.strictEqual(currentURL(), '/order/eat-out/9');
     assert.ok(this.element.querySelector('.order-pad'));
     assert.notOk(this.element.querySelector('.icon-delete-white'));
   });
@@ -48,7 +48,7 @@ module('Acceptance | order/eat-out', function(hooks) {
   });
 
   test('order with online customer', async function(assert) {
-    await visit('/order/eat-out/8');
+    await visit('/order/eat-out/7');
 
     assert.ok(this.element.querySelectorAll('.order-pad_right_customer input[placeholder="Order id"]'), 'order id input displayed');
     assert.strictEqual(this.element.querySelectorAll('.order-pad_right_customer input:disabled').length, 1);

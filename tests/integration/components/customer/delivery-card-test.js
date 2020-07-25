@@ -20,10 +20,32 @@ module('Integration | Component | customer/delivery-card', function(hooks) {
     await render(hbs`<Customer::DeliveryCard @customer={{this.customer}} />`);
 
     let text = splitByNewline(this.element.querySelector('.card-body p').textContent);
+    assert.strictEqual(text.length, 4);
     assert.strictEqual(text[0], 'telephone');
     assert.strictEqual(text[1], 'address one');
     assert.strictEqual(text[2], 'road');
     assert.strictEqual(text[3], 'postcode');
+  });
+
+  test('it renders delivery customer tags', async function(assert) {
+    let tag = this.owner.lookup('service:store').createRecord('delivery-customer-tag', { name: 'Tag name', colour: 'blue' });
+    this.set('customer', this.owner.lookup('service:store').createRecord('customer/delivery', {
+      telephone: 'telephone',
+      addressOne: 'address one',
+      road: 'road',
+      postcode: 'postcode',
+      deliveryCustomerTags: [tag]
+    }));
+
+    await render(hbs`<Customer::DeliveryCard @customer={{this.customer}} />`);
+
+    let text = splitByNewline(this.element.querySelector('.card-body p').textContent);
+    assert.strictEqual(text.length, 5);
+    assert.strictEqual(text[0], 'telephone');
+    assert.strictEqual(text[1], 'address one');
+    assert.strictEqual(text[2], 'road');
+    assert.strictEqual(text[3], 'postcode');
+    assert.strictEqual(text[4], 'Tag name');
   });
 
   test('clicking delete shows ui confirm with onDelete argument', async function(assert) {
@@ -76,6 +98,26 @@ module('Integration | Component | customer/delivery-card', function(hooks) {
     assert.notOk(this.element.querySelector('.btn-primary'));
   });
 
+  test('does not enable save if attributes tags have not changed', async function(assert) {
+    this.server.post('/customer/deliveries', 'customer/deliveries');
+    let tag = this.owner.lookup('service:store').createRecord('delivery-customer-tag', { name: 'Tag name', colour: 'blue' });
+    let customer = await this.owner.lookup('service:store')
+      .createRecord('customer/delivery', { telephone: '12345678901', addressOne: 'address one', road: 'road', postcode: 'postcode', deliveryCustomerTags: [tag] })
+      .save();
+    this.set('customer', customer);
+
+    await render(hbs`<Customer::DeliveryCard @customer={{this.customer}} />`);
+    await click('.btn-main-secondary');
+    assert.notOk(this.element.querySelector('.btn-primary'));
+
+    await click('.badge-primary > span'); // remove tag
+    assert.ok(this.element.querySelector('.btn-primary'));
+
+    await click('.dropdown-toggle');
+    await click('.dropdown-item'); // re add tag
+    assert.notOk(this.element.querySelector('.btn-primary'));
+  });
+
   test('cancel edit rolls back attributes and resets invalid message', async function(assert) {
     this.server.post('/customer/deliveries', 'customer/deliveries');
     let customer = await this.owner.lookup('service:store')
@@ -91,7 +133,7 @@ module('Integration | Component | customer/delivery-card', function(hooks) {
     await fillIn('input[placeholder="Road"]', 'a new road');
 
     assert.ok(this.element.querySelector('.alert'));
-    await click('.btn-main-secondary');
+    await click('.card-body > div:last-child .btn-main-secondary');
 
     assert.notOk(this.element.querySelector('.alert'));
     let text = splitByNewline(this.element.querySelector('.card-body p').textContent);
@@ -99,6 +141,27 @@ module('Integration | Component | customer/delivery-card', function(hooks) {
     assert.strictEqual(text[1], 'address one');
     assert.strictEqual(text[2], 'road');
     assert.strictEqual(text[3], 'postcode');
+  });
+
+  test('cancel edit restores old tags', async function(assert) {
+    this.server.post('/customer/deliveries', 'customer/deliveries');
+    let tag = this.owner.lookup('service:store').createRecord('delivery-customer-tag', { name: 'Tag name', colour: 'blue' });
+    let customer = await this.owner.lookup('service:store')
+      .createRecord('customer/delivery', { telephone: '12345678901', addressOne: 'address one', road: 'road', postcode: 'postcode', deliveryCustomerTags: [tag] })
+      .save();
+    this.set('customer', customer);
+
+    await render(hbs`<Customer::DeliveryCard @customer={{this.customer}} />`);
+    await click('.btn-main-secondary');
+    assert.notOk(this.element.querySelector('.btn-primary'));
+
+    assert.strictEqual(this.element.querySelectorAll('.badge').length, 2); // dropdown + card
+    await click('.badge-primary > span'); // remove tag
+    assert.strictEqual(this.element.querySelectorAll('.badge').length, 1); // only in dropdown
+    assert.ok(this.element.querySelector('.btn-primary'));
+
+    await click('.card-body > div:last-child .btn-main-secondary');
+    assert.ok(this.element.querySelector('.badge')); // still displayed after cancelling (dropdown no longer displayed)
   });
 
   test('editing customer calls ui confirm', async function(assert) {

@@ -48,6 +48,21 @@ export default class OrderCardComponent extends Component {
   }
 
   @action
+  addDeliveryCustomerTag(tag) {
+    let customer = this.args.order.get('customer');
+    customer.get('deliveryCustomerTags').pushObject(tag);
+    customer.save()
+      .then(() => this.ui.showToast('Added delivery customer tag to customer', 3900))
+      .catch(error => {
+        customer.get('deliveryCustomerTags').removeObject(tag);
+        console.error('Failed to add delivery-customer-tag to customer', error);
+        this.ui.showAppOverlay(
+          'Failed to add delivery customer tag to customer :(',
+          error && error.errors && error.errors[0] && error.errors[0].detail || error.message || 'Unknown error');
+      });
+  }
+
+  @action
   updatePaymentMethod(paymentMethod) {
     if (this.args.order.get('paymentMethod') !== paymentMethod) {
       this.args.order.set('paymentMethod', paymentMethod);

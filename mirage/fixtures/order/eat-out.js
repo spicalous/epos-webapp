@@ -65,6 +65,16 @@ export default [
   {
     id: 8,
     dateTime: '2016-03-09T00:45:47.000Z',
+    orderItemIds:[29],
+    customerId: { id: 7, type: 'customer/delivery'},
+    notes: 'This is an order note',
+    paymentMethod: null,
+    estimatedTime: 45
+  },
+  {
+    id: 9,
+    // Ensure this the latest order (order-eat-out tests rely on this being top of order list)
+    dateTime: '2016-03-10T17:00:29.000Z',
     orderItemIds:[27, 28],
     customerId: { id: 8, type: 'customer/online'},
     notes: '',

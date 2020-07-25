@@ -166,5 +166,11 @@ export default [
     menuItemId: 336,
     quantity: 4,
     editOptionIds:[]
+  },
+  {
+    id: 29,
+    menuItemId: 224,
+    quantity: 1,
+    editOptionIds:[]
   }
 ];

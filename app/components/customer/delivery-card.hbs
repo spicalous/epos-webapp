@@ -6,16 +6,37 @@
                                @road={{@customer.road}}
                                @postcode={{@customer.postcode}}
                                @onChange={{this.onChange}} />
-    {{#if this.invalidReason}}
-      <div class="row flex-shrink-0">
-        <div class="col-12 offset-sm-2 col-sm-10">
-          <div class="alert alert-danger" role="alert">
-            {{this.invalidReason}}
+      <div class="row mb-3 justify-content-end">
+        <div class="col-2">
+          <div class="dropdown">
+            <button type="button" class="btn btn-main-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">
+              Add tag
+            </button>
+            <div class="dropdown-menu dropdown-menu-left">
+              {{#each this.tags as |tag|}}
+                <button type="button" class="dropdown-item" {{on "click" (fn this.addTag tag)}}>
+                  <Customer::DeliveryTag @tag={{tag}} />
+                </button>
+              {{/each}}
+            </div>
           </div>
         </div>
+        <div class="col-10 d-flex">
+          {{#each @customer.deliveryCustomerTags as |tag|}}
+            <Customer::DeliveryTag class="align-self-center" @tag={{tag}} @onDelete={{this.deleteTag}} />
+          {{/each}}
+        </div>
       </div>
-    {{/if}}
-    <div class="d-flex justify-content-end">
+      {{#if this.invalidReason}}
+        <div class="row flex-shrink-0">
+          <div class="col-12 offset-sm-2 col-sm-10">
+            <div class="alert alert-danger" role="alert">
+              {{this.invalidReason}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
+      <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-main-secondary mr-3" {{on "click" this.cancelEditing}}>
           Cancel
         </button>
@@ -38,7 +59,10 @@
         {{@customer.telephone}}<br>
         {{#if @customer.addressOne}}{{@customer.addressOne}}<br>{{/if}}
         {{#if @customer.road}}{{@customer.road}}<br>{{/if}}
-        {{@customer.postcode}}
+        {{@customer.postcode}}<br>
+        {{#each @customer.deliveryCustomerTags as |tag|}}
+          <Customer::DeliveryTag @tag={{tag}} />
+        {{/each}}
       </p>
       <div class="d-flex justify-content-between">
         <button type="button" class="btn btn-main-secondary" {{on "click" this.startEditing}}>

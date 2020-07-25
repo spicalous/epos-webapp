@@ -1,14 +1,18 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
+import { hash } from 'rsvp';
 import Ember from 'ember';
 
 export default class OrdersEatOutRoute extends Route {
 
   model() {
-    return this.store.findAll('order/eat-out', {
-      reload: true,
-      include: 'orderItems.menuItem,orderItems.editOptions,customer'
+    return hash({
+      orders: this.store.findAll('order/eat-out', {
+        reload: true,
+        include: 'orderItems.menuItem,orderItems.editOptions,customer,customer.deliveryCustomerTags'
+      }),
+      deliveryCustomerTags: this.store.findAll('delivery-customer-tag')
     });
   }
 

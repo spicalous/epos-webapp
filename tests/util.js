@@ -10,6 +10,11 @@ export class UIStub extends Service {
     this.message = message;
   }
 
+  showAppOverlay(title, message) {
+    this.title = title;
+    this.message = message;
+  }
+
   showConfirm(title, message, callback, btnClass, btnText) {
     this.title = title;
     this.message = message;

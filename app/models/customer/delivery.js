@@ -1,4 +1,4 @@
-import { attr } from '@ember-data/model';
+import { attr, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import CustomerModel, { validate as validateTelephone } from './../customer';
 
@@ -6,6 +6,7 @@ export default class CustomerDeliveryModel extends CustomerModel {
   @attr('string', { defaultValue: '' }) addressOne;
   @attr('string', { defaultValue: '' }) road;
   @attr('string', { defaultValue: '' }) postcode;
+  @hasMany('delivery-customer-tag') deliveryCustomerTags;
 
   @computed('addressOne', 'road')
   get address() {

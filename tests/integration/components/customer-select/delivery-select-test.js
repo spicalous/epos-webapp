@@ -11,6 +11,10 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
 
   hooks.beforeEach(function() {
     this.server.db.emptyData();
+    this.loadCustomersAndTagsFixtures = () => {
+      this.server.loadFixtures('customer/deliveries');
+      this.server.loadFixtures('delivery-customer-tags');
+    };
     this.set('emptyFn', function() {});
   });
 
@@ -35,7 +39,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('searching for delivery customer', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -47,6 +51,18 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
     await fillInPromise;
 
     assert.ok(this.element.querySelectorAll('.list-group-item').length > 0);
+  });
+
+  test('displays delivery customer with tag', async function(assert) {
+    this.loadCustomersAndTagsFixtures();
+
+    await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
+                                                     @onSave={{this.emptyFn}}
+                                                     @onDeliveryCustomerSelected={{this.emptyFn}}/>`);
+
+    await fillIn('input[placeholder="Telephone"]', '020');
+
+    assert.ok(this.element.querySelectorAll('.list-group-item .badge').length > 0);
   });
 
   test('app overlay shown when searching for delivery customer fails', async function(assert) {
@@ -64,7 +80,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('road suggestions', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -78,7 +94,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('postcode suggestions', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -87,14 +103,15 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
     await fillIn('input[placeholder="Postcode"]', 'AB');
 
     let suggestions = splitByNewline(this.element.querySelector('.dropdown-menu').textContent);
-    assert.strictEqual(suggestions.length, 3);
+    assert.strictEqual(suggestions.length, 4);
     assert.strictEqual(suggestions[0], 'AB1 2CD');
     assert.strictEqual(suggestions[1], 'AB2 2CD');
     assert.strictEqual(suggestions[2], 'AB3 3CD');
+    assert.strictEqual(suggestions[3], 'AB4 4CD');
   });
 
   test('road suggestion error does not display suggestions', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.server.get('/roads', () => ({ errors: [{ detail: 'A failure reason' }] }), 500);
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
@@ -107,7 +124,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('postcode suggestion error does not display suggestions', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.server.get('/postcodes', () => ({ errors: [{ detail: 'A failure reason' }]}), 500);
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
@@ -120,7 +137,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('selecting road suggestion searches customer', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -133,7 +150,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('selecting postcode suggestion searches customer', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -154,7 +171,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('save button not displayed if searching is complete and customer is invalid', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -168,7 +185,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('save button not displayed if customer valid and before searching', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -184,7 +201,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('save button not displayed if customer is valid, but there are results', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -199,7 +216,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('save button displayed if customer is valid, and no results', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -214,7 +231,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('save button not displayed if searching', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
 
     await render(hbs`<CustomerSelect::DeliverySelect @onCancel={{this.emptyFn}}
                                                      @onSave={{this.emptyFn}}
@@ -235,7 +252,7 @@ module('Integration | Component | customer-select/delivery-select', function(hoo
   });
 
   test('pressing save button executes callback with customer info', async function(assert) {
-    this.server.loadFixtures('customer/deliveries');
+    this.loadCustomersAndTagsFixtures();
     this.set('onSave', ({ telephone, addressOne, road, postcode }) => {
       assert.strictEqual(telephone, '29384820485');
       assert.strictEqual(addressOne, 'addressOne');

@@ -37,7 +37,7 @@ export default class CustomerDeliverySearchComponent extends Component {
 
   _query(telephone, addressOne, road, postcode) {
     this.latestQueryTimestamp = Date.now();
-    this.store.query('customer/delivery', { telephone, addressOne, road, postcode })
+    this.store.query('customer/delivery', { telephone, addressOne, road, postcode, include: 'deliveryCustomerTags' })
       .then(this._handleCustomerDeliveryQuerySuccess.bind(this, this.latestQueryTimestamp))
       .catch(this._handleCustomerDeliveryQueryFailed.bind(this, this.latestQueryTimestamp));
   }

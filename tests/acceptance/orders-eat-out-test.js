@@ -23,13 +23,14 @@ module('Acceptance | orders/eat-out', function(hooks) {
 
     assert.ok(-5 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 5);
     this.element.querySelector('.card:nth-child(6)').scrollIntoView();
-    assert.ok(480 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 490);
+    console.log(this.element.parentElement.scrollTop);
+    assert.ok(695 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 705);
 
     await click('.card:nth-child(6) [test-id="order-card-edit"]');
     await click('.order-pad_right_actions .btn-danger');
     await click('.modal-footer .btn-primary');
 
-    assert.ok(480 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 490);
+    assert.ok(695 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 705);
   });
 
   test('show "No orders to display" when no orders', async function(assert) {
@@ -45,7 +46,7 @@ module('Acceptance | orders/eat-out', function(hooks) {
     this.server.loadFixtures();
     await visit('/orders/eat-out');
 
-    assert.strictEqual(this.element.querySelectorAll('.card').length, 8, 'correct number of orders displayed');
+    assert.strictEqual(this.element.querySelectorAll('.card').length, 9, 'correct number of orders displayed');
   });
 
   test('order summary', async function(assert) {
@@ -57,11 +58,11 @@ module('Acceptance | orders/eat-out', function(hooks) {
       ['2', '57.45'],
       ['2', '61.15'],
       ['2', '84.90'],
-      ['2', '58.00'],
+      ['3', '63.25'],
       ['3', '70.50'],
-      ['3', '106.10'],
+      ['4', '111.35'],
       ['2', '84.90'],
-      ['8', '261.50']);
+      ['9', '266.75']);
   });
 
   test('order summary is updated when order is edited', async function(assert) {
@@ -73,11 +74,11 @@ module('Acceptance | orders/eat-out', function(hooks) {
       ['2', '57.45'],
       ['2', '61.15'],
       ['2', '84.90'],
-      ['2', '58.00'],
+      ['3', '63.25'],
       ['3', '70.50'],
-      ['3', '106.10'],
+      ['4', '111.35'],
       ['2', '84.90'],
-      ['8', '261.50']);
+      ['9', '266.75']);
 
     await click('.card [test-id="order-card-edit"]');
     await click('.order-pad_left_bottom_menu .list-group-item');
@@ -89,11 +90,11 @@ module('Acceptance | orders/eat-out', function(hooks) {
       ['2', '57.45'],
       ['2', '61.15'],
       ['2', '126.90'],
-      ['2', '58.00'],
+      ['3', '63.25'],
       ['3', '70.50'],
-      ['3', '106.10'],
+      ['4', '111.35'],
       ['2', '126.90'],
-      ['8', '303.50']);
+      ['9', '308.75']);
   });
 
   test('all filters selected by default', async function(assert) {
@@ -131,7 +132,7 @@ module('Acceptance | orders/eat-out', function(hooks) {
     this.server.get('/printer/order/:orderType/:receiptType/:orderId', function(schema, request) {
       assert.strictEqual(request.params.orderType, 'eat-out');
       assert.strictEqual(request.params.receiptType, 'EAT_IN');
-      assert.strictEqual(request.params.orderId, '8');
+      assert.strictEqual(request.params.orderId, '9');
     });
 
     await visit('/orders/eat-out');
@@ -147,7 +148,7 @@ module('Acceptance | orders/eat-out', function(hooks) {
     this.server.get('/printer/order/:orderType/:receiptType/:orderId', function(schema, request) {
       assert.strictEqual(request.params.orderType, 'eat-out');
       assert.strictEqual(request.params.receiptType, 'DELIVERY');
-      assert.strictEqual(request.params.orderId, '8');
+      assert.strictEqual(request.params.orderId, '9');
     });
 
     await visit('/orders/eat-out');
@@ -197,6 +198,36 @@ module('Acceptance | orders/eat-out', function(hooks) {
     await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(1)');
 
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
+  });
+
+  test('adding tag', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-out');
+
+    assert.strictEqual(this.element.querySelectorAll('.card-body > .text-center > .badge').length, 1);
+
+    await click('.dropdown[test-id="add-tag-dropdown"] .dropdown-toggle');
+    await click('.dropdown[test-id="add-tag-dropdown"] .dropdown-item .badge-primary');
+
+    assert.strictEqual(this.element.querySelectorAll('.card-body > .text-center > .badge').length, 2);
+  });
+
+  test('adding tag failure', async function(assert) {
+    this.server.loadFixtures();
+    this.server.patch('/customer/deliveries/:id', () => ({
+      'errors':[{'status':'500','title':'Error Title','detail':'Error adding delivery customer tag'}]
+    }), 500);
+
+    await visit('/orders/eat-out');
+
+    assert.strictEqual(this.element.querySelectorAll('.card-body > .text-center > .badge').length, 1);
+
+    await click('.dropdown[test-id="add-tag-dropdown"] .dropdown-toggle');
+    await click('.dropdown[test-id="add-tag-dropdown"] .dropdown-item .badge-primary');
+
+    assert.strictEqual(this.element.querySelector('.app-overlay h2').textContent.trim(), 'Failed to add delivery customer tag to customer :(');
+    assert.ok(this.element.querySelector('.app-overlay').textContent.trim().includes('Error adding delivery customer tag'));
+    assert.strictEqual(this.element.querySelectorAll('.card-body > .text-center > .badge').length, 1);
   });
 
   function assertOrderSummary(assert, element, cash, card, onlinePayment, notPaid, takeAway, delivery, onlineCustomer, all) {
