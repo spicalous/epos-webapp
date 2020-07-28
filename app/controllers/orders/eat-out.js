@@ -105,7 +105,7 @@ export default class OrdersEatOutController extends Controller {
     return this.model.orders.reduce((prev, order) => prev + order.total, 0);
   }
 
-  @computed('orderTypesToShow.[]', 'model.orders.[]')
+  @computed('orderTypesToShow.[]', 'deliveryOrders.[]', 'takeawayOrders.[]', 'onlineOrders.[]')
   get filteredByOrderType() {
     let result = [];
     this.orderTypesToShow.forEach(orderType => {
@@ -122,7 +122,7 @@ export default class OrdersEatOutController extends Controller {
     return result;
   }
 
-  @computed('paymentTypesToShow.[]', 'model.orders.@each.paymentMethod')
+  @computed('paymentTypesToShow.[]', 'model.orders.@each.paymentMethod', 'cardOrders.[]', 'cashOrders.[]', 'notPaidOrders.[]', 'onlinePaymentOrders.[]')
   get filteredByPaymentType() {
     let result = [];
     this.paymentTypesToShow.forEach(paymentType => {

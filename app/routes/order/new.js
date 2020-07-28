@@ -9,7 +9,7 @@ export default class OrderNewRoute extends Route {
       menuItems: this.store.findAll('menu-item', { include: 'categories,editCategories' }),
       categories: this.store.peekAll('category'),
       editOptions: this.store.findAll('edit-option'),
-      order: this.get('store').createRecord('order/eat-out', {
+      order: this.store.createRecord('order/eat-out', {
         dateTime: new Date(),
         orderItems: A(),
         paymentMethod: null,

@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { click, currentURL, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { splitByNewline } from './../util';
+import { splitByNewline } from 'epos-webapp/tests/util';
 
 module('Acceptance | order/eat-out', function(hooks) {
   setupApplicationTest(hooks);

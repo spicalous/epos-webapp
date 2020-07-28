@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { click, fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { splitByNewline } from './../../../util';
+import { splitByNewline } from 'epos-webapp/tests/util';
 
 module('Integration | Component | customer/delivery-input', function(hooks) {
   setupRenderingTest(hooks);
@@ -44,10 +44,10 @@ module('Integration | Component | customer/delivery-input', function(hooks) {
     await fillIn('input[placeholder="Road"]', 'a new road');
 
     assert.verifySteps(['telephone value address one value a new road postcode value']);
-    assert.strictEqual(this.get('telephone'), 'telephone value');
-    assert.strictEqual(this.get('addressOne'), 'address one value');
-    assert.strictEqual(this.get('road'), 'road value');
-    assert.strictEqual(this.get('postcode'), 'postcode value');
+    assert.strictEqual(this.telephone, 'telephone value');
+    assert.strictEqual(this.addressOne, 'address one value');
+    assert.strictEqual(this.road, 'road value');
+    assert.strictEqual(this.postcode, 'postcode value');
   });
 
   test('change callback executed when any input changes', async function(assert) {

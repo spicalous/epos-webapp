@@ -6,7 +6,7 @@ export default class CustomerDeliveryTagCardComponent extends Component {
 
   @tracked editing = false;
 
-  @computed('args.tag.{name,colour}')
+  @computed('args.tag.{name,name.length,colour}')
   get canSave() {
     return this.args.tag.get('hasDirtyAttributes') && this.args.tag.name && this.args.tag.name.length < 101;
   }

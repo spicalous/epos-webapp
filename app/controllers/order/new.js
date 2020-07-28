@@ -24,7 +24,7 @@ export default class OrderNewController extends Controller {
 
   @action
   newOrder() {
-    this.set('model.order', this.get('store').createRecord('order/eat-out', {
+    this.set('model.order', this.store.createRecord('order/eat-out', {
       dateTime: new Date(),
       orderItems: A(),
       paymentMethod: null,

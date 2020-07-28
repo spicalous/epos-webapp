@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { currentURL, visit, click, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { splitByNewline } from './../util';
+import { splitByNewline } from 'epos-webapp/tests/util';
 
 const CUSTOMER_TAKEAWAY_DROPDOWN = '.order-pad_right_customer .dropdown > .dropdown-menu > button:nth-child(1)';
 const CUSTOMER_DELIVERY_DROPDOWN = '.order-pad_right_customer .dropdown > .dropdown-menu > button:nth-child(2)';

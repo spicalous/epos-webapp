@@ -13,12 +13,17 @@ export default class CustomerDeliveryCardComponent extends Component {
   @tracked editing = false;
   @tracked tags = null;
   @tracked invalidReason = '';
+  @tracked originalTags = null;
 
-  @computed('invalidReason', 'args.customer.{hasDirtyAttributes,deliveryCustomerTags.[]}')
+  @computed('originalTags', 'invalidReason', 'args.customer.{hasDirtyAttributes,deliveryCustomerTags.[]}')
   get canSave() {
-    let originalTagIds = this.originalTags.mapBy('id');
-    let currentTagIds = this.args.customer.get('deliveryCustomerTags').mapBy('id');
-    return !this.invalidReason && (this.args.customer.get('hasDirtyAttributes') || !arrayEquals(originalTagIds, currentTagIds));
+    let tagsChanged = false;
+    if (this.originalTags) {
+      let originalTagIds = this.originalTags.mapBy('id');
+      let currentTagIds = this.args.customer.get('deliveryCustomerTags').mapBy('id');
+      tagsChanged = !arrayEquals(originalTagIds, currentTagIds);
+    }
+    return !this.invalidReason && (this.args.customer.get('hasDirtyAttributes') || tagsChanged);
   }
 
   @action

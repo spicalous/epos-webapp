@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { UIStub } from './../../util';
+import { UIStub } from 'epos-webapp/tests/util';
 
 module('Integration | Component | button-with-confirm', function(hooks) {
   setupRenderingTest(hooks);

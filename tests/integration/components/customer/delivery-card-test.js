@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { UIStub, splitByNewline } from './../../../util';
+import { UIStub, splitByNewline } from 'epos-webapp/tests/util';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 
 module('Integration | Component | customer/delivery-card', function(hooks) {

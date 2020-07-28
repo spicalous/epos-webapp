@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { fillIn, render, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { splitByNewline } from './../../util';
+import { splitByNewline } from 'epos-webapp/tests/util';
 
 module('Integration | Component | order-pad', function(hooks) {
   setupRenderingTest(hooks);
@@ -301,8 +301,8 @@ module('Integration | Component | order-pad', function(hooks) {
     let store = this.owner.lookup('service:store');
     this.set('order', store.createRecord('order/eat-out', {
       orderItems: [
-        store.createRecord('order-item', { quantity: 1, menuItem: this.get('menuItems').objectAt(39), editOptions: [] }),
-        store.createRecord('order-item', { quantity: 1, menuItem: this.get('menuItems').objectAt(46), editOptions: [] })
+        store.createRecord('order-item', { quantity: 1, menuItem: this.menuItems.objectAt(39), editOptions: [] }),
+        store.createRecord('order-item', { quantity: 1, menuItem: this.menuItems.objectAt(46), editOptions: [] })
       ]
     }));
 
@@ -317,7 +317,7 @@ module('Integration | Component | order-pad', function(hooks) {
   test('decrementing order item when item is more than 1', async function(assert) {
     let store = this.owner.lookup('service:store');
     this.set('order', store.createRecord('order/eat-out', {
-      orderItems: [store.createRecord('order-item', { quantity: 2, menuItem: this.get('menuItems').objectAt(39), editOptions: [] })]
+      orderItems: [store.createRecord('order-item', { quantity: 2, menuItem: this.menuItems.objectAt(39), editOptions: [] })]
     }));
 
     await render(hbs`<OrderPad @categories={{this.categories}}
@@ -335,7 +335,7 @@ module('Integration | Component | order-pad', function(hooks) {
   test('removing item by decrementing', async function(assert) {
     let store = this.owner.lookup('service:store');
     this.set('order', store.createRecord('order/eat-out', {
-      orderItems: [store.createRecord('order-item', { quantity: 1, menuItem: this.get('menuItems').objectAt(39), editOptions: [] })]
+      orderItems: [store.createRecord('order-item', { quantity: 1, menuItem: this.menuItems.objectAt(39), editOptions: [] })]
     }));
 
     await render(hbs`<OrderPad @categories={{this.categories}}
@@ -528,7 +528,7 @@ module('Integration | Component | order-pad', function(hooks) {
     await click('.order-pad_right_actions .btn-success');
     await fillIn('.modal select', '25');
 
-    assert.strictEqual(this.get('order.estimatedTime'), '25');
+    assert.strictEqual(this.order.estimatedTime, '25');
   });
 
   test('selecting paymentMethod in confirm modal', async function(assert) {
@@ -545,7 +545,7 @@ module('Integration | Component | order-pad', function(hooks) {
     await click('.order-pad_right_actions .btn-success');
     await fillIn('.modal div:nth-child(2) select', 'CASH');
 
-    assert.strictEqual(this.get('order.paymentMethod'), 'CASH');
+    assert.strictEqual(this.order.paymentMethod, 'CASH');
   });
 
   test('NOT PAID is displayed by default', async function(assert) {
@@ -561,7 +561,7 @@ module('Integration | Component | order-pad', function(hooks) {
     await click('.order-pad_right_customer .dropdown > .dropdown-menu > button:nth-child(1)');
     await click('.order-pad_right_actions .btn-success');
 
-    assert.strictEqual(this.get('order.paymentMethod'), null);
+    assert.strictEqual(this.order.paymentMethod, null);
     assert.strictEqual(this.element.querySelector('.modal .col-6:nth-child(2) option[selected]').textContent, 'NOT PAID');
   });
 
@@ -579,11 +579,11 @@ module('Integration | Component | order-pad', function(hooks) {
     await click('.order-pad_right_actions .btn-success');
 
     await fillIn('.modal div:nth-child(2) select', 'CASH');
-    assert.strictEqual(this.get('order.paymentMethod'), 'CASH');
+    assert.strictEqual(this.order.paymentMethod, 'CASH');
     assert.strictEqual(this.element.querySelector('.modal .col-6:nth-child(2) option[selected]').textContent, 'CASH');
 
     await fillIn('.modal div:nth-child(2) select', 'NOT PAID');
-    assert.strictEqual(this.get('order.paymentMethod'), null);
+    assert.strictEqual(this.order.paymentMethod, null);
     assert.strictEqual(this.element.querySelector('.modal .col-6:nth-child(2) option[selected]').textContent, 'NOT PAID');
   });
 
@@ -601,7 +601,7 @@ module('Integration | Component | order-pad', function(hooks) {
     await click('.order-pad_right_actions .btn-success');
     await fillIn('.modal textarea', 'this is an order note');
 
-    assert.strictEqual(this.get('order.notes'), 'this is an order note');
+    assert.strictEqual(this.order.notes, 'this is an order note');
   });
 
 });
