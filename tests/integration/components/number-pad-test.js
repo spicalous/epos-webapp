@@ -22,7 +22,7 @@ module('Integration | Component | number-pad', function(hooks) {
     await render(hbs`<NumberPad @onChange={{this.onChange}} @value={{this.value}}/>`);
 
     await click(this.element.querySelectorAll('button')[0]);
-    assert.strictEqual(this.get('value'), '1', 'value updated');
+    assert.strictEqual(this.value, '1', 'value updated');
     assert.strictEqual(this.element.querySelector('div.text-center').textContent.trim(), '1', 'DOM updated');
   });
 
@@ -38,7 +38,7 @@ module('Integration | Component | number-pad', function(hooks) {
     await click(btns[2]);
     await click(btns[3]);
     await click(btns[4]);
-    assert.strictEqual(this.get('value'), '1234', 'respects max length');
+    assert.strictEqual(this.value, '1234', 'respects max length');
     assert.strictEqual(this.element.querySelector('div.text-center').textContent.trim(), '1234', 'DOM updated');
   });
 
@@ -50,7 +50,7 @@ module('Integration | Component | number-pad', function(hooks) {
 
     await click(this.element.querySelectorAll('button')[9]);
 
-    assert.strictEqual(this.get('value'), '', 'value is empty string');
+    assert.strictEqual(this.value, '', 'value is empty string');
     assert.strictEqual(this.element.querySelector('div.text-center').textContent.trim(), '', 'DOM is empty');
   });
 
@@ -62,7 +62,7 @@ module('Integration | Component | number-pad', function(hooks) {
 
     await click(this.element.querySelectorAll('button')[11]);
 
-    assert.strictEqual(this.get('value'), '', 'value is empty string');
+    assert.strictEqual(this.value, '', 'value is empty string');
     assert.strictEqual(this.element.querySelector('div.text-center').textContent.trim(), '', 'DOM is empty');
   });
 
@@ -75,7 +75,7 @@ module('Integration | Component | number-pad', function(hooks) {
 
     await click(this.element.querySelectorAll('button')[9]);
 
-    assert.strictEqual(this.get('value'), '123', 'one character removed');
+    assert.strictEqual(this.value, '123', 'one character removed');
     assert.strictEqual(this.element.querySelector('div.text-center').textContent.trim(), '123', 'DOM updated');
   });
 
@@ -88,7 +88,7 @@ module('Integration | Component | number-pad', function(hooks) {
 
     await click(this.element.querySelectorAll('button')[11]);
 
-    assert.strictEqual(this.get('value'), '', 'value is cleared');
+    assert.strictEqual(this.value, '', 'value is cleared');
     assert.strictEqual(this.element.querySelector('div.text-center').textContent.trim(), '', 'DOM is cleared');
   });
 });

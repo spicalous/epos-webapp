@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { UIStub } from './../../../util';
+import { UIStub } from 'epos-webapp/tests/util';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 
 module('Integration | Component | customer/delivery-tag-card', function(hooks) {

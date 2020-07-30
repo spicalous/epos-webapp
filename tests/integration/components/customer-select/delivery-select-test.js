@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, render, waitFor, waitUntil } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { splitByNewline } from './../../../util';
+import { splitByNewline } from 'epos-webapp/tests/util';
 
 module('Integration | Component | customer-select/delivery-select', function(hooks) {
   setupRenderingTest(hooks);

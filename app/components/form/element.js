@@ -6,7 +6,7 @@ export default class FormElementComponent extends Component {
 
   @tracked clickedOutside = false;
 
-  @computed('args.suggestions', 'clickedOutside')
+  @computed('args.suggestions.[]', 'clickedOutside')
   get showSuggestions() {
     return this.args.suggestions
       && this.args.suggestions.length > 0

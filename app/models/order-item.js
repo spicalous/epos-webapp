@@ -13,7 +13,7 @@ export default class OrderItemModel extends Model {
     }, 0);
   }
 
-  @computed('quantity', 'menuItem', 'editOptions.[]')
+  @computed('quantity', 'menuItem', 'editOptionTotal')
   get total() {
     return this.quantity * (this.menuItem.get('price') + this.editOptionTotal);
   }

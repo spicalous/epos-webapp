@@ -24,7 +24,7 @@ module('Integration | Component | form/select', function(hooks) {
 
     await fillIn('select', '20');
 
-    assert.strictEqual(this.get('selectedValue'), '20');
+    assert.strictEqual(this.selectedValue, '20');
     assert.strictEqual(this.element.querySelector('option:checked').textContent.trim(), '20');
   });
 });

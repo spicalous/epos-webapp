@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { splitByNewline } from './../../util';
+import { splitByNewline } from 'epos-webapp/tests/util';
 
 const DECREMENT_SELECTOR = 'button:nth-child(1)';
 const EDIT_SELECTOR = 'button:nth-child(2)';

@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { UIStub } from './../../util';
+import { UIStub } from 'epos-webapp/tests/util';
 
 const OPTIONS = { include: 'orderItems.menuItem,orderItems.editOptions,customer' };
 

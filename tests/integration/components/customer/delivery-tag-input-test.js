@@ -37,8 +37,8 @@ module('Integration | Component | customer/delivery-tag-input', function(hooks) 
     await click('.dropdown-toggle');
     await click('.dropdown-menu .dropdown-item:nth-child(3)');
 
-    assert.strictEqual(this.get('name'), 'My new tag name');
-    assert.strictEqual(this.get('colour'), 'green');
+    assert.strictEqual(this.name, 'My new tag name');
+    assert.strictEqual(this.colour, 'green');
     assert.strictEqual(this.element.querySelector('.dropdown-toggle span').textContent.trim(), 'green');
   });
 

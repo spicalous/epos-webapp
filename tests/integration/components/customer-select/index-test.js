@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { splitByNewline } from './../../../util';
+import { splitByNewline } from 'epos-webapp/tests/util';
 
 module('Integration | Component | customer-select/index', function(hooks) {
   setupRenderingTest(hooks);

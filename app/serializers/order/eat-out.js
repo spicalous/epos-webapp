@@ -2,6 +2,9 @@ import JSONAPISerializer from '@ember-data/serializer/json-api';
 import { EmbeddedRecordsMixin } from '@ember-data/serializer/rest';
 
 export default class OrderEatOutSerializer extends JSONAPISerializer.extend(EmbeddedRecordsMixin) {
+
+  isEmbeddedRecordsMixinCompatible = true;
+
   attrs = {
     orderItems: {
       serialize: 'records',
@@ -11,5 +14,6 @@ export default class OrderEatOutSerializer extends JSONAPISerializer.extend(Embe
       serialize: 'records',
       deserialize: 'ids'
     }
-  }
+  };
+
 }

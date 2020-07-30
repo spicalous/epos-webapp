@@ -12,12 +12,12 @@ export default class ModalEditOrderItemDialogComponent extends Component {
     this.selectedEditCategoryId = this.args.item.get('menuItem.editCategories.firstObject.id');
   }
 
-  @computed('selectedEditCategoryId')
+  @computed('args.editOptions', 'selectedEditCategoryId')
   get editOptionsForSelectedEditCategoryId() {
     return this.args.editOptions.filterBy('editCategoryId', parseInt(this.selectedEditCategoryId));
   }
 
-  @computed('editCategoryId')
+  @computed('args.{editOptions,item}', 'editCategoryId')
   get editOptionsGroupedByEditCategory() {
     return this.args.item.get('menuItem.editCategories').map(editCategory => {
       return {
