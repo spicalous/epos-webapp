@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { A } from '@ember/array';
-import { action } from '@ember/object';
-import { bool, sort } from '@ember/object/computed';
+import { action, computed } from '@ember/object';
+import {  sort } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
@@ -12,12 +12,21 @@ export default class OrdersEatInController extends Controller {
 
   @tracked showOrderConfirmModal = false;
   @tracked newTableName = '';
-  @bool('newTableName') validTableName;
+  @tracked newNumberOfGuests = '';
 
   sortByTime = ['dateTime:desc'];
 
   @sort('model', 'sortByTime')
   ordersByTimestamp;
+
+  @computed('newTableName', 'newNumberOfGuests')
+  get canCreate() {
+    if (this.newNumberOfGuests) {
+      let numerical = Number(this.newNumberOfGuests.trim());
+      return this.newTableName && !Number.isNaN(numerical) && numerical > 0;
+    }
+    return this.newTableName;
+  }
 
   @action
   toggleCreateModal() {
@@ -30,7 +39,8 @@ export default class OrdersEatInController extends Controller {
     let record = this.store.createRecord('order/eat-in', {
       dateTime: new Date(),
       orderItems: A(),
-      tableName: this.newTableName
+      tableName: this.newTableName,
+      numberOfGuests: this.newNumberOfGuests
     });
 
     record.save()

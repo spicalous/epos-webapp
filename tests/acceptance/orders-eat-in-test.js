@@ -42,7 +42,6 @@ module('Acceptance | orders/eat-in', function(hooks) {
     await click('.modal-footer .btn-success');
 
     assert.strictEqual(this.element.querySelectorAll('.card').length, 1);
-    assert.strictEqual(this.element.querySelector('.card-body').textContent.trim(), 'id: ABC1 name: table name');
   });
 
 });
