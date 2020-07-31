@@ -5,6 +5,7 @@ import { sort, intersect, filter, filterBy } from '@ember/object/computed';
 import { tracked } from '@glimmer/tracking';
 import { getModelName } from './../../helpers/get-model-name';
 import { inject as service } from '@ember/service';
+import { RECEIPT_TYPE } from './../../models/receipt-type';
 
 function filterByCustomerType(customerType) {
   return function(order) {
@@ -23,11 +24,6 @@ const PAYMENT_TYPE = {
   CASH: 'Cash',
   CARD: 'Card',
   ONLINE: 'Online payment'
-};
-
-const RECEIPT_TYPE = {
-  EAT_IN: 'EAT_IN',
-  DELIVERY: 'DELIVERY'
 };
 
 export default class OrdersEatOutController extends Controller {
