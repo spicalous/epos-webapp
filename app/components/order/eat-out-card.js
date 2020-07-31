@@ -1,8 +1,8 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { getModelName } from './../helpers/get-model-name';
-import { PAYMENT_METHODS } from './../models/payment-method';
+import { getModelName } from './../../helpers/get-model-name';
+import { PAYMENT_METHODS } from './../../models/payment-method';
 import { inject as service } from '@ember/service';
 
 const DEFAULT_DISPLAY_INFO_TAKE_AWAY = 'TAKE AWAY';
@@ -18,7 +18,7 @@ const ICON_CLASS_LOOKUP = {
   'customer/online': 'icon-customer-online'
 };
 
-export default class OrderCardComponent extends Component {
+export default class OrderEatOutCardComponent extends Component {
 
   paymentMethods = PAYMENT_METHODS;
 
