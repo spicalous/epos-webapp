@@ -1,8 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 import { getModelName } from './../../helpers/get-model-name';
-import { PAYMENT_METHODS } from './../../models/payment-method';
 import { inject as service } from '@ember/service';
 
 const DEFAULT_DISPLAY_INFO_TAKE_AWAY = 'TAKE AWAY';
@@ -20,11 +18,7 @@ const ICON_CLASS_LOOKUP = {
 
 export default class OrderEatOutCardComponent extends Component {
 
-  paymentMethods = PAYMENT_METHODS;
-
   @service ui;
-
-  @tracked showOrderItems = false;
 
   get customerModelName() {
     return getModelName([this.args.order.get('customer')]);
@@ -43,11 +37,6 @@ export default class OrderEatOutCardComponent extends Component {
   }
 
   @action
-  toggleShowOrderItems() {
-    this.showOrderItems = !this.showOrderItems;
-  }
-
-  @action
   addDeliveryCustomerTag(tag) {
     let customer = this.args.order.get('customer');
     customer.get('deliveryCustomerTags').pushObject(tag);
@@ -60,20 +49,6 @@ export default class OrderEatOutCardComponent extends Component {
           'Failed to add delivery customer tag to customer :(',
           error && error.errors && error.errors[0] && error.errors[0].detail || error.message || 'Unknown error');
       });
-  }
-
-  @action
-  updatePaymentMethod(paymentMethod) {
-    if (this.args.order.get('paymentMethod') !== paymentMethod) {
-      this.args.order.set('paymentMethod', paymentMethod);
-      this.args.order.save()
-        .then(() => this.ui.showToast('Updated payment method', 3000))
-        .catch((error) => {
-          console.error('Failed to update payment method', error);
-          this.args.order.rollbackAttributes();
-          this.ui.showToast('Failed to update payment method');
-        });
-    }
   }
 
 }

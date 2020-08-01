@@ -18,7 +18,7 @@ module('Acceptance | order/eat-out', function(hooks) {
     assert.strictEqual(element.querySelector('.order-pad_right_info div:nth-child(2)').textContent.trim(), expectedTotalText);
   }
 
-  test('navigating from orders/eat-out', async function(assert) {
+  test('editing orders/eat-out item', async function(assert) {
     await visit('/orders/eat-out');
 
     await click('[test-id="order-card-edit"]');
