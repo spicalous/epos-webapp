@@ -2,12 +2,16 @@
   <div class="col-12 col-sm-7 col-md-8 order-pad_left">
     <div class="row flex-shrink-0 my-2 d-sm-none">
       <div class="col">
-        <CustomerSelect @customer={{@order.customer}}
-                        @isEditable={{@isNewOrder}}
-                        @onTakeAwaySelected={{this.setNewTakeAwayCustomer}}
-                        @onDeliverySelected={{this.showDeliveryCustomerSelect}}
-                        @onOnlineSelected={{this.setNewOnlineCustomer}}
-                        @onRemoveCustomer={{this.removeCustomer}}/>
+        {{#if @isEatInOrder}}
+          <Order::EatInInfo @order={{@order}}/>
+        {{else}}
+          <CustomerSelect @customer={{@order.customer}}
+                          @isEditable={{@isNewOrder}}
+                          @onTakeAwaySelected={{this.setNewTakeAwayCustomer}}
+                          @onDeliverySelected={{this.showDeliveryCustomerSelect}}
+                          @onOnlineSelected={{this.setNewOnlineCustomer}}
+                          @onRemoveCustomer={{this.removeCustomer}}/>
+        {{/if}}
       </div>
     </div>
     <div class="row flex-shrink-0">
@@ -60,12 +64,16 @@
   <div class="d-none d-sm-flex col-sm-5 col-md-4 order-pad_right {{if this.showOrder "show-order"}}">
     <div class="row order-pad_right_customer mt-2">
       <div class="col">
-        <CustomerSelect @customer={{@order.customer}}
-                        @isEditable={{@isNewOrder}}
-                        @onTakeAwaySelected={{this.setNewTakeAwayCustomer}}
-                        @onDeliverySelected={{this.showDeliveryCustomerSelect}}
-                        @onOnlineSelected={{this.setNewOnlineCustomer}}
-                        @onRemoveCustomer={{this.removeCustomer}}/>
+        {{#if @isEatInOrder}}
+          <Order::EatInInfo @order={{@order}}/>
+        {{else}}
+          <CustomerSelect @customer={{@order.customer}}
+                          @isEditable={{@isNewOrder}}
+                          @onTakeAwaySelected={{this.setNewTakeAwayCustomer}}
+                          @onDeliverySelected={{this.showDeliveryCustomerSelect}}
+                          @onOnlineSelected={{this.setNewOnlineCustomer}}
+                          @onRemoveCustomer={{this.removeCustomer}}/>
+        {{/if}}
       </div>
     </div>
     <div class="row order-pad_right_items mt-2">

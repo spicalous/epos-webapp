@@ -16,7 +16,7 @@ export default class OrderEatOutController extends Controller {
   }
 
   @action
-  transitionToOrders() {
+  transitionToOrdersEatOut() {
     this.transitionToRoute('orders.eat-out');
   }
 }

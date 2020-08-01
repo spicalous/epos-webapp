@@ -359,6 +359,33 @@ module('Integration | Component | order-pad', function(hooks) {
     assert.strictEqual(this.element.querySelectorAll('.order-pad_right_actions button').length, 1);
   });
 
+  test('empty customer and empty order items and isEatInOrder=true shows cancel submit buttons', async function(assert) {
+    this.set('order', this.owner.lookup('service:store').createRecord('order/eat-in'));
+
+    await render(hbs`<OrderPad @categories={{this.categories}}
+                               @menuItems={{this.menuItems}}
+                               @order={{this.order}}
+                               @isEatInOrder={{true}}/>`);
+
+    assert.strictEqual(this.element.querySelector('.order-pad_right_actions .btn-danger').textContent.trim(), 'Cancel', 'Cancel button displayed');
+    assert.strictEqual(this.element.querySelector('.order-pad_right_actions .btn-secondary:disabled').textContent.trim(), 'Submit', 'Submit button displayed');
+  });
+
+  test('displays eat-in order info', async function(assert) {
+    this.set('order', this.owner.lookup('service:store').createRecord('order/eat-in', { tableId: 'TABLEID', tableName: 'Table 1', numberOfGuests: 2 }));
+
+    await render(hbs`<OrderPad @categories={{this.categories}}
+                               @menuItems={{this.menuItems}}
+                               @order={{this.order}}
+                               @isEatInOrder={{true}}/>`);
+
+    let text = splitByNewline(this.element.querySelector('.order-pad_right_customer .col > div').textContent);
+    assert.strictEqual(text.length, 3);
+    assert.strictEqual(text[0], 'Id: TABLEID');
+    assert.strictEqual(text[1], 'Table 1');
+    assert.strictEqual(text[2], '2');
+  });
+
   test('customer and empty order items shows cancel button and disabled submit', async function(assert) {
     let store = this.owner.lookup('service:store');
     this.set('order', store.createRecord('order/eat-out', { customer: store.createRecord('customer/take-away') }));

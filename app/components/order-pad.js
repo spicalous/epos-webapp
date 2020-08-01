@@ -92,7 +92,11 @@ export default class OrderPadComponent extends Component {
     return this.args.order.get('paymentMethod') || 'NOT PAID';
   }
 
-  @empty('args.order.customer') noCustomer;
+  @computed('args.{order.customer,isEatInOrder}')
+  get noCustomer() {
+    return !this.args.isEatInOrder && !this.args.order.customer;
+  }
+
   @empty('args.order.orderItems') noOrderItems;
   @and('noCustomer', 'noOrderItems') emptyOrderPad;
 

@@ -10,10 +10,6 @@
     height: 32px;
   }
 
-  &-delete-white {
-    content: url('/assets/icons/delete-white.svg');
-  }
-
   &-customer {
 
     &-delivery {
@@ -27,6 +23,13 @@
     &-online {
       content: url('/assets/icons/customer-online.svg');
     }
+  }
 
+  &-delete-white {
+    content: url('/assets/icons/delete-white.svg');
+  }
+
+  &-users {
+    content: url('/assets/icons/users.svg');
   }
 }
