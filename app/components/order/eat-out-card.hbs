@@ -41,16 +41,18 @@
       {{#if @order.notes}}
         <div class="mb-3" test-id="order-list-item-notes">{{@order.notes}}</div>
       {{/if}}
-      <ul class="list-group mb-3">
-        {{#each @order.orderItems as |orderItem|}}
-          <li class="list-group-item">
-            {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
-            {{#each orderItem.editOptions as |editOption|}}
-              <div>{{editOption.name}}</div>
-            {{/each}}
-          </li>
-        {{/each}}
-      </ul>
+      {{#if @order.orderItems}}
+        <ul class="list-group mb-3">
+          {{#each @order.orderItems as |orderItem|}}
+            <li class="list-group-item">
+              {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
+              {{#each orderItem.editOptions as |editOption|}}
+                <div>{{editOption.name}}</div>
+              {{/each}}
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
     {{/if}}
     <div class="row">
       <div class="col-2 col-sm">
