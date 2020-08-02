@@ -16,13 +16,7 @@
     <div class="row mt-3">
       <div class="col">
         {{#each this.ordersByTimestamp as |order|}}
-          <div class="card mb-3">
-            <div class="card-body">
-              id: {{order.tableId}}<br>
-              name: {{order.tableName}}<br>
-              guests: {{order.numberOfGuests}}
-            </div>
-          </div>
+          <Order::EatInCard @order={{order}} @onPrintOrder={{this.printOrder}} />
         {{/each}}
       </div>
     </div>

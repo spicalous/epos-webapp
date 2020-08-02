@@ -4,6 +4,7 @@ import { action, computed } from '@ember/object';
 import {  sort } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { RECEIPT_TYPE } from './../../models/receipt-type';
 
 export default class OrdersEatInController extends Controller {
 
@@ -53,4 +54,36 @@ export default class OrdersEatInController extends Controller {
         record.unloadRecord();
       });
   }
+
+  @action
+  printOrder(orderId, orderType, receiptType) {
+    let namespace = this.store.adapterFor('application').get('namespace');
+    receiptType = receiptType || RECEIPT_TYPE.EAT_IN;
+
+    this.ui.showAppLoader('Printing receipt');
+
+    fetch(`/${namespace}/printer/${orderType}/${receiptType}/${orderId}`)
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((responseBody) => {
+            throw new Error(extractErrorMessageFromResponse(responseBody));
+          });
+        }
+      })
+      .then(() => {
+        this.ui.dismissAppLoader();
+        this.ui.showAppOverlay('Order printed successfully');
+      })
+      .catch(error => {
+        console.error('Failed to print order', error);
+        this.ui.dismissAppLoader();
+        this.ui.showAppOverlay('Order failed to print', error.message);
+      });
+  }
+}
+
+function extractErrorMessageFromResponse(response) {
+  return response && response.errors && response.errors[0] && response.errors[0].detail
+    ? response.errors[0].detail
+    : 'Unknown error';
 }

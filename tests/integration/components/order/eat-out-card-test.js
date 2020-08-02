@@ -47,9 +47,7 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
 
   test('formats date time', async function(assert) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
-
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.emptyFn}}/>`);
-
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.emptyFn}}/>`);
     assert.strictEqual(this.element.querySelector('.card-body > div small').textContent, '2016/03/09 - 12:34');
   });
 
@@ -59,7 +57,7 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
     this.set('order.customer', null);
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.emptyFn}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.emptyFn}}/>`);
 
     assert.ok(this.element.querySelector('.card-body > div .icon-customer-unknown'));
     assert.strictEqual(this.element.querySelector('.card-body > div > div:nth-child(2)').textContent.trim(), 'Unknown customer type');
@@ -94,7 +92,7 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
     this.set('order', await store.findRecord('order/eat-out', 1, OPTIONS));
     this.set('order.customer', store.createRecord('customer/delivery', { telephone: 'telephone', addressOne: 'address one', road: 'road', postcode: 'postcode' }));
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.emptyFn}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.emptyFn}}/>`);
 
     assert.strictEqual(this.element.querySelector('.dropdown[test-id="add-tag-dropdown"] .dropdown-toggle').textContent.trim(), 'Add tag');
   });
@@ -107,7 +105,7 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
     this.set('order.customer', customer);
     this.set('tags', [store.createRecord('delivery-customer-tag', { name: 'Tag name', colour: 'blue' })]);
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @deliveryCustomerTags={{this.tags}} @onPrintOrder={{this.emptyFn}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @deliveryCustomerTags={{this.tags}} @onPrintOrder={{this.emptyFn}}/>`);
     assert.strictEqual(this.element.querySelectorAll('.badge').length, 1); // only in dropdown menu
     await click('.dropdown[test-id="add-tag-dropdown"] .dropdown-toggle');
     await click('.dropdown[test-id="add-tag-dropdown"] .dropdown-item');
@@ -125,7 +123,7 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
     this.set('order.customer', customer);
     this.set('tags', [store.createRecord('delivery-customer-tag', { name: 'Tag name', colour: 'blue' })]);
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @deliveryCustomerTags={{this.tags}} @onPrintOrder={{this.emptyFn}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @deliveryCustomerTags={{this.tags}} @onPrintOrder={{this.emptyFn}}/>`);
     assert.strictEqual(this.element.querySelectorAll('.badge').length, 1); // only in dropdown menu
     await click('.dropdown[test-id="add-tag-dropdown"] .dropdown-toggle');
     await click('.dropdown[test-id="add-tag-dropdown"] .dropdown-item');
@@ -138,7 +136,7 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
   test('formats null payment type', async function(assert) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.emptyFn}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.emptyFn}}/>`);
 
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
   });
@@ -146,15 +144,47 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
   test('formats non null payment type', async function(assert) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 2, OPTIONS));
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.emptyFn}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.emptyFn}}/>`);
 
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CASH £26.85');
+  });
+
+  test('updating payment info failure', async function(assert) {
+    this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
+    this.server.patch('/order/eat-outs/:id', 500);
+
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.emptyFn}}/>`);
+
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
+
+    await click('[test-id="order-card-payment-info"]');
+    await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(2)');
+
+    const uiService = this.owner.lookup('service:ui');
+    assert.strictEqual(uiService.message, 'Failed to update payment method');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
+  });
+
+  test('updating payment info', async function(assert) {
+    this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
+    this.server.patch('/order/eat-outs/:id', 'order/eatOuts');
+
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.emptyFn}}/>`);
+
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
+
+    await click('[test-id="order-card-payment-info"]');
+    await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(2)');
+
+    const uiService = this.owner.lookup('service:ui');
+    assert.strictEqual(uiService.message, 'Updated payment method');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CASH £26.85');
   });
 
   test('showing order details', async function(assert) {
     this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.emptyFn}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.emptyFn}}/>`);
 
     await click('button.btn-block');
 
@@ -177,7 +207,7 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
       assert.strictEqual(receiptType, 'EAT_IN');
     });
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.printOrder}}/>`);
 
     await click('.row button.dropdown-toggle');
     await click('.row .dropdown-menu button:nth-child(1)');
@@ -192,43 +222,11 @@ module('Integration | Component | order/eat-out-card', function(hooks) {
       assert.strictEqual(receiptType, 'DELIVERY');
     });
 
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.printOrder}}/>`);
+    await render(hbs`<Order::EatOutCard @order={{this.order}} @onPrintOrder={{this.printOrder}}/>`);
 
     await click('.row button.dropdown-toggle');
     await click('.row .dropdown-menu button:nth-child(2)');
     assert.expect(3);
-  });
-
-  test('updating payment info failure', async function(assert) {
-    this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
-    this.server.patch('/order/eat-outs/:id', 500);
-
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.emptyFn}}/>`);
-
-    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
-
-    await click('[test-id="order-card-payment-info"]');
-    await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(2)');
-
-    const uiService = this.owner.lookup('service:ui');
-    assert.strictEqual(uiService.message, 'Failed to update payment method');
-    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
-  });
-
-  test('updating payment info', async function(assert) {
-    this.set('order', await this.owner.lookup('service:store').findRecord('order/eat-out', 1, OPTIONS));
-    this.server.patch('/order/eat-outs/:id', 'order/eatOuts');
-
-    await render(hbs`<Order::EatOutCard @order={{order}} @onPrintOrder={{this.emptyFn}}/>`);
-
-    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £26.85');
-
-    await click('[test-id="order-card-payment-info"]');
-    await click('[test-id="order-card-payment-info"] + div.dropdown-menu button:nth-child(2)');
-
-    const uiService = this.owner.lookup('service:ui');
-    assert.strictEqual(uiService.message, 'Updated payment method');
-    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CASH £26.85');
   });
 
   function mockOrderItem(quantity, menuItem, editOptions) {

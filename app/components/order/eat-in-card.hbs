@@ -1,0 +1,18 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="d-flex">
+      <div class="flex-even">
+      </div>
+      <div class="flex-fill mb-3">
+        <Order::EatInInfo @order={{@order}}/>
+      </div>
+      <div class="flex-even d-flex justify-content-end">
+        <small>{{format-date-time @order.dateTime}}</small>
+      </div>
+    </div>
+    <div class="text-center mb-3">
+      <Order::PaymentMethodUpdateButton @order={{@order}}/>
+    </div>
+    <Order::DetailsActions @order={{@order}} @editRoute="order.eat-in" @onPrintOrder={{@onPrintOrder}}/>
+  </div>
+</div>

@@ -100,8 +100,12 @@ export default class OrderPadComponent extends Component {
   @empty('args.order.orderItems') noOrderItems;
   @and('noCustomer', 'noOrderItems') emptyOrderPad;
 
-  @computed('args.order.customer.{telephone,addressOne,road,postcode}')
+  @computed('args.isEatInOrder', 'args.order.customer.{telephone,addressOne,road,postcode}')
   get validCustomer() {
+    if (this.args.isEatInOrder) {
+      return true;
+    }
+
     let modelName = getModelName([this.args.order.get('customer')]);
     let validateFn = VALIDATE_CUSTOMER_FN_MAP[modelName];
 
