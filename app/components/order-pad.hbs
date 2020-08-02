@@ -2,7 +2,7 @@
   <div class="col-12 col-sm-7 col-md-8 order-pad_left">
     <div class="row flex-shrink-0 my-2 d-sm-none">
       <div class="col">
-        {{#if @isEatInOrder}}
+        {{#if this.isEatInOrder}}
           <Order::EatInInfo @order={{@order}}/>
         {{else}}
           <CustomerSelect @customer={{@order.customer}}
@@ -64,7 +64,7 @@
   <div class="d-none d-sm-flex col-sm-5 col-md-4 order-pad_right {{if this.showOrder "show-order"}}">
     <div class="row order-pad_right_customer mt-2">
       <div class="col">
-        {{#if @isEatInOrder}}
+        {{#if this.isEatInOrder}}
           <Order::EatInInfo @order={{@order}}/>
         {{else}}
           <CustomerSelect @customer={{@order.customer}}

@@ -359,13 +359,12 @@ module('Integration | Component | order-pad', function(hooks) {
     assert.strictEqual(this.element.querySelectorAll('.order-pad_right_actions button').length, 1);
   });
 
-  test('empty customer and empty order items and isEatInOrder=true shows cancel submit buttons', async function(assert) {
+  test('empty customer and empty order items shows cancel submit buttons for order/eat-in', async function(assert) {
     this.set('order', this.owner.lookup('service:store').createRecord('order/eat-in'));
 
     await render(hbs`<OrderPad @categories={{this.categories}}
                                @menuItems={{this.menuItems}}
-                               @order={{this.order}}
-                               @isEatInOrder={{true}}/>`);
+                               @order={{this.order}}/>`);
 
     assert.strictEqual(this.element.querySelector('.order-pad_right_actions .btn-danger').textContent.trim(), 'Cancel', 'Cancel button displayed');
     assert.strictEqual(this.element.querySelector('.order-pad_right_actions .btn-secondary:disabled').textContent.trim(), 'Submit', 'Submit button displayed');
@@ -376,8 +375,7 @@ module('Integration | Component | order-pad', function(hooks) {
 
     await render(hbs`<OrderPad @categories={{this.categories}}
                                @menuItems={{this.menuItems}}
-                               @order={{this.order}}
-                               @isEatInOrder={{true}}/>`);
+                               @order={{this.order}}/>`);
 
     let text = splitByNewline(this.element.querySelector('.order-pad_right_customer .col > div').textContent);
     assert.strictEqual(text.length, 3);
