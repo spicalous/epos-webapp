@@ -187,7 +187,9 @@
           </div>
           <div class="row text-center">
             <div class="col-6">
-              <div>Estimated time ({{format-time this.estimatedTime}})</div>
+              {{#if @order.estimatedTime}}
+                <div>Estimated time ({{format-time this.estimatedTime}})</div>
+              {{/if}}
             </div>
             <div class="col-6">
               <div>Payment method</div>
@@ -195,9 +197,11 @@
           </div>
           <div class="row mb-2 text-center">
             <div class="col-6">
-              <Form::Select @options={{this.estimatedTimes}}
-                            @selectedValue={{@order.estimatedTime}}
-                            @onChange={{this.onEstimatedTimeSelect}}/>
+              {{#if @order.estimatedTime}}
+                <Form::Select @options={{this.estimatedTimes}}
+                              @selectedValue={{@order.estimatedTime}}
+                              @onChange={{this.onEstimatedTimeSelect}}/>
+              {{/if}}
             </div>
             <div class="col-6">
               <Form::Select @options={{this.paymentMethods}}

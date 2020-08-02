@@ -44,6 +44,14 @@ module('Acceptance | order/eat-in', function(hooks) {
     assert.strictEqual(this.element.querySelector('.order-pad_right_actions .btn-secondary:disabled').textContent.trim(), 'Submit', 'Submit button displayed');
   });
 
+  test('estimated time select is not displayed with eat in order', async function(assert) {
+    await visit('/order/eat-in/1');
+    await click('.order-pad_left_bottom_menu .list-group-item');
+    await click('.order-pad_right_actions .btn-success');
+
+    assert.strictEqual(this.element.querySelectorAll('.modal select').length, 1);
+  });
+
   test('confirming cancel dialog does not save changes and transitions back to orders route', async function(assert) {
     await visit('/orders/eat-in');
     await click('.card [test-id="order-list-details-btn"]');
