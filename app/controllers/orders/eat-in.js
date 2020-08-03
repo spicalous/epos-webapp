@@ -47,6 +47,7 @@ export default class OrdersEatInController extends Controller {
     record.save()
       .then(() => {
         this.newTableName = '';
+        this.newNumberOfGuests = '';
       })
       .catch(error => {
         console.error('Failed to create order/eat-in', error);
