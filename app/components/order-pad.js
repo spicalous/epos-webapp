@@ -92,12 +92,25 @@ export default class OrderPadComponent extends Component {
     return this.args.order.get('paymentMethod') || 'NOT PAID';
   }
 
-  @empty('args.order.customer') noCustomer;
+  @computed('args.order')
+  get isEatInOrder() {
+    return getModelName([this.args.order]) === 'order/eat-in';
+  }
+
+  @computed('isEatInOrder', 'args.order.customer')
+  get noCustomer() {
+    return !this.isEatInOrder && !this.args.order.customer;
+  }
+
   @empty('args.order.orderItems') noOrderItems;
   @and('noCustomer', 'noOrderItems') emptyOrderPad;
 
-  @computed('args.order.customer.{telephone,addressOne,road,postcode}')
+  @computed('isEatInOrder', 'args.order.customer.{telephone,addressOne,road,postcode}')
   get validCustomer() {
+    if (this.isEatInOrder) {
+      return true;
+    }
+
     let modelName = getModelName([this.args.order.get('customer')]);
     let validateFn = VALIDATE_CUSTOMER_FN_MAP[modelName];
 

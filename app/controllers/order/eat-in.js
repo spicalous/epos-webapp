@@ -11,12 +11,12 @@ export default class OrderEatOutController extends Controller {
   unloadStoreAndTransition() {
     this.store.unloadAll();
     next(this, function() {
-      this.transitionToRoute('orders.eat-out');
+      this.transitionToRoute('orders.eat-in');
     });
   }
 
   @action
-  transitionToOrdersEatOut() {
-    this.transitionToRoute('orders.eat-out');
+  transitionToOrdersEatIn() {
+    this.transitionToRoute('orders.eat-in');
   }
 }

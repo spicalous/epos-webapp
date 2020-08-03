@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('order', function() {
     this.route('new');
     this.route('eat-out', { path: '/eat-out/:eat_out_id' });
+    this.route('eat-in', { path: '/eat-in/:eat_in_id' });
   });
   this.route('orders', function() {
     this.route('eat-in');

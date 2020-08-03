@@ -20,17 +20,18 @@ module('Acceptance | orders/eat-out', function(hooks) {
   test('coming back to orders restores scroll position', async function(assert) {
     this.server.loadFixtures();
     await visit('/orders/eat-out');
+    this.element.parentElement.scrollTo(0,0); // reset before test
 
-    assert.ok(-5 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 5);
+    assert.strictEqual(this.element.parentElement.scrollTop, 0);
     this.element.querySelector('.card:nth-child(6)').scrollIntoView();
-    console.log(this.element.parentElement.scrollTop);
-    assert.ok(695 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 705);
+    assert.ok(695 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 715);
 
     await click('.card:nth-child(6) [test-id="order-card-edit"]');
     await click('.order-pad_right_actions .btn-danger');
     await click('.modal-footer .btn-primary');
 
-    assert.ok(695 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 705);
+    assert.ok(695 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 715);
+    this.element.parentElement.scrollTo(0,0); // reset after test
   });
 
   test('show "No orders to display" when no orders', async function(assert) {

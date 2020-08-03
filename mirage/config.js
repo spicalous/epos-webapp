@@ -2,6 +2,31 @@ import { Collection } from 'ember-cli-mirage';
 
 let tableIdCounter = 1;
 
+function patchOrderHandler(modelName, schemaName) {
+  return function(schema, request) {
+    let attrs = this.normalizedRequestAttrs(modelName);
+    attrs.orderItemIds = [];
+    let body = JSON.parse(request.requestBody);
+    body.data['order-items'].forEach(item => {
+      let orderItemAttrs = {
+        quantity: item.data.attributes.quantity,
+        menuItemId: item.data.relationships['menu-item'].data.id,
+        editOptionIds: item.data.relationships['edit-options']
+          ? item.data.relationships['edit-options'].data.map(editOptionRelationship => editOptionRelationship.id)
+          : []
+      };
+      if (item.data.id) {
+        schema.orderItems.find(item.data.id).update(orderItemAttrs);
+        attrs.orderItemIds.push(item.data.id);
+      } else {
+        let orderItem = schema.orderItems.create(orderItemAttrs);
+        attrs.orderItemIds.push(orderItem.id);
+      }
+    });
+    return schema[schemaName].find(request.params.id).update(attrs);
+  };
+}
+
 export default function() {
   this.namespace = 'EPOSDataService/api';
   this.get('/settings');
@@ -11,6 +36,8 @@ export default function() {
   this.get('/edit-options');
   this.get('/menu-items');
   this.get('/order/eat-ins', 'order/eatIns');
+  this.get('/order/eat-ins/:id', 'order/eatIns');
+  this.patch('/order/eat-ins/:id', patchOrderHandler('order/eat-in', 'order/eatIns'));
   this.post('/order/eat-ins', function(schema) {
     let attrs = this.normalizedRequestAttrs('order/eat-in');
     attrs.tableId = 'ABC' + tableIdCounter++;
@@ -52,28 +79,7 @@ export default function() {
     }
     return schema['order/eatOuts'].create(attrs);
   });
-  this.patch('/order/eat-outs/:id', function(schema, request) {
-    let attrs = this.normalizedRequestAttrs('order/eat-out');
-    attrs.orderItemIds = [];
-    let body = JSON.parse(request.requestBody);
-    body.data['order-items'].forEach(item => {
-      let orderItemAttrs = {
-        quantity: item.data.attributes.quantity,
-        menuItemId: item.data.relationships['menu-item'].data.id,
-        editOptionIds: item.data.relationships['edit-options']
-          ? item.data.relationships['edit-options'].data.map(editOptionRelationship => editOptionRelationship.id)
-          : []
-      };
-      if (item.data.id) {
-        schema.orderItems.find(item.data.id).update(orderItemAttrs);
-        attrs.orderItemIds.push(item.data.id);
-      } else {
-        let orderItem = schema.orderItems.create(orderItemAttrs);
-        attrs.orderItemIds.push(orderItem.id);
-      }
-    });
-    return schema['order/eatOuts'].find(request.params.id).update(attrs);
-  });
+  this.patch('/order/eat-outs/:id', patchOrderHandler('order/eat-out', 'order/eatOuts'));
   this.get('/printer/order/:orderType/:receiptType/:orderId', { timing: 1000 });
   this.get('/customer/deliveries', (schema, request) => {
     let { telephone, addressOne, road, postcode } = request.queryParams;

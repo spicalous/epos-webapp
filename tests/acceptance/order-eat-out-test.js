@@ -18,7 +18,7 @@ module('Acceptance | order/eat-out', function(hooks) {
     assert.strictEqual(element.querySelector('.order-pad_right_info div:nth-child(2)').textContent.trim(), expectedTotalText);
   }
 
-  test('navigating from orders/eat-out', async function(assert) {
+  test('editing orders/eat-out item', async function(assert) {
     await visit('/orders/eat-out');
 
     await click('[test-id="order-card-edit"]');
@@ -53,6 +53,13 @@ module('Acceptance | order/eat-out', function(hooks) {
     assert.ok(this.element.querySelectorAll('.order-pad_right_customer input[placeholder="Order id"]'), 'order id input displayed');
     assert.strictEqual(this.element.querySelectorAll('.order-pad_right_customer input:disabled').length, 1);
     assert.notOk(this.element.querySelector('.icon-delete-white'));
+  });
+
+  test('estimated time select is displayed with eat out order', async function(assert) {
+    await visit('/order/eat-out/1');
+    await click('.order-pad_right_actions .btn-success');
+
+    assert.strictEqual(this.element.querySelectorAll('.modal select').length, 2);
   });
 
   test('confirming cancel dialog does not save changes and transitions back to orders route', async function(assert) {

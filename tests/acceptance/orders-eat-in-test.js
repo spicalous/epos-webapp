@@ -42,7 +42,32 @@ module('Acceptance | orders/eat-in', function(hooks) {
     await click('.modal-footer .btn-success');
 
     assert.strictEqual(this.element.querySelectorAll('.card').length, 1);
-    assert.strictEqual(this.element.querySelector('.card-body').textContent.trim(), 'id: ABC1 name: table name');
+  });
+
+  test('coming back to orders restores scroll position', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-in');
+    this.element.parentElement.scrollTo(0,0); // reset before test
+
+    assert.strictEqual(this.element.parentElement.scrollTop, 0);
+    this.element.querySelector('.card:nth-child(3)').scrollIntoView();
+    assert.ok(265 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 285);
+
+    await click('.card:nth-child(3) [test-id="order-card-edit"]');
+    await click('.order-pad_right_actions .btn-danger');
+    await click('.modal-footer .btn-primary');
+
+    assert.ok(265 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 285);
+    this.element.parentElement.scrollTo(0,0); // reset after test
+  });
+
+  test('show "No orders to display" when no orders', async function(assert) {
+    await visit('/orders/eat-in');
+
+    assert.strictEqual(
+      this.element.querySelector('.container-fluid > div:last-child').textContent.trim(),
+      'No orders to display',
+      'correct message displayed');
   });
 
 });

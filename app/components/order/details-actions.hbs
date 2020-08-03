@@ -1,0 +1,44 @@
+{{#if this.showOrderItems}}
+  {{#if @order.notes}}
+    <div class="mb-3" test-id="order-list-item-notes">{{@order.notes}}</div>
+  {{/if}}
+  {{#if @order.orderItems}}
+    <ul class="list-group mb-3">
+      {{#each @order.orderItems as |orderItem|}}
+        <li class="list-group-item">
+          {{orderItem.quantity}} x {{orderItem.menuItem.menuId}} {{orderItem.menuItem.name}}
+          {{#each orderItem.editOptions as |editOption|}}
+            <div>{{editOption.name}}</div>
+          {{/each}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+{{/if}}
+<div class="row">
+  <div class="col-2 col-sm">
+    <LinkTo @route={{@editRoute}} @model={{@order.id}} @tagName="button" type="button" test-id="order-card-edit" @class="btn btn-main-secondary">
+      Edit
+    </LinkTo>
+  </div>
+  <div class="offset-1 col-6 offset-sm-0 col-sm">
+    <button test-id="order-list-details-btn" type="button" class="btn btn-block btn-main-secondary" {{on "click" this.toggleShowOrderItems}}>
+      {{if this.showOrderItems "Hide details" "Show details"}}
+    </button>
+  </div>
+  <div class="offset-1 col-2 offset-sm-0 col-sm d-flex justify-content-end">
+    <div class="dropdown">
+      <button class="btn btn-main-secondary dropdown-toggle" type="button" id="order-{{@order.id}}-dropdown-print-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Print
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="order-{{@order.id}}-dropdown-print-btn">
+        <button type="button" class="dropdown-item" {{on "click" (fn @onPrintOrder @order.id (get-model-name @order) "EAT_IN")}}>
+          Print small
+        </button>
+        <button type="button" class="dropdown-item" {{on "click" (fn @onPrintOrder @order.id (get-model-name @order) "DELIVERY")}}>
+          Print large
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
