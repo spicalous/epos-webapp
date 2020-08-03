@@ -13,8 +13,8 @@ module('Integration | Component | order/eat-in-info', function(hooks) {
 
     let text = splitByNewline(this.element.textContent);
     assert.strictEqual(text.length, 3);
-    assert.strictEqual(text[0], 'Id: TABLEID');
-    assert.strictEqual(text[1], 'Table 1');
-    assert.strictEqual(text[2], '42');
+    assert.strictEqual(text[0], 'Table 1');
+    assert.strictEqual(text[1], '42');
+    assert.strictEqual(text[2], 'ID: TABLEID');
   });
 });

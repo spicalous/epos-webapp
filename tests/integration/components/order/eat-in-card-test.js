@@ -67,9 +67,9 @@ module('Integration | Component | order/eat-in-card', function(hooks) {
 
     let texts = splitByNewline(this.element.querySelector('.card-body .flex-fill > div').textContent);
     assert.strictEqual(texts.length, 3);
-    assert.strictEqual(texts[0], 'Id: TABLEID');
-    assert.strictEqual(texts[1], 'Table name');
-    assert.strictEqual(texts[2], '4');
+    assert.strictEqual(texts[0], 'Table name');
+    assert.strictEqual(texts[1], '4');
+    assert.strictEqual(texts[2], 'ID: TABLEID');
   });
 
   test('formats payment type', async function(assert) {

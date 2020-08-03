@@ -32,9 +32,9 @@ module('Acceptance | order/eat-in', function(hooks) {
 
     let text = splitByNewline(this.element.querySelector('.order-pad_right_customer .col > div').textContent);
     assert.strictEqual(text.length, 3);
-    assert.strictEqual(text[0], 'Id: AAA111');
-    assert.strictEqual(text[1], 'Table 1');
-    assert.strictEqual(text[2], '2');
+    assert.strictEqual(text[0], 'Table 1');
+    assert.strictEqual(text[1], '2');
+    assert.strictEqual(text[2], 'ID: AAA111');
   });
 
   test('does not show back button when no order items', async function(assert) {
@@ -142,9 +142,9 @@ module('Acceptance | order/eat-in', function(hooks) {
     assert.strictEqual(this.element.querySelectorAll('.order-pad_right_items .list-group-item').length, 1);
     let text = splitByNewline(this.element.querySelector('.order-pad_right_customer .col > div').textContent);
     assert.strictEqual(text.length, 3);
-    assert.strictEqual(text[0], 'Id: AAA111');
-    assert.strictEqual(text[1], 'Table 1');
-    assert.strictEqual(text[2], '2');
+    assert.strictEqual(text[0], 'Table 1');
+    assert.strictEqual(text[1], '2');
+    assert.strictEqual(text[2], 'ID: AAA111');
     assertOrderInfo(assert, this.element, '1 item', '£42.00');
   });
 

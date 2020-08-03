@@ -379,9 +379,9 @@ module('Integration | Component | order-pad', function(hooks) {
 
     let text = splitByNewline(this.element.querySelector('.order-pad_right_customer .col > div').textContent);
     assert.strictEqual(text.length, 3);
-    assert.strictEqual(text[0], 'Id: TABLEID');
-    assert.strictEqual(text[1], 'Table 1');
-    assert.strictEqual(text[2], '2');
+    assert.strictEqual(text[0], 'Table 1');
+    assert.strictEqual(text[1], '2');
+    assert.strictEqual(text[2], 'ID: TABLEID');
   });
 
   test('customer and empty order items shows cancel button and disabled submit', async function(assert) {
