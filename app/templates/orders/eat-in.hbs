@@ -5,10 +5,38 @@
     </LinkTo>
   </div>
   <span class="navbar-brand d-flex flex-even justify-content-center">Eat in</span>
-  <div class="flex-even d-flex justify-content-end">
-    <button class="btn btn-outline-light" type="button" {{on "click" this.toggleCreateModal}}>
-      Create
+  <div class="dropdown flex-even d-flex justify-content-end">
+    <button class="btn btn-outline-light dropdown-toggle" type="button" id="order-summary-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Summary
     </button>
+    <div class="dropdown-menu dropdown-menu-right px-3 text-nowrap" aria-labelledby="order-summary-btn">
+      <div class="d-flex">
+        <div class="d-flex flex-column">
+          <div class="mr-3">Cash</div>
+          <div class="mr-3">Card</div>
+          <div class="mr-3">Online</div>
+          <div class="mr-3">Not paid</div>
+          <hr class="w-100">
+          <div class="mr-3">Total</div>
+        </div>
+        <div class="d-flex flex-column align-items-end">
+          <div class="mr-3">{{this.cashOrders.length}}</div>
+          <div class="mr-3">{{this.cardOrders.length}}</div>
+          <div class="mr-3">{{this.onlinePaymentOrders.length}}</div>
+          <div class="mr-3">{{this.notPaidOrders.length}}</div>
+          <hr class="w-100">
+          <div class="mr-3">{{this.model.length}}</div>
+        </div>
+        <div class="d-flex flex-column align-items-end">
+          <div>{{format-currency this.totalCash}}</div>
+          <div>{{format-currency this.totalCard}}</div>
+          <div>{{format-currency this.totalOnlinePayment}}</div>
+          <div>{{format-currency this.totalNotPaid}}</div>
+          <hr class="w-100">
+          <div>{{format-currency this.totalAll}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
 <div class="container-fluid">
@@ -61,3 +89,7 @@
     </Modal::Base::Dialog>
   </EmberWormhole>
 {{/if}}
+
+<button class="btn btn-lg btn-primary fixed-bottom-right-btn shadow mb-3 mr-3" type="button" {{on "click" this.toggleCreateModal}}>
+  Create
+</button>

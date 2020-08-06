@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { A } from '@ember/array';
 import { action, computed } from '@ember/object';
-import {  sort } from '@ember/object/computed';
+import { filterBy, sort } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { RECEIPT_TYPE } from './../../models/receipt-type';
@@ -19,6 +19,43 @@ export default class OrdersEatInController extends Controller {
 
   @sort('model', 'sortByTime')
   ordersByTimestamp;
+
+  @filterBy('model', 'paymentMethod', 'CASH')
+  cashOrders;
+
+  @filterBy('model', 'paymentMethod', 'CARD')
+  cardOrders;
+
+  @filterBy('model', 'paymentMethod', 'ONLINE')
+  onlinePaymentOrders;
+
+  @filterBy('model', 'paymentMethod', null)
+  notPaidOrders;
+
+  @computed('cashOrders.@each.total')
+  get totalCash() {
+    return this.cashOrders.reduce((prev, order) => prev + order.total, 0);
+  }
+
+  @computed('cardOrders.@each.total')
+  get totalCard() {
+    return this.cardOrders.reduce((prev, order) => prev + order.total, 0);
+  }
+
+  @computed('onlinePaymentOrders.@each.total')
+  get totalOnlinePayment() {
+    return this.onlinePaymentOrders.reduce((prev, order) => prev + order.total, 0);
+  }
+
+  @computed('notPaidOrders.@each.total')
+  get totalNotPaid() {
+    return this.notPaidOrders.reduce((prev, order) => prev + order.total, 0);
+  }
+
+  @computed('model.@each.total')
+  get totalAll() {
+    return this.model.reduce((prev, order) => prev + order.total, 0);
+  }
 
   @computed('newTableName', 'newNumberOfGuests')
   get canCreate() {

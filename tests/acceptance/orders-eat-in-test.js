@@ -19,7 +19,7 @@ module('Acceptance | orders/eat-in', function(hooks) {
 
   test('create button is disabled if table name is empty', async function(assert) {
     await visit('/orders/eat-in');
-    await click('nav .justify-content-end .btn-outline-light');
+    await click('.fixed-bottom-right-btn');
 
     assert.ok(this.element.querySelector('.modal-footer .btn-secondary'));
   });
@@ -28,7 +28,7 @@ module('Acceptance | orders/eat-in', function(hooks) {
     this.server.post('/order/eat-ins', 500);
 
     await visit('/orders/eat-in');
-    await click('nav .justify-content-end .btn-outline-light');
+    await click('.fixed-bottom-right-btn');
     await fillIn('.modal input', '123');
     await click('.modal-footer .btn-success');
 
@@ -37,7 +37,7 @@ module('Acceptance | orders/eat-in', function(hooks) {
 
   test('creating order displays in order list', async function(assert) {
     await visit('/orders/eat-in');
-    await click('nav .justify-content-end .btn-outline-light');
+    await click('.fixed-bottom-right-btn');
     await fillIn('.modal input', 'table name');
     await click('.modal-footer .btn-success');
 
@@ -70,4 +70,37 @@ module('Acceptance | orders/eat-in', function(hooks) {
       'correct message displayed');
   });
 
+  test('calculates order summary', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-in');
+
+    await click('[test-id="order-card-edit"]'); // edit
+    await click('.order-pad_left_bottom_menu .list-group-item'); // add order item
+
+    await click('.order-pad_right_actions .btn-success');
+    await click('.modal-footer .btn-success');
+    await click('.app-overlay');
+
+    await click('button#order-summary-btn');
+
+    assertOrderSummary(assert, this.element,
+      ['1', '0.00'],
+      ['1', '42.00'],
+      ['0', '0.00'],
+      ['1', '0.00'],
+      ['3', '42.00']);
+  });
+
+  function assertOrderSummary(assert, element, cash, card, onlinePayment, notPaid, all) {
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(1)').textContent, cash[0], 'cash order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(1)').textContent, cash[1], 'cash order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(2)').textContent, card[0], 'card order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(2)').textContent, card[1], 'card order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(3)').textContent, onlinePayment[0], 'online order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(3)').textContent, onlinePayment[1], 'online order total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(4)').textContent, notPaid[0], 'not paid order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(4)').textContent, notPaid[1], 'not paid total');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(2) > div:nth-child(6)').textContent, all[0], 'total order count');
+    assert.strictEqual(element.querySelector('nav .dropdown-menu > div > div:nth-child(3) > div:nth-child(6)').textContent, all[1], 'total order total');
+  }
 });

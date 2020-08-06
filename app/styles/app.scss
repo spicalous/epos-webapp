@@ -92,3 +92,9 @@ html, body, body > div.container-fluid {
   animation: fade-in 0.2s ease;
   z-index: $overlay-zindex;
 }
+
+.fixed-bottom-right-btn {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
