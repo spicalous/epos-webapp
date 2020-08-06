@@ -6,13 +6,15 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { RECEIPT_TYPE } from './../../models/receipt-type';
 
+const DEFAULT_TABLE_NAME = 'Table ';
+
 export default class OrdersEatInController extends Controller {
 
   @service store;
   @service ui;
 
   @tracked showOrderConfirmModal = false;
-  @tracked newTableName = '';
+  @tracked newTableName = DEFAULT_TABLE_NAME;
   @tracked newNumberOfGuests = '';
 
   sortByTime = ['dateTime:desc'];
@@ -83,7 +85,7 @@ export default class OrdersEatInController extends Controller {
 
     record.save()
       .then(() => {
-        this.newTableName = '';
+        this.newTableName = DEFAULT_TABLE_NAME;
         this.newNumberOfGuests = '';
       })
       .catch(error => {

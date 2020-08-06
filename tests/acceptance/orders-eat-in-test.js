@@ -20,6 +20,7 @@ module('Acceptance | orders/eat-in', function(hooks) {
   test('create button is disabled if table name is empty', async function(assert) {
     await visit('/orders/eat-in');
     await click('.fixed-bottom-right-btn');
+    await fillIn('.modal input', '');
 
     assert.ok(this.element.querySelector('.modal-footer .btn-secondary'));
   });
