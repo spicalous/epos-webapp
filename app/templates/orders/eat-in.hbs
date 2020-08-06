@@ -41,7 +41,7 @@
 </nav>
 <div class="container-fluid">
   {{#if this.ordersByTimestamp}}
-    <div class="row mt-3">
+    <div class="row mt-3 pb-3 mb-5">
       <div class="col">
         {{#each this.ordersByTimestamp as |order|}}
           <Order::EatInCard @order={{order}} @onPrintOrder={{this.printOrder}} />
