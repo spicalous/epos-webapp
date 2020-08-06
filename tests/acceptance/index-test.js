@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, currentURL, click } from '@ember/test-helpers';
+import { visit, fillIn, currentURL, click } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 
@@ -52,5 +52,16 @@ module('Acceptance | index', function(hooks) {
 
     assert.notOk(this.element.querySelector('.app-overlay'));
     assert.ok(this.element.querySelector('[test-id="settings"] .btn:nth-child(2)').getAttribute('class').includes('active'), 'second button still active');
+  });
+
+  test('creating eat in order navigates to new order', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/');
+
+    await click('.row:nth-child(2) button');
+    await fillIn('.modal input', 'Table 1');
+    await click('.modal .btn-success');
+
+    assert.equal(currentURL(), '/order/eat-in/4');
   });
 });

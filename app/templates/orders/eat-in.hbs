@@ -55,38 +55,10 @@
   {{/if}}
 </div>
 
-{{#if this.showOrderConfirmModal}}
+{{#if this.showNewOrderModal}}
   <EmberWormhole @to={{this.ui.appModalContainerId}}>
-    <Modal::Base::Dialog @title="Create table"
-                         @onDismiss={{this.toggleCreateModal}}
-                         @onConfirm={{this.createOrder}} as |Body Footer onDismiss onConfirm|>
-      <Body>
-      <form novalidate>
-        <Form::Group class="mb-1" @validateOnDirty={{true}} @invalidFeedback="Table name must not be empty" as |fg|>
-          <label>Table name</label>
-          <fg.element @value={{this.newTableName}} @pattern=".+"/>
-        </Form::Group>
-        <Form::Group class="mb-1" @validateOnDirty={{true}} @invalidFeedback="Must be a number" as |fg|>
-          <label>Number of guests</label>
-          <fg.element @value={{this.newNumberOfGuests}} @pattern="[0-9]*"/>
-        </Form::Group>
-      </form>
-      </Body>
-      <Footer>
-        <button type="button" class="btn btn-main-secondary" {{on "click" onDismiss}}>
-          Cancel
-        </button>
-        {{#if this.canCreate}}
-          <button type="button" class="btn btn-success" {{on "click" onConfirm}}>
-            Create
-          </button>
-        {{else}}
-          <button type="button" class="btn btn-secondary" disabled>
-            Create
-          </button>
-        {{/if}}
-      </Footer>
-    </Modal::Base::Dialog>
+    <Modal::CreateEatIn @onDismiss={{this.toggleCreateModal}}
+                        @onCreateOrder={{this.onCreateOrder}} />
   </EmberWormhole>
 {{/if}}
 

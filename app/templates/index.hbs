@@ -1,23 +1,35 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col text-center">
-      <h2 class="mt-3">Orders</h2>
+      <h2 class="mt-3">Eat in</h2>
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-sm-4 mb-1">
+    <div class="col-12 col-sm-6 mb-1">
+      <button type="button" class="btn btn-lg btn-block btn-outline-main" {{on "click" this.toggleCreateModal}}>
+        New
+      </button>
+    </div>
+    <div class="col-12 col-sm-6 mb-1">
+      <LinkTo @route="orders.eat-in" @tagName="button" type="button" @class="btn btn-lg btn-block btn-outline-main">
+        Recent
+      </LinkTo>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <h2 class="mt-3">Eat out</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6 mb-1">
       <LinkTo @route="order.new" @tagName="button" type="button" @class="btn btn-lg btn-block btn-outline-main">
         New
       </LinkTo>
     </div>
-    <div class="col-12 col-sm-4 mb-1">
-      <LinkTo @route="orders.eat-in" @tagName="button" type="button" @class="btn btn-lg btn-block btn-outline-main">
-        Eat in
-      </LinkTo>
-    </div>
-    <div class="col-12 col-sm-4 mb-1">
+    <div class="col-12 col-sm-6 mb-1">
       <LinkTo @route="orders.eat-out" @tagName="button" type="button" @class="btn btn-lg btn-block btn-outline-main">
-        Eat out
+        Recent
       </LinkTo>
     </div>
   </div>
@@ -50,6 +62,15 @@
     {{/each}}
   </div>
 </div>
+
+{{#if this.showNewOrderModal}}
+  <EmberWormhole @to={{this.ui.appModalContainerId}}>
+    <Modal::CreateEatIn @onDismiss={{this.toggleCreateModal}}
+                        @onCreateOrder={{this.onCreateOrder}}
+                        @onCreateOrderSuccess={{this.transitionToOrder}}/>
+  </EmberWormhole>
+{{/if}}
+
 <div id="app-version" class="text-muted">
   {{this.name}} - {{this.version}}
 </div>
