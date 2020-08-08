@@ -1,0 +1,32 @@
+<Modal::Base::Dialog @title="Apply discount" @onDismiss={{@onDismiss}} @onConfirm={{this.applyOrderModifier}} as |Body Footer
+                     onDismiss onConfirm|>
+  <Body>
+  <div class="input-group {{this.validationCssClass}}">
+    <div class="input-group-prepend">
+      {{#each-in this.types as |type display|}}
+        <button type="button" class="btn {{if (eq this.selectedType type) "btn-primary" "btn-main-secondary"}}" {{on "click" (fn this.selectType type)}}>{{display}}</button>
+      {{/each-in}}
+    </div>
+    <Input @type="text" class="form-control {{this.validationCssClass}}" autocomplete="off" @value={{this.value}}/>
+  </div>
+  {{#if this.invalidFeedback}}
+    <div class="invalid-feedback">
+      {{this.invalidFeedback}}
+    </div>
+  {{/if}}
+  </Body>
+  <Footer>
+    <button type="button" class="btn btn-main-secondary" {{on "click" onDismiss}}>
+      Cancel
+    </button>
+    {{#if this.isValid}}
+      <button type="button" class="btn btn-primary" {{on "click" onConfirm}}>
+        Apply
+      </button>
+    {{else}}
+      <button type="button" class="btn btn-secondary" disbled>
+        Apply
+      </button>
+    {{/if}}
+  </Footer>
+</Modal::Base::Dialog>
