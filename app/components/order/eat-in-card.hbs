@@ -10,9 +10,7 @@
         <small>{{format-date-time @order.dateTime}}</small>
       </div>
     </div>
-    <div class="text-center mb-3">
-      <Order::PaymentMethodUpdateButton @order={{@order}}/>
-    </div>
+    <Order::TotalInfo @order={{@order}}/>
     <Order::DetailsActions @order={{@order}} @editRoute="order.eat-in" @onPrintOrder={{@onPrintOrder}}/>
   </div>
 </div>

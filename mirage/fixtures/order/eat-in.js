@@ -15,9 +15,10 @@ export default [
     tableId: 'AAA222',
     tableName: 'Table 2',
     numberOfGuests: 4,
-    orderItemIds: [],
+    orderItemIds: [30],
+    orderModifierId: 1,
     notes: 'This is a note',
-    paymentMethod: 'CASH'
+    paymentMethod: 'CASH',
   },
   {
     id: 3,

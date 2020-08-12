@@ -7,7 +7,7 @@ export default class OrdersEatInRoute extends Route {
   model() {
     return this.store.findAll('order/eat-in', {
       reload: true,
-      include: 'orderItems.menuItem,orderItems.editOptions'
+      include: 'orderItems.menuItem,orderItems.editOptions,orderModifier'
     });
   }
 

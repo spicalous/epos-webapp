@@ -34,9 +34,7 @@
         </div>
       </div>
     {{/if}}
-    <div class="text-center mb-3">
-      <Order::PaymentMethodUpdateButton @order={{@order}}/>
-    </div>
+    <Order::TotalInfo @order={{@order}}/>
     <Order::DetailsActions @order={{@order}} @editRoute="order.eat-out" @onPrintOrder={{@onPrintOrder}}/>
   </div>
 </div>

@@ -1,11 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action, computed } from '@ember/object';
-
-const MODIFIER_TYPES = {
-  PERCENT: 'PERCENT',
-  ABSOLUTE: 'ABSOLUTE'
-};
+import { MODIFIER_TYPES } from 'epos-webapp/models/order-modifier';
 
 const MODIFIER_TYPE_TO_DISPLAY = {
   PERCENT: '%',

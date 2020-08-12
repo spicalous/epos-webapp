@@ -44,13 +44,13 @@ module('Acceptance | orders/eat-in', function(hooks) {
 
     assert.strictEqual(this.element.parentElement.scrollTop, 0);
     this.element.querySelector('.card:nth-child(3)').scrollIntoView();
-    assert.ok(265 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 285);
+    assert.ok(290 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 310, `scrollTop=${this.element.parentElement.scrollTop}`);
 
     await click('.card:nth-child(3) [test-id="order-card-edit"]');
     await click('.order-pad_right_actions .btn-danger');
     await click('.modal-footer .btn-primary');
 
-    assert.ok(265 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 285);
+    assert.ok(290 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 310, `scrollTop=${this.element.parentElement.scrollTop}`);
     this.element.parentElement.scrollTo(0,0); // reset after test
   });
 
@@ -61,6 +61,42 @@ module('Acceptance | orders/eat-in', function(hooks) {
       this.element.querySelector('.container-fluid > div:last-child').textContent.trim(),
       'No orders to display',
       'correct message displayed');
+  });
+
+  test('removing order modifier loaded from back end', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-in');
+
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Original: £5.25');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: £1.25');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
+
+    await click('.card:nth-child(2) .row .dropdown .dropdown-toggle');
+    await click('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)');
+
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Apply discount');
+    assert.notOk(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"]'));
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £5.25');
+  });
+
+  test('removing order modifier loaded from back end failure', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-in');
+
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Original: £5.25');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: £1.25');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
+
+    this.server.patch('/order/eat-ins/:id', () => ({ errors: [{ detail: 'Error message for PATCH order/eat-ins' }]}), 500);
+    await click('.card:nth-child(2) .row .dropdown .dropdown-toggle');
+    await click('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)');
+
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Original: £5.25');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: £1.25');
+    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
   });
 
   test('calculates order summary', async function(assert) {
@@ -77,11 +113,11 @@ module('Acceptance | orders/eat-in', function(hooks) {
     await click('button#order-summary-btn');
 
     assertOrderSummary(assert, this.element,
-      ['1', '0.00'],
+      ['1', '4.00'],
       ['1', '42.00'],
       ['0', '0.00'],
       ['1', '0.00'],
-      ['3', '42.00']);
+      ['3', '46.00']);
   });
 
   function assertOrderSummary(assert, element, cash, card, onlinePayment, notPaid, all) {

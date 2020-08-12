@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { currentURL, visit, click } from '@ember/test-helpers';
+import { currentURL, fillIn, visit, click } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 
@@ -229,6 +229,72 @@ module('Acceptance | orders/eat-out', function(hooks) {
     assert.strictEqual(this.element.querySelector('.app-overlay h2').textContent.trim(), 'Failed to add delivery customer tag to customer :(');
     assert.ok(this.element.querySelector('.app-overlay').textContent.trim().includes('Error adding delivery customer tag'));
     assert.strictEqual(this.element.querySelectorAll('.card-body > .text-center > .badge').length, 1);
+  });
+
+  test('applying discount', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-out');
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-item:nth-child(4)');
+    await fillIn('.modal-body input', '10');
+    await click('.modal-footer .btn-primary');
+
+    assert.strictEqual(this.element.querySelector('.card .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Original: £14.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: £1.50 (10%)');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £13.45');
+  });
+
+  test('applying discount error', async function(assert) {
+    this.server.loadFixtures();
+    this.server.patch('/order/eat-outs/:id', () => ({ errors: [{ detail: 'Error message for PATCH order/eat-outs' }]}), 500);
+    await visit('/orders/eat-out');
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-item:nth-child(4)');
+    await fillIn('.modal-body input', '10');
+    await click('.modal-footer .btn-primary');
+
+    assert.strictEqual(this.element.querySelector('.card .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Apply discount');
+    assert.notOk(this.element.querySelector('[test-id="order-modifier"]'));
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
+  });
+
+  test('removing discount', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-out');
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-item:nth-child(4)');
+    await fillIn('.modal-body input', '10');
+    await click('.modal-footer .btn-primary');
+
+    assert.strictEqual(this.element.querySelector('.card .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-item:nth-child(4)');
+
+    assert.strictEqual(this.element.querySelector('.card .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Apply discount');
+    assert.notOk(this.element.querySelector('[test-id="order-modifier"]'));
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');
+  });
+
+  test('removing discount error', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-out');
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-item:nth-child(4)');
+    await fillIn('.modal-body input', '10');
+    await click('.modal-footer .btn-primary');
+
+    assert.strictEqual(this.element.querySelector('.card .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+
+    this.server.patch('/order/eat-outs/:id', () => ({ errors: [{ detail: 'Error message for PATCH order/eat-outs' }]}), 500);
+    await click('.card .row .dropdown .dropdown-toggle');
+    await click('.card .row .dropdown .dropdown-item:nth-child(4)');
+
+    assert.strictEqual(this.element.querySelector('.card .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Original: £14.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: £1.50 (10%)');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £13.45');
   });
 
   function assertOrderSummary(assert, element, cash, card, onlinePayment, notPaid, takeAway, delivery, onlineCustomer, all) {

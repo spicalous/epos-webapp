@@ -29,7 +29,7 @@
   <div class="offset-1 col-2 offset-sm-0 col-sm d-flex justify-content-end">
     <div class="dropdown">
       <button class="btn btn-main-secondary dropdown-toggle" type="button" id="order-{{@order.id}}-dropdown-print-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Print
+        Actions
       </button>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="order-{{@order.id}}-dropdown-print-btn">
         <button type="button" class="dropdown-item" {{on "click" (fn @onPrintOrder @order.id (get-model-name @order) "EAT_IN")}}>
@@ -38,7 +38,24 @@
         <button type="button" class="dropdown-item" {{on "click" (fn @onPrintOrder @order.id (get-model-name @order) "DELIVERY")}}>
           Print large
         </button>
+        <div class="dropdown-divider"></div>
+          {{#if @order.orderModifier}}
+            <button type="button" class="dropdown-item" {{on "click" this.removeDiscount}}>
+              Remove discount
+            </button>
+          {{else}}
+            <button type="button" class="dropdown-item" {{on "click" this.toggleApplyOrderModifierDialog}}>
+              Apply discount
+            </button>
+          {{/if}}
       </div>
     </div>
   </div>
 </div>
+
+{{#if this.showApplyOrderModifierModal}}
+  <EmberWormhole @to={{this.ui.appModalContainerId}}>
+    <Modal::ApplyOrderModifier @onDismiss={{this.toggleApplyOrderModifierDialog}}
+                               @onApplyOrderModifier={{this.onApplyOrderModifier}}/>
+  </EmberWormhole>
+{{/if}}

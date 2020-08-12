@@ -29,29 +29,29 @@ export default class OrdersEatInController extends Controller {
   @filterBy('model', 'paymentMethod', null)
   notPaidOrders;
 
-  @computed('cashOrders.@each.total')
+  @computed('cashOrders.@each.modifiedTotal')
   get totalCash() {
-    return this.cashOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.cashOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('cardOrders.@each.total')
+  @computed('cardOrders.@each.modifiedTotal')
   get totalCard() {
-    return this.cardOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.cardOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('onlinePaymentOrders.@each.total')
+  @computed('onlinePaymentOrders.@each.modifiedTotal')
   get totalOnlinePayment() {
-    return this.onlinePaymentOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.onlinePaymentOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('notPaidOrders.@each.total')
+  @computed('notPaidOrders.@each.modifiedTotal')
   get totalNotPaid() {
-    return this.notPaidOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.notPaidOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('model.@each.total')
+  @computed('model.@each.modifiedTotal')
   get totalAll() {
-    return this.model.reduce((prev, order) => prev + order.total, 0);
+    return this.model.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
   @action

@@ -121,4 +121,5 @@ export default function() {
   this.post('/delivery-customer-tags');
   this.patch('delivery-customer-tags/:id');
   this.del('delivery-customer-tags/:id');
+  this.post('/order-modifiers');
 }

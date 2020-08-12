@@ -10,7 +10,7 @@ export default class OrdersEatOutRoute extends Route {
     return hash({
       orders: this.store.findAll('order/eat-out', {
         reload: true,
-        include: 'orderItems.menuItem,orderItems.editOptions,customer,customer.deliveryCustomerTags'
+        include: 'orderItems.menuItem,orderItems.editOptions,customer,customer.deliveryCustomerTags,orderModifier'
       }),
       deliveryCustomerTags: this.store.findAll('delivery-customer-tag')
     });
