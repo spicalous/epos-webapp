@@ -82,11 +82,6 @@ export default class OrderPadComponent extends Component {
     return this.args.order.get('orderItems').reduce((prev, item) => prev + item.get('quantity'), 0);
   }
 
-  @computed('args.order.total')
-  get orderTotal() {
-    return this.args.order.get('total');
-  }
-
   @computed('args.order.paymentMethod')
   get selectedPaymentMethod() {
     return this.args.order.get('paymentMethod') || 'NOT PAID';
