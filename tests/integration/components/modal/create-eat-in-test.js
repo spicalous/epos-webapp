@@ -17,11 +17,11 @@ module('Integration | Component | modal/create-eat-in', function(hooks) {
 
     await fillIn('.modal input', '');
     assert.ok(this.element.querySelector('.modal-footer .btn-secondary'));
-    assert.notOk(this.element.querySelector('.modal-footer .btn-success'));
+    assert.notOk(this.element.querySelector('.modal-footer .btn-primary'));
 
     await fillIn('.modal input', 'Table 1');
     assert.notOk(this.element.querySelector('.modal-footer .btn-secondary'));
-    assert.ok(this.element.querySelector('.modal-footer .btn-success'));
+    assert.ok(this.element.querySelector('.modal-footer .btn-primary'));
   });
 
   test('dismissing calls onDismiss', async function(assert) {
@@ -37,7 +37,7 @@ module('Integration | Component | modal/create-eat-in', function(hooks) {
     await render(hbs`<Modal::CreateEatIn @onDismiss={{this.onDismiss}}
                                          @onCreateOrder={{this.onCreateOrder}}/>`);
 
-    await click('.modal-footer .btn-success');
+    await click('.modal-footer .btn-primary');
     assert.verifySteps(['on create']);
   });
 

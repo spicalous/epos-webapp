@@ -60,7 +60,7 @@ module('Acceptance | index', function(hooks) {
 
     await click('.row:nth-child(2) button');
     await fillIn('.modal input', 'Table 1');
-    await click('.modal .btn-success');
+    await click('.modal .btn-primary');
 
     assert.equal(currentURL(), '/order/eat-in/4');
   });

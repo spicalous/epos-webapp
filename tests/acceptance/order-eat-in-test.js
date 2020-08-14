@@ -77,7 +77,7 @@ module('Acceptance | order/eat-in', function(hooks) {
     assertOrderInfo(assert, this.element, '1 item', '£43.50');
 
     await click('.order-pad_right_actions .btn-danger');
-    await click('.modal-footer .btn-primary');
+    await click('.modal-footer .btn-danger');
 
     assert.strictEqual(currentURL(), '/orders/eat-in');
 

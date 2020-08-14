@@ -138,7 +138,7 @@ module('Acceptance | order/new', function(hooks) {
     assert.ok(this.element.querySelector('.order-pad_right_customer input'));
 
     await click('.order-pad_right_actions .btn-danger');
-    await click('.modal-footer .btn-primary');
+    await click('.modal-footer .btn-danger');
 
     assert.notOk(this.element.querySelector('.category-button.btn-main'));
     assert.strictEqual(this.element.querySelectorAll('.order-pad_right_items .list-group-item').length, 0);

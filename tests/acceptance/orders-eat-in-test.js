@@ -23,7 +23,7 @@ module('Acceptance | orders/eat-in', function(hooks) {
     await visit('/orders/eat-in');
     await click('.fixed-bottom-right-btn');
     await fillIn('.modal input', '123');
-    await click('.modal-footer .btn-success');
+    await click('.modal-footer .btn-primary');
 
     assert.strictEqual(this.element.querySelector('.app-overlay h2').textContent.trim(), 'Failed to create table :(');
   });
@@ -32,7 +32,7 @@ module('Acceptance | orders/eat-in', function(hooks) {
     await visit('/orders/eat-in');
     await click('.fixed-bottom-right-btn');
     await fillIn('.modal input', 'table name');
-    await click('.modal-footer .btn-success');
+    await click('.modal-footer .btn-primary');
 
     assert.strictEqual(this.element.querySelectorAll('.card').length, 1);
   });
@@ -48,7 +48,7 @@ module('Acceptance | orders/eat-in', function(hooks) {
 
     await click('.card:nth-child(3) [test-id="order-card-edit"]');
     await click('.order-pad_right_actions .btn-danger');
-    await click('.modal-footer .btn-primary');
+    await click('.modal-footer .btn-danger');
 
     assert.ok(290 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 310, `scrollTop=${this.element.parentElement.scrollTop}`);
     this.element.parentElement.scrollTo(0,0); // reset after test

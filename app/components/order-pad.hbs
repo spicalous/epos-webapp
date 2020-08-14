@@ -115,6 +115,8 @@
           <ButtonWithConfirm class="btn-lg btn-block btn-danger"
                              @confirmTitle="Cancel order"
                              @confirmMessage="Are you sure you want to cancel?"
+                             @confirmBtnClass="btn-danger"
+                             @confirmBtnText="Cancel"
                              @onConfirm={{this.cancelOrder}}>
             Cancel
           </ButtonWithConfirm>

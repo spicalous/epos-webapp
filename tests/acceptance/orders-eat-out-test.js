@@ -28,7 +28,7 @@ module('Acceptance | orders/eat-out', function(hooks) {
 
     await click('.card:nth-child(6) [test-id="order-card-edit"]');
     await click('.order-pad_right_actions .btn-danger');
-    await click('.modal-footer .btn-primary');
+    await click('.modal-footer .btn-danger');
 
     assert.ok(695 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 715);
     this.element.parentElement.scrollTo(0,0); // reset after test
