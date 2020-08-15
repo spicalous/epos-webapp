@@ -9,6 +9,10 @@ export default class OrderEatOutSerializer extends JSONAPISerializer.extend(Embe
     orderItems: {
       serialize: 'records',
       deserialize: 'ids'
+    },
+    orderModifier: {
+      serialize: 'records',
+      deserialize: 'ids'
     }
   };
 

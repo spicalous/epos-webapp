@@ -1,9 +1,9 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { PAYMENT_METHODS } from './../../models/payment-method';
+import { PAYMENT_METHODS } from 'epos-webapp/models/payment-method';
 
-export default class OrderPaymentMethodUpdateButtonComponent extends Component {
+export default class OrderTotalInfoComponent extends Component {
 
   @service ui;
 

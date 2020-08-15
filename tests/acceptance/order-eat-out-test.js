@@ -87,7 +87,7 @@ module('Acceptance | order/eat-out', function(hooks) {
     assertOrderInfo(assert, this.element, '6 items', '£57.70');
 
     await click('.order-pad_right_actions .btn-danger');
-    await click('.modal-footer .btn-primary');
+    await click('.modal-footer .btn-danger');
 
     await click('.card [test-id="order-list-details-btn"]');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £14.95');

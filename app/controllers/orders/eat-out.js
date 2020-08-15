@@ -61,44 +61,44 @@ export default class OrdersEatOutController extends Controller {
   @filterBy('model.orders', 'paymentMethod', null)
   notPaidOrders;
 
-  @computed('cashOrders.@each.total')
+  @computed('cashOrders.@each.modifiedTotal')
   get totalCash() {
-    return this.cashOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.cashOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('cardOrders.@each.total')
+  @computed('cardOrders.@each.modifiedTotal')
   get totalCard() {
-    return this.cardOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.cardOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('onlinePaymentOrders.@each.total')
+  @computed('onlinePaymentOrders.@each.modifiedTotal')
   get totalOnlinePayment() {
-    return this.onlinePaymentOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.onlinePaymentOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('notPaidOrders.@each.total')
+  @computed('notPaidOrders.@each.modifiedTotal')
   get totalNotPaid() {
-    return this.notPaidOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.notPaidOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('takeawayOrders.@each.total')
+  @computed('takeawayOrders.@each.modifiedTotal')
   get totalCustomerTakeawayOrders() {
-    return this.takeawayOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.takeawayOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('deliveryOrders.@each.total')
+  @computed('deliveryOrders.@each.modifiedTotal')
   get totalCustomerDeliveryOrders() {
-    return this.deliveryOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.deliveryOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('onlineOrders.@each.total')
+  @computed('onlineOrders.@each.modifiedTotal')
   get totalCustomerOnlineOrders() {
-    return this.onlineOrders.reduce((prev, order) => prev + order.total, 0);
+    return this.onlineOrders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
-  @computed('model.orders.@each.total')
+  @computed('model.orders.@each.modifiedTotal')
   get totalAll() {
-    return this.model.orders.reduce((prev, order) => prev + order.total, 0);
+    return this.model.orders.reduce((prev, order) => prev + order.modifiedTotal, 0);
   }
 
   @computed('orderTypesToShow.[]', 'deliveryOrders.[]', 'takeawayOrders.[]', 'onlineOrders.[]')

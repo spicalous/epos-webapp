@@ -22,7 +22,7 @@ module('Integration | Component | order/details-actions', function(hooks) {
 
     assert.strictEqual(this.element.querySelector('.row div:nth-child(1) button').textContent.trim(), 'Edit');
     assert.strictEqual(this.element.querySelector('.row div:nth-child(2) button').textContent.trim(), 'Show details');
-    assert.strictEqual(this.element.querySelector('.row div:nth-child(3) button').textContent.trim(), 'Print');
+    assert.strictEqual(this.element.querySelector('.row div:nth-child(3) button').textContent.trim(), 'Actions');
     assert.notOk(this.element.querySelector('[test-id="order-list-item-notes"]'));
   });
 
