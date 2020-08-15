@@ -148,4 +148,18 @@ module('Acceptance | order/eat-in', function(hooks) {
     assertOrderInfo(assert, this.element, '1 item', '£42.00');
   });
 
+  test('displays order modifier data', async function(assert) {
+    await visit('/order/eat-in/1');
+    assert.strictEqual(this.element.querySelectorAll('.order-pad_right_info div').length, 2);
+
+    await visit('/order/eat-in/2');
+    let orderInfo = this.element.querySelectorAll('.order-pad_right_info div');
+    assert.strictEqual(orderInfo.length, 6);
+    assert.strictEqual(orderInfo[0].textContent.trim(), 'Sub-total');
+    assert.strictEqual(orderInfo[1].textContent.trim(), '£5.25');
+    assert.strictEqual(orderInfo[2].textContent.trim(), 'Discount');
+    assert.strictEqual(orderInfo[3].textContent.trim(), '-£1.25');
+    assert.strictEqual(orderInfo[4].textContent.trim(), '1 item');
+    assert.strictEqual(orderInfo[5].textContent.trim(), '£4.00');
+  });
 });

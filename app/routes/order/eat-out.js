@@ -8,7 +8,7 @@ export default class OrderEatOutRoute extends Route {
       menuItems: this.store.findAll('menu-item', { include: 'categories,editCategories' }),
       categories: this.store.peekAll('category'),
       editOptions: this.store.findAll('edit-option'),
-      order: this.store.findRecord('order/eat-out', params['eat_out_id'], { include: 'orderItems.menuItem,orderItems.editOptions,customer' })
+      order: this.store.findRecord('order/eat-out', params['eat_out_id'], { include: 'orderItems.menuItem,orderItems.editOptions,customer,orderModifier' })
     });
   }
 }

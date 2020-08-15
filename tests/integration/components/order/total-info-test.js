@@ -86,8 +86,8 @@ module('Integration | Component | order/total-info', function(hooks) {
 
     await render(hbs`<Order::TotalInfo @order={{this.order}} />`);
 
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Original: £10.95');
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: £1.09 (10%)');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £10.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.09 (10%)');
     // also ensures that that we do not run into rounding errors
     //   10.95           10.95
     // -  1.095           1.10
@@ -100,8 +100,8 @@ module('Integration | Component | order/total-info', function(hooks) {
 
     await render(hbs`<Order::TotalInfo @order={{this.order}} />`);
 
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Original: £10.95');
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: £1.23');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £10.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.23');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £9.72');
   });
 
@@ -110,7 +110,7 @@ module('Integration | Component | order/total-info', function(hooks) {
 
     await render(hbs`<Order::TotalInfo @order={{this.order}} />`);
 
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Original: £10.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £10.95');
     assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: Unknown "UNKNOWN" type');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £10.95');
   });

@@ -95,12 +95,18 @@
         </div>
       </div>
     </div>
-    <div class="row order-pad_right_info pt-2 text-center d-none d-sm-flex">
-      <div class="col">
+    <div class="row order-pad_right_info pt-2 px-5 d-none d-sm-flex">
+      {{#if @order.orderModifier}}
+        <div class="col-6">Sub-total</div>
+        <div class="col-6 text-right">£{{format-currency @order.total}}</div>
+        <div class="col-6">Discount</div>
+        <div class="col-6 text-right">{{@order.modifierData}}</div>
+      {{/if}}
+      <div class="col-6">
         {{this.orderItemQuantitySum}} {{#if (eq 1 this.orderItemQuantitySum)}}item{{else}}items{{/if}}
       </div>
-      <div class="col">
-        £{{format-currency @order.total}}
+      <div class="col-6 text-right">
+        £{{format-currency (if @order.orderModifier @order.modifiedTotal @order.total)}}
       </div>
     </div>
     <div class="row order-pad_right_actions my-2">

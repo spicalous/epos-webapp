@@ -1,7 +1,7 @@
 <div class="text-center mb-3">
   {{#if @order.orderModifier}}
     <div test-id="order-modifier">
-      <div>Original: £{{format-currency @order.total}}</div>
+      <div>Sub-total: £{{format-currency @order.total}}</div>
       <div>Discount: {{@order.modifierData}}</div>
     </div>
   {{/if}}
