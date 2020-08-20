@@ -9,8 +9,8 @@ module('Integration | Component | order/total-info', function(hooks) {
   setupRenderingTest(hooks);
   setupMirage(hooks);
 
-  function createOrderWithOrderModifier(orderModifierAttrs) {
-    let menuItem = this.server.create('menu-item', mockMenuItem('1', 'menu item one', 1095));
+  function createOrderWithOrderModifier(orderModifierAttrs, optionalPrice) {
+    let menuItem = this.server.create('menu-item', mockMenuItem('1', 'menu item one', optionalPrice || 1095));
     let orderItem = this.server.create('order-item', { quantity: 1, menuItem, editOptions: [] });
     let orderModifier = this.server.create('order-modifier', orderModifierAttrs);
     this.server.create('order/eat-out', { ...mockOrder(null, [orderItem]), orderModifier });
@@ -86,13 +86,27 @@ module('Integration | Component | order/total-info', function(hooks) {
 
     await render(hbs`<Order::TotalInfo @order={{this.order}} />`);
 
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £10.95');
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.09 (10%)');
     // also ensures that that we do not run into rounding errors
     //   10.95           10.95
     // -  1.095           1.10
     // =  9.855 -> 9.86   9.85
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £10.95');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.10 (10%)');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £9.85');
+  });
+
+  test('percent discount test rounding', async function(assert) {
+    this.set('order', await this.createOrderWithOrderModifier({ type: 'PERCENT', value: 10 }, 1335));
+
+    await render(hbs`<Order::TotalInfo @order={{this.order}} />`);
+
+    // also ensures that that we do not run into rounding errors
+    //   13.35             13.35
+    // -  1.335             1.34
+    // = 12.015 -> 12.02   12.01
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £13.35');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.34 (10%)');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £12.01');
   });
 
   test('absolute discount', async function(assert) {
