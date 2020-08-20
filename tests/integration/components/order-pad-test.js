@@ -629,4 +629,27 @@ module('Integration | Component | order-pad', function(hooks) {
     assert.strictEqual(this.order.notes, 'this is an order note');
   });
 
+  test('print checkbox is displayed only on existing orders', async function(assert) {
+    this.set('order', this.owner.lookup('service:store').createRecord('order/eat-out'));
+    this.set('isNewOrder', false);
+
+    await render(hbs`<div id="app-modal-container"></div>
+                     <OrderPad @categories={{this.categories}}
+                               @menuItems={{this.menuItems}}
+                               @isNewOrder={{this.isNewOrder}}
+                               @order={{this.order}}/>`);
+
+    await click('.order-pad_left_bottom_menu .list-group-item'); // add item to order
+    await click('.order-pad_right_customer .dropdown > button'); // open new customer dropdown
+    await click('.order-pad_right_customer .dropdown > .dropdown-menu > button:nth-child(3)'); // add customer to order
+    await click('.order-pad_right_actions .btn-success'); // show order confirm modal
+    await fillIn(' div:nth-child(2) select', 'CASH');
+
+    assert.ok(this.element.querySelector('.modal #checkbox-print'));
+
+    this.set('isNewOrder', true);
+
+    assert.notOk(this.element.querySelector('.modal #checkbox-print'));
+  });
+
 });

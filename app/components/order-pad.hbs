@@ -217,20 +217,29 @@
                             @onChange={{this.onPaymentMethodSelect}}/>
             </div>
           </div>
-
-          <div class="row mb-2">
+          <div class="row mb-3">
             <div class="col">
               <div>Notes</div>
               <Textarea @class="form-control" rows="2" @value={{@order.notes}}/>
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-main-secondary" {{on "click" onDismiss}}>
-          Cancel
-        </button>
-        <button type="button" class="btn btn-success" {{on "click" onConfirm}}>
-          Confirm
-        </button>
+        <div class="d-flex mb-2 w-100">
+          {{#unless @isNewOrder}}
+            <div class="custom-control custom-checkbox py-2 flex-fill" {{on "click" this.togglePrint}} {{!-- template-lint-disable no-invalid-interactive --}}>
+              <input type="checkbox" class="custom-control-input" id="checkbox-print" checked={{this.print}}>
+              <label class="custom-control-label" for="checkbox-print">Print</label>
+            </div>
+          {{/unless}}
+          <div>
+            <button type="button" class="btn btn-main-secondary" {{on "click" onDismiss}}>
+              Cancel
+            </button>
+            <button type="button" class="btn btn-success" {{on "click" onConfirm}}>
+              Confirm
+            </button>
+          </div>
+        </div>
       </Footer>
     </Modal::Base::Dialog>
   </EmberWormhole>

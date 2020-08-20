@@ -38,6 +38,7 @@ export default class OrderPadComponent extends Component {
   @tracked showDeliverySelect = false;
   @tracked showOrder = false;
   @tracked showOrderConfirmModal = false;
+  @tracked print = false;
 
   paymentMethods = Object.keys(PAYMENT_METHODS);
   estimatedTimes = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 75];
@@ -252,13 +253,19 @@ export default class OrderPadComponent extends Component {
   }
 
   @action
+  togglePrint(event) {
+    this.print = !this.print;
+    event.preventDefault();
+  }
+
+  @action
   submitOrder() {
     this.toggleConfirmOrder();
     this.ui.showAppLoader('Submitting order..');
     if (this.args.preOrderSubmit) {
       this.args.preOrderSubmit();
     }
-    this.args.order.save()
+    this.args.order.save({ adapterOptions: { print: this.print }})
       .then(() => {
         // These are embedded records that we send to the server with POST order request.
         // Ember doesn't have a way to match embedded records from the request with server response.
