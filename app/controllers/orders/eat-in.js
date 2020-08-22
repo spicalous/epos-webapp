@@ -3,18 +3,30 @@ import { action, computed } from '@ember/object';
 import { filterBy, sort } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import { RECEIPT_TYPE } from './../../models/receipt-type';
+import { RECEIPT_TYPE } from 'epos-webapp/models/receipt-type';
+
+const PAYMENT_TYPE = {
+  NOT_PAID: 'Not paid',
+  CASH: 'Cash',
+  CARD: 'Card',
+  ONLINE: 'Online payment'
+};
 
 export default class OrdersEatInController extends Controller {
+
+  paymentTypes = [PAYMENT_TYPE.NOT_PAID, PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
 
   @service store;
   @service ui;
 
   @tracked showNewOrderModal = false;
 
+  @tracked
+  paymentTypesToShow = [PAYMENT_TYPE.NOT_PAID, PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
+
   sortByTime = ['dateTime:desc'];
 
-  @sort('model', 'sortByTime')
+  @sort('filteredByPaymentType', 'sortByTime')
   ordersByTimestamp;
 
   @filterBy('model', 'paymentMethod', 'CASH')
@@ -52,6 +64,35 @@ export default class OrdersEatInController extends Controller {
   @computed('model.@each.modifiedTotal')
   get totalAll() {
     return this.model.reduce((prev, order) => prev + order.modifiedTotal, 0);
+  }
+
+  @computed('paymentTypesToShow.[]', 'notPaidOrders', 'cashOrders', 'cardOrders', 'onlinePaymentOrders')
+  get filteredByPaymentType() {
+    let result = [];
+    this.paymentTypesToShow.forEach(paymentType => {
+      if (paymentType === PAYMENT_TYPE.NOT_PAID) {
+        result = result.concat(this.notPaidOrders);
+      }
+      if (paymentType === PAYMENT_TYPE.CASH) {
+        result = result.concat(this.cashOrders);
+      }
+      if (paymentType === PAYMENT_TYPE.CARD) {
+        result = result.concat(this.cardOrders);
+      }
+      if (paymentType === PAYMENT_TYPE.ONLINE) {
+        result = result.concat(this.onlinePaymentOrders);
+      }
+    });
+    return result;
+  }
+
+  @action
+  togglePaymentTypeFilter(paymentType) {
+    if (this.paymentTypesToShow.includes(paymentType)) {
+      this.paymentTypesToShow.removeObject(paymentType);
+    } else {
+      this.paymentTypesToShow.addObject(paymentType);
+    }
   }
 
   @action

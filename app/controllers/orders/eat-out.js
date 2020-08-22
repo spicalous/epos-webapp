@@ -3,9 +3,9 @@ import Controller from '@ember/controller';
 import { action, computed } from '@ember/object';
 import { sort, intersect, filter, filterBy } from '@ember/object/computed';
 import { tracked } from '@glimmer/tracking';
-import { getModelName } from './../../helpers/get-model-name';
+import { getModelName } from 'epos-webapp/helpers/get-model-name';
 import { inject as service } from '@ember/service';
-import { RECEIPT_TYPE } from './../../models/receipt-type';
+import { RECEIPT_TYPE } from 'epos-webapp/models/receipt-type';
 
 function filterByCustomerType(customerType) {
   return function(order) {
@@ -31,8 +31,7 @@ export default class OrdersEatOutController extends Controller {
   orderTypes = [ORDER_TYPE.DELIVERY, ORDER_TYPE.TAKEAWAY, ORDER_TYPE.ONLINE];
   paymentTypes = [PAYMENT_TYPE.NOT_PAID, PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
 
-  @service
-  ui;
+  @service ui;
 
   @tracked
   orderTypesToShow = [ORDER_TYPE.DELIVERY, ORDER_TYPE.TAKEAWAY, ORDER_TYPE.ONLINE];
@@ -118,7 +117,7 @@ export default class OrdersEatOutController extends Controller {
     return result;
   }
 
-  @computed('paymentTypesToShow.[]', 'model.orders.@each.paymentMethod', 'cardOrders.[]', 'cashOrders.[]', 'notPaidOrders.[]', 'onlinePaymentOrders.[]')
+  @computed('paymentTypesToShow.[]', 'cardOrders.[]', 'cashOrders.[]', 'notPaidOrders.[]', 'onlinePaymentOrders.[]')
   get filteredByPaymentType() {
     let result = [];
     this.paymentTypesToShow.forEach(paymentType => {

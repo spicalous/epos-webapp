@@ -17,6 +17,24 @@ module('Acceptance | orders/eat-in', function(hooks) {
     assert.strictEqual(currentURL(), '/');
   });
 
+  test('all filters selected by default', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-in');
+
+    assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-primary').length, 4, 'order filters selected');
+  });
+
+  test('filters by payment type', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-in');
+
+    await click('[test-id="payment-type-filters"] button');
+
+    assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-primary').length, 3);
+    assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-main-secondary').length, 1);
+    assert.strictEqual(this.element.querySelectorAll('.card').length, 2, 'only orders with selected payment type displayed');
+  });
+
   test('error displayed if creating table error', async function(assert) {
     this.server.post('/order/eat-ins', 500);
 
@@ -44,13 +62,13 @@ module('Acceptance | orders/eat-in', function(hooks) {
 
     assert.strictEqual(this.element.parentElement.scrollTop, 0);
     this.element.querySelector('.card:nth-child(3)').scrollIntoView();
-    assert.ok(290 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 310, `scrollTop=${this.element.parentElement.scrollTop}`);
+    assert.ok(316 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 336, `scrollTop=${this.element.parentElement.scrollTop}`);
 
     await click('.card:nth-child(3) [test-id="order-card-edit"]');
     await click('.order-pad_right_actions .btn-danger');
     await click('.modal-footer .btn-danger');
 
-    assert.ok(290 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 310, `scrollTop=${this.element.parentElement.scrollTop}`);
+    assert.ok(316 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 336, `scrollTop=${this.element.parentElement.scrollTop}`);
     this.element.parentElement.scrollTo(0,0); // reset after test
   });
 

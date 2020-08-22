@@ -40,8 +40,20 @@
   </div>
 </nav>
 <div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col text-center" test-id="payment-type-filters">
+      {{#each this.paymentTypes as |paymentType|}}
+        {{#let (contains this.paymentTypesToShow paymentType) as |isActive|}}
+          <button type="button" class="btn mb-3 {{if isActive "btn-primary" "btn-main-secondary"}}"
+            {{on "click" (fn this.togglePaymentTypeFilter paymentType)}}>
+            {{paymentType}}
+          </button>
+        {{/let}}
+      {{/each}}
+    </div>
+  </div>
   {{#if this.ordersByTimestamp}}
-    <div class="row mt-3 pb-3 mb-5">
+    <div class="row pb-3 mb-5">
       <div class="col">
         {{#each this.ordersByTimestamp as |order|}}
           <Order::EatInCard @order={{order}} @onPrintOrder={{this.printOrder}} />
