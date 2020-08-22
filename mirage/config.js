@@ -7,6 +7,7 @@ function patchOrderHandler(modelName, schemaName) {
     let attrs = this.normalizedRequestAttrs(modelName);
     attrs.orderItemIds = [];
     let body = JSON.parse(request.requestBody);
+
     body.data['order-items'].forEach(item => {
       let orderItemAttrs = {
         quantity: item.data.attributes.quantity,
@@ -23,6 +24,10 @@ function patchOrderHandler(modelName, schemaName) {
         attrs.orderItemIds.push(orderItem.id);
       }
     });
+
+    if (body.data['order-modifier'] === null) {
+      attrs.orderModifierId = null;
+    }
     return schema[schemaName].find(request.params.id).update(attrs);
   };
 }

@@ -91,7 +91,7 @@ module('Integration | Component | order/total-info', function(hooks) {
     // -  1.095           1.10
     // =  9.855 -> 9.86   9.85
     assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £10.95');
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.10 (10%)');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: (10%) -£1.10');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £9.85');
   });
 
@@ -105,7 +105,7 @@ module('Integration | Component | order/total-info', function(hooks) {
     // -  1.335             1.34
     // = 12.015 -> 12.02   12.01
     assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £13.35');
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.34 (10%)');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: (10%) -£1.34');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £12.01');
   });
 

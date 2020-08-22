@@ -3,11 +3,12 @@ import { action, computed } from '@ember/object';
 import { and, empty, sort } from '@ember/object/computed';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-import { getModelName } from './../helpers/get-model-name';
-import { validate as validateDelivery } from './../models/customer/delivery';
-import { validate as validateOnline } from './../models/customer/online';
-import { validate as validateTakeaway } from './../models/customer/take-away';
-import { PAYMENT_METHODS } from './../models/payment-method';
+import { getModelName } from 'epos-webapp/helpers/get-model-name';
+import { validate as validateDelivery } from 'epos-webapp/models/customer/delivery';
+import { validate as validateOnline } from 'epos-webapp/models/customer/online';
+import { validate as validateTakeaway } from 'epos-webapp/models/customer/take-away';
+import { PAYMENT_METHODS } from 'epos-webapp/models/payment-method';
+import { MODIFIER_TYPES } from 'epos-webapp/models/order-modifier';
 import { cancel, debounce } from '@ember/runloop';
 
 const VALIDATE_CUSTOMER_FN_MAP = {
@@ -39,6 +40,7 @@ export default class OrderPadComponent extends Component {
   @tracked showOrder = false;
   @tracked showOrderConfirmModal = false;
   @tracked print = false;
+  @tracked showApplyOrderModifierModal = false;
 
   paymentMethods = Object.keys(PAYMENT_METHODS);
   estimatedTimes = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 75];
@@ -127,6 +129,13 @@ export default class OrderPadComponent extends Component {
   @computed('args.order.estimatedTime')
   get estimatedTime() {
     return new Date(Date.now() + (this.args.order.estimatedTime * 1000 * 60));
+  }
+
+  @computed('args.order.{orderModifier,modifiedTotal,total}', )
+  get orderTotal() {
+    return this.args.order.orderModifier
+      ? this.args.order.modifiedTotal
+      : this.args.order.total;
   }
 
   @action
@@ -256,6 +265,28 @@ export default class OrderPadComponent extends Component {
   togglePrint(event) {
     this.print = !this.print;
     event.preventDefault();
+  }
+
+  @action
+  toggleApplyOrderModifierDialog() {
+    this.showApplyOrderModifierModal = !this.showApplyOrderModifierModal;
+  }
+
+  @action
+  async onApplyOrderModifier(type, value) {
+    this.showApplyOrderModifierModal = false;
+    this.args.order.set('orderModifier', this.store.createRecord('order-modifier', {
+      type,
+      value: type === MODIFIER_TYPES.ABSOLUTE ? value * 100 : value
+    }));
+  }
+
+  @action
+  async removeDiscount() {
+    let orderModifier = await this.args.order.orderModifier;
+    orderModifier.deleteRecord();
+    orderModifier.unloadRecord();
+    this.args.order.orderModifier = null;
   }
 
   @action

@@ -21,7 +21,7 @@ export default class OrderModel extends Model {
 
     if (orderModifier.type === MODIFIER_TYPES.PERCENT) {
       let result = Math.round(this.total * (orderModifier.value / 100));
-      return `-£${formatCurrency.compute([result])} (${orderModifier.value}%)`;
+      return `(${orderModifier.value}%) -£${formatCurrency.compute([result])}`;
     }
     if (orderModifier.type === MODIFIER_TYPES.ABSOLUTE) {
       return `-£${formatCurrency.compute([orderModifier.value])}`;

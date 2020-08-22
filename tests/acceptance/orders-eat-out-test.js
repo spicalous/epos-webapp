@@ -241,7 +241,7 @@ module('Acceptance | orders/eat-out', function(hooks) {
 
     assert.strictEqual(this.element.querySelector('.card .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
     assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £14.95');
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.50 (10%)');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: (10%) -£1.50');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £13.45');
   });
 
@@ -293,7 +293,7 @@ module('Acceptance | orders/eat-out', function(hooks) {
 
     assert.strictEqual(this.element.querySelector('.card .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
     assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £14.95');
-    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.50 (10%)');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: (10%) -£1.50');
     assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'ONLINE £13.45');
   });
 

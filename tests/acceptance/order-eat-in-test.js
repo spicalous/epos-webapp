@@ -161,5 +161,15 @@ module('Acceptance | order/eat-in', function(hooks) {
     assert.strictEqual(orderInfo[3].textContent.trim(), '-£1.25');
     assert.strictEqual(orderInfo[4].textContent.trim(), '1 item');
     assert.strictEqual(orderInfo[5].textContent.trim(), '£4.00');
+
+    await click('.order-pad_right_actions .btn-success');
+
+    let modalOrderInfo = this.element.querySelectorAll('.modal-footer .container-fluid > .row > div');
+    assert.strictEqual(modalOrderInfo[0].textContent.trim(), 'Sub-total');
+    assert.strictEqual(modalOrderInfo[1].textContent.trim(), '£5.25');
+    assert.strictEqual(modalOrderInfo[2].textContent.trim(), 'Discount');
+    assert.strictEqual(modalOrderInfo[3].textContent.trim(), '-£1.25');
+    assert.strictEqual(modalOrderInfo[4].textContent.trim(), '1 item');
+    assert.strictEqual(modalOrderInfo[5].textContent.trim(), '£4.00');
   });
 });

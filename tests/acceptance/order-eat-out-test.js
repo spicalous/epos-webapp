@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { click, currentURL, visit } from '@ember/test-helpers';
+import { click, currentURL, fillIn, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { splitByNewline } from 'epos-webapp/tests/util';
@@ -147,4 +147,34 @@ module('Acceptance | order/eat-out', function(hooks) {
     assert.ok(this.element.querySelector('.order-pad_right_customer input'));
   });
 
+  test('allows adding order modifier on new order', async function(assert) {
+    await visit('/');
+
+    await click('.row:nth-child(4) button');
+    await click('.order-pad_left_bottom_menu .list-group-item');
+    assertOrderInfo(assert, this.element, '1 item', '£42.00');
+
+    await click('.order-pad_right_customer .dropdown > button');
+    await click('.order-pad_right_customer .dropdown > .dropdown-menu > button:nth-child(1)');
+    await click('.btn-success');
+
+    assert.strictEqual(this.element.querySelector('.modal-footer .row:nth-child(2) button').textContent.trim(), 'Apply discount');
+    await click('.modal-footer .row:nth-child(2) button');
+    await fillIn('.modal input', 50);
+    await click('.modal-footer .btn-primary');
+    assert.strictEqual(this.element.querySelector('.modal-footer .row:nth-child(2) button').textContent.trim(), 'Remove discount');
+
+    let modalOrderInfo = this.element.querySelectorAll('.modal-footer .container-fluid > .row > div');
+    assert.strictEqual(modalOrderInfo[0].textContent.trim(), 'Sub-total');
+    assert.strictEqual(modalOrderInfo[1].textContent.trim(), '£42.00');
+    assert.strictEqual(modalOrderInfo[2].textContent.trim(), 'Discount');
+    assert.strictEqual(modalOrderInfo[3].textContent.trim(), '(50%) -£21.00');
+    assert.strictEqual(modalOrderInfo[4].textContent.trim(), '1 item');
+    assert.strictEqual(modalOrderInfo[5].textContent.trim(), '£21.00');
+
+    await visit('/orders/eat-out');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £42.00');
+    assert.strictEqual(this.element.querySelector('[test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: (50%) -£21.00');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £21.00');
+  });
 });
