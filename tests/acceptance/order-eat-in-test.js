@@ -57,7 +57,7 @@ module('Acceptance | order/eat-in', function(hooks) {
     await click('.card [test-id="order-list-details-btn"]');
 
     // assert initial state
-    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CARD £0.00');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £0.00');
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 0);
 
     // edit
@@ -82,7 +82,7 @@ module('Acceptance | order/eat-in', function(hooks) {
     assert.strictEqual(currentURL(), '/orders/eat-in');
 
     await click('.card [test-id="order-list-details-btn"]');
-    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CARD £0.00');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £0.00');
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 0);
   });
 
@@ -91,7 +91,7 @@ module('Acceptance | order/eat-in', function(hooks) {
     await click('.card [test-id="order-list-details-btn"]');
 
     // assert initial state
-    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CARD £0.00');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £0.00');
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 0);
 
     // edit
@@ -117,7 +117,7 @@ module('Acceptance | order/eat-in', function(hooks) {
     assert.strictEqual(currentURL(), '/orders/eat-in');
 
     await click('.card [test-id="order-list-details-btn"]');
-    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'CARD £43.50');
+    assert.strictEqual(this.element.querySelector('[test-id="order-card-payment-info"]').textContent.trim(), 'NOT PAID £43.50');
     assert.strictEqual(this.element.querySelectorAll('.card .list-group-item').length, 1);
   });
 

@@ -10,6 +10,17 @@
     height: 32px;
   }
 
+  &-chevron {
+
+    &-down {
+      content: url('/assets/icons/chevron-down.svg');
+    }
+
+    &-up {
+      content: url('/assets/icons/chevron-up.svg');
+    }
+  }
+
   &-customer {
 
     &-delivery {

@@ -7,7 +7,7 @@ export default [
     numberOfGuests: 2,
     orderItemIds: [],
     notes: 'This is a note',
-    paymentMethod: null
+    paymentMethod: 'CARD'
   },
   {
     id: 2,
@@ -28,6 +28,6 @@ export default [
     numberOfGuests: 2,
     orderItemIds: [],
     notes: 'This is a note',
-    paymentMethod: 'CARD'
+    paymentMethod: null
   }
 ];

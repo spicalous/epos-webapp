@@ -21,16 +21,17 @@ module('Acceptance | orders/eat-in', function(hooks) {
     this.server.loadFixtures();
     await visit('/orders/eat-in');
 
-    assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-primary').length, 4, 'order filters selected');
+    assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-primary').length, 3, 'order filters selected');
   });
 
   test('filters by payment type', async function(assert) {
     this.server.loadFixtures();
     await visit('/orders/eat-in');
 
+    await click('[test-id="show-completed-btn"]');
     await click('[test-id="payment-type-filters"] button');
 
-    assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-primary').length, 3);
+    assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-primary').length, 2);
     assert.strictEqual(this.element.querySelectorAll('[test-id="payment-type-filters"] button.btn-main-secondary').length, 1);
     assert.strictEqual(this.element.querySelectorAll('.card').length, 2, 'only orders with selected payment type displayed');
   });
@@ -58,63 +59,69 @@ module('Acceptance | orders/eat-in', function(hooks) {
   test('coming back to orders restores scroll position', async function(assert) {
     this.server.loadFixtures();
     await visit('/orders/eat-in');
+    await click('[test-id="show-completed-btn"]');
     this.element.parentElement.scrollTo(0,0); // reset before test
 
     assert.strictEqual(this.element.parentElement.scrollTop, 0);
-    this.element.querySelector('.card:nth-child(3)').scrollIntoView();
-    assert.ok(316 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 336, `scrollTop=${this.element.parentElement.scrollTop}`);
+    this.element.querySelector('.card').scrollIntoView();
+    assert.ok(85 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 105, `scrollTop=${this.element.parentElement.scrollTop}`);
 
-    await click('.card:nth-child(3) [test-id="order-card-edit"]');
+    await click('.card [test-id="order-card-edit"]');
     await click('.order-pad_right_actions .btn-danger');
     await click('.modal-footer .btn-danger');
 
-    assert.ok(316 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 336, `scrollTop=${this.element.parentElement.scrollTop}`);
+    assert.ok(85 < this.element.parentElement.scrollTop && this.element.parentElement.scrollTop < 105, `scrollTop=${this.element.parentElement.scrollTop}`);
     this.element.parentElement.scrollTo(0,0); // reset after test
   });
 
   test('show "No orders to display" when no orders', async function(assert) {
     await visit('/orders/eat-in');
+    await click('[test-id="show-completed-btn"]');
 
     assert.strictEqual(
-      this.element.querySelector('.container-fluid > div:last-child').textContent.trim(),
-      'No orders to display',
-      'correct message displayed');
+      this.element.querySelector('.container-fluid > .row:nth-child(3) .text-muted').textContent.trim(),
+      'No orders to display');
+    assert.strictEqual(
+      this.element.querySelector('.container-fluid > .row:nth-child(5) .text-muted').textContent.trim(),
+      'No orders to display');
   });
 
   test('removing order modifier loaded from back end', async function(assert) {
     this.server.loadFixtures();
     await visit('/orders/eat-in');
+    await click('[test-id="show-completed-btn"]');
 
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £5.25');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.25');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £5.25');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.25');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
 
-    await click('.card:nth-child(2) .row .dropdown .dropdown-toggle');
-    await click('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)');
+    await click('.row:nth-child(5) .card:nth-child(1) .row .dropdown .dropdown-toggle');
+    await click('.row:nth-child(5) .card:nth-child(1) .row .dropdown .dropdown-item:nth-child(4)');
 
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Apply discount');
-    assert.notOk(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"]'));
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £5.25');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Apply discount');
+    assert.notOk(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-modifier"]'));
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £5.25');
   });
 
   test('removing order modifier loaded from back end failure', async function(assert) {
     this.server.loadFixtures();
     await visit('/orders/eat-in');
+    await click('[test-id="show-completed-btn"]');
 
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £5.25');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.25');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £5.25');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.25');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
 
     this.server.patch('/order/eat-ins/:id', () => ({ errors: [{ detail: 'Error message for PATCH order/eat-ins' }]}), 500);
-    await click('.card:nth-child(2) .row .dropdown .dropdown-toggle');
-    await click('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)');
+    await click('.row:nth-child(5) .card:nth-child(1) .row .dropdown .dropdown-toggle');
+    await click('.row:nth-child(5) .card:nth-child(1) .row .dropdown .dropdown-item:nth-child(4)');
 
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £5.25');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.25');
-    assert.strictEqual(this.element.querySelector('.card:nth-child(2) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) .row .dropdown .dropdown-item:nth-child(4)').textContent.trim(), 'Remove discount');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-modifier"] div:nth-child(1)').textContent.trim(), 'Sub-total: £5.25');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-modifier"] div:nth-child(2)').textContent.trim(), 'Discount: -£1.25');
+    assert.strictEqual(this.element.querySelector('.row:nth-child(5) .card:nth-child(1) [test-id="order-card-payment-info"]').textContent.trim(), 'CASH £4.00');
   });
 
   test('calculates order summary', async function(assert) {
@@ -132,10 +139,26 @@ module('Acceptance | orders/eat-in', function(hooks) {
 
     assertOrderSummary(assert, this.element,
       ['1', '4.00'],
-      ['1', '42.00'],
-      ['0', '0.00'],
       ['1', '0.00'],
+      ['0', '0.00'],
+      ['1', '42.00'],
       ['3', '46.00']);
+  });
+
+  test('toggling in progress and completed orders', async function(assert) {
+    this.server.loadFixtures();
+    await visit('/orders/eat-in');
+
+    assert.strictEqual(this.element.querySelector('.row:nth-child(2) .badge').textContent, '1');
+    assert.strictEqual(this.element.querySelectorAll('.row:nth-child(3) .card').length, 1);
+    assert.strictEqual(this.element.querySelector('.row:nth-child(4) .badge').textContent, '2');
+    assert.strictEqual(this.element.querySelectorAll('.row:nth-child(5) .card').length, 0);
+
+    await click('[test-id="show-inprogress-btn"]');
+    await click('[test-id="show-completed-btn"]');
+
+    assert.strictEqual(this.element.querySelectorAll('.row:nth-child(3) .card').length, 0);
+    assert.strictEqual(this.element.querySelectorAll('.row:nth-child(5) .card').length, 2);
   });
 
   function assertOrderSummary(assert, element, cash, card, onlinePayment, notPaid, all) {

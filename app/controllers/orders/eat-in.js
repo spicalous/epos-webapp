@@ -14,20 +14,15 @@ const PAYMENT_TYPE = {
 
 export default class OrdersEatInController extends Controller {
 
-  paymentTypes = [PAYMENT_TYPE.NOT_PAID, PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
+  paymentTypes = [PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
 
   @service store;
   @service ui;
 
   @tracked showNewOrderModal = false;
-
-  @tracked
-  paymentTypesToShow = [PAYMENT_TYPE.NOT_PAID, PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
-
-  sortByTime = ['dateTime:desc'];
-
-  @sort('filteredByPaymentType', 'sortByTime')
-  ordersByTimestamp;
+  @tracked showInProgress = true;
+  @tracked showCompleted = false;
+  @tracked paymentTypesToShow = [PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
 
   @filterBy('model', 'paymentMethod', 'CASH')
   cashOrders;
@@ -70,9 +65,6 @@ export default class OrdersEatInController extends Controller {
   get filteredByPaymentType() {
     let result = [];
     this.paymentTypesToShow.forEach(paymentType => {
-      if (paymentType === PAYMENT_TYPE.NOT_PAID) {
-        result = result.concat(this.notPaidOrders);
-      }
       if (paymentType === PAYMENT_TYPE.CASH) {
         result = result.concat(this.cashOrders);
       }
@@ -86,6 +78,14 @@ export default class OrdersEatInController extends Controller {
     return result;
   }
 
+  sortByTime = ['dateTime:desc'];
+
+  @sort('notPaidOrders', 'sortByTime')
+  notPaidOrdersByTimestamp;
+
+  @sort('filteredByPaymentType', 'sortByTime')
+  paidOrdersByTimestamp;
+
   @action
   togglePaymentTypeFilter(paymentType) {
     if (this.paymentTypesToShow.includes(paymentType)) {
@@ -93,6 +93,16 @@ export default class OrdersEatInController extends Controller {
     } else {
       this.paymentTypesToShow.addObject(paymentType);
     }
+  }
+
+  @action
+  toggleShowInProgress() {
+    this.showInProgress = !this.showInProgress;
+  }
+
+  @action
+  toggleShowCompleted() {
+    this.showCompleted = !this.showCompleted;
   }
 
   @action
