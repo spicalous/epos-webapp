@@ -41,4 +41,12 @@ module('Integration | Component | modal/create-eat-in', function(hooks) {
     assert.verifySteps(['on create']);
   });
 
+  test('clicking number of guests buttons populates number of guests input', async function(assert) {
+    await render(hbs`<Modal::CreateEatIn @onDismiss={{this.onDismiss}}
+                                         @onCreateOrder={{this.onCreateOrder}}/>`);
+
+    await click('.form-row button');
+    assert.strictEqual(this.element.querySelector('.form-group:nth-child(2) input').value, '1');
+  });
+
 });

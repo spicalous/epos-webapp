@@ -14,6 +14,8 @@ export default class ModalCreateEatInComponent extends Component {
   @tracked newTableName = DEFAULT_TABLE_NAME;
   @tracked newNumberOfGuests = '';
 
+  numberOfGuestChoices = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
   @computed('newTableName', 'newNumberOfGuests')
   get canCreate() {
     if (this.newNumberOfGuests) {
@@ -21,6 +23,11 @@ export default class ModalCreateEatInComponent extends Component {
       return this.newTableName && !Number.isNaN(numerical) && numerical > 0;
     }
     return this.newTableName;
+  }
+
+  @action
+  setNumberOfGuests(value) {
+    this.newNumberOfGuests = value;
   }
 
   @action

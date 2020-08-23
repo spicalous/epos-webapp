@@ -3,7 +3,7 @@
                      @onConfirm={{this.createOrder}} as |Body Footer onDismiss onConfirm|>
   <Body>
   <form novalidate>
-    <Form::Group class="mb-1" @validateOnDirty={{true}} @invalidFeedback="Table name must not be empty" as |fg|>
+    <Form::Group class="mb-3" @validateOnDirty={{true}} @invalidFeedback="Table name must not be empty" as |fg|>
       <label>Table name</label>
       <fg.element @value={{this.newTableName}} @pattern=".+"/>
     </Form::Group>
@@ -11,6 +11,15 @@
       <label>Number of guests</label>
       <fg.element @value={{this.newNumberOfGuests}} @pattern="[0-9]*"/>
     </Form::Group>
+    <div class="form-row">
+      {{#each this.numberOfGuestChoices as |numberOfGuests|}}
+        <div class="col-2">
+          <button type="button" class="btn btn-lg btn-block btn-main-secondary px-0 mb-1" {{on "click" (fn this.setNumberOfGuests numberOfGuests)}}>
+            {{numberOfGuests}}
+          </button>
+        </div>
+      {{/each}}
+    </div>
   </form>
   </Body>
   <Footer>
