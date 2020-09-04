@@ -18,4 +18,5 @@ Router.map(function() {
   });
   this.route('delivery-customer-tags');
   this.route('delivery-customers');
+  this.route('menu');
 });

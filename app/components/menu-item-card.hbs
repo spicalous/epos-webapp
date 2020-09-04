@@ -1,0 +1,42 @@
+<div class="card mb-3">
+  <div class="card-body">
+    {{#if this.editing}}
+      <div class="d-flex justify-content-between">
+        <div class="d-flex">
+          <span class="align-self-center">{{@menuItem.menuId}} {{@menuItem.name}}</span>
+        </div>
+        <div>
+          <form class="form-inline">
+            <Form::Group @validateOnDirty={{true}} as |fg|>
+              <fg.element @type="number" @min="0" @step="0.01" @required={{true}} @value={{this.inputPrice}}/>
+            </Form::Group>
+            <button type="button" class="btn btn-main-secondary ml-1" {{on "click" this.cancelEditing}}>
+              Cancel
+            </button>
+            {{#if this.validPrice}}
+              <button type="button" class="btn btn-primary ml-1" {{on "click" this.save}}>
+                Save
+              </button>
+            {{else}}
+              <button type="button" class="btn btn-secondary ml-1" disabled>
+                Save
+              </button>
+            {{/if}}
+          </form>
+        </div>
+      </div>
+    {{else}}
+      <div class="d-flex justify-content-between">
+        <div class="d-flex">
+          <span class="align-self-center">{{@menuItem.menuId}} {{@menuItem.name}}</span>
+        </div>
+        <div>
+          {{this.displayPrice}}
+          <button type="button" class="btn btn-main-secondary" {{on "click" this.startEditing}}>
+            Edit
+          </button>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</div>

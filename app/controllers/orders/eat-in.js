@@ -20,8 +20,6 @@ export default class OrdersEatInController extends Controller {
   @service ui;
 
   @tracked showNewOrderModal = false;
-  @tracked showInProgress = true;
-  @tracked showCompleted = false;
   @tracked paymentTypesToShow = [PAYMENT_TYPE.CASH, PAYMENT_TYPE.CARD, PAYMENT_TYPE.ONLINE];
 
   @filterBy('model', 'paymentMethod', 'CASH')
@@ -93,16 +91,6 @@ export default class OrdersEatInController extends Controller {
     } else {
       this.paymentTypesToShow.addObject(paymentType);
     }
-  }
-
-  @action
-  toggleShowInProgress() {
-    this.showInProgress = !this.showInProgress;
-  }
-
-  @action
-  toggleShowCompleted() {
-    this.showCompleted = !this.showCompleted;
   }
 
   @action

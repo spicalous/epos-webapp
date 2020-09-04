@@ -53,56 +53,60 @@
       {{/each}}
     </div>
   </div>
-  <div class="row mb-3">
-    <div class="col">
-      <button type="button" class="btn btn-main-secondary btn-lg btn-block" test-id="show-inprogress-btn" {{on "click" this.toggleShowInProgress}}>
-        {{#if this.showInProgress}}
-          <span class="icon-24 icon-chevron-up align-middle"></span>
-        {{else}}
-          <span class="icon-24 icon-chevron-down align-middle"></span>
+  <ShowHideToggle @initial={{true}} as |showHideToggle|>
+    <div class="row mb-3">
+      <div class="col">
+        <button type="button" class="btn btn-main-secondary btn-lg btn-block" test-id="show-inprogress-btn" {{on "click" showHideToggle.toggleShow}}>
+          {{#if showHideToggle.show}}
+            <span class="icon-24 icon-chevron-up align-middle"></span>
+          {{else}}
+            <span class="icon-24 icon-chevron-down align-middle"></span>
+          {{/if}}
+          In progress <span class="badge badge-secondary">{{this.notPaidOrdersByTimestamp.length}}</span>
+        </button>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        {{#if showHideToggle.show}}
+          {{#each this.notPaidOrdersByTimestamp as |order|}}
+            <Order::EatInCard @order={{order}} @onPrintOrder={{this.printOrder}} />
+          {{else}}
+            <div class="my-3 text-center text-muted">
+              No orders to display
+            </div>
+          {{/each}}
         {{/if}}
-        In progress <span class="badge badge-secondary">{{this.notPaidOrdersByTimestamp.length}}</span>
-      </button>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col">
-      {{#if this.showInProgress}}
-        {{#each this.notPaidOrdersByTimestamp as |order|}}
-          <Order::EatInCard @order={{order}} @onPrintOrder={{this.printOrder}} />
-        {{else}}
-          <div class="my-3 text-center text-muted">
-            No orders to display
-          </div>
-        {{/each}}
-      {{/if}}
+  </ShowHideToggle>
+  <ShowHideToggle as |showHideToggle|>
+    <div class="row mb-3">
+      <div class="col">
+        <button type="button" class="btn btn-main-secondary btn-lg btn-block" test-id="show-completed-btn" {{on "click" showHideToggle.toggleShow}}>
+          {{#if showHideToggle.show}}
+            <span class="icon-24 icon-chevron-up align-middle"></span>
+          {{else}}
+            <span class="icon-24 icon-chevron-down align-middle"></span>
+          {{/if}}
+          Completed orders <span class="badge badge-secondary">{{this.paidOrdersByTimestamp.length}}</span>
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col">
-      <button type="button" class="btn btn-main-secondary btn-lg btn-block" test-id="show-completed-btn" {{on "click" this.toggleShowCompleted}}>
-        {{#if this.showCompleted}}
-          <span class="icon-24 icon-chevron-up align-middle"></span>
-        {{else}}
-          <span class="icon-24 icon-chevron-down align-middle"></span>
+    <div class="row pb-3 mb-5">
+      <div class="col">
+        {{#if showHideToggle.show}}
+          {{#each this.paidOrdersByTimestamp as |order|}}
+            <Order::EatInCard @order={{order}} @onPrintOrder={{this.printOrder}} />
+          {{else}}
+            <div class="my-3 text-center text-muted">
+              No orders to display
+            </div>
+          {{/each}}
         {{/if}}
-        Completed orders <span class="badge badge-secondary">{{this.paidOrdersByTimestamp.length}}</span>
-      </button>
+      </div>
     </div>
-  </div>
-  <div class="row pb-3 mb-5">
-    <div class="col">
-      {{#if this.showCompleted}}
-        {{#each this.paidOrdersByTimestamp as |order|}}
-          <Order::EatInCard @order={{order}} @onPrintOrder={{this.printOrder}} />
-        {{else}}
-          <div class="my-3 text-center text-muted">
-            No orders to display
-          </div>
-        {{/each}}
-      {{/if}}
-    </div>
-  </div>
+  </ShowHideToggle>
 </div>
 
 {{#if this.showNewOrderModal}}
@@ -112,7 +116,6 @@
   </EmberWormhole>
 {{/if}}
 
-<button class="btn btn-lg btn-primary fixed-bottom-right-btn shadow mb-3 mr-3" type="button" {{on "click"
-                                                                                                  this.toggleCreateModal}}>
+<button class="btn btn-lg btn-primary fixed-bottom-right-btn shadow mb-3 mr-3" type="button" {{on "click" this.toggleCreateModal}}>
   Create
 </button>

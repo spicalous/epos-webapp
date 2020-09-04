@@ -1,0 +1,50 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="flex-even">
+    <LinkTo @route="index" @tagName="button" type="button" @class="btn btn-outline-light">
+      Back
+    </LinkTo>
+  </div>
+  <span class="navbar-brand flex-even d-flex justify-content-center">Menu</span>
+  <div class="flex-even">
+  </div>
+</nav>
+<div class="container pb-5">
+  <ShowHideToggle as |showHide|>
+    <div class="row mt-3">
+      <div class="col-12">
+        <button type="button" class="btn btn-main-secondary btn-lg btn-block text-left font-weight-bold" {{on "click" showHide.toggleShow}}>
+          No category <small class="text-muted">({{this.this.noCategoryMenuItems.length}})</small>
+        </button>
+      </div>
+    </div>
+    {{#if showHide.show}}
+      <div class="row mt-3">
+        {{#each this.noCategoryMenuItems as |menuItem|}}
+          <div class="col-12">
+            <MenuItemCard @menuItem={{menuItem}}/>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+  </ShowHideToggle>
+  {{#each this.categoriesAndMenuItems as |categoryMenuItem|}}
+    <ShowHideToggle as |showHide|>
+      <div class="row mt-3">
+        <div class="col-12">
+          <button type="button" class="btn btn-main-secondary btn-lg btn-block text-left font-weight-bold" {{on "click" showHide.toggleShow}}>
+            {{categoryMenuItem.category.name}} <small class="text-muted">({{categoryMenuItem.menuItems.length}})</small>
+          </button>
+        </div>
+      </div>
+      {{#if showHide.show}}
+        <div class="row mt-3">
+          {{#each categoryMenuItem.menuItems as |menuItem|}}
+            <div class="col-12">
+              <MenuItemCard @menuItem={{menuItem}}/>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </ShowHideToggle>
+  {{/each}}
+</div>

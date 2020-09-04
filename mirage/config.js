@@ -40,6 +40,7 @@ export default function() {
   this.get('/edit-categories');
   this.get('/edit-options');
   this.get('/menu-items');
+  this.patch('/menu-items/:id');
   this.get('/order/eat-ins', 'order/eatIns');
   this.get('/order/eat-ins/:id', 'order/eatIns');
   this.patch('/order/eat-ins/:id', patchOrderHandler('order/eat-in', 'order/eatIns'));
