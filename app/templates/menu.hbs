@@ -5,7 +5,17 @@
     </LinkTo>
   </div>
   <span class="navbar-brand flex-even d-flex justify-content-center">Menu</span>
-  <div class="flex-even">
+  <div class="flex-even d-flex justify-content-end">
+    <div class="dropdown">
+      <button class="btn btn-outline-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Actions
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="/EPOSDataService/api/menu/export" rel="noreferrer noopener" target="_blank">
+          Export menu <span class="icon-1em icon-new-tab"></span>
+        </a>
+      </div>
+    </div>
   </div>
 </nav>
 <div class="container pb-5">
@@ -13,6 +23,11 @@
     <div class="row mt-3">
       <div class="col-12">
         <button type="button" class="btn btn-main-secondary btn-lg btn-block text-left font-weight-bold" {{on "click" showHide.toggleShow}}>
+          {{#if showHide.show}}
+            <span class="icon-1em icon-chevron-up align-middle"></span>
+          {{else}}
+            <span class="icon-1em icon-chevron-down align-middle"></span>
+          {{/if}}
           No category <small class="text-muted">({{this.this.noCategoryMenuItems.length}})</small>
         </button>
       </div>
@@ -32,6 +47,11 @@
       <div class="row mt-3">
         <div class="col-12">
           <button type="button" class="btn btn-main-secondary btn-lg btn-block text-left font-weight-bold" {{on "click" showHide.toggleShow}}>
+            {{#if showHide.show}}
+              <span class="icon-1em icon-chevron-up align-middle"></span>
+            {{else}}
+              <span class="icon-1em icon-chevron-down align-middle"></span>
+            {{/if}}
             {{categoryMenuItem.category.name}} <small class="text-muted">({{categoryMenuItem.menuItems.length}})</small>
           </button>
         </div>

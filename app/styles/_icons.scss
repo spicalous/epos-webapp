@@ -1,5 +1,10 @@
 .icon {
 
+  &-1em {
+    width: 1em;
+    height: 1em;
+  }
+
   &-24 {
     width: 24px;
     height: 24px;
@@ -38,6 +43,10 @@
 
   &-delete-white {
     content: url('/assets/icons/delete-white.svg');
+  }
+
+  &-new-tab {
+    content: url('/assets/icons/new-tab.svg');
   }
 
   &-users {
